@@ -1,0 +1,264 @@
+
+.rodape-botton {
+    position:absolute;
+    bottom:0;
+    width:100%;
+    background:rgb(116, 142, 202);
+    
+}
+
+.cab-msg{
+    color: rgb(22, 69, 158);
+    background-color:rgba(160, 212, 247, 0.589); 
+}
+
+.pcenter { text-align: center; }
+
+.header-oferta {
+    color: rgb(41, 58, 3);
+    background-color:rgba(133, 233, 145, 0.637);
+    
+}
+.header-troca {
+    color: rgb(41, 58, 3);
+    background-color:rgba(118, 223, 197, 0.877);
+    
+}
+
+.header-necessidade {
+    color: rgb(102, 52, 19);
+    background-color:rgba(245, 120, 37, 0.445);
+    
+}
+
+.header-trans {
+    color: rgb(65, 19, 102);
+    background-color:rgba(165, 17, 233, 0.274);
+}
+
+.imagem-part{
+  width:150px ; 
+  height: 170px;
+  
+}
+.imagem-header{
+    width:30px ; 
+    height: 30px;
+    padding-left: 0px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    padding-right: 3px;
+    margin-right: 5px;
+  }
+
+.imagem-home{
+    width:90% ; 
+    height: 90%;  
+    
+}
+.btn-green{
+    color: rgb(41, 58, 3);
+    background-color:rgb(133, 233, 145);
+}
+
+.btn-violeta{
+    color:purple;
+    background:plum;
+}
+
+.btn-sair{
+    color:white;
+    background:firebrick;
+}
+.btn-sugestoes{
+    color:white;
+    background:rgb(91, 19, 207);
+    margin-left: 20px;
+}
+.btn-mostrar-mensagens{
+    color:white;
+    background-color:rgb(17, 61, 156);
+    margin-left: 0px;
+}
+
+.btn-mensagem{
+    color:white;
+    background-color:rgb(17, 61, 156);
+    
+}
+
+.btn-redes{
+    color:white;
+    background-color:rebeccapurple;
+    font-style: italic;
+}
+
+.btn-criar-redes{
+    color:white;
+    background-color:rgb(125, 12, 238);
+    font-style: italic;
+}
+
+.btn-ofertas{
+    color:white;
+    background-color:rgb(7, 75, 10);
+    font-style: italic;
+}
+
+.sugestao-of-nec{
+    color:rgb(46, 18, 207);
+    background-color:rgb(240, 240, 243);
+    
+}
+
+.btn-incluir-ofertas{
+    color:white;
+    background-color:rgb(16, 94, 42);
+    font-style: italic;
+}
+.btn-criar-ofertas{
+    color:white;
+    background-color:rgb(36, 133, 23);
+    font-style: italic;
+}
+
+.btn-necessidades{
+    color: white;
+    background-color:rgb(100, 48, 24);
+    font-style: italic;
+}
+
+.btn-incluir-necessidades{
+    color:white;
+    background-color:rgb(190, 54, 0);
+    font-style: italic;
+}
+
+.btn-criar-necessidades{
+    color:white;
+    background-color:rgb(160, 62, 17);
+    font-style: italic;
+}
+
+.btn-editar{
+    color:white;
+    background-color:rgb(26, 98, 116);
+    
+}
+
+.btn-trocar{
+    color:white;
+    background-color:rgb(7, 88, 4);
+    
+    
+}
+
+.btn-mapa{
+    color:black;
+    background-color:rgb(243, 187, 2);
+    
+    font-style: italic;
+    
+}
+.btn-mapa-disable{
+    color:black;
+    background-color:rgba(243, 187, 2, 0.404);
+    
+    font-style: italic;
+    
+}
+
+.texto-mensagens{
+    color:rgb(17, 61, 156);
+}
+
+.texto-nome-logado{
+    color:rgb(0, 58, 248); 
+}
+
+.texto-transacao{
+    color:rgb(81, 0, 156);
+    
+}
+.texto-necessidade{
+    color:rgb(88, 33, 7);
+    
+}
+.tabela-necessidade{
+    color:rgb(88, 33, 7);
+    background-color:white;
+}
+.texto-oferta{
+    color:rgb(3, 110, 8);
+}
+
+.texto-troca{
+    color:rgb(8, 85, 68);
+}
+
+.tabela-oferta{
+    color:rgb(7, 75, 10);
+    background-color:white;
+}
+.btn-transacao{
+    color:white;
+    background-color:rgb(81, 0, 156);
+    
+    font-style: italic;
+}
+
+.btn-finalizar{
+    color:white;
+    background-color:rgb(81, 0, 156);
+   
+}
+
+
+.btn-mapa-geral{
+    color:white;
+    background-color:rgb(100, 48, 24);
+    
+    font-style: italic;
+    
+}
+
+.btn-detalhes{
+    color:purple;
+    background:plum;
+    
+}
+
+.red-message{
+    color: crimson;
+}
+
+.no-margin{
+    padding-right: 0px;
+    padding-left: 0px;
+}
+
+#map {
+    height: 80%;
+  }
+
+/* Optional: Makes the sample page fill the window. */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    
+  }
+
+  .texto_p{
+   font-size: 12px;
+  }
+
+  .texto_m{
+    font-size: 14px;
+   }
+
+  .texto_g{
+    font-size: 20px;
+   }
+
+  
