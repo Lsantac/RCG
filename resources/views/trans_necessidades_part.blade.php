@@ -66,7 +66,7 @@
     <br>
 
     <div style="float: left; width: 70%; "> 
-        <form class="row g-3" method="post" action="{{route('consultar_trans_of_part')}}">
+        <form class="row g-3" method="get" action="{{route('consultar_trans_of_part')}}">
 
           @csrf
     

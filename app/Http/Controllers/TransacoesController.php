@@ -18,9 +18,7 @@ class TransacoesController extends Controller
         /*$id_part = $id;*/
 
         $filtra_id_logado = request('filtra_id_logado');
-
         $id_part = request('id_part_t');
-        
         $id_of_part = request('id_of_part_t');
    
         $part = DB::table('participantes')->where('id',$id_part)
@@ -101,11 +99,8 @@ class TransacoesController extends Controller
       public function trans_trocas_part(request $request){
     
             $id_part = request('id_part_t');
-            
             $id_of_part = request('id_of_part_t');
 
-            
-       
             $part = DB::table('participantes')->where('id',$id_part)
                                               ->select('participantes.*')
                                               ->first();
@@ -155,9 +150,10 @@ class TransacoesController extends Controller
 
       public function trans_necessidades_part(Request $request){
 
-        
+            $filtra_id_logado = request('filtra_id_logado');
             $id_part = request('id_part_t');
             $id_nec_part = request('id_nec_part_t');
+            $id_logado = request('id_logado');
     
             
             $part = DB::table('participantes')->where('id',$id_part)
@@ -183,8 +179,15 @@ class TransacoesController extends Controller
             // split on 1+ whitespace & ignore empty (eg. trailing space)
             $searchValues = preg_split('/\s+/', $string, -1, PREG_SPLIT_NO_EMPTY);   
             
-            $ofps = DB::table('ofertas_part')->where('ofertas_part.id_part',"<>",$id_part)
-                                                   ->where(function($query) use ($searchValues){
+            $ofps = DB::table('ofertas_part')->where(function($verif) use ($filtra_id_logado,$id_part,$id_logado){
+                                                if($filtra_id_logado){
+                                                $verif->where('ofertas_part.id_part',"<>",$id_part);
+                                                }else{
+                                                $verif->where('ofertas_part.id_part',"=",$id_logado);
+                                                }                                               
+                                                })
+            
+                                                ->where(function($query) use ($searchValues){
                                                             foreach ($searchValues as $value) {
                                                                      if(strlen($value)>3){      
                                                                      $query->orwhere('obs','like','%'.($value).'%')

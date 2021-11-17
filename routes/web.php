@@ -84,8 +84,8 @@ Route::post('altera_necessidade_part',  [NecessidadesController::class,'altera_n
 Route::get('/trans_ofertas_part',  [TransacoesController::class,'trans_ofertas_part'])->name('trans_ofertas_part');
 Route::get('/trans_trocas_part',  [TransacoesController::class,'trans_trocas_part'])->name('trans_trocas_part');
 Route::get('/trans_necessidades_part',  [TransacoesController::class,'trans_necessidades_part'])->name('trans_necessidades_part');
-Route::post('/consultar_trans_nec_part',  [TransacoesController::class,'consultar_trans_nec_part'])->name('consultar_trans_nec_part');
-Route::post('/consultar_trans_of_part',  [TransacoesController::class,'consultar_trans_of_part'])->name('consultar_trans_of_part');
+Route::get('/consultar_trans_nec_part',  [TransacoesController::class,'consultar_trans_nec_part'])->name('consultar_trans_nec_part');
+Route::get('/consultar_trans_of_part',  [TransacoesController::class,'consultar_trans_of_part'])->name('consultar_trans_of_part');
 Route::get('/mens_transacoes_part',  [TransacoesController::class,'mens_transacoes_part'])->name('mens_transacoes_part');
 Route::get('/incluir_mens_trans',  [TransacoesController::class,'incluir_mens_trans'])->name('incluir_mensagem');
 Route::get('/finalizar_trans',  [TransacoesController::class,'finalizar_trans'])->name('finalizar_transacao');
