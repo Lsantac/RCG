@@ -71,7 +71,7 @@ class ofertasController extends Controller
 
       public function consultar_ofertas(Request $request){
 
-            $num_linhas_por_pag = 4;
+            $num_linhas_por_pag = 5;
 
             if(isset($_GET['consulta_of'])){
               
@@ -226,7 +226,7 @@ class ofertasController extends Controller
                                                 'categorias.descricao as desc_cat','unidades.descricao as desc_unid')
 
                                           ->orderBy('data','desc')
-                                          ->paginate(4);
+                                          ->paginate(5);
 
       }
       
@@ -257,7 +257,7 @@ class ofertasController extends Controller
                                     'categorias.descricao as desc_cat','unidades.descricao as desc_unid')
 
                                     ->orderBy('data','desc')
-                                    ->paginate(4);
+                                    ->paginate(5);
 
       /*dd($ofps);      */
 

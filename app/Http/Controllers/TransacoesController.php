@@ -375,7 +375,7 @@ class TransacoesController extends Controller
                             AS distancia') 
                      
                       ->orderBy('distancia','asc')
-                      ->paginate(10);
+                      ->paginate(5);
                       
           
           $ofps->appends($request->all());   

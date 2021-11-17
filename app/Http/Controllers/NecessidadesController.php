@@ -68,7 +68,7 @@ class NecessidadesController extends Controller
 
       public function consultar_necessidades(Request $request){
 
-            $num_linhas_por_pag = 4;
+            $num_linhas_por_pag = 5;
 
             if(isset($_GET['consulta_nec'])){
 
@@ -151,8 +151,9 @@ class NecessidadesController extends Controller
                                               ->join('unidades','necessidades.id_unid','=','unidades.id')
 
                                               ->select('participantes.id as id_part','participantes.latitude','participantes.longitude','participantes.nome_part','necessidades_part.id as id_nec_part',
-                                                'necessidades_part.id_nec','necessidades_part.quant','necessidades_part.data','necessidades_part.obs','necessidades.descricao as desc_nec',
-                                                'categorias.descricao as desc_cat','unidades.descricao as desc_unid')
+                                              'participantes.endereco','participantes.cidade','participantes.estado','participantes.pais',
+                                              'necessidades_part.id_nec','necessidades_part.quant','necessidades_part.data','necessidades_part.obs','necessidades.descricao as desc_nec',
+                                              'categorias.descricao as desc_cat','unidades.descricao as desc_unid')
 
                                               ->orderBy('data','desc')
                                               ->paginate($num_linhas_por_pag);
@@ -217,11 +218,12 @@ class NecessidadesController extends Controller
                                           ->join('unidades','necessidades.id_unid','=','unidades.id')
 
                                           ->select('participantes.id as id_part','participantes.latitude','participantes.longitude','participantes.nome_part','necessidades_part.id as id_nec_part',
+                                                'participantes.endereco','participantes.cidade','participantes.estado','participantes.pais',
                                                 'necessidades_part.id_nec','necessidades_part.quant','necessidades_part.data','necessidades_part.obs','necessidades.descricao as desc_nec',
                                                 'categorias.descricao as desc_cat','unidades.descricao as desc_unid')
 
                                           ->orderBy('data','desc')
-                                          ->paginate(10);
+                                          ->paginate(5);
 
       }
       
@@ -246,11 +248,12 @@ class NecessidadesController extends Controller
                                     ->join('unidades','necessidades.id_unid','=','unidades.id')
                                     
                                     ->select('participantes.id as id_part','participantes.latitude','participantes.longitude','participantes.nome_part','necessidades_part.id as id_nec_part',
+                                                'participantes.endereco','participantes.cidade','participantes.estado','participantes.pais',
                                                 'necessidades_part.id_nec','necessidades_part.quant','necessidades_part.data','necessidades_part.obs','necessidades.descricao as desc_nec',
                                                 'categorias.descricao as desc_cat','unidades.descricao as desc_unid')
 
                                     ->orderBy('data','desc')
-                                    ->paginate(10);
+                                    ->paginate(5);
 
       
       return view('consultar_necessidades_part',['part' => $participante,'necps'=>$necps,'necs'=>$necs,'cats'=>$cats,'unids'=>$unids]);

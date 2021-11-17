@@ -75,6 +75,13 @@
     background:rgb(91, 19, 207);
     margin-left: 20px;
 }
+
+.btn-sugestoes-of{
+    color:white;
+    background:rgb(6, 117, 80);
+    margin-left: 20px;
+}
+
 .btn-mostrar-mensagens{
     color:white;
     background-color:rgb(17, 61, 156);

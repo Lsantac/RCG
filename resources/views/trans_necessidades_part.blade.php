@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="container">
+<div class="container-fluid">
 
     <div class='results'>
         @if(Session::get('fail_mapa'))
@@ -97,7 +97,7 @@
       </div>    
 
   <div style="float: left; width: auto;">
-    <form style="display:inline;" action="{{route('trans_necessidades_part')}}" method="post">
+    <form style="display:inline;" action="{{route('trans_necessidades_part')}}" method="get">
       @csrf 
       
       <button type="submit" class="btn btn-sm btn-sugestoes texto_p">Mostrar Sugestões</button>   

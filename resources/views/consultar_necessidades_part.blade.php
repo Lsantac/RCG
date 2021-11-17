@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="container">
+<div class="container-fluid">
 
     <h2>Necessidades do Participante</h2> 
     <h5>{{$part->nome_part}}</h5> 
@@ -212,20 +212,21 @@
                     </td>
 
                     <td>
-                      <form action="{{route('trans_necessidades_part')}}" method="post">
+                      @if(Session::get('id_logado') == $necp->id_part)  
+                      <form action="{{route('trans_necessidades_part')}}" method="get">
                             @csrf 
-                            <!--<button type="submit" class="btn btn-sm btn-transacao bi-arrow-down-up texto_p"> Transação</button>-->
-                            
-                            <button type="submit" class="btn btn-sm btn-transacao bi-arrow-down-up texto_p">Sugestões
-                                    <span class="badge sugestao-of-nec">
-                                      {{App\Http\Controllers\NecessidadesController::verifica_sugestoes_nec($part->id,$necp->desc_cat,$necp->desc_nec,$necp->obs,1)}}
-                                    </span>
+                            <button type="submit" class="btn btn-sm btn-sugestoes bi-arrow-down-up texto_p">
+                              Sugestões <span class="badge sugestao-of-nec">
+                                        {{App\Http\Controllers\NecessidadesController::verifica_sugestoes_nec(Session::get('id_logado'),$necp->desc_cat,$necp->desc_nec,$necp->obs,1)}}
+                                        </span>
                             </button>
-
+                            <input value="1" name="filtra_id_logado" type="hidden">
                             <input value="{{$part->id}}" name="id_part_t" type="hidden">
                             <input value="{{$necp->id_nec_part}}" name="id_nec_part_t" type="hidden">
-                            
                       </form>
+                      @endif  
+
+
                     </td>
 
 

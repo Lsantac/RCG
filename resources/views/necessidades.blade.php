@@ -102,13 +102,19 @@
                           
                             <div class="col pcenter no-margin">
                                   @if($necp->id_part <> Session::get('id_logado'))
-                                    <form action="{{route('trans_trocas_part')}}" method="get">
-                                      @csrf 
-                                      <input value="{{$necp->id_part}}" name="id_part_t" type="hidden">
-                                      <input value="{{$necp->id_nec_part}}" name="id_nec_part_t" type="hidden">
+                                      <form action="{{route('trans_necessidades_part')}}" method="get">
+                                        @csrf 
+                                        <button type="submit" class="btn btn-sm btn-sugestoes-of bi-arrow-down-up texto_p">
+                                          Sugestões <span class="badge sugestao-of-nec">
+                                                    {{App\Http\Controllers\NecessidadesController::verifica_sugestoes_nec($necp->id_part,$necp->desc_cat,$necp->desc_nec,$necp->obs,1)}}
+                                                    </span>
+                                        </button>
 
-                                      <p><button type="submit" class="btn btn-sm btn-trocar bi-arrow-repeat texto_p">&nbspTrocar</button></p>   
-                                    </form>
+                                        <input value="0" name="filtra_id_logado" type="hidden">
+                                        <input value="{{$necp->id_part}}" name="id_part_t" type="hidden">
+                                        <input value="{{$necp->id_nec_part}}" name="id_nec_part_t" type="hidden">
+                                        
+                                      </form>
                                   @else
                                     <form action="{{route('trans_necessidades_part')}}" method="get">
                                       @csrf 
