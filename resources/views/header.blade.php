@@ -64,6 +64,7 @@
                   <li><a class="dropdown-item" href="#">Configurar Redes</a></li>
                   <li><a class="dropdown-item" href="#">Categorias</a></li>
                   <li><a class="dropdown-item" href="#">Unidades</a></li>
+                  <li><a class="dropdown-item" href="#">Moedas</a></li>
                 </ul>
               </div>
               &nbsp&nbsp

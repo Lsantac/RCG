@@ -25,7 +25,7 @@ class NecessidadesController extends Controller
                                               })
                                      ->where(function($query) use ($searchValues){
                                             foreach ($searchValues as $value) {
-                                                      if(strlen($value)>3){      
+                                                      if(strlen($value)>4){      
                                                       $query->orwhere('obs','like','%'.($value).'%')
                                                             ->orwhere('ofertas.descricao','like','%'.($value).'%')
                                                             ->orwhere('categorias.descricao','like','%'.($value).'%');
@@ -103,6 +103,7 @@ class NecessidadesController extends Controller
                                                 ->select('participantes.id as id_part','participantes.latitude','participantes.longitude','participantes.nome_part',
                                                 'participantes.endereco','participantes.cidade','participantes.estado','participantes.pais','necessidades_part.id as id_nec_part',
                                                 'necessidades_part.id_nec','necessidades_part.quant','necessidades_part.data','necessidades_part.obs','necessidades.descricao as desc_nec',
+                                                'necessidades_part.status',
                                                 'categorias.descricao as desc_cat','unidades.descricao as desc_unid')
 
                                                 ->orderBy('data','desc')
@@ -136,6 +137,7 @@ class NecessidadesController extends Controller
               ->select('participantes.id as id_part','participantes.latitude','participantes.longitude','participantes.nome_part',
               'participantes.endereco','participantes.cidade','participantes.estado','participantes.pais',
               'necessidades_part.id as id_nec_part','necessidades_part.id_nec','necessidades_part.quant','necessidades_part.data','necessidades_part.obs',
+              'necessidades_part.status',
               'necessidades.descricao as desc_nec','categorias.descricao as desc_cat','unidades.descricao as desc_unid')
 
               ->orderBy('data','desc')
@@ -153,6 +155,7 @@ class NecessidadesController extends Controller
                                               ->select('participantes.id as id_part','participantes.latitude','participantes.longitude','participantes.nome_part','necessidades_part.id as id_nec_part',
                                               'participantes.endereco','participantes.cidade','participantes.estado','participantes.pais',
                                               'necessidades_part.id_nec','necessidades_part.quant','necessidades_part.data','necessidades_part.obs','necessidades.descricao as desc_nec',
+                                              'necessidades_part.status',
                                               'categorias.descricao as desc_cat','unidades.descricao as desc_unid')
 
                                               ->orderBy('data','desc')
@@ -169,6 +172,7 @@ class NecessidadesController extends Controller
                                               ->select('participantes.id as id_part','participantes.latitude','participantes.longitude','participantes.nome_part',
                                                       'participantes.endereco','participantes.cidade','participantes.estado','participantes.pais',
                                                       'necessidades_part.id as id_nec_part','necessidades_part.id_nec','necessidades_part.quant','necessidades_part.data','necessidades_part.obs',
+                                                      'necessidades_part.status',
                                                       'necessidades.descricao as desc_nec','categorias.descricao as desc_cat','unidades.descricao as desc_unid')
 
                                               ->orderBy('data','desc')
@@ -220,6 +224,7 @@ class NecessidadesController extends Controller
                                           ->select('participantes.id as id_part','participantes.latitude','participantes.longitude','participantes.nome_part','necessidades_part.id as id_nec_part',
                                                 'participantes.endereco','participantes.cidade','participantes.estado','participantes.pais',
                                                 'necessidades_part.id_nec','necessidades_part.quant','necessidades_part.data','necessidades_part.obs','necessidades.descricao as desc_nec',
+                                                'necessidades_part.status',
                                                 'categorias.descricao as desc_cat','unidades.descricao as desc_unid')
 
                                           ->orderBy('data','desc')
@@ -250,6 +255,7 @@ class NecessidadesController extends Controller
                                     ->select('participantes.id as id_part','participantes.latitude','participantes.longitude','participantes.nome_part','necessidades_part.id as id_nec_part',
                                                 'participantes.endereco','participantes.cidade','participantes.estado','participantes.pais',
                                                 'necessidades_part.id_nec','necessidades_part.quant','necessidades_part.data','necessidades_part.obs','necessidades.descricao as desc_nec',
+                                                'necessidades_part.status',
                                                 'categorias.descricao as desc_cat','unidades.descricao as desc_unid')
 
                                     ->orderBy('data','desc')

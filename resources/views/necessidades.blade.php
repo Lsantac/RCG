@@ -99,26 +99,19 @@
                     
                     <td>
                       <div class="row">
-                          
                             <div class="col pcenter no-margin">
-                                  @if($necp->id_part <> Session::get('id_logado'))
-                                      <form action="{{route('trans_necessidades_part')}}" method="get">
-                                        @csrf 
-                                        <button type="submit" class="btn btn-sm btn-sugestoes-of bi-arrow-down-up texto_p">
-                                          Sugestões <span class="badge sugestao-of-nec">
-                                                    {{App\Http\Controllers\NecessidadesController::verifica_sugestoes_nec(Session::get('id_logado'),$necp->desc_cat,$necp->desc_nec,$necp->obs,0)}}
-                                                    </span>
-                                        </button>
+                                <form action="{{route('trans_necessidades_part')}}" method="get">
+                                  @csrf 
 
-                                        <input value="0" name="filtra_id_logado" type="hidden">
-                                        <input value="{{$necp->id_part}}" name="id_part_t" type="hidden">
-                                        <input value="{{$necp->id_nec_part}}" name="id_nec_part_t" type="hidden">
-                                        <input value="{{Session::get('id_logado')}}" name="id_logado" type="hidden">
-   
-                                      </form>
+                                  @if($necp->id_part <> Session::get('id_logado'))
+                                      <button type="submit" class="btn btn-sm btn-sugestoes-of bi-arrow-down-up texto_p">
+                                        Sugestões <span class="badge sugestao-of-nec">
+                                                  {{App\Http\Controllers\NecessidadesController::verifica_sugestoes_nec(Session::get('id_logado'),$necp->desc_cat,$necp->desc_nec,$necp->obs,0)}}
+                                                  </span>
+                                      </button>
+
+                                      <input value="0" name="filtra_id_logado" type="hidden">
                                   @else
-                                    <form action="{{route('trans_necessidades_part')}}" method="get">
-                                      @csrf 
                                       <button type="submit" class="btn btn-sm btn-sugestoes bi-arrow-down-up texto_p">
                                         Sugestões <span class="badge sugestao-of-nec">
                                                   {{App\Http\Controllers\NecessidadesController::verifica_sugestoes_nec(Session::get('id_logado'),$necp->desc_cat,$necp->desc_nec,$necp->obs,1)}}
@@ -126,19 +119,32 @@
                                       </button>
 
                                       <input value="1" name="filtra_id_logado" type="hidden">
-                                      <input value="{{$necp->id_part}}" name="id_part_t" type="hidden">
-                                      <input value="{{$necp->id_nec_part}}" name="id_nec_part_t" type="hidden">
-                                      <input value="{{Session::get('id_logado')}}" name="id_logado" type="hidden">
-                                      
-                                    </form>
-                                  @endif  
+                                  @endif
+
+                                  <input value="{{$necp->id_part}}" name="id_part_t" type="hidden">
+                                  <input value="{{$necp->id_nec_part}}" name="id_nec_part_t" type="hidden">
+                                  <input value="{{Session::get('id_logado')}}" name="id_logado" type="hidden">
+
+                                </form>
                             </div>
                          
                       </div>  
                     </td>    
                     <td></td>
-
-                    <td class="texto_p">Status</td>
+                     
+                    @if($necp->status == 1)
+                       <td class="texto_p">Pendente</td>
+                    @else
+                        @if($necp->status == 3)
+                            <td class="texto_p">Em Andamento</td>
+                        @else
+                            @if($necp->status == 4)
+                               <td class="texto_p">Ok</td>
+                            @else   
+                               <td class="texto_p"></td>
+                            @endif 
+                        @endif    
+                    @endif
 
                     <td>
                           <div style="" class="col">

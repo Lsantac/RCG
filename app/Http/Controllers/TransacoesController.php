@@ -58,7 +58,7 @@ class TransacoesController extends Controller
             
                                                ->where(function($query) use ($searchValues){
                                                         foreach ($searchValues as $value) {
-                                                                 if(strlen($value)>3){      
+                                                                 if(strlen($value)>4){      
                                                                  $query->orwhere('obs','like','%'.($value).'%')
                                                                        ->orwhere('necessidades.descricao','like','%'.($value).'%')
                                                                        ->orwhere('categorias.descricao','like','%'.($value).'%');
@@ -189,7 +189,7 @@ class TransacoesController extends Controller
             
                                                 ->where(function($query) use ($searchValues){
                                                             foreach ($searchValues as $value) {
-                                                                     if(strlen($value)>3){      
+                                                                     if(strlen($value)>4){      
                                                                      $query->orwhere('obs','like','%'.($value).'%')
                                                                            ->orwhere('ofertas.descricao','like','%'.($value).'%')
                                                                            ->orwhere('categorias.descricao','like','%'.($value).'%');
@@ -646,8 +646,6 @@ class TransacoesController extends Controller
                                     'data' => date('Y-m-d H:i:s')
                     ]);
                     
-                   
-
                     //Incluindo registro de quantidade de moeda/fluxo no historico do participante da necessidade
                     if($of_nec_tr=='nec'){
                        $id_part_inclui_moeda = request('id_part_nec');
@@ -669,6 +667,24 @@ class TransacoesController extends Controller
                     $code = 3;
                  }
 
+                  //Atualizar Status Ofertas e Necessidades
+                  $ofp = DB::table('ofertas_part')->where('id',request('id_of_part_t'))
+                                                  ->select('ofertas_part.status');
+                  $ofp->update(['status'=>$code]);   
+
+                  if($of_nec_tr=='nec'){
+                     $necp = DB::table('necessidades_part')->where('id',request('id_nec_part_t'))
+                                                           ->select('necessidades_part.status');
+                     $necp->update(['status'=>$code]); 
+                     
+                  }else{
+                       if($of_nec_tr=='tr'){
+                          $oftrp = DB::table('ofertas_part')->where('id',request('id_of_tr_part_t'))
+                                                            ->select('ofertas_part.status');
+                          $oftrp->update(['status'=>$code]);   
+                       }
+                  }
+
                   $trans_up = DB::table('transacoes')->where('id',$trans->id)
                                                      ->first();
 
@@ -686,6 +702,25 @@ class TransacoesController extends Controller
             }else{
                   /*ao incluir uma mensagem, um registro de transação é incluido junto */
                   session()->flash('code', 1);
+
+                  //Atualizar Status Ofertas e Necessidades para 'Em andamento'
+                  $ofp = DB::table('ofertas_part')->where('id',request('id_of_part_t'))
+                                                  ->select('ofertas_part.status');
+                  $ofp->update(['status'=>1]);   
+
+                  if($of_nec_tr=='nec'){
+                     $necp = DB::table('necessidades_part')->where('id',request('id_nec_part_t'))
+                                                           ->select('necessidades_part.status');
+                     $necp->update(['status'=>1]); 
+                     
+                  }else{
+                       if($of_nec_tr=='tr'){
+                          $oftrp = DB::table('ofertas_part')->where('id',request('id_of_tr_part_t'))
+                                                            ->select('ofertas_part.status');
+                          $oftrp->update(['status'=>1]);   
+                       }
+                  }
+
                   return back();
 
             }      

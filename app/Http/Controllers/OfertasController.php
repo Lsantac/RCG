@@ -27,7 +27,7 @@ class ofertasController extends Controller
 
                                            ->where(function($query) use ($searchValues){
                                                     foreach ($searchValues as $value) {
-                                                             if(strlen($value)>3){      
+                                                             if(strlen($value)>4){      
                                                              $query->orwhere('obs','like','%'.($value).'%')
                                                                    ->orwhere('necessidades.descricao','like','%'.($value).'%')
                                                                    ->orwhere('categorias.descricao','like','%'.($value).'%');
@@ -108,6 +108,7 @@ class ofertasController extends Controller
                                                 ->select('participantes.id as id_part','participantes.latitude','participantes.longitude','participantes.nome_part',
                                                 'participantes.endereco','participantes.cidade','participantes.estado','participantes.pais',
                                                 'ofertas_part.id as id_of_part','ofertas_part.id_of','ofertas_part.quant','ofertas_part.data','ofertas_part.obs',
+                                                'ofertas_part.status',
                                                 'ofertas.descricao as desc_of','categorias.descricao as desc_cat','unidades.descricao as desc_unid')
 
                                                 ->orderBy('data','desc')
@@ -141,6 +142,7 @@ class ofertasController extends Controller
                     ->select('participantes.id as id_part','participantes.latitude','participantes.longitude','participantes.nome_part',
                     'participantes.endereco','participantes.cidade','participantes.estado','participantes.pais',
                     'ofertas_part.id as id_of_part','ofertas_part.id_of','ofertas_part.quant','ofertas_part.data','ofertas_part.obs',
+                    'ofertas_part.status',
                     'ofertas.descricao as desc_of','categorias.descricao as desc_cat','unidades.descricao as desc_unid')
 
                     ->orderBy('data','desc')
@@ -156,6 +158,7 @@ class ofertasController extends Controller
                                               ->select('participantes.id as id_part','participantes.latitude','participantes.longitude','participantes.nome_part',
                                                       'participantes.endereco','participantes.cidade','participantes.estado','participantes.pais',
                                                       'ofertas_part.id as id_of_part','ofertas_part.id_of','ofertas_part.quant','ofertas_part.data','ofertas_part.obs',
+                                                      'ofertas_part.status',
                                                       'ofertas.descricao as desc_of','categorias.descricao as desc_cat','unidades.descricao as desc_unid')
 
                                               ->orderBy('data','desc')
@@ -173,6 +176,7 @@ class ofertasController extends Controller
                                               ->select('participantes.id as id_part','participantes.latitude','participantes.longitude','participantes.nome_part',
                                                       'participantes.endereco','participantes.cidade','participantes.estado','participantes.pais',
                                                       'ofertas_part.id as id_of_part','ofertas_part.id_of','ofertas_part.quant','ofertas_part.data','ofertas_part.obs',
+                                                      'ofertas_part.status',
                                                       'ofertas.descricao as desc_of','categorias.descricao as desc_cat','unidades.descricao as desc_unid')
 
                                               ->orderBy('data','desc')
@@ -223,6 +227,7 @@ class ofertasController extends Controller
 
                                           ->select('participantes.id as id_part','participantes.latitude','participantes.longitude','participantes.nome_part','ofertas_part.id as id_of_part',
                                                 'ofertas_part.id_of','ofertas_part.quant','ofertas_part.data','ofertas_part.obs','ofertas.descricao as desc_of',
+                                                'ofertas_part.status',
                                                 'categorias.descricao as desc_cat','unidades.descricao as desc_unid')
 
                                           ->orderBy('data','desc')
@@ -253,7 +258,7 @@ class ofertasController extends Controller
                                     ->select('participantes.id as id_part','participantes.latitude','participantes.longitude',
                                     'participantes.nome_part','ofertas_part.id as id_of_part',
                                     'ofertas_part.id_of','ofertas_part.quant','ofertas_part.data','ofertas_part.obs',
-                                    'ofertas.descricao as desc_of',
+                                    'ofertas.descricao as desc_of','ofertas_part.status',
                                     'categorias.descricao as desc_cat','unidades.descricao as desc_unid')
 
                                     ->orderBy('data','desc')

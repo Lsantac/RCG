@@ -130,7 +130,19 @@
                     </td>    
                     <td></td>
 
-                    <td class="texto_p">Status</td>
+                    @if($ofp->status == 1)
+                       <td class="texto_p">Pendente</td>
+                    @else
+                        @if($ofp->status == 3)
+                            <td class="texto_p">Em Andamento</td>
+                        @else
+                            @if($ofp->status == 4)
+                               <td class="texto_p">Ok</td>
+                            @else   
+                               <td class="texto_p"></td>
+                            @endif 
+                        @endif    
+                    @endif
 
                     <td>
                           <div style="" class="col">
