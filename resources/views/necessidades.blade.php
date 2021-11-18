@@ -4,7 +4,7 @@
 
 <div class="container-fluid">
 
-    <h2 class="texto-oferta">Necessidades</h2> 
+    <h2 class="texto-necessidade">Necessidades</h2> 
     <br>
     
     <div class="row">
@@ -106,7 +106,7 @@
                                         @csrf 
                                         <button type="submit" class="btn btn-sm btn-sugestoes-of bi-arrow-down-up texto_p">
                                           Sugestões <span class="badge sugestao-of-nec">
-                                                    {{App\Http\Controllers\NecessidadesController::verifica_sugestoes_nec($necp->id_part,$necp->desc_cat,$necp->desc_nec,$necp->obs,0)}}
+                                                    {{App\Http\Controllers\NecessidadesController::verifica_sugestoes_nec(Session::get('id_logado'),$necp->desc_cat,$necp->desc_nec,$necp->obs,0)}}
                                                     </span>
                                         </button>
 

@@ -12,7 +12,7 @@
               <a style="color:rgb(0, 50, 97); " class="nav-link active" aria-current="page" href="/home">Início</a>
             </li>
             <li class="nav-item">
-              <a style="color:rgb(16, 89, 172); " class="nav-link" href="/participantes">Participantes</a>
+              <a style=" color:rgb(17, 88, 196);" class="nav-link" href="/participantes">Participantes</a>
             </li>
             <li class="nav-item">
               <a style="color:rgb(18, 134, 43); " class="nav-link" href="/ofertas">Ofertas</a>

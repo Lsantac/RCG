@@ -4,7 +4,7 @@
 
 <div class="container-fluid">
 
-    <h2>Participantes</h2> 
+    <h2 class="texto-participante">Participantes</h2> 
     <br>
     <div class='results'>
         @if(Session::get('fail_mapa'))
