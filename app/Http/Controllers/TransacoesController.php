@@ -558,11 +558,7 @@ class TransacoesController extends Controller
                                               ->first();
 
             if(!$confere) {
-                  
-                /*  dd('id_nec_part_t : '.request('id_nec_part_t').
-                      ' ,id_of_part_t : '.request('id_of_part_t').
-                      ' ,id_of_tr_part_t : '.request('id_of_tr_part_t'));*/
-
+                
                   $trans = DB::table('transacoes')->insertGetId([
                         'id_nec_part' => request('id_nec_part_t'),
                         'id_of_part' => request('id_of_part_t'),
@@ -593,19 +589,49 @@ class TransacoesController extends Controller
 
             //Atualizar Status Ofertas e Necessidades - Pendente
             $ofp = DB::table('ofertas_part')->where('id',request('id_of_part_t'))
-            ->select('ofertas_part.status');
-            $ofp->update(['status'=>2]);
+                                            ->select('ofertas_part.status');
             
-            if($of_nec_tr =='nec'){
+            $ofp2 = $ofp->first();
+            
+            if($ofp2->status == 0){
+               $ofp->update(['status'=>1]);
+            }else{
+                 if($ofp2->status == 1){
+                    $ofp->update(['status'=>2]);     
+                 } 
+            }
+            
+            /*dd($of_nec_tr);  */
+
+            if(($of_nec_tr == 'nec') or ($of_nec_tr == 'of')){
                $necp = DB::table('necessidades_part')->where('id',request('id_nec_part_t'))
                                                      ->select('necessidades_part.status');
-               $necp->update(['status'=>2]);
+
+               $necp2 = $necp->first();  
+
+
+               if($necp2->status == 0){
+                  $necp->update(['status'=>1]);
+               }else{
+                    if($necp2->status == 1){
+                       $necp->update(['status'=>2]);     
+                    } 
+               }
             
             }else{
                   if($of_nec_tr =='tr'){
                      $oftrp = DB::table('ofertas_part')->where('id',request('id_of_tr_part_t'))
                                                        ->select('ofertas_part.status');
-                     $oftrp->update(['status'=>2]);
+
+                     $oftrp2 = $oftrp->first();                                                       
+
+                     if($oftrp2->status == 0){
+                        $oftrp->update(['status'=>1]);
+                     }else{
+                          if($oftrp2->status == 1){
+                             $oftrp->update(['status'=>2]);     
+                          } 
+                     }
                      
                   }
             }

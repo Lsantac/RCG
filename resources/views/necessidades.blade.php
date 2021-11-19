@@ -19,7 +19,7 @@
               <form action="mostra_varios_parts" method="post">
                     @csrf
 
-                    @if (isset($ofps_map)) 
+                    @if (isset($necps_map)) 
                     <button class="btn btn-mapa btn-sm bi-globe texto_m" type="submit"> Mapa Geral</button>
 
                         <input value="0" name="nome_part" type="hidden">
@@ -28,7 +28,7 @@
                         <input value="{{Session::get('longitude')}}" name="longitude" type="hidden">
 
                         @if (count($necps_map)>0)
-                            @foreach($necps_map as $ofp)  
+                            @foreach($necps_map as $necp)  
                                 <input value="{{$necp->id_part}}" name="parts[{{ $loop->index }}][id]" type="hidden">
                                 <input value="{{$necp->latitude}}" name="parts[{{ $loop->index }}][latitude]" type="hidden">
                                 <input value="{{$necp->longitude}}" name="parts[{{ $loop->index }}][longitude]" type="hidden">
@@ -132,15 +132,15 @@
                     </td>    
                     <td></td>
                      
-                    @if($necp->status == 2)
+                    @if($necp->status == 1)
                        <td class="texto_p">Pendente</td>
                     @else
-                        @if($necp->status == 3)
+                        @if(($necp->status == 3) or ($necp->status == 2))
                             <td class="texto_p">Em Andamento</td>
                         @else
                             @if($necp->status == 4)
                                <td class="texto_p">Ok</td>
-                            @else   
+                            @else  
                                <td class="texto_p"></td>
                             @endif 
                         @endif    

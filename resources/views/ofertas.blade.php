@@ -133,16 +133,17 @@
                     @if($ofp->status == 1)
                        <td class="texto_p">Pendente</td>
                     @else
-                        @if($ofp->status == 3)
+                        @if(($ofp->status == 3) or ($ofp->status == 2))
                             <td class="texto_p">Em Andamento</td>
                         @else
                             @if($ofp->status == 4)
                                <td class="texto_p">Ok</td>
-                            @else   
+                            @else  
                                <td class="texto_p"></td>
                             @endif 
                         @endif    
                     @endif
+
 
                     <td>
                           <div style="" class="col">
