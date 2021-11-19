@@ -188,9 +188,9 @@
                   <div class="row">
                     <div class="col-6 ">
                          @if (count($trans)>0)
-                             <input onkeypress="return event.keyCode!=13" id="QtOf" onchange="verifica_quant({{$disp_qt_of_trans}},'of')"  form="finalizar_transacao"  value="{{$trans[0]->quant_of}}" type="" name="QtOf" class="form-control texto_m"  required>  
+                             <input onkeypress="return event.keyCode!=13" id="QtOf" name="QtOf" onchange="verifica_quant({{$disp_qt_of_trans}},'of')"  form="finalizar_transacao"  value="{{$trans[0]->quant_of}}" type=""  class="form-control texto_m"  required>  
                          @else
-                             <input onkeypress="return event.keyCode!=13" id="QtOf" onchange="verifica_quant({{$disp_qt_of_trans}},'of')" form="finalizar_transacao"  value="{{$disp_qt_of_trans}}" type="" name="QtOf" class="form-control texto_m"  required>  
+                             <input onkeypress="return event.keyCode!=13" id="QtOf" name="QtOf" onchange="verifica_quant({{$disp_qt_of_trans}},'of')" form="finalizar_transacao"  value="{{$disp_qt_of_trans}}" type=""  class="form-control texto_m"  required>  
                          @endif    
                     </div>
                     <div class="col-3" style="padding: 5px 0;border: 3px;">{{$ofps->desc_unid}}</div>
@@ -209,9 +209,9 @@
                       <div class="row">
                           <div class="col-6 ">
                             @if (count($trans)>0)
-                                <input  onkeypress="return event.keyCode!=13" id="QtNec" onchange="verifica_quant({{$disp_qt_nec_trans}},'nec')" form="finalizar_transacao"  value="{{$trans[0]->quant_nec}}" type="" name="QtNec" class="form-control texto_m"  required>  
+                                <input  onkeypress="return event.keyCode!=13" id="QtNec" name="QtNec" onchange="verifica_quant({{$disp_qt_nec_trans}},'nec')" form="finalizar_transacao"  value="{{$trans[0]->quant_nec}}" type=""  class="form-control texto_m"  required>  
                             @else
-                                <input  onkeypress="return event.keyCode!=13" id="QtNec" onchange="verifica_quant({{$disp_qt_nec_trans}},'nec')" form="finalizar_transacao"  value="{{$disp_qt_nec_trans}}" type="" name="QtNec" class="form-control texto_m"  required>  
+                                <input  onkeypress="return event.keyCode!=13" id="QtNec" name="QtNec" onchange="verifica_quant({{$disp_qt_nec_trans}},'nec')" form="finalizar_transacao"  value="{{$disp_qt_nec_trans}}" type=""  class="form-control texto_m"  required>  
                             @endif  
                           </div>
                           <div class="col-3" style="padding: 5px 0;border: 3px;">{{$necps->desc_unid}}</div>
@@ -228,9 +228,9 @@
                       <div class="row">
                           <div class="col-6 ">
                             @if (count($trans)>0)
-                                <input  onkeypress="return event.keyCode!=13" id="QtOfTr" onchange="verifica_quant({{$disp_qt_of_tr_trans}},'tr')" form="finalizar_transacao"  value="{{$trans[0]->quant_of_tr}}" type="" name="QtOfTr" class="form-control texto_m"  required>  
+                                <input  onkeypress="return event.keyCode!=13" id="QtOfTr" name="QtOfTr" onchange="verifica_quant({{$disp_qt_of_tr_trans}},'tr')" form="finalizar_transacao"  value="{{$trans[0]->quant_of_tr}}" type=""  class="form-control texto_m"  required>  
                             @else
-                                <input  onkeypress="return event.keyCode!=13" id="QtOfTr" onchange="verifica_quant({{$disp_qt_of_tr_trans}},'tr')" form="finalizar_transacao"  value="{{$disp_qt_of_tr_trans}}" type="" name="QtOfTr" class="form-control texto_m"  required>  
+                                <input  onkeypress="return event.keyCode!=13" id="QtOfTr" name="QtOfTr" onchange="verifica_quant({{$disp_qt_of_tr_trans}},'tr')" form="finalizar_transacao"  value="{{$disp_qt_of_tr_trans}}" type=""  class="form-control texto_m"  required>  
                             @endif  
                           </div>
                           <div class="col-3" style="padding: 5px 0;border: 3px;">{{$oftrps->desc_unid}}</div>
@@ -247,9 +247,9 @@
                 @csrf
 
                 <!-- Button trigger modal Finalizar -->
-              <button type="button" class="btn btn-finalizar btn-sm" data-bs-toggle="modal" data-bs-target="#finalizar">
-                Finalizar
-              </button>
+                <button type="button" class="btn btn-finalizar btn-sm" data-bs-toggle="modal" data-bs-target="#finalizar">
+                  Finalizar
+                </button>
 
                 <div class="modal fade" id="finalizar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                   <div class="modal-dialog">
@@ -267,6 +267,10 @@
                       <input value="{{Session('id_logado')}}" name="id_logado" id="id_logado" type="hidden">
                       <input value="{{$ofps->id_part}}" name="id_part_of" id="id_part_of" type="hidden">
                       <input value="{{$ofps->id_of_part}}" name="id_of_part_t" id="id_of_part_t" type="hidden">
+
+                      <input value="{{$disp_qt_of_trans}}" name="disp_qt_of_trans" id="disp_qt_of_trans" type="hidden">
+                      <input value="{{$disp_qt_of_tr_trans}}" name="disp_qt_of_tr_trans" id="disp_qt_of_tr_trans" type="hidden">
+                      <input value="{{$disp_qt_nec_trans}}" name="disp_qt_nec_trans" id="disp_qt_nec_trans" type="hidden">
 
                       @if(isset($oftrps))
                          <input value="{{$oftrps->id_part}}" name="id_part_of_tr" id="id_part_of_tr" type="hidden">

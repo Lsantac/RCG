@@ -538,6 +538,19 @@ class TransacoesController extends Controller
 
       public function incluir_mens_trans(Request $request){
 
+            $id_part_inclui_moeda = 0;
+            
+            if(request('id_logado')==request('id_part_of')){
+                  $of_nec_tr = 'of';
+               }else{
+                     if(request('id_logado')==request('id_part_nec')){
+                       $of_nec_tr = 'nec';
+                     } else{
+                           if(request('id_logado')==request('id_part_of_tr')){
+                              $of_nec_tr = 'tr';
+                           }   
+                     }     
+               } 
             
             $confere = DB::table('transacoes')->where('id_nec_part', request('id_nec_part_t'))
                                               ->where('id_of_part', request('id_of_part_t'))
@@ -578,6 +591,25 @@ class TransacoesController extends Controller
                   
             ]);
 
+            //Atualizar Status Ofertas e Necessidades - Pendente
+            $ofp = DB::table('ofertas_part')->where('id',request('id_of_part_t'))
+            ->select('ofertas_part.status');
+            $ofp->update(['status'=>2]);
+            
+            if($of_nec_tr =='nec'){
+               $necp = DB::table('necessidades_part')->where('id',request('id_nec_part_t'))
+                                                     ->select('necessidades_part.status');
+               $necp->update(['status'=>2]);
+            
+            }else{
+                  if($of_nec_tr =='tr'){
+                     $oftrp = DB::table('ofertas_part')->where('id',request('id_of_tr_part_t'))
+                                                       ->select('ofertas_part.status');
+                     $oftrp->update(['status'=>2]);
+                     
+                  }
+            }
+
            return back();
 
       }  
@@ -586,6 +618,12 @@ class TransacoesController extends Controller
 
             $code = 0;
             $id_part_inclui_moeda = 0;
+            $disp_qt_of_trans = request('disp_qt_of_trans');
+            $disp_qt_of_tr_trans = request('disp_qt_of_tr_trans');
+            $disp_qt_nec_trans = request('disp_qt_nec_trans');
+            $QtOf = request('QtOf');
+            $QtOfTr = request('QtOfTr');
+            $QtNec = request('QtNec');
 
             if(request('id_logado')==request('id_part_of')){
                $of_nec_tr = 'of';
@@ -667,63 +705,56 @@ class TransacoesController extends Controller
                     $code = 3;
                  }
 
-                  //Atualizar Status Ofertas e Necessidades
-                  $ofp = DB::table('ofertas_part')->where('id',request('id_of_part_t'))
-                                                  ->select('ofertas_part.status');
-                  $ofp->update(['status'=>$code]);   
-
-                  if($of_nec_tr=='nec'){
-                     $necp = DB::table('necessidades_part')->where('id',request('id_nec_part_t'))
-                                                           ->select('necessidades_part.status');
-                     $necp->update(['status'=>$code]); 
-                     
-                  }else{
-                       if($of_nec_tr=='tr'){
-                          $oftrp = DB::table('ofertas_part')->where('id',request('id_of_tr_part_t'))
-                                                            ->select('ofertas_part.status');
-                          $oftrp->update(['status'=>$code]);   
-                       }
-                  }
-
                   $trans_up = DB::table('transacoes')->where('id',$trans->id)
                                                      ->first();
 
                  if($trans_up) {  
-                        /*return back()->with('success',$mens_back);*/
+                        /*Sucesso*/
                         session()->flash('code', $code);
-                        
-                        return back();
                   }else{
-                        /*return back()->with('fail','Erro na atualização da transação!');        */
+                        /*Erro na atualização da transação!  */
                         session()->flash('code', 0);
-                        return back();
                   }   
 
             }else{
                   /*ao incluir uma mensagem, um registro de transação é incluido junto */
-                  session()->flash('code', 1);
+                  $code = 1;  
+                  session()->flash('code', $code);
+            } 
 
-                  //Atualizar Status Ofertas e Necessidades para 'Em andamento'
-                  $ofp = DB::table('ofertas_part')->where('id',request('id_of_part_t'))
-                                                  ->select('ofertas_part.status');
-                  $ofp->update(['status'=>1]);   
+            //Atualizar Status Ofertas e Necessidades
+            $ofp = DB::table('ofertas_part')->where('id',request('id_of_part_t'))
+            ->select('ofertas_part.status');
+            if(($disp_qt_of_trans - $QtOf) > 0){
+               $ofp->update(['status'=>3]);
+            }else{
+               $ofp->update(['status'=>$code]);
+            }
+               
 
-                  if($of_nec_tr=='nec'){
-                     $necp = DB::table('necessidades_part')->where('id',request('id_nec_part_t'))
-                                                           ->select('necessidades_part.status');
-                     $necp->update(['status'=>1]); 
+            if($of_nec_tr =='nec'){
+               $necp = DB::table('necessidades_part')->where('id',request('id_nec_part_t'))
+                                                     ->select('necessidades_part.status');
+               if(($disp_qt_nec_trans - $QtNec) > 0){
+                 $necp->update(['status'=>3]);
+               }else{
+                 $necp->update(['status'=>$code]);
+               }
+
+            }else{
+                  if($of_nec_tr =='tr'){
+                     $oftrp = DB::table('ofertas_part')->where('id',request('id_of_tr_part_t'))
+                                                       ->select('ofertas_part.status');
+                     if(($disp_qt_of_tr_trans - $QtOfTr) > 0){
+                       $oftrp->update(['status'=>3]);
+                     }else{
+                       $oftrp->update(['status'=>$code]);
+                     }                                   
                      
-                  }else{
-                       if($of_nec_tr=='tr'){
-                          $oftrp = DB::table('ofertas_part')->where('id',request('id_of_tr_part_t'))
-                                                            ->select('ofertas_part.status');
-                          $oftrp->update(['status'=>1]);   
-                       }
                   }
+            }
 
-                  return back();
-
-            }      
+            return back();     
 
       }  
 

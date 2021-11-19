@@ -132,7 +132,7 @@
                     </td>    
                     <td></td>
                      
-                    @if($necp->status == 1)
+                    @if($necp->status == 2)
                        <td class="texto_p">Pendente</td>
                     @else
                         @if($necp->status == 3)
