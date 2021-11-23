@@ -106,6 +106,8 @@
                                       @csrf 
                                       <input value="{{$ofp->id_part}}" name="id_part_t" type="hidden">
                                       <input value="{{$ofp->id_of_part}}" name="id_of_part_t" type="hidden">
+                                      <input value="0" name="filtra_id_logado" type="hidden">
+                                      <input value="{{Session::get('id_logado')}}" name="id_logado" type="hidden">
 
                                       <p><button type="submit" class="btn btn-sm btn-trocar bi-arrow-repeat texto_p">&nbspTrocar</button></p>   
                                     </form>

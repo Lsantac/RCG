@@ -98,8 +98,10 @@ class TransacoesController extends Controller
 
       public function trans_trocas_part(request $request){
     
+            $filtra_id_logado = request('filtra_id_logado');
             $id_part = request('id_part_t');
             $id_of_part = request('id_of_part_t');
+            $id_logado = request('id_logado');
 
             $part = DB::table('participantes')->where('id',$id_part)
                                               ->select('participantes.*')
@@ -124,7 +126,13 @@ class TransacoesController extends Controller
                         AS distancia';
 
             
-            $of_tr_ps = DB::table('ofertas_part')->where('ofertas_part.id_part',"<>",$id_part)
+            $of_tr_ps = DB::table('ofertas_part')->where(function($verif) use ($filtra_id_logado,$id_part,$id_logado){
+                                                      if($filtra_id_logado){
+                                                      $verif->where('ofertas_part.id_part',"<>",$id_part);
+                                                      }else{
+                                                      $verif->where('ofertas_part.id_part',"=",$id_logado);
+                                                      }                                               
+                                                      })
                                                  
                                                  ->join('participantes','ofertas_part.id_part','=','participantes.id')
                                                  ->join('ofertas','ofertas_part.id_of','=','ofertas.id')
