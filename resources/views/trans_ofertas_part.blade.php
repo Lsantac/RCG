@@ -15,7 +15,7 @@
     </div>
 
     <h4 class="texto-oferta" style="color:rgb(91, 19, 207);">Sugestões de Transações para a oferta do Participante</h4> 
-    <h5 class="texto-nome-logado">{{$part->nome_part}}</h5> 
+    <h5 class="texto-nome-logado">{{$nome_part_cab}}</h5> 
     <br>
 
      @if (isset($ofps)) 

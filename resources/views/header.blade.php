@@ -41,9 +41,9 @@
                <a href="/alterar_participantes/{{Session('id_logado')}}" id="dropdownMenuButton1">
 
                 @if(Session::get('imagem_logado'))
-                   <img src="/uploads/participantes/{{Session('imagem_logado')}}" class="imagem-header">
+                   <img src="/uploads/participantes/{{Session('imagem_logado')}}" class="imagem-header rounded-circle">
                 @else
-                   <img src="/img/logo.jpg" class="imagem-header">
+                   <img src="/img/logo.jpg" class="imagem-header rounded-circle">
                 @endif 
       
                </a>

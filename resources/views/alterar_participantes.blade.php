@@ -8,14 +8,14 @@
 
         @csrf 
 
-        <h2>Alterar Participante</h2> 
+        <h2 class="texto-participante">Alterar Participante</h2> 
 
         <figure class="figure">
 
             @if(!@empty($participante->imagem))
-                <img src="/uploads/participantes/{{Session('imagem_logado')}}" class="imagem-part">
+                <img src="/uploads/participantes/{{Session('imagem_logado')}}" class="imagem-part rounded-pill">
             @else
-                <img src="/img/logo.jpg" class="figure-img img-fluid rounded imagem-part img-thumbnail">
+                <img src="/img/logo.jpg" class="figure-img img-fluid rounded-pill imagem-part img-thumbnail ">
             @endif 
 
             <!--<img src="/uploads/participantes/{{$participante->imagem}}" class="figure-img img-fluid rounded imagem-part img-thumbnail" alt="...">-->

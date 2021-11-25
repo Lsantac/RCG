@@ -8,13 +8,13 @@
 
         @csrf 
 
-        <h2>Detalhes do Participante</h2> 
+        <h2 class="texto-participante">Detalhes do Participante</h2> 
 
         <figure class="figure">
             @if(!@empty($participante->imagem))
-                <img src="/uploads/participantes/{{$participante->imagem}}" class="imagem-part">
+                <img src="/uploads/participantes/{{$participante->imagem}}" class="imagem-part rounded-pill">
             @else
-                <img src="/img/logo.jpg" class="figure-img img-fluid rounded imagem-part img-thumbnail">
+                <img src="/img/logo.jpg" class="figure-img img-fluid rounded-pill imagem-part img-thumbnail">
             @endif 
         </figure>
         
@@ -68,7 +68,8 @@
             <a type="button" href="/necessidades_part/{{$participante->id}}" class="btn btn-necessidades bi-arrow-down-circle-fill texto_m"> Necessidades</a>   
             <a type="button" href="/transacoes_part/{{$participante->id}}" class="btn btn-transacao bi-arrow-down-up texto_m"> Transações</a>   
             <a type="button" href="/redes_part/{{$participante->id}}" class="btn btn-redes bi-snow texto_m"> Redes</a>   
-            <a type="submit" class="btn btn-mapa bi-globe texto_m"> Mapa</a>
+            <a type="button" href="/mostramapa/{{$participante->id}}"  class="btn btn-mapa bi-globe texto_m"> Mapa</a>  
+
         </div>
         
     </form>

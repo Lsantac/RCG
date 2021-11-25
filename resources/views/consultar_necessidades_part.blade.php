@@ -4,8 +4,8 @@
 
 <div class="container-fluid">
 
-    <h2>Necessidades do Participante</h2> 
-    <h5>{{$part->nome_part}}</h5> 
+    <h2 class="texto-necessidade">Necessidades do Participante</h2> 
+    <h5 class="texto-participante">{{$part->nome_part}}</h5> 
     <br>
     
     <div class='results'>
@@ -37,12 +37,14 @@
           <!--<a class="btn btn btn-redes bi-snow" type="button"> Incluir Rede</a> -->
           
           <!-- Button trigger modal -->
-          <button type="button" class="btn btn-incluir-necessidades btn-sm bi-arrow-up-circle-fill" data-bs-toggle="modal" data-bs-target="#Incluirnecessidade">
-            Incluir Necessidade
-          </button>
-          <button type="button" class="btn btn-criar-necessidades btn-sm bi-arrow-up-circle-fill" data-bs-toggle="modal" data-bs-target="#Novanecessidade">
-            Criar novo tipo de Necessidade
-          </button>
+          @if(Session::get('id_logado') == $part->id)
+            <button type="button" class="btn btn-incluir-necessidades btn-sm bi-arrow-up-circle-fill" data-bs-toggle="modal" data-bs-target="#Incluirnecessidade">
+              Incluir Necessidade
+            </button>
+            <button type="button" class="btn btn-criar-necessidades btn-sm bi-arrow-up-circle-fill" data-bs-toggle="modal" data-bs-target="#Novanecessidade">
+              Criar novo tipo de Necessidade
+            </button>
+          @endif
         </div>
         
     </form>
@@ -162,7 +164,11 @@
             <th scope="col" class="texto_p">Quant</th>
             <th scope="col" class="texto_p">Unidade</th>
             <th scope="col" colspan="2" class="texto_p pcenter">Transações</th>
-            <th class="texto_p" >Ações</th>
+            @if(Session::get('id_logado') == $part->id)
+                <th class="texto_p" >Ações</th>
+            @else
+                <th class="texto_p" >Status</th>
+            @endif
           </tr>
         </thead>
 
@@ -176,8 +182,8 @@
                     <td>
                       <div class="card " style="width: 40rem;">
                         <div class="card-body">
-                          <h5 class="card-title">Necessidade : {{$necp->desc_nec}}</h5>
-                          <h6 class="card-subtitle mb-2 text-muted">Categoria : {{$necp->desc_cat}} </h6>
+                          <h5 class="card-title texto-necessidade">Necessidade : {{$necp->desc_nec}}</h5>
+                          <h6 style="color:rgb(97, 75, 4)" class="card-subtitle mb-2">Categoria : {{$necp->desc_cat}} </h6>
                           <p class="card-text">Obs : {{$necp->obs}}</p>
                           <!--<a href="#" class="card-link">Card link</a>
                           <a href="#" class="card-link">Another link</a>-->
@@ -197,7 +203,7 @@
                     <td class="texto_p">{{$necp->desc_unid}}</td>
 
                     <td>
-                      <form action="" method="post">
+                      <!--<form action="" method="post">
                             @csrf 
                             
                             <button type="submit" class="btn btn-sm btn-mensagem bi-arrow-repeat texto_p">
@@ -208,22 +214,22 @@
                             <input value="{{$part->id}}" name="id_part_t" type="hidden">
                             <input value="{{$necp->id_nec_part}}" name="id_nec_part_t" type="hidden">
                             
-                      </form>
+                      </form>-->
                     </td>
 
                     <td>
-                      @if(Session::get('id_logado') == $necp->id_part)  
-                      <form action="{{route('trans_necessidades_part')}}" method="get">
-                            @csrf 
-                            <button type="submit" class="btn btn-sm btn-sugestoes bi-arrow-down-up texto_p">
-                              Sugestões <span class="badge sugestao-of-nec">
-                                        {{App\Http\Controllers\NecessidadesController::verifica_sugestoes_nec(Session::get('id_logado'),$necp->desc_cat,$necp->desc_nec,$necp->obs,1)}}
-                                        </span>
-                            </button>
-                            <input value="1" name="filtra_id_logado" type="hidden">
-                            <input value="{{$part->id}}" name="id_part_t" type="hidden">
-                            <input value="{{$necp->id_nec_part}}" name="id_nec_part_t" type="hidden">
-                      </form>
+                      @if(Session::get('id_logado') == $part->id)  
+                        <form action="{{route('trans_necessidades_part')}}" method="get">
+                              @csrf 
+                              <button type="submit" class="btn btn-sm btn-sugestoes bi-arrow-down-up texto_p">
+                                Sugestões <span class="badge sugestao-of-nec">
+                                          {{App\Http\Controllers\NecessidadesController::verifica_sugestoes_nec(Session::get('id_logado'),$necp->desc_cat,$necp->desc_nec,$necp->obs,1)}}
+                                          </span>
+                              </button>
+                              <input value="1" name="filtra_id_logado" type="hidden">
+                              <input value="{{$part->id}}" name="id_part_t" type="hidden">
+                              <input value="{{$necp->id_nec_part}}" name="id_nec_part_t" type="hidden">
+                        </form>
                       @endif  
 
 
@@ -231,7 +237,9 @@
 
 
                     <td>
-                        <button class="btn btn-editar btn-sm bi bi-pencil texto_p" type="submit" data-bs-toggle="modal" data-bs-target="#Editarnecessidade-{{$necp->id_nec_part}}"> Editar</button>
+                        @if(Session::get('id_logado') == $part->id)  
+                           <button class="btn btn-editar btn-sm bi bi-pencil texto_p" type="submit" data-bs-toggle="modal" data-bs-target="#Editarnecessidade-{{$necp->id_nec_part}}"> Editar</button>
+                        @endif   
 
                         <form action="{{route('altera_necessidade_part')}}" method="post">
                           @csrf 
@@ -283,7 +291,9 @@
                           </form>
                     </td>
                     <td>
-                        <button class="btn btn-danger btn-sm bi bi-trash texto_p" type="button" data-bs-toggle="modal" data-bs-target="#ModalExcluinecessidade-{{$necp->id_nec_part}}" >Excluir</button>
+                        @if(Session::get('id_logado') == $part->id)  
+                            <button class="btn btn-danger btn-sm bi bi-trash texto_p" type="button" data-bs-toggle="modal" data-bs-target="#ModalExcluinecessidade-{{$necp->id_nec_part}}" >Excluir</button>
+                        @endif
 
                         <form class="" action="/deleta_necessidade_part/{{$necp->id_nec_part}}" method="POST">
                               @csrf

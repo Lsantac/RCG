@@ -91,8 +91,17 @@ class TransacoesController extends Controller
       /*dd($necps);*/
       
       $necps->appends($request->all());   
+
+      $nome_part_cab = "";
+      if($filtra_id_logado == 1){
+         $nome_part_cab = $part->nome_part;
+      }else{
+         if($filtra_id_logado == 0){
+         $nome_part_cab = request('nome_part_cab');
+         }
+      }
                                         
-      return view('trans_ofertas_part',['part' => $part,'ofps'=>$ofps,'necps'=>$necps]);
+      return view('trans_ofertas_part',['part' => $part,'ofps'=>$ofps,'necps'=>$necps,'nome_part_cab'=>$nome_part_cab]);
 
       }
 

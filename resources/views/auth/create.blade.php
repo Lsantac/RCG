@@ -8,7 +8,7 @@
     <form action="{{route('auth.create')}}" method="POST"  class="row g-3" enctype="multipart/form-data">
         @csrf 
         
-        <h2>Novo Participante</h2> 
+        <h2 class="texto-participante">Novo Participante</h2> 
         <figure class="figure">
             <img src="/img/logo.jpg" class="figure-img img-fluid rounded imagem-part img-thumbnail" alt="...">
         </figure>

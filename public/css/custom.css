@@ -175,6 +175,11 @@
     
 }
 
+.btn-conferir-confirmacoes{
+    color:white;
+    background-color:purple;
+}
+
 .texto-mensagens{
     color:rgb(17, 61, 156);
 }

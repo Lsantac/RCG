@@ -6,7 +6,7 @@
 
 <div class="container-fluid">
 
-    <h2 style="color:rgb(18, 134, 43);">Ofertas do Participante</h2> 
+    <h2 class="texto-oferta">Ofertas do Participante</h2> 
     <h5 class="texto-nome-logado">{{$part->nome_part}}</h5> 
     <br>
 
@@ -39,12 +39,17 @@
           <!--<a class="btn btn btn-redes bi-snow" type="button"> Incluir Rede</a> -->
           
           <!-- Button trigger modal -->
-          <button type="button" class="btn btn-incluir-ofertas btn-sm bi-arrow-up-circle-fill" data-bs-toggle="modal" data-bs-target="#IncluirOferta">
-            Incluir Oferta
-          </button>
-          <button type="button" class="btn btn-criar-ofertas btn-sm bi-arrow-up-circle-fill" data-bs-toggle="modal" data-bs-target="#NovaOferta">
-            Criar novo tipo de Oferta
-          </button>
+              
+              @if(Session::get('id_logado') == $part->id)  
+                <button type="button" class="btn btn-incluir-ofertas btn-sm bi-arrow-up-circle-fill" data-bs-toggle="modal" data-bs-target="#IncluirOferta">
+                  Incluir Oferta
+                </button>
+
+                <button type="button" class="btn btn-criar-ofertas btn-sm bi-arrow-up-circle-fill" data-bs-toggle="modal" data-bs-target="#NovaOferta">
+                  Criar novo tipo de Oferta
+                </button>
+              @endif 
+          
         </div>
         
     </form>
@@ -166,7 +171,11 @@
             <th scope="col" class="texto_p">Unidade</th>
             <!--<th scope="col" class="texto_p">Observações</th>-->
             <th scope="col" colspan="2" class="texto_p pcenter">Transações</th>
-            <th class="texto_p" >Ações</th>
+            @if(Session::get('id_logado') == $part->id)  
+                <th class="texto_p" >Ações</th>
+            @else
+                <th class="texto_p" >Status</th>
+            @endif
 
           </tr>
         </thead>
@@ -180,8 +189,8 @@
                     <td>
                       <div class="card" style="width: 40rem;">
                         <div class="card-body">
-                          <h5 class="card-title">Oferta : {{$ofp->desc_of}}</h5>
-                          <h6 class="card-subtitle mb-2 text-muted">Categoria : {{$ofp->desc_cat}} </h6>
+                          <h5 class="card-title texto-oferta">Oferta : {{$ofp->desc_of}}</h5>
+                          <h6 style="color:rgb(4, 97, 97)" class="card-subtitle mb-2">Categoria : {{$ofp->desc_cat}} </h6>
                           <p class="card-text">Obs : {{$ofp->obs}}</p>
                           <!--<a href="#" class="card-link">Card link</a>
                           <a href="#" class="card-link">Another link</a>-->
@@ -200,10 +209,9 @@
                     <td class="texto_p">{{$ofp->quant}}</td>
                     <td class="texto_p">{{$ofp->desc_unid}}</td>
                    
-                    <td>
+                    <!--<td>
                       <form action="" method="post">
                             @csrf 
-                            <!--<button type="submit" class="btn btn-sm btn-transacao bi-arrow-down-up texto_p"> Transação</button> -->
                             
                             <button type="submit" class="btn btn-sm btn-mensagem bi-arrow-repeat texto_p">
                               Mensagens <span class="badge sugestao-of-nec"> </span>                              
@@ -214,27 +222,38 @@
                             <input value="{{$ofp->id_of_part}}" name="id_of_part_t" type="hidden">
                             
                       </form>
-                    </td>
+                    </td> -->
 
                     <td>
-                    @if(Session::get('id_logado') == $ofp->id_part)  
                         <form action="{{route('trans_ofertas_part')}}" method="get">
                               @csrf 
                               <button type="submit" class="btn btn-sm btn-sugestoes bi-arrow-down-up texto_p">
                                 Sugestões <span class="badge sugestao-of-nec">
-                                          {{App\Http\Controllers\OfertasController::verifica_sugestoes_of(Session::get('id_logado'),$ofp->desc_cat,$ofp->desc_of,$ofp->obs,1)}}
+                                          @if(Session::get('id_logado') == $part->id)
+                                             {{App\Http\Controllers\OfertasController::verifica_sugestoes_of(Session::get('id_logado'),$ofp->desc_cat,$ofp->desc_of,$ofp->obs,1)}}
+                                          @else
+                                             {{App\Http\Controllers\OfertasController::verifica_sugestoes_of(Session::get('id_logado'),$ofp->desc_cat,$ofp->desc_of,$ofp->obs,0)}}
+                                          @endif
                                           </span>
                               </button>
-                              <input value="1" name="filtra_id_logado" type="hidden">
-                              <input value="{{$part->id}}" name="id_part_t" type="hidden">
+                              @if(Session::get('id_logado') == $part->id)
+                                 <input value="1" name="filtra_id_logado" type="hidden">
+                                 <input value="{{$part->id}}" name="id_part_t" type="hidden">   
+                                 <input value="" name="nome_part_cab" type="hidden">   
+                              @else
+                                 <input value="0" name="filtra_id_logado" type="hidden">
+                                 <input value="{{Session::get('id_logado')}}" name="id_part_t" type="hidden">
+                                 <input value="{{$part->nome_part}}" name="nome_part_cab" type="hidden">   
+                              @endif 
                               <input value="{{$ofp->id_of_part}}" name="id_of_part_t" type="hidden">
                         </form>
-                      @endif  
-
                     </td>
                     
                     <td>
-                        <button class="btn btn-editar btn-sm bi bi-pencil texto_p" type="submit" data-bs-toggle="modal" data-bs-target="#EditarOferta-{{$ofp->id_of_part}}"> Editar</button>
+                        @if(Session::get('id_logado') == $part->id)  
+                           <button class="btn btn-editar btn-sm bi bi-pencil texto_p" type="submit" data-bs-toggle="modal" data-bs-target="#EditarOferta-{{$ofp->id_of_part}}">
+                            Editar</button>
+                        @endif  
 
                         <form action="{{route('altera_oferta_part')}}" method="post">
                           @csrf 
@@ -286,7 +305,10 @@
                           </form>
                     </td>
                     <td>
-                        <button class="btn btn-danger btn-sm bi bi-trash texto_p" type="button" data-bs-toggle="modal" data-bs-target="#ModalExcluiOferta-{{$ofp->id_of_part}}" >Excluir</button>
+                        @if(Session::get('id_logado') == $part->id)  
+                            <button class="btn btn-danger btn-sm bi bi-trash texto_p" type="button" data-bs-toggle="modal" data-bs-target="#ModalExcluiOferta-{{$ofp->id_of_part}}" >
+                             Excluir</button>
+                        @endif
 
                         <form class="" action="/deleta_oferta_part/{{$ofp->id_of_part}}" method="POST">
                               @csrf
