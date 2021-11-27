@@ -13,14 +13,19 @@
                     <div class="card-body">
                       
                       <p class="card-text">
-                         Existem <span style="color:blue ;"><b>X</b></span> mensagens de necessidades ou trocas de outros participantes esperando resposta. 
+                         Existem <span style="color:blue ;"><b>X</b></span> mensagens de Necessidades e Trocas de outros participantes esperando resposta. 
                       </p>
+                      <p class="card-text">
+                        Existem <span style="color:rgb(36, 5, 148) ;"><b>Z</b></span> transações em andamento para suas Ofertas. 
+                      </p>
+
                       <p>
-                        Existem <span style="color:purple ;"><b>Y</b></span> confirmações de necessidades ou trocas de outros participantes esperando sua confirmação. 
+                        Existem <span style="color:purple ;"><b>Y</b></span> confirmações de Necessidades e Trocas de outros participantes esperando sua confirmação. 
                       </p>
-                      <a href="#" class="btn btn-primary">Conferir mensagens</a>
-                      <a href="#" class="btn btn-conferir-confirmacoes">Conferir confirmações</a>
-                      <a href="#" class="btn btn-ofertas">Incluir Oferta</a>
+                      <a href="#" class="btn btn-sm btn-primary">Conferir mensagens</a>
+                      <a href="#" class="btn btn-sm btn-conferir-andamentos">Conferir andamentos</a>
+                      <a href="#" class="btn btn-sm btn-conferir-confirmacoes">Conferir confirmações</a>
+                      <a href="#" class="btn btn-sm btn-ofertas">Minhas Ofertas</a>
                     </div>
                   </div>
             </div>
@@ -32,13 +37,17 @@
                       <p class="card-text">
                         Existem <span style="color:blue;"><b>X</b></span> mensagens de ofertas de outros participantes esperando resposta. 
                       </p>
+                      <p class="card-text">
+                        Existem <span style="color:rgb(36, 5, 148) ;"><b>Z</b></span> transações em andamento para suas Necessidades. 
+                      </p>
                       <p>
                         Existem <span style="color:purple ;"><b>Y</b></span> confirmações de ofertas de outros participantes esperando sua confirmação. 
                       </p>
                       <br>
-                      <a href="#" class="btn btn-primary">Conferir mensagens</a>
-                      <a href="#" class="btn btn-conferir-confirmacoes">Conferir confirmações</a>
-                      <a href="#" class="btn btn-necessidades">Incluir Necessidade</a>
+                      <a href="#" class="btn btn-sm btn-primary">Conferir mensagens</a>
+                      <a href="#" class="btn btn-sm btn-conferir-andamentos">Conferir andamentos</a>
+                      <a href="#" class="btn btn-sm btn-conferir-confirmacoes">Conferir confirmações</a>
+                      <a href="#" class="btn btn-sm btn-necessidades">Minhas Necessidades</a>
                     </div>
                   </div>
             </div>

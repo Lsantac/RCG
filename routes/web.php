@@ -8,7 +8,7 @@ use App\Http\Controllers\OfertasController;
 use App\Http\Controllers\NecessidadesController;
 use App\Http\Controllers\TransacoesController;
 use App\Http\Controllers\UserAuthController;
-
+use App\Http\Controllers\IniciaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,10 +21,11 @@ use App\Http\Controllers\UserAuthController;
 |
 */
 
-
-Route::get('/home', function () {
+/*Tela Inicial */
+Route::get('/home', [IniciaController::class,'tela_inicial']);
+/*Route::get('/home', function () {
     return view('home');
-});
+});*/
 
 /*Autenticações, login e logout */
 
@@ -105,3 +106,6 @@ Route::get('/geocode', function ()
 {
     return view('geocode');
 });
+
+
+
