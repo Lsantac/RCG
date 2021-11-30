@@ -71,11 +71,14 @@
         <form class="row g-3" method="get" action="{{route('consultar_trans_nec_part')}}">
 
           @csrf
-    
+
+          <input name="id_part_t" type="hidden" value="{{$part->id}}"> 
+          <input value="{{$ofp->id_of_part}}" name="id_of_part_t" type="hidden">
+          <input value="1" name="filtra_id_logado" type="hidden">
+          <input value="{{Session::get('id_logado')}}" name="id_logado" type="hidden">
+
           <div class="col-sm-10 g-3">
               <input class="form-control texto_p" name="consultar_trans_nec_part" value="" placeholder="Digite palavras para procurar outras necessidades..." type="search">
-              <input name="id_part_t" type="hidden" value="{{$part->id}}"> 
-              <input value="{{$ofp->id_of_part}}" name="id_of_part_t" type="hidden">        
           </div>
       
           <div style="text-align:center;width: 5%;"  class="col-sm-2">
@@ -105,6 +108,8 @@
       <button type="submit" class="btn btn-sm btn-sugestoes texto_p ">Mostrar Sugestões</button>   
       <input value="{{$part->id}}" name="id_part_t" type="hidden">
       <input value="{{$ofp->id_of_part}}" name="id_of_part_t" type="hidden">
+      <input value="1" name="filtra_id_logado" type="hidden">
+
       
     </form>
   </div>

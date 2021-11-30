@@ -13,10 +13,10 @@
                     <div class="card-body">
                       
                       <p class="card-text">
-                         Existem <span style="color:blue ;"><b>X</b></span> mensagens de Necessidades e Trocas de outros participantes esperando resposta. 
+                         Existem <span style="color:blue ;"><b>{{$num_mens_unica}}</b></span> mensagens de Necessidades e Trocas de outros participantes esperando resposta. 
                       </p>
                       <p class="card-text">
-                        Existem <span style="color:rgb(36, 5, 148) ;"><b>Z</b></span> transações em andamento para suas Ofertas. 
+                        Existem <span style="color:rgb(36, 5, 148) ;"><b>{{$num_mens_anda}}</b></span> transações em andamento para suas Ofertas. 
                       </p>
 
                       <p>

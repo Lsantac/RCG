@@ -20,6 +20,7 @@ class TransacoesController extends Controller
         $filtra_id_logado = request('filtra_id_logado');
         $id_part = request('id_part_t');
         $id_of_part = request('id_of_part_t');
+        $id_logado = request('id_logado');
    
         $part = DB::table('participantes')->where('id',$id_part)
                                           ->select('participantes.*')
@@ -48,11 +49,11 @@ class TransacoesController extends Controller
         /*dd($searchValues);*/
         
 
-        $necps = DB::table('necessidades_part')->where(function($verif) use ($filtra_id_logado,$id_part){
+        $necps = DB::table('necessidades_part')->where(function($verif) use ($filtra_id_logado,$id_part,$id_logado){
                                                        if($filtra_id_logado){
                                                           $verif->where('necessidades_part.id_part',"<>",$id_part);
                                                        }else{
-                                                          $verif->where('necessidades_part.id_part',"=",$id_part);
+                                                          $verif->where('necessidades_part.id_part',"=",$id_logado);
                                                        }                                               
                                                        })
             
@@ -171,8 +172,7 @@ class TransacoesController extends Controller
             $id_part = request('id_part_t');
             $id_nec_part = request('id_nec_part_t');
             $id_logado = request('id_logado');
-    
-            
+
             $part = DB::table('participantes')->where('id',$id_part)
                                               ->select('participantes.*')
                                               ->first();
@@ -238,15 +238,26 @@ class TransacoesController extends Controller
     
           
           $ofps->appends($request->all());   
+
+          $nome_part_cab = "";
+          if($filtra_id_logado == 1){
+             $nome_part_cab = $part->nome_part;
+          }else{
+             if($filtra_id_logado == 0){
+                $nome_part_cab = request('nome_part_cab');
+             }
+          }
                                             
-          return view('trans_necessidades_part',['part' => $part,'ofps'=>$ofps,'necps'=>$necps]);
+          return view('trans_necessidades_part',['part' => $part,'ofps'=>$ofps,'necps'=>$necps,'nome_part_cab'=>$nome_part_cab]);
     
           }
       
       public function consultar_trans_nec_part(Request $request){
 
+            $filtra_id_logado = request('filtra_id_logado');
             $id_part = request('id_part_t');
             $id_of_part = request('id_of_part_t');
+            $id_logado = request('id_logado');
 
             $part = DB::table('participantes')->where('id',$id_part)
                                               ->select('participantes.*')
@@ -270,7 +281,14 @@ class TransacoesController extends Controller
             // split on 1+ whitespace & ignore empty (eg. trailing space)
             $searchValues = preg_split('/\s+/', $string, -1, PREG_SPLIT_NO_EMPTY);   
            
-            $necps = DB::table('necessidades_part')->where('necessidades_part.id_part',"<>",$id_part)
+            $necps = DB::table('necessidades_part')->where(function($verif) use ($filtra_id_logado,$id_part,$id_logado){
+                                                      if($filtra_id_logado){
+                                                         $verif->where('necessidades_part.id_part',"<>",$id_part);
+                                                      }else{
+                                                         $verif->where('necessidades_part.id_part',"=",$id_logado);
+                                                      }                                               
+                                                      })
+
                                                    ->where(function($query) use ($searchValues){
                                                             foreach ($searchValues as $value) {
                                                                      $query->orwhere('obs','like','%'.($value).'%')
@@ -318,15 +336,26 @@ class TransacoesController extends Controller
                       
           
           $necps->appends($request->all());   
+
+          $nome_part_cab = "";
+          if($filtra_id_logado == 1){
+             $nome_part_cab = $part->nome_part;
+          }else{
+             if($filtra_id_logado == 0){
+               $nome_part_cab = request('nome_part_cab');
+             }
+          }
                                             
-          return view('trans_ofertas_part',['part' => $part,'ofps'=>$ofps,'necps'=>$necps]);
+          return view('trans_ofertas_part',['part' => $part,'ofps'=>$ofps,'necps'=>$necps,'nome_part_cab'=>$nome_part_cab]);
     
           }     
       
       public function consultar_trans_of_part(Request $request){
 
+            $filtra_id_logado = request('filtra_id_logado');
             $id_part = request('id_part_t');
             $id_nec_part = request('id_nec_part_t');
+            $id_logado = request('id_logado');
 
             $part = DB::table('participantes')->where('id',$id_part)
                                               ->select('participantes.*')
@@ -351,8 +380,16 @@ class TransacoesController extends Controller
             // split on 1+ whitespace & ignore empty (eg. trailing space)
             $searchValues = preg_split('/\s+/', $string, -1, PREG_SPLIT_NO_EMPTY);   
            
-            $ofps = DB::table('ofertas_part')->where('ofertas_part.id_part',"<>",$id_part)
-                                                   ->where(function($query) use ($searchValues){
+            $ofps = DB::table('ofertas_part')->where(function($verif) use ($filtra_id_logado,$id_part,$id_logado){
+                                                if($filtra_id_logado){
+                                                   $verif->where('ofertas_part.id_part',"<>",$id_part);
+                                                }else{
+                                                   $verif->where('ofertas_part.id_part',"=",$id_logado);
+                                                }                                               
+                                                })
+
+
+                                             ->where(function($query) use ($searchValues){
                                                             foreach ($searchValues as $value) {
                                                                      $query->orwhere('obs','like','%'.($value).'%')
                                                                            ->orwhere('ofertas.descricao','like','%'.($value).'%')
@@ -399,10 +436,109 @@ class TransacoesController extends Controller
                       
           
           $ofps->appends($request->all());   
+
+          $nome_part_cab = "";
+          if($filtra_id_logado == 1){
+             $nome_part_cab = $part->nome_part;
+          }else{
+             if($filtra_id_logado == 0){
+               $nome_part_cab = request('nome_part_cab');
+             }
+          }
                                             
-          return view('trans_necessidades_part',['part' => $part,'ofps'=>$ofps,'necps'=>$necps]);
+          return view('trans_necessidades_part',['part' => $part,'ofps'=>$ofps,'necps'=>$necps,'nome_part_cab'=>$nome_part_cab]);
     
-          }     
+          }
+          
+          public function consultar_trans_trocas_part(Request $request){
+
+            $filtra_id_logado = request('filtra_id_logado');
+            $id_part = request('id_part_t');
+            $id_of_part = request('id_of_part_t');
+            $id_logado = request('id_logado');
+
+            $part = DB::table('participantes')->where('id',$id_part)
+                                              ->select('participantes.*')
+                                              ->first();
+                                                           
+            $ofps = DB::table('ofertas_part')->where('ofertas_part.id',$id_of_part)
+                                             ->join('participantes','ofertas_part.id_part','=','participantes.id')
+                                             ->join('ofertas','ofertas_part.id_of','=','ofertas.id')
+                                             ->join('categorias','ofertas.id_cat','=','categorias.id')
+                                             ->join('unidades','ofertas.id_unid','=','unidades.id')
+                                          
+                                             ->select('participantes.id as id_part','participantes.nome_part','participantes.latitude','participantes.longitude','participantes.nome_part','ofertas_part.id as id_of_part',
+                                                      'ofertas_part.id_of','ofertas_part.quant','ofertas_part.data','ofertas_part.obs','ofertas.descricao as desc_of',
+                                                      'categorias.descricao as desc_cat','unidades.descricao as desc_unid')
+                                             ->get();
+
+            $sql_dist = '(6371 * (2 *
+            atan2(sqrt(sin(radians(participantes.latitude-'.$ofps[0]->latitude.')/2) * sin(radians(participantes.latitude-'.$ofps[0]->latitude.')/2) +sin(radians(participantes.longitude-'.$ofps[0]->longitude.')/2) 
+            * sin(radians(participantes.longitude-'.$ofps[0]->longitude.')/2) * cos(radians('.$ofps[0]->latitude.')) * cos(radians(participantes.latitude))),
+            sqrt(1-(sin(radians(participantes.latitude-'.$ofps[0]->latitude.')/2) * sin(radians(participantes.latitude-'.$ofps[0]->latitude.')/2) +sin(radians(participantes.longitude-'.$ofps[0]->longitude.')/2) 
+            * sin(radians(participantes.longitude-'.$ofps[0]->longitude.')/2) * cos(radians('.$ofps[0]->latitude.')) * cos(radians(participantes.latitude))))) ) )
+            AS distancia';
+                                             
+                        
+            $string = request('consultar_trans_of_part');
+           
+            // split on 1+ whitespace & ignore empty (eg. trailing space)
+            $searchValues = preg_split('/\s+/', $string, -1, PREG_SPLIT_NO_EMPTY);   
+           
+            $of_tr_ps = DB::table('ofertas_part')->where(function($verif) use ($filtra_id_logado,$id_part,$id_logado){
+                                                if($filtra_id_logado){
+                                                   $verif->where('ofertas_part.id_part',"<>",$id_part);
+                                                }else{
+                                                   $verif->where('ofertas_part.id_part',"=",$id_logado);
+                                                }                                               
+                                                })
+
+                                                ->where(function($query) use ($searchValues){
+                                                            foreach ($searchValues as $value) {
+                                                                     $query->orwhere('obs','like','%'.($value).'%')
+                                                                           ->orwhere('ofertas.descricao','like','%'.($value).'%')
+                                                                           ->orwhere('categorias.descricao','like','%'.($value).'%')
+                                                                           ->orwhere('nome_part','like','%'.$value.'%')
+                                                                           ->orwhere('endereco','like','%'.$value.'%')
+                                                                           ->orwhere('cidade','like','%'.$value.'%')
+                                                                           ->orwhere('cep','like','%'.$value.'%')
+                                                                           ->orwhere('email','like','%'.$value.'%')
+                                                                           ->orwhere('estado','like','%'.$value.'%');
+                                                                     
+                                                            }
+                                                    
+                                                    })
+    
+                ->join('participantes','ofertas_part.id_part','=','participantes.id')
+                ->join('ofertas','ofertas_part.id_of','=','ofertas.id')
+                ->join('categorias','ofertas.id_cat','=','categorias.id')
+                ->join('unidades','ofertas.id_unid','=','unidades.id')
+                
+                ->selectRaw('participantes.id as id_part,participantes.nome_part,participantes.latitude,participantes.longitude,
+                            participantes.nome_part,ofertas_part.id as id_of_part,
+                            participantes.endereco,participantes.cidade,participantes.cep,participantes.email,participantes.estado,
+                           ofertas_part.id_of,ofertas_part.quant,ofertas_part.data,
+                           ofertas_part.obs,ofertas.descricao as desc_of,
+                           categorias.descricao as desc_cat,unidades.descricao as desc_unid,'.$sql_dist) 
+                     
+                      ->orderBy('distancia','asc')
+                      ->paginate(3);
+                      
+          
+          $of_tr_ps->appends($request->all());   
+
+          $nome_part_cab = "";
+          if($filtra_id_logado == 1){
+             $nome_part_cab = $part->nome_part;
+          }else{
+             if($filtra_id_logado == 0){
+               $nome_part_cab = request('nome_part_cab');
+             }
+          }
+                                            
+          return view('trans_trocas_part',['part' => $part,'ofps'=>$ofps,'of_tr_ps'=>$of_tr_ps,'nome_part_cab'=>$nome_part_cab]);
+    
+          }         
 
       public function mens_transacoes_part(Request $request){
      
@@ -600,7 +736,8 @@ class TransacoesController extends Controller
                   'id_trans' => $id_trans,
                   'id_part' => request('id_part_logado'), 
                   'mensagem' => request('mensagem'),
-                  'data' => date('Y-m-d H:i:s')
+                  'data' => date('Y-m-d H:i:s'),
+                  'of_nec_tr' => $of_nec_tr
                   
             ]);
 

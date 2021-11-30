@@ -60,14 +60,16 @@
     <br>
 
     <div style="float: left; width: 70%; "> 
-        <form class="row g-3" method="post" action="{{route('consultar_trans_nec_part')}}">
+        <form class="row g-3" method="get" action="{{route('consultar_trans_trocas_part')}}">
 
           @csrf
+          <input name="id_part_t" type="hidden" value="{{$part->id}}"> 
+          <input value="{{$ofp->id_of_part}}" name="id_of_part_t" type="hidden">        
+          <input value="0" name="filtra_id_logado" type="hidden">
+          <input value="{{Session::get('id_logado')}}" name="id_logado" type="hidden">
     
           <div class="col-sm-10 g-3">
               <input class="form-control texto_m" name="consultar_trans_nec_part" value="" placeholder="Digite palavras para procurar outras ofertas para trocar..." type="search">
-              <input name="id_part_t" type="hidden" value="{{$part->id}}"> 
-              <input value="{{$ofp->id_of_part}}" name="id_of_part_t" type="hidden">        
           </div>
       
           <div style="text-align:center;width: 5%;"  class="col-sm-2">
