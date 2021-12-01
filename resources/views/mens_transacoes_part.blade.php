@@ -309,7 +309,7 @@
                 Nova Mensagem
               </button>
 
-              <!-- Modal -->
+              <!-- Modal incluir Mensagem -->
               <form action="{{route('incluir_mensagem')}}" method="get">
                 
                 @csrf
@@ -335,16 +335,20 @@
 
                           <br>
                           <textarea name ="mensagem" class="form-control" id="mensagem" rows="3" required></textarea>
-
-                          <input value="{{Session('id_logado')}}" name="id_part_logado" id="id_part_logado" type="hidden">
+                          
+                          <input value="{{Session('id_logado')}}" name="id_logado" id="id_logado" type="hidden">
                           <input value="{{$ofps->id_of_part}}" name="id_of_part_t" id="id_of_part_t" type="hidden">
+                          <input value="{{$ofps->id_part}}" name="id_part_of" id="id_part_of" type="hidden">
                           <input value="{{$ofps->quant}}" name="qt_of_part_t" id="qt_of_part_t" type="hidden">
                         
                           @if(isset($oftrps) )
+                             <input value="{{$oftrps->id_part}}" name="id_part_of_tr" id="id_part_of_tr" type="hidden">
                              <input value="{{$oftrps->id_of_part}}" name="id_of_tr_part_t" id="id_of_tr_part_t" type="hidden">
                              <input value="0" name="id_nec_part_t" id="id_nec_part_t" type="hidden">
                              <input value="{{$oftrps->quant}}" name="qt_of_tr_part_t" id="qt_of_tr_part_t" type="hidden">
+
                           @else
+                             <input value="{{$necps->id_part}}" name="id_part_nec" id="id_part_nec" type="hidden">
                              <input value="{{$necps->id_nec_part}}" name="id_nec_part_t" id="id_nec_part_t" type="hidden">
                              <input value="0" name="id_of_tr_part_t" id="id_of_tr_part_t" type="hidden">
                              <input value="{{$necps->quant}}" name="qt_nec_part_t" id="qt_nec_part_t" type="hidden">   

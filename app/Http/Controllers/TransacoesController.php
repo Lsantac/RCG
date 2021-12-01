@@ -480,7 +480,7 @@ class TransacoesController extends Controller
             AS distancia';
                                              
                         
-            $string = request('consultar_trans_of_part');
+            $string = request('consultar_trans_troca_part');
            
             // split on 1+ whitespace & ignore empty (eg. trailing space)
             $searchValues = preg_split('/\s+/', $string, -1, PREG_SPLIT_NO_EMPTY);   
@@ -692,18 +692,24 @@ class TransacoesController extends Controller
       public function incluir_mens_trans(Request $request){
 
             $id_part_inclui_moeda = 0;
-            
+            $of_nec_tr = ""; 
+
             if(request('id_logado')==request('id_part_of')){
-                  $of_nec_tr = 'of';
-               }else{
-                     if(request('id_logado')==request('id_part_nec')){
-                       $of_nec_tr = 'nec';
-                     } else{
-                           if(request('id_logado')==request('id_part_of_tr')){
-                              $of_nec_tr = 'tr';
-                           }   
-                     }     
-               } 
+               $of_nec_tr = 'of';
+            }else{
+                  if(request('id_logado')==request('id_part_nec')){
+                    $of_nec_tr = 'nec';
+                  } else{
+                        if(request('id_logado')==request('id_part_of_tr')){
+                           $of_nec_tr = 'tr';
+                        }   
+                  }     
+            }  
+
+            /*dd("Id logado: ".request('id_logado')." Id_of_part_t : ".request('id_of_part_t').
+            " Id_nec_part_t : ".request('id_nec_part_t').
+            " Id_of_tr_part_t : ".request('id_of_tr_part_t').
+            " of_nec_tr: ".$of_nec_tr);*/
             
             $confere = DB::table('transacoes')->where('id_nec_part', request('id_nec_part_t'))
                                               ->where('id_of_part', request('id_of_part_t'))
@@ -734,7 +740,7 @@ class TransacoesController extends Controller
 
             $msgs_i = DB::table('mensagens_trans')->insert([
                   'id_trans' => $id_trans,
-                  'id_part' => request('id_part_logado'), 
+                  'id_part' => request('id_logado'), 
                   'mensagem' => request('mensagem'),
                   'data' => date('Y-m-d H:i:s'),
                   'of_nec_tr' => $of_nec_tr

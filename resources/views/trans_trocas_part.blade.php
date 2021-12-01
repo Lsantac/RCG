@@ -69,7 +69,7 @@
           <input value="{{Session::get('id_logado')}}" name="id_logado" type="hidden">
     
           <div class="col-sm-10 g-3">
-              <input class="form-control texto_m" name="consultar_trans_nec_part" value="" placeholder="Digite palavras para procurar outras ofertas para trocar..." type="search">
+              <input class="form-control texto_m" name="consultar_trans_troca_part" value="" placeholder="Digite palavras para procurar outras ofertas para trocar..." type="search">
           </div>
       
           <div style="text-align:center;width: 5%;"  class="col-sm-2">
