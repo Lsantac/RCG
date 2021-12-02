@@ -942,6 +942,31 @@ class TransacoesController extends Controller
 
       }
       
+   public static function verifica_status_trans_of_nec_tr ($id_of_part,$id_nec_part,$id_of_tr_part){
+
+   $status_trans = 0;      
+   $trans = DB::table('transacoes')->where('transacoes.id_of_part',$id_of_part)
+                                   ->where(function($verif) use ($id_nec_part,$id_of_tr_part){
+                                       if($id_nec_part > 0){
+                                          $verif->where('transacoes.id_nec_part',$id_nec_part);
+                                       }else{
+                                          if($id_of_tr_part > 0){
+                                             $verif->where('transacoes.id_of_tr_part',$id_of_tr_part);
+                                          }
+                                       }                                               
+                                    })
+                                    ->first();
+
+   if(isset($trans)){
+      $status_trans = $trans->id_st_trans;
+   }else{
+      $status_trans = 0;
+   }
+   
+   return($status_trans);   
+
+
+   }   
       
 
 }
