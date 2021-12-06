@@ -919,37 +919,31 @@ class TransacoesController extends Controller
             //Atualizar Status Ofertas e Necessidades
             $ofp = DB::table('ofertas_part')->where('id',request('id_of_part_t'))
                                             ->select('ofertas_part.status');
-            /*if(($disp_qt_of_trans - $QtOf) > 0){
+            if(($disp_qt_of_trans - $QtOf) > 0){
                $ofp->update(['status'=>3]);
             }else{
                $ofp->update(['status'=>$code]);
-            }*/
+            }
 
-            $ofp->update(['status'=>$code]);
-           
             $necp = DB::table('necessidades_part')->where('id',request('id_nec_part_t'))
                                                   ->select('necessidades_part.status');
             if($necp){                                                  
-               /*if(($disp_qt_nec_trans - $QtNec) > 0){
+               if(($disp_qt_nec_trans - $QtNec) > 0){
                $necp->update(['status'=>3]);
                }else{
                $necp->update(['status'=>$code]);
-               }*/
-
-               $necp->update(['status'=>$code]);
+               }
 
             }
             
             $oftrp = DB::table('ofertas_part')->where('id',request('id_of_tr_part_t'))
                                               ->select('ofertas_part.status');
-            /*if(($disp_qt_of_tr_trans - $QtOfTr) > 0){
+            if(($disp_qt_of_tr_trans - $QtOfTr) > 0){
                 $oftrp->update(['status'=>3]);
             }else{
                 $oftrp->update(['status'=>$code]);
-            } */                                  
+            }                                   
  
-            $oftrp->update(['status'=>$code]);
-            
             return back();     
 
       }

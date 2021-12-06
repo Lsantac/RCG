@@ -9,33 +9,69 @@
             
             <div class="col">
                 <div class="card" style="width: 100%;">
-                    <h5 class="card-header header-oferta">Minhas Ofertas</h5>
+                    <h5 class="card-header header-oferta"><a href="" class="texto-oferta"> Minhas Ofertas</a></h5>
                     <div class="card-body">
-                      
-                      <p class="card-text">
-                         Existem <span style="color:blue ;"><b>{{$num_mens_unica}}</b></span> mensagens de Necessidades e Trocas de outros participantes esperando resposta. 
-                      </p>
-                      <p class="card-text">
-                        Existem <span style="color:rgb(36, 5, 148) ;"><b>{{$num_mens_anda}}</b></span> transações em andamento para suas Ofertas. 
-                      </p>
 
-                      <p>
-                        Existem <span style="color:purple ;"><b>Y</b></span> confirmações de Necessidades e Trocas de outros participantes esperando sua confirmação. 
-                      </p>
-                      <a href="#" class="btn btn-sm btn-primary">Conferir mensagens</a>
-                      <a href="#" class="btn btn-sm btn-conferir-andamentos">Conferir andamentos</a>
-                      <a href="#" class="btn btn-sm btn-conferir-confirmacoes">Conferir confirmações</a>
-                      <a href="#" class="btn btn-sm btn-ofertas">Minhas Ofertas</a>
+                      <div class="row">
+                        <div class="col-1">
+                          <h4 class="bi bi-chat-left-dots-fill texto-pendente"></h4>
+                        </div>
+                        <div class="col-11">
+                          <p class="card-text">
+                            Existem <span style="color:rgb(18, 158, 14);"><b>{{$num_mens_unica}}</b></span> mensagens de Necessidades ou Trocas de outros participantes esperando resposta. 
+                         </p>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-1">
+                          <h4 class="bi bi-chat-left-dots-fill texto-em-andamento"></h4>
+                        </div>
+                        <div class="col-11">
+                          <p class="card-text">
+                            Existem <span style="color:rgb(197, 15, 233);"><b>{{$num_mens_anda}}</b></span> transações em andamento para suas Ofertas. 
+                          </p>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-1">
+                          <h4 class="bi bi-check-circle-fill texto-parc-finalizada"></h4>
+                        </div>
+                        <div class="col-11">
+                          <p>
+                            Existem <span style="color:rgb(15, 135, 233);"><b>{{$num_ofp_parc}}</b></span> confirmações de Necessidades ou Trocas de outros participantes esperando sua confirmação. 
+                          </p>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-1">
+                          <h4 class="bi bi-check-circle-fill texto-finalizada"></h4>
+                        </div>
+                        <div class="col-11">
+                              @if($num_ofp_final > 1)
+                                <p>
+                                Existem <span style="color:rgb(15, 29, 233);"><b>{{$num_ofp_final}}</b></span> Ofertas suas já finalizadas. 
+                                </p>
+                              @else
+                                <p>
+                                Existe <span style="color:rgb(15, 29, 233);"><b>{{$num_ofp_final}}</b></span> Oferta sua já finalizada. 
+                                </p>
+                              @endif
+                        </div>
+                      </div>
+                      
                     </div>
                   </div>
             </div>
             <div class="col">
                 <div class="card" style="width: 100%;">
-                    <h5 class="card-header header-necessidade">Minhas Necessidades</h5>
+                    <h5 class="card-header header-necessidade"><a href="" class="texto-necessidade"> Minhas Necessidades</a></h5>
                     <div class="card-body">
                       
                       <p class="card-text">
-                        Existem <span style="color:blue;"><b>X</b></span> mensagens de ofertas de outros participantes esperando resposta. 
+                        Existem <span style="color:blue;"><b>X</b></span> mensagens de Ofertas de outros participantes esperando resposta. 
                       </p>
                       <p class="card-text">
                         Existem <span style="color:rgb(36, 5, 148) ;"><b>Z</b></span> transações em andamento para suas Necessidades. 
@@ -44,10 +80,8 @@
                         Existem <span style="color:purple ;"><b>Y</b></span> confirmações de ofertas de outros participantes esperando sua confirmação. 
                       </p>
                       <br>
-                      <a href="#" class="btn btn-sm btn-primary">Conferir mensagens</a>
-                      <a href="#" class="btn btn-sm btn-conferir-andamentos">Conferir andamentos</a>
-                      <a href="#" class="btn btn-sm btn-conferir-confirmacoes">Conferir confirmações</a>
-                      <a href="#" class="btn btn-sm btn-necessidades">Minhas Necessidades</a>
+           
+           
                     </div>
                   </div>
             </div>
