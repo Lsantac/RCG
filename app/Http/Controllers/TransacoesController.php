@@ -555,6 +555,8 @@ class TransacoesController extends Controller
             }else{
                  $id_of_tr_part = 0;
             }
+
+           /* dd([$id_of_part,$id_of_tr_part,$id_nec_part,$troca]);*/
             
             $part = DB::table('participantes')->where('id',$id_part)
                                               ->select('participantes.*')
@@ -620,6 +622,7 @@ class TransacoesController extends Controller
                $id_trans = 0;
             }                                            
 
+            /*dd($id_trans);*/
          
             $msgs = DB::table('mensagens_trans')->where('mensagens_trans.id_trans',$id_trans)          
                     ->select('mensagens_trans.*','participantes.nome_part as nome_part_mens')
@@ -635,7 +638,7 @@ class TransacoesController extends Controller
                                             ->join('moedas','transacoes.id_moeda','=','moedas.id') 
                                             ->get();
 
-                                          
+           /*dd($trans);                                          */
                                             
            $soma_qt_of_trans = DB::table('transacoes')->where('transacoes.id_of_part',$id_of_part)
                                                       ->sum('transacoes.quant_of');                                                          
@@ -829,6 +832,8 @@ class TransacoesController extends Controller
             
             if($trans) { 
                 $trans_up = DB::table('transacoes')->where('id',$trans->id);
+
+                /*dd(request('Fluxo'));*/
                              
                 $trans_up->update([
                   'quant_moeda'=>request('QtFluxo'),
@@ -908,36 +913,43 @@ class TransacoesController extends Controller
                   session()->flash('code', $code);
             } 
 
-            /*dd([$of_nec_tr, " OF: ",$disp_qt_of_trans,$QtOf," Nec: ",$disp_qt_nec_trans,$QtNec," Tr: ",$disp_qt_of_tr_trans,$QtOfTr]);*/
+            /*dd([$of_nec_tr, " OF: ",$disp_qt_of_trans,$QtOf," Nec: ",$disp_qt_nec_trans,$QtNec," Tr: ",$disp_qt_of_tr_trans,$QtOfTr," Code : ",$code]);*/
             /*dd($code);*/
 
             //Atualizar Status Ofertas e Necessidades
             $ofp = DB::table('ofertas_part')->where('id',request('id_of_part_t'))
                                             ->select('ofertas_part.status');
-            if(($disp_qt_of_trans - $QtOf) > 0){
+            /*if(($disp_qt_of_trans - $QtOf) > 0){
                $ofp->update(['status'=>3]);
             }else{
                $ofp->update(['status'=>$code]);
-            }
+            }*/
+
+            $ofp->update(['status'=>$code]);
            
             $necp = DB::table('necessidades_part')->where('id',request('id_nec_part_t'))
                                                   ->select('necessidades_part.status');
             if($necp){                                                  
-               if(($disp_qt_nec_trans - $QtNec) > 0){
+               /*if(($disp_qt_nec_trans - $QtNec) > 0){
                $necp->update(['status'=>3]);
                }else{
                $necp->update(['status'=>$code]);
-               }
+               }*/
+
+               $necp->update(['status'=>$code]);
+
             }
             
             $oftrp = DB::table('ofertas_part')->where('id',request('id_of_tr_part_t'))
                                               ->select('ofertas_part.status');
-            if(($disp_qt_of_tr_trans - $QtOfTr) > 0){
+            /*if(($disp_qt_of_tr_trans - $QtOfTr) > 0){
                 $oftrp->update(['status'=>3]);
             }else{
                 $oftrp->update(['status'=>$code]);
-            }                                   
+            } */                                  
  
+            $oftrp->update(['status'=>$code]);
+            
             return back();     
 
       }

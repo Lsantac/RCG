@@ -133,18 +133,22 @@
                     <td></td>
 
                     @if($ofp->status == 1)
-                    <td class="texto_p texto-pendente"><h4 class="bi bi-chat-left-dots-fill"></h4></td>
-                    @else
-                        @if(($ofp->status == 3) or ($ofp->status == 2))
-                            <td class="texto_p texto-em-andamento"><h4 class="bi bi-chat-left-dots-fill"></h4></td>
-                        @else
-                            @if($ofp->status == 4)
-                               <td class="texto_p texto-finalizada"><h4 class="bi bi-check-circle-fill"></h4></td>
-                            @else  
-                               <td class="texto_p"></td>
-                            @endif 
-                        @endif    
-                    @endif
+                      <td class="texto_p texto-pendente"><h4 class="bi bi-chat-left-dots-fill"></h4></td>
+                      @else
+                          @if($ofp->status == 2)
+                              <td class="texto_p texto-em-andamento"><h4 class="bi bi-chat-left-dots-fill"></h4></td>
+                          @else
+                              @if(($ofp->status == 3))
+                                 <td class="texto_p texto-parc-finalizada"><h4 class="bi bi-check-circle-fill"></h4></td>
+                              @else 
+                                  @if($ofp->status == 4)
+                                      <td class="texto_p texto-finalizada"><h4 class="bi bi-check-circle-fill"></h4></td>
+                                  @else  
+                                      <td class="texto_p"></td>
+                                  @endif
+                              @endif  
+                          @endif    
+                      @endif
 
                     <td>
                           <div style="" class="col">

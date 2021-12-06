@@ -112,7 +112,7 @@
                   <a href="#" class="btn btn-primary btn-sm">Ver Perfil</a>    
                 </div>
                 <div class="col-9">
-                  <div style="color:rgb(122, 66, 13); text-decoration:double;" class="card-text texto_m"> 
+                  <div style="color:rgb(13, 122, 107); text-decoration:double;" class="card-text texto_m"> 
                     <strong> Confirmada em :
                         @php
                             if(isset($trans[0])){
@@ -145,11 +145,12 @@
 
               <div class="col-6 ">
                 @if(isset($oftrps))
-                    <input  class="form-control" value="Troca" name="Fluxo" id="Fluxo" readonly>
+                    <input  class="form-control" value="Troca" name="Fluxo_tr" id="Fluxo_tr" readonly>
+                    <input form="finalizar_transacao" value="1" name="Fluxo" id="Fluxo" type="hidden">
                 @else 
                     <select form="finalizar_transacao" class="form-select texto_m" aria-label="Default select example" name="Fluxo" id="Fluxo" required>
                             @if (count($trans)>0)
-                              <option value="{{$trans[0]->id_moeda}}" selected>{{$trans[0]->desc_moeda}}</option>
+                                 <option value="{{$trans[0]->id_moeda}}" selected>{{$trans[0]->desc_moeda}}</option>
                             @else
                               <option value = "" selected></option>
                             @endif

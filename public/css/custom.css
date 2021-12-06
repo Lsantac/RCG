@@ -219,6 +219,11 @@
 .texto-finalizada{
     color:rgb(15, 29, 233);
 }
+
+.texto-parc-finalizada{
+    color:rgb(15, 135, 233);
+}
+
 .texto-em-andamento{
     color:rgb(197, 15, 233);
 }
