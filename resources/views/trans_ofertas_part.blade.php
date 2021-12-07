@@ -225,7 +225,7 @@
                             <input value="{{$part->id}}" name="id_part_t" type="hidden">
                             <input value="{{$necp->id_nec_part}}" name="id_nec_part_t" type="hidden">
                             <input value="{{$ofp->id_of_part}}" name="id_of_part_t" type="hidden"> 
-                        
+                            <input value="of" name="origem" type="hidden"> 
                             <button type="submit" class="btn btn-sm btn-mensagem bi-arrow-repeat texto_p"> Detalhes da Transação</button>   
                            
                       </form>

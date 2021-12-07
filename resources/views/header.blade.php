@@ -1,7 +1,7 @@
 
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <div class="container-fluid texto_m">
+      <div class="container-fluid ">
         <a class="navbar-brand" href="#">RCG</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -20,9 +20,7 @@
             <li class="nav-item">
               <a style="color:rgb(126, 49, 13); " class="nav-link" href="/necessidades">Necessidades</a>
             </li>
-            <li class="nav-item">
-              <a  style="color:rgb(81, 0, 156); "  class="nav-link" href="/transações">Minhas Transações</a>
-            </li> 
+           
             <li class="nav-item">
               <a class="nav-link" href="/redes">Redes</a>
             </li>

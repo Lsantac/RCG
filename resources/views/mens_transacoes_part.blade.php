@@ -319,7 +319,7 @@
                   <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                       <div class="modal-header cab-msg">
-                        @if(isset($necps))
+                        @if($origem == "of")
                             <h5 class="modal-title" id="staticBackdropLabel">Nova mensagem para : {{$necps->nome_part}}</h5>
                         @else
                             <h5 class="modal-title" id="staticBackdropLabel">Nova mensagem para : {{$ofps->nome_part}}</h5>

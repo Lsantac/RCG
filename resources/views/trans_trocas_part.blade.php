@@ -203,7 +203,7 @@
                             <input value="{{$part->id}}" name="id_part_t" type="hidden">
                             <input value="{{$of_tr_p->id_of_part}}" name="id_of_tr_part_t" type="hidden">
                             <input value="{{$ofp->id_of_part}}" name="id_of_part_t" type="hidden"> 
-                        
+                            <input value="tr" name="origem" type="hidden"> 
                             <button type="submit" class="btn btn-sm btn-mensagem bi-arrow-repeat texto_p"> Detalhes da Transação</button>   
                            
                       </form>

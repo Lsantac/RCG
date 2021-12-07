@@ -11,7 +11,7 @@ class IniciaController extends Controller
 
            $id_logado = Session('id_logado');
 
-           /*Transações com mensagens unicas */
+           /*Transações com mensagens unicas Ofertas e trocas */
 
            $mens_unica_of_tr = DB::table('mensagens_trans')
              ->where('id_part',$id_logado)
@@ -25,37 +25,55 @@ class IniciaController extends Controller
              ->havingRaw('COUNT(id_part) = ?', [1])
              ->get();
 
-            /* dd($mens_unica_of_tr);*/
+            $num_mens_unica_of_tr = $mens_unica_of_tr->count();
 
-            $num_mens_unica = $mens_unica_of_tr->count();
-           
+            /*Transações com mensagens unicas Necessidades */
+
+            $mens_unica_nec = DB::table('mensagens_trans')
+            ->where('id_part',$id_logado)
+            ->where('of_nec_tr','nec')
+            ->selectRaw('COUNT(id_part) as qt_mens,id_part,id_trans')
+            ->groupBy('id_part','id_trans')
+            ->havingRaw('COUNT(id_part) = ?', [1])
+            ->get();
+
+            $num_mens_unica_nec = $mens_unica_nec->count();
+
             /*Transações com mais de uma mensagem - Em Andamento */
 
-            $mens_anda_of = DB::table('mensagens_trans')
+            $mens_anda_of_tr = DB::table('mensagens_trans')
              ->where('id_part',$id_logado)
-             ->where('of_nec_tr','of')
+             ->Where(function($query) {
+              $query->where('of_nec_tr','of')
+                    ->orwhere('of_nec_tr','tr');
+              })
              ->selectRaw('COUNT(id_part) as qt_mens,id_part,id_trans')
              ->groupBy('id_part','id_trans')
              ->havingRaw('COUNT(id_part) > ?', [1])
              ->get();
 
-           $mens_anda_tr = DB::table('mensagens_trans')
+             $num_mens_anda_of_tr = $mens_anda_of_tr->count();
+
+             $mens_anda_nec = DB::table('mensagens_trans')
              ->where('id_part',$id_logado)
-             ->where('of_nec_tr','tr')
+             ->where('of_nec_tr','nec')
              ->selectRaw('COUNT(id_part) as qt_mens,id_part,id_trans')
              ->groupBy('id_part','id_trans')
              ->havingRaw('COUNT(id_part) > ?', [1])
              ->get();
 
-             $num_mens_of_anda = $mens_anda_of->count();
-             $num_mens_tr_anda = $mens_anda_tr->count();
-             $num_mens_anda = $num_mens_of_anda + $num_mens_tr_anda;
+             $num_mens_anda_nec = $mens_anda_nec->count();
 
              /* Ofertas parcialmente finalizadas*/
              $num_ofp_parc = DB::table('ofertas_part')
              ->where('id_part',$id_logado)
              ->where('status',3)
-             ->count();                 
+             ->count(); 
+             
+             $num_nec_parc = DB::table('necessidades_part')
+             ->where('id_part',$id_logado)
+             ->where('status',3)
+             ->count();
 
              /* Ofertas totalmente finalizadas*/
              $num_ofp_final = DB::table('ofertas_part')
@@ -63,13 +81,21 @@ class IniciaController extends Controller
              ->where('status',4)
              ->count();                 
 
-             return view('home',[
-                         'num_mens_unica' => $num_mens_unica,
-                         'num_mens_anda' => $num_mens_anda,
-                         'num_ofp_parc' => $num_ofp_parc,
-                         'num_ofp_final' => $num_ofp_final
+             $num_nec_final = DB::table('necessidades_part')
+             ->where('id_part',$id_logado)
+             ->where('status',4)
+             ->count();                 
 
-                        ]);
+             return view('home',[
+                         'num_mens_unica_of_tr' => $num_mens_unica_of_tr,
+                         'num_mens_unica_nec' => $num_mens_unica_nec,
+                         'num_mens_anda_of_tr' => $num_mens_anda_of_tr,
+                         'num_mens_anda_nec' => $num_mens_anda_nec,
+                         'num_ofp_parc' => $num_ofp_parc,
+                         'num_ofp_final' => $num_ofp_final,
+                         'num_nec_parc' => $num_ofp_parc,
+                         'num_nec_final' => $num_ofp_final
+                         ]);
 
     }
 }

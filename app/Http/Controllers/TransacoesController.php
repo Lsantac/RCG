@@ -101,9 +101,16 @@ class TransacoesController extends Controller
          $nome_part_cab = request('nome_part_cab');
          }
       }
-                                        
-      return view('trans_ofertas_part',['part' => $part,'ofps'=>$ofps,'necps'=>$necps,'nome_part_cab'=>$nome_part_cab]);
 
+      $origem = "of";
+                                        
+      return view('trans_ofertas_part',[
+                  'part' => $part,
+                  'ofps'=>$ofps,
+                  'necps'=>$necps,
+                  'nome_part_cab'=>$nome_part_cab,
+                  'origem'=>$origem
+                  ]);
       }
 
       public function trans_trocas_part(request $request){
@@ -159,9 +166,16 @@ class TransacoesController extends Controller
                       ->paginate(3);
     
           
-          $of_tr_ps->appends($request->all());   
+          $of_tr_ps->appends($request->all()); 
+          
+          $origem = "tr";
                                             
-          return view('trans_trocas_part',['part' => $part,'ofps'=>$ofps,'of_tr_ps'=>$of_tr_ps]);
+          return view('trans_trocas_part',[
+                      'part' => $part,
+                      'ofps'=>$ofps,
+                      'of_tr_ps'=>$of_tr_ps,
+                      'origem'=>$origem
+                      ]);
     
           }
     
@@ -247,8 +261,16 @@ class TransacoesController extends Controller
                 $nome_part_cab = request('nome_part_cab');
              }
           }
+
+          $origem = "nec";
                                             
-          return view('trans_necessidades_part',['part' => $part,'ofps'=>$ofps,'necps'=>$necps,'nome_part_cab'=>$nome_part_cab]);
+          return view('trans_necessidades_part',[
+                      'part' => $part,
+                      'ofps'=>$ofps,
+                      'necps'=>$necps,
+                      'nome_part_cab'=>$nome_part_cab,
+                      'origem'=>$origem
+                      ]);
     
           }
       
@@ -546,6 +568,7 @@ class TransacoesController extends Controller
             $id_of_part = request('id_of_part_t');
             $id_of_tr_part = request('id_of_tr_part_t');
             $id_nec_part = request('id_nec_part_t');
+            $origem = request('origem');
 
             $troca = 0;
 
@@ -667,6 +690,7 @@ class TransacoesController extends Controller
                                                  'disp_qt_of_trans'=>$disp_qt_of_trans, 
                                                  'disp_qt_of_tr_trans'=>$disp_qt_of_tr_trans, 
                                                  'disp_qt_nec_trans'=>$disp_qt_nec_trans, 
+                                                 'origem'=>$origem
                                                  ]);                      
     
            } else{
@@ -685,6 +709,7 @@ class TransacoesController extends Controller
                                                 'disp_qt_of_trans'=>$disp_qt_of_trans, 
                                                 'disp_qt_of_tr_trans'=>$disp_qt_of_tr_trans, 
                                                 'disp_qt_nec_trans'=>$disp_qt_nec_trans, 
+                                                'origem'=>$origem
                                                 ]);                      
 
            }                                                      
