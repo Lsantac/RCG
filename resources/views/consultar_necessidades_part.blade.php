@@ -163,11 +163,10 @@
             <th scope="col" class="texto_p">Data</th>
             <th scope="col" class="texto_p">Quant</th>
             <th scope="col" class="texto_p">Unidade</th>
-            <th scope="col" colspan="2" class="texto_p pcenter">Transações</th>
-            @if(Session::get('id_logado') == $part->id)
-                <th class="texto_p" >Ações</th>
-            @else
-                <th class="texto_p" >Status</th>
+            <th scope="col" class="texto_p" >Status</th>
+            <th scope="col" class="texto_p" style="text-align:left;">Transações</th>
+            @if(Session::get('id_logado') == $part->id)  
+                <th scope="col" class="texto_p" >Ações</th>
             @endif
           </tr>
         </thead>
@@ -202,20 +201,19 @@
                     <td class="texto_p">{{$necp->quant}}</td>
                     <td class="texto_p">{{$necp->desc_unid}}</td>
 
-                    <td>
-                      <!--<form action="" method="post">
-                            @csrf 
-                            
-                            <button type="submit" class="btn btn-sm btn-mensagem bi-arrow-repeat texto_p">
-                              Mensagens <span class="badge sugestao-of-nec"> </span>                              
-                                       
-                            </button>
-
-                            <input value="{{$part->id}}" name="id_part_t" type="hidden">
-                            <input value="{{$necp->id_nec_part}}" name="id_nec_part_t" type="hidden">
-                            
-                      </form>-->
-                    </td>
+                    @if($necp->status == 2)
+                        <td class="texto_p texto-em-andamento"><h4 class="bi bi-chat-left-dots-fill"></h4></td>
+                    @else
+                        @if(($necp->status == 3))
+                            <td class="texto_p texto-parc-finalizada"><h4 class="bi bi-check-circle-fill"></h4></td>
+                        @else 
+                            @if($necp->status == 4)
+                                <td class="texto_p texto-finalizada"><h4 class="bi bi-check-circle-fill"></h4></td>
+                            @else  
+                                <td class="texto_p"></td>
+                            @endif
+                        @endif  
+                    @endif   
 
                     <td>
                       @if(Session::get('id_logado') == $part->id)  
@@ -231,11 +229,8 @@
                               <input value="{{$necp->id_nec_part}}" name="id_nec_part_t" type="hidden">
                         </form>
                       @endif  
-
-
                     </td>
-
-
+                    
                     <td>
                         @if(Session::get('id_logado') == $part->id)  
                            <button class="btn btn-editar btn-sm bi bi-pencil texto_p" type="submit" data-bs-toggle="modal" data-bs-target="#Editarnecessidade-{{$necp->id_nec_part}}"> Editar</button>

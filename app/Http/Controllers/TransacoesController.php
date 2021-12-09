@@ -719,16 +719,18 @@ class TransacoesController extends Controller
 
       public function incluir_mens_trans(Request $request){
 
-            $id_part_inclui_moeda = 0;
             $of_nec_tr = ""; 
+            $id_part_of = request('id_part_of');
+            $id_part_nec = request('id_part_nec');
+            $id_part_of_tr = request('id_part_of_tr');
 
-            if(request('id_logado')==request('id_part_of')){
+            if(request('id_logado') == $id_part_of){
                $of_nec_tr = 'of';
             }else{
-                  if(request('id_logado')==request('id_part_nec')){
+                  if(request('id_logado') == $id_part_nec){
                     $of_nec_tr = 'nec';
                   } else{
-                        if(request('id_logado')==request('id_part_of_tr')){
+                        if(request('id_logado') == $id_part_of_tr){
                            $of_nec_tr = 'tr';
                         }   
                   }     
@@ -766,9 +768,21 @@ class TransacoesController extends Controller
                   $id_trans = $confere->id;
             }
 
+            $id_part_dest = 0;
+            if($of_nec_tr == "of") {
+               if($id_part_nec > 0){
+                  $id_part_dest = $id_part_nec;
+               }else{
+                  $id_part_dest = $id_part_of_tr;
+               }
+            }else{
+                  $id_part_dest = $id_part_of;
+            }
+
             $msgs_i = DB::table('mensagens_trans')->insert([
                   'id_trans' => $id_trans,
                   'id_part' => request('id_logado'), 
+                  'id_part_dest' => $id_part_dest, 
                   'mensagem' => request('mensagem'),
                   'data' => date('Y-m-d H:i:s'),
                   'of_nec_tr' => $of_nec_tr
@@ -780,14 +794,15 @@ class TransacoesController extends Controller
                                             ->select('ofertas_part.status');
             
             $ofp2 = $ofp->first();
-            
-            if($ofp2->status == 0){
+            $ofp->update(['status'=>2]);  
+
+            /*if($ofp2->status == 0){
                $ofp->update(['status'=>1]);
             }else{
                  if($ofp2->status == 1){
                     $ofp->update(['status'=>2]);     
                  } 
-            }
+            }*/
             
             /*dd($of_nec_tr);  */
 
@@ -795,14 +810,15 @@ class TransacoesController extends Controller
                $necp = DB::table('necessidades_part')->where('id',request('id_nec_part_t'))
                                                      ->select('necessidades_part.status');
                $necp2 = $necp->first();  
+               $necp->update(['status'=>2]); 
 
-               if($necp2->status == 0){
+               /*if($necp2->status == 0){
                   $necp->update(['status'=>1]);
                }else{
                     if($necp2->status == 1){
                        $necp->update(['status'=>2]);     
                     } 
-               }
+               }*/
             
             }else{
                   if($of_nec_tr =='tr'){
@@ -810,14 +826,15 @@ class TransacoesController extends Controller
                                                        ->select('ofertas_part.status');
 
                      $oftrp2 = $oftrp->first();                                                       
+                     $oftrp->update(['status'=>2]);     
 
-                     if($oftrp2->status == 0){
+                     /*if($oftrp2->status == 0){
                         $oftrp->update(['status'=>1]);
                      }else{
                           if($oftrp2->status == 1){
                              $oftrp->update(['status'=>2]);     
                           } 
-                     }
+                     }*/
                      
                   }
             }
@@ -934,7 +951,7 @@ class TransacoesController extends Controller
 
             }else{
                   /*ao incluir uma mensagem, um registro de transação é incluido junto */
-                  $code = 1;  
+                  $code = 2;  
                   session()->flash('code', $code);
             } 
 

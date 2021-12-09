@@ -13,19 +13,6 @@
                     <div class="card-body">
 
                       <a href="" style="text-decoration: none;">
-                        <div class="row">
-                          <div class="col-1">
-                            <h4 class="bi bi-chat-left-dots-fill texto-pendente"></h4>
-                          </div>
-                          <div class="col-11">
-                            <p class="card-text" style="color:black;">
-                              Existem <span style="color:rgb(18, 158, 14);"><b>{{$num_mens_unica_of_tr}}</b></span> mensagens de Necessidades ou Trocas de outros participantes esperando resposta. 
-                          </p>
-                          </div>
-                        </div>
-                      </a>
-
-                      <a href="" style="text-decoration: none;">
                       <div class="row">
                         <div class="col-1">
                           <h4 class="bi bi-chat-left-dots-fill texto-em-andamento"></h4>
@@ -77,19 +64,6 @@
                 <div class="card" style="width: 100%;">
                     <h5 class="card-header header-necessidade"><a style="text-decoration: none;" href="/necessidades_part/{{Session::get('id_logado')}}" class="texto-necessidade bi-arrow-down-circle-fill"> Minhas Necessidades</a></h5>
                     <div class="card-body">
-                      
-                      <a href="" style="text-decoration: none;">
-                      <div class="row">
-                        <div class="col-1">
-                          <h4 class="bi bi-chat-left-dots-fill texto-pendente"></h4>
-                        </div>
-                        <div class="col-11">
-                          <p class="card-text" style="color:black;">
-                            Existem <span style="color:rgb(18, 158, 14);"><b>{{$num_mens_unica_nec}}</b></span> mensagens de Ofertas de outros participantes esperando resposta. 
-                         </p>
-                        </div>
-                      </div>
-                      </a>
 
                       <a href="" style="text-decoration: none;">
                       <div class="row">

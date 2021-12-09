@@ -199,24 +199,20 @@
                       $ofp->id_of_part,$necp->id_nec_part,0);
                     @endphp  
                       
-                      @if($status == 1)
-                         <td class="texto_p texto-pendente"><h4 class="bi bi-chat-left-dots-fill"></h4></td>  
-                      @else
-                          @if($status == 2)
-                              <td class="texto_p texto-em-andamento"><h4 class="bi bi-chat-left-dots-fill"></h4></td>
-                          @else
-                              @if(($status == 3))
-                                 <td class="texto_p texto-parc-finalizada"><h4 class="bi bi-check-circle-fill"></h4></td>
-                              @else 
-                                  @if($status == 4)
-                                      <td class="texto_p texto-finalizada"><h4 class="bi bi-check-circle-fill"></h4></td>
-                                  @else  
-                                      <td class="texto_p"></td>
-                                  @endif
-                              @endif  
-                          @endif    
-                      @endif
-
+                    @if($status == 2)
+                        <td class="texto_p texto-em-andamento"><h4 class="bi bi-chat-left-dots-fill"></h4></td>
+                    @else
+                        @if(($status == 3))
+                            <td class="texto_p texto-parc-finalizada"><h4 class="bi bi-check-circle-fill"></h4></td>
+                        @else 
+                            @if($status == 4)
+                                <td class="texto_p texto-finalizada"><h4 class="bi bi-check-circle-fill"></h4></td>
+                            @else  
+                                <td class="texto_p"></td>
+                            @endif
+                        @endif  
+                    @endif    
+                      
                     <td>
                       <form action="{{route('mens_transacoes_part')}}" method="get">
                         

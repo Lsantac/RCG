@@ -169,14 +169,12 @@
             <th scope="col" class="texto_p">Data</th>
             <th scope="col" class="texto_p">Quant</th>
             <th scope="col" class="texto_p">Unidade</th>
-            <!--<th scope="col" class="texto_p">Observações</th>-->
-            <th scope="col" colspan="2" class="texto_p pcenter">Transações</th>
+            <th scope="col" class="texto_p" >Status</th>
+            <th scope="col" class="texto_p" style="text-align:left;">Transações</th>
             @if(Session::get('id_logado') == $part->id)  
-                <th class="texto_p" >Ações</th>
-            @else
-                <th class="texto_p" >Status</th>
+                <th scope="col" class="texto_p" >Ações</th>
             @endif
-
+            
           </tr>
         </thead>
 
@@ -209,20 +207,20 @@
                     <td class="texto_p">{{$ofp->quant}}</td>
                     <td class="texto_p">{{$ofp->desc_unid}}</td>
                    
-                    <!--<td>
-                      <form action="" method="post">
-                            @csrf 
-                            
-                            <button type="submit" class="btn btn-sm btn-mensagem bi-arrow-repeat texto_p">
-                              Mensagens <span class="badge sugestao-of-nec"> </span>                              
-                                       
-                            </button>
-
-                            <input value="{{$part->id}}" name="id_part_t" type="hidden">
-                            <input value="{{$ofp->id_of_part}}" name="id_of_part_t" type="hidden">
-                            
-                      </form>
-                    </td> -->
+                    
+                    @if($ofp->status == 2)
+                        <td class="texto_p texto-em-andamento"><h4 class="bi bi-chat-left-dots-fill"></h4></td>
+                    @else
+                        @if(($ofp->status == 3))
+                            <td class="texto_p texto-parc-finalizada"><h4 class="bi bi-check-circle-fill"></h4></td>
+                        @else 
+                            @if($ofp->status == 4)
+                                <td class="texto_p texto-finalizada"><h4 class="bi bi-check-circle-fill"></h4></td>
+                            @else  
+                                <td class="texto_p"></td>
+                            @endif
+                        @endif  
+                    @endif   
 
                     <td>
                         <form action="{{route('trans_ofertas_part')}}" method="get">
@@ -236,6 +234,7 @@
                                           @endif
                                           </span>
                               </button>
+                              
                               @if(Session::get('id_logado') == $part->id)
                                  <input value="1" name="filtra_id_logado" type="hidden">
                                  <input value="{{$part->id}}" name="id_part_t" type="hidden">   
@@ -342,6 +341,7 @@
 
           @else
               <td><td>Nenhum registro encontrado</td></td>    
+              
           @endif 
 
         </tbody>
