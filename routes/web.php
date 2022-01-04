@@ -23,6 +23,8 @@ use App\Http\Controllers\IniciaController;
 
 /*Tela Inicial */
 Route::get('/home', [IniciaController::class,'tela_inicial']);
+Route::get('/trans_anda_ofertas_part', [IniciaController::class,'trans_anda_ofertas_part']);
+
 /*Route::get('/home', function () {
     return view('home');
 });*/
@@ -31,11 +33,11 @@ Route::get('/home', [IniciaController::class,'tela_inicial']);
 
 Route::post('login',[UserAuthController::class,'login'])->name('auth.login');
 Route::post('create',[UserAuthController::class,'create'])->name('auth.create');
-Route::delete('/logout',  [UserAuthController::class,'logout'])->name('auth.logout');
-Route::any('mudasenha',  [UserAuthController::class,'alterpass'])->name('auth.alterpass');
-Route::any('resetasenha',  [UserAuthController::class,'resetpass'])->name('auth.resetpass');
-Route::post('senhaok',  [UserAuthController::class,'alterpassok'])->name('auth.alterpassok');
-Route::post('resetsenhaok',  [UserAuthController::class,'resetpassok'])->name('auth.resetpassok');
+Route::delete('/logout',[UserAuthController::class,'logout'])->name('auth.logout');
+Route::any('mudasenha',[UserAuthController::class,'alterpass'])->name('auth.alterpass');
+Route::any('resetasenha',[UserAuthController::class,'resetpass'])->name('auth.resetpass');
+Route::post('senhaok',[UserAuthController::class,'alterpassok'])->name('auth.alterpassok');
+Route::post('resetsenhaok',[UserAuthController::class,'resetpassok'])->name('auth.resetpassok');
 
 Route::get('/novo_participante', function () {
     return view('auth.create');
@@ -91,6 +93,8 @@ Route::get('/consultar_trans_trocas_part',  [TransacoesController::class,'consul
 Route::get('/mens_transacoes_part',  [TransacoesController::class,'mens_transacoes_part'])->name('mens_transacoes_part');
 Route::get('/incluir_mens_trans',  [TransacoesController::class,'incluir_mens_trans'])->name('incluir_mensagem');
 Route::get('/finalizar_trans',  [TransacoesController::class,'finalizar_trans'])->name('finalizar_transacao');
+
+
 
 /*Redes*/
 Route::get('/consulta_redes',  [RedesController::class,'query_redes'])->name('consulta_redes');

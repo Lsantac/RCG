@@ -12,17 +12,17 @@
                     <h5 class="card-header header-oferta"><a style="text-decoration: none;" href="/ofertas_part/{{Session::get('id_logado')}}" class="texto-oferta bi-arrow-up-circle-fill"> Minhas Ofertas</a></h5>
                     <div class="card-body">
 
-                      <a href="" style="text-decoration: none;">
-                      <div class="row">
-                        <div class="col-1">
-                          <h4 class="bi bi-chat-left-dots-fill texto-em-andamento"></h4>
+                      <a href="/trans_anda_ofertas_part" style="text-decoration: none;">
+                        <div class="row">
+                          <div class="col-1">
+                            <h4 class="bi bi-chat-left-dots-fill texto-em-andamento"></h4>
+                          </div>
+                          <div class="col-11">
+                            <p class="card-text" style="color:black;">
+                              Existem <span style="color:rgb(197, 15, 233);"><b>{{$num_mens_anda_of_tr}}</b></span> transações em andamento para suas Ofertas. 
+                            </p>
+                          </div>
                         </div>
-                        <div class="col-11">
-                          <p class="card-text" style="color:black;">
-                            Existem <span style="color:rgb(197, 15, 233);"><b>{{$num_mens_anda_of_tr}}</b></span> transações em andamento para suas Ofertas. 
-                          </p>
-                        </div>
-                      </div>
                       </a>
 
                       <a href="" style="text-decoration: none;">
