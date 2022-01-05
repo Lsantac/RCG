@@ -56,9 +56,9 @@ class IniciaController extends Controller
 
     }
 
-    public function trans_anda_ofertas_part(request $request){
+    public function cons_trans_ofertas_part($status,$id_logado,Request $request){
 
-        $id_logado = Session('id_logado');
+        /*$id_logado = Session('id_logado');*/
 
         /*$of_part_1 =DB::table('ofertas_part_1')
         ->select('*')
@@ -66,8 +66,8 @@ class IniciaController extends Controller
 
         /*dd($of_part_1);*/
 
-        $of_st_2 = DB::table('ofertas_part')
-        ->where('ofertas_part.status',2)
+        $of_status = DB::table('ofertas_part')
+        ->where('ofertas_part.status',$status)
         ->where('ofertas_part.id_part',$id_logado)
 
         ->leftjoin('transacoes','ofertas_part.id','=','transacoes.id_of_part')
@@ -78,25 +78,30 @@ class IniciaController extends Controller
         ->leftjoin('ofertas_1','transacoes.id_of_tr_part','ofertas_1.id')
         ->leftjoin('categorias','ofertas.id_cat','categorias.id')
         ->leftjoin('categorias_1','ofertas_1.id_cat','categorias_1.id')
+        ->leftjoin('categorias_2','necessidades.id_cat','categorias_2.id')
         ->leftjoin('participantes','ofertas_part.id_part','participantes.id')  
         ->leftjoin('participantes_1','ofertas_part_1.id_part','participantes_1.id')  
 
         ->select('ofertas_part.id as id_of','ofertas_part.id_part as id_partic_ofertas','ofertas_part.status as status_of',
+         'ofertas_part.obs as obs_of',
          'transacoes.id_of_part as id_of_part',
          'transacoes.id as id_trans','transacoes.id_nec_part as id_nec_part','transacoes.id_of_tr_part as id_of_tr_part',
          'transacoes.quant_of as quant_of','transacoes.quant_nec as quant_nec','transacoes.quant_of_tr as quant_of_tr',
          'transacoes.id_st_trans as id_st_trans','transacoes.quant_moeda as quant_moeda','transacoes.id_moeda as id_moeda',
          'transacoes.data_inic as data_inic','transacoes.data_final_nec_part as data_final_nec_part','transacoes.data_final_of_part as data_final_of_part',
          'transacoes.data_final_of_tr_part as data_final_of_tr_part',
-         'ofertas.descricao as desc_of','categorias.descricao as descr_cat_of',
-         'ofertas_1.descricao as desc_of_tr','categorias_1.descricao as descr_cat_of_tr',
-         )
+         'ofertas.descricao as desc_of','categorias.descricao as desc_cat_of',
+         'ofertas_1.descricao as desc_of_tr','categorias_1.descricao as desc_cat_of_tr',
+         'necessidades.descricao as desc_nec','categorias_2.descricao as desc_cat_nec')
 
+        ->orderBy('data_inic','desc')
+        ->paginate(5);
 
-        ->first();
+        $of_status->appends($request->all());
 
-        dd($of_st_2);
+        /*dd($of_status);*/
+
+        return view('cons_trans_ofertas_part',['of_status'=>$of_status]);
         
-
     }    
 }

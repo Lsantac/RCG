@@ -12,7 +12,7 @@
                     <h5 class="card-header header-oferta"><a style="text-decoration: none;" href="/ofertas_part/{{Session::get('id_logado')}}" class="texto-oferta bi-arrow-up-circle-fill"> Minhas Ofertas</a></h5>
                     <div class="card-body">
 
-                      <a href="/trans_anda_ofertas_part" style="text-decoration: none;">
+                      <a href="/cons_trans_ofertas_part/{{2}}/{{Session::get('id_logado')}}" style="text-decoration: none;">
                         <div class="row">
                           <div class="col-1">
                             <h4 class="bi bi-chat-left-dots-fill texto-em-andamento"></h4>
