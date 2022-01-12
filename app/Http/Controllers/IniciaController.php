@@ -11,38 +11,86 @@ class IniciaController extends Controller
 
            $id_logado = Session('id_logado');
 
-            /*Transações com alguma mensagem - Em Andamento */
+            /*Ofertas com transações em andamento*/
 
-            $num_mens_anda_of_tr = DB::table('ofertas_part')
-            ->where('id_part','=',$id_logado)
-            ->where('status','=',2)
+            $num_mens_anda_of = DB::table('ofertas_part')
+            ->where('ofertas_part.id_part','=',$id_logado)
+            ->where('ofertas_part.status','=',2)
+
+            ->join('transacoes','ofertas_part.id','=','transacoes.id_of_part')
             ->count(); 
+
+            $num_mens_anda_tr = DB::table('ofertas_part')
+            ->where('ofertas_part.id_part','=',$id_logado)
+            ->where('ofertas_part.status','=',2)
+
+            ->join('transacoes','ofertas_part.id','=','transacoes.id_of_tr_part')
+            ->count(); 
+
+            $num_mens_anda_of_tr = $num_mens_anda_of + $num_mens_anda_tr;
+
+            /* Necessidades com transações em andamento -------------------------------------------------------------*/
 
             $num_mens_anda_nec = DB::table('necessidades_part')
-            ->where('id_part','=',$id_logado)
-            ->where('status','=',2)
+            ->where('necessidades_part.id_part','=',$id_logado)
+            ->where('necessidades_part.status','=',2)
+
+            ->join('transacoes','necessidades_part.id','=','transacoes.id_nec_part')
             ->count(); 
 
-             /* Ofertas parcialmente finalizadas*/
-             $num_ofp_parc = DB::table('ofertas_part')
-             ->where('id_part','=',$id_logado)
-             ->where('status','=',3)
+             /* Ofertas parcialmente finalizadas ----------------------------------------------------------------------*/
+
+             $num_of_parc = DB::table('ofertas_part')
+             ->where('ofertas_part.id_part','=',$id_logado)
+             ->where('ofertas_part.status','=',3)
+
+             ->join('transacoes','ofertas_part.id','=','transacoes.id_of_part')
              ->count(); 
+
+             $num_of_tr_parc = DB::table('ofertas_part')
+             ->where('ofertas_part.id_part','=',$id_logado)
+             ->where('ofertas_part.status','=',3)
+
+             ->join('transacoes','ofertas_part.id','=','transacoes.id_of_tr_part')
+             ->count();
+             
+             $num_ofp_parc = $num_of_parc + $num_of_tr_parc;
+
+             /* Necessidades parcialmente finalizadas ------------------------------------------------------------------*/
              
              $num_nec_parc = DB::table('necessidades_part')
              ->where('id_part','=',$id_logado)
              ->where('status','=',3)
+
+             ->join('transacoes','necessidades_part.id','=','transacoes.id_nec_part')
              ->count();
 
-             /* Ofertas totalmente finalizadas*/
-             $num_ofp_final = DB::table('ofertas_part')
+             /* Ofertas totalmente finalizadas --------------------------------------------------------------------------*/
+
+             $num_of_final = DB::table('ofertas_part')
              ->where('id_part','=',$id_logado)
              ->where('status','=',4)
-             ->count();                 
+
+             ->join('transacoes','ofertas_part.id','=','transacoes.id_of_part')
+             ->count();     
+
+             $num_of_tr_final = DB::table('ofertas_part')
+             ->where('id_part','=',$id_logado)
+             ->where('status','=',4)
+
+             ->join('transacoes','ofertas_part.id','=','transacoes.id_of_tr_part')
+             ->count(); 
+             
+             $num_ofp_final = $num_of_final + $num_of_tr_final;
+
+
+             /* Necessidades totalmente finalizadas -------------------------------------------------------------------------*/
 
              $num_nec_final = DB::table('necessidades_part')
              ->where('id_part','=',$id_logado)
              ->where('status','=',4)
+
+             ->join('transacoes','necessidades_part.id','=','transacoes.id_nec_part')
              ->count();                 
 
              return view('home',[
@@ -112,7 +160,7 @@ class IniciaController extends Controller
         /*->get();
         dd($of_status);*/
 
-        return view('cons_trans_ofertas_part',['of_status'=>$of_status]);
+        return view('cons_trans_ofertas_part',['of_status'=>$of_status,'status'=>$status]);
         
     }    
 }

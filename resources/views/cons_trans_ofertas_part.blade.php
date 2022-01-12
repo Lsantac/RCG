@@ -4,8 +4,19 @@
 
 
 <div class="container-fluid">
+    @if($status == 2)
+        <h4 class="texto-oferta" style="color:rgb(197, 15, 233);">Transações em andamento para as Ofertas do Participante</h4> 
+    @else
+        @if($status == 3)
+            <h4 class="texto-oferta" style="color:rgb(15, 135, 233);">Transações com confirmação parcial para as Ofertas do Participante</h4> 
+        @else
+            @if($status == 4)
+                <h4 class="texto-oferta" style="color:rgb(15, 29, 233);">Transações Finalizadas para as Ofertas do Participante</h4> 
+            @endif    
+        @endif
+    @endif
      
-    <h4 class="texto-oferta">Transaçoes em andamento para as Ofertas do Participante</h4> 
+    
     <h4 class="texto-nome-logado">{{Session::get('nomelogado')}}</h4> 
     <br>
 
@@ -55,8 +66,32 @@
                                               <div class="card-body header-oferta" >
                                                    <div class="row align-items-start">
                                                       <div class="col">
-                                                           <h6 class="card-title texto-oferta">Oferta : {{$of_st->desc_of}}</h6>
+                                                          <div class="row">
+                                                                <div class="col">
+                                                                     <h6 class="card-title texto-oferta">Oferta : {{$of_st->desc_of}}</h6>       
+                                                                </div>
+                                                                <div class="col texto_p">
+                                                                  @php
+                                                                      if($of_st->data_final_of_part <> null){
+                                                                        $date = new DateTime($of_st->data_final_of_part);
+                                                                        echo "Confirmada em : ".$date->format('d-m-Y'). " (UTC: ".$date->format('H:i').")" ;
+                                                                      }
+                                                                  @endphp
+
+                                                                </div>
+                                                              </div>
+                                                          </div>
+
                                                            <div class="card-text texto_p">Categoria : {{$of_st->desc_cat_of}} </div>
+                                                           <div class="texto_p">
+                                                           @php
+                                                              if($of_st->data_inic <> null){
+                                                                $date = new DateTime($of_st->data_inic);
+                                                                echo "Início : ".$date->format('d-m-Y'). " (UTC: ".$date->format('H:i').")" ;
+                                                              }
+                                                           @endphp
+                                                           </div>
+
                                                            <div class="card-text texto_p">Participante : {{$of_st->nome_part_of}} </div>
                                                            <div class="card-text texto_p">Obs : {{$of_st->obs_of}}</div>
                                                       </div>
@@ -80,12 +115,44 @@
                                         <div class="row align-items-start">
                                             <div class="col">
                                                   @if($of_st->fluxo == 'troca')
-                                                     <h6 class="card-title texto-necessidade">Troca : {{$of_st->desc_of_tr}}</h6>
+                                                     <div class="row">
+                                                          <div class="col">
+                                                              <h6 class="card-title texto-troca">Troca : {{$of_st->desc_of_tr}}</h6>       
+                                                          </div>
+                                                          <div class="col texto_p">
+                                                            @php
+                                                                if($of_st->data_final_of_tr_part <> null){
+                                                                  $date = new DateTime($of_st->data_final_of_tr_part);
+                                                                  echo "Confirmada em : ".$date->format('d-m-Y'). " (UTC: ".$date->format('H:i').")" ;
+                                                                }
+                                                            @endphp
+
+                                                          </div>
+
+                                                        </div>
+                                                      </div>
+
                                                      <div class="card-text texto_p">Categoria : {{$of_st->desc_cat_of_tr}}</div>
                                                      <div class="card-text texto_p">Participante : {{$of_st->nome_part_of_tr}} </div>
                                                      <div class="card-text texto_p">Obs : {{$of_st->obs_of_tr}}</div>   
                                                   @else
-                                                     <h6 class="card-title texto-necessidade">Necessidade : {{$of_st->desc_nec}}</h6>
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <h6 class="card-title texto-necessidade">Necessidade : {{$of_st->desc_nec}}</h6>       
+                                                        </div>
+                                                        <div class="col texto_p">
+                                                          @php
+                                                              if($of_st->data_final_nec_part <> null){
+                                                                $date = new DateTime($of_st->data_final_nec_part);
+                                                                echo "Confirmada em : ".$date->format('d-m-Y'). " (UTC: ".$date->format('H:i').")" ;
+                                                              }
+                                                          @endphp
+
+                                                        </div>
+
+                                                      </div>
+                                                    </div>
+
                                                      <div class="card-text texto_p">Categoria : {{$of_st->desc_cat_nec}}</div>
                                                      <div class="card-text texto_p">Participante : {{$of_st->nome_part_nec}} </div>
                                                      <div class="card-text texto_p">Obs : {{$of_st->obs_nec}}</div>   
@@ -99,19 +166,19 @@
 
                         <td>
                           <div class="col">
-                                  <div class="card" >
+                                  <div class="card" style="width: 20rem;" >
 
                                     <div class="card-body header-trans">
           
                                         <div class="row align-items-start">
                                             <div class="col">
                                                   <h6 class="card-title">Fluxo : {{$of_st->fluxo}}</h6>
-                                                  <div class="card-text texto_p">Quant Fluxo : {{$of_st->quant_moeda}}</div>
-                                                  <div class="card-text texto_p">Quant Oferta : {{$of_st->quant_of}}</div>
+                                                  <div class="card-text texto_p">Qt Fluxo : {{$of_st->quant_moeda}}</div>
+                                                  <div class="card-text texto_p">Qt Oferta : {{$of_st->quant_of}}</div>
                                                   @if($of_st->fluxo == 'troca')
-                                                      <div class="card-text texto_p">Quant Troca : {{$of_st->quant_of_tr}}</div>
+                                                      <div class="card-text texto_p">Qt Troca : {{$of_st->quant_of_tr}}</div>
                                                   @else
-                                                      <div class="card-text texto_p">Quant Necessidade : {{$of_st->quant_nec}}</div>
+                                                      <div class="card-text texto_p">Qt Necessidade : {{$of_st->quant_nec}}</div>
                                                   @endif
                                                   
                                             </div>
