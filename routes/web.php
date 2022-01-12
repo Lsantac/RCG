@@ -24,10 +24,7 @@ use App\Http\Controllers\IniciaController;
 /*Tela Inicial */
 Route::get('/home', [IniciaController::class,'tela_inicial']);
 Route::get('/cons_trans_ofertas_part/{status}/{id_part}', [IniciaController::class,'cons_trans_ofertas_part']);
-
-/*Route::get('/home', function () {
-    return view('home');
-});*/
+Route::get('/cons_trans_necessidades_part/{status}/{id_part}', [IniciaController::class,'cons_trans_necessidades_part']);
 
 /*Autenticações, login e logout */
 

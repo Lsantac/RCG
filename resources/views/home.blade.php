@@ -73,7 +73,7 @@
                     <h5 class="card-header header-necessidade"><a style="text-decoration: none;" href="/necessidades_part/{{Session::get('id_logado')}}" class="texto-necessidade bi-arrow-down-circle-fill"> Minhas Necessidades</a></h5>
                     <div class="card-body">
 
-                      <a href="" style="text-decoration: none;">
+                      <a href="/cons_trans_necessidades_part/{{2}}/{{Session::get('id_logado')}}" style="text-decoration: none;">
                       <div class="row">
                         <div class="col-1">
                           <h4 class="bi bi-chat-left-dots-fill texto-em-andamento"></h4>
@@ -90,7 +90,7 @@
                       </div>
                       </a>
 
-                      <a href="" style="text-decoration: none;">
+                      <a href="/cons_trans_necessidades_part/{{3}}/{{Session::get('id_logado')}}" style="text-decoration: none;">
                       <div class="row">
                         <div class="col-1">
                           <h4 class="bi bi-check-circle-fill texto-parc-finalizada"></h4>
@@ -107,7 +107,7 @@
                       </div>
                       </a>
 
-                      <a href="" style="text-decoration: none;">
+                      <a href="/cons_trans_necessidades_part/{{4}}/{{Session::get('id_logado')}}" style="text-decoration: none;">
                       <div class="row">
                         <div class="col-1">
                           <h4 class="bi bi-check-circle-fill texto-finalizada"></h4>
