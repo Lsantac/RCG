@@ -11,7 +11,7 @@
             <h4 class="texto-oferta" style="color:rgb(15, 135, 233);">Transações com confirmação parcial para as Ofertas do Participante</h4> 
         @else
             @if($status == 4)
-                <h4 class="texto-oferta" style="color:rgb(15, 29, 233);">Transações Finalizadas para as Ofertas do Participante</h4> 
+                <h4 class="texto-oferta" style="color:rgb(101, 12, 218);">Transações Finalizadas para as Ofertas do Participante</h4> 
             @endif    
         @endif
     @endif
@@ -68,7 +68,7 @@
                                                       <div class="col">
                                                           <div class="row">
                                                                 <div class="col">
-                                                                     <h6 class="card-title texto-oferta">Oferta : {{$of_st->desc_of}}</h6>       
+                                                                     <h6 class="texto-oferta">Oferta : {{$of_st->desc_of}}</h6>       
                                                                 </div>
                                                                 <div class="col texto_p">
                                                                   @php

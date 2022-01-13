@@ -54,11 +54,11 @@
                         <div class="col-11">
                               @if(($num_ofp_final > 1) or ($num_ofp_final == 0))
                                 <p style="color:black;">
-                                Existem <span style="color:rgb(15, 29, 233);"><b>{{$num_ofp_final}}</b></span> Ofertas já finalizadas. 
+                                Existem <span style="color:rgb(101, 12, 218);"><b>{{$num_ofp_final}}</b></span> Ofertas já finalizadas. 
                                 </p>
                               @else
                                 <p style="color:black;">
-                                Existe <span style="color:rgb(15, 29, 233);"><b>{{$num_ofp_final}}</b></span> Oferta já finalizada. 
+                                Existe <span style="color:rgb(101, 12, 218);"><b>{{$num_ofp_final}}</b></span> Oferta já finalizada. 
                                 </p>
                               @endif
                         </div>
@@ -115,11 +115,11 @@
                         <div class="col-11">
                               @if($num_nec_final > 1 or $num_nec_final == 0)
                                 <p style="color:black;">
-                                Existem <span style="color:rgb(15, 29, 233);"><b>{{$num_nec_final}}</b></span> Necessidades já finalizadas. 
+                                Existem <span style="color:rgb(101, 12, 218);"><b>{{$num_nec_final}}</b></span> Necessidades já finalizadas. 
                                 </p>
                               @else
                                 <p style="color:black;">
-                                Existe <span style="color:rgb(15, 29, 233);"><b>{{$num_nec_final}}</b></span> Necessidade já finalizada. 
+                                Existe <span style="color:rgb(101, 12, 218);"><b>{{$num_nec_final}}</b></span> Necessidade já finalizada. 
                                 </p>
                               @endif
                         </div>
