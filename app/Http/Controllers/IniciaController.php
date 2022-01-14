@@ -116,6 +116,13 @@ class IniciaController extends Controller
 
         /*dd($of_part_1);*/
 
+        $ofertas_1= DB::table('ofertas')->select('*');
+        $ofertas_part_1= DB::table('ofertas_part')->select('*');
+        $categorias_1= DB::table('categorias')->select('*');
+        $categorias_2= DB::table('categorias')->select('*');
+        $participantes_1= DB::table('participantes')->select('*');
+        $participantes_2= DB::table('participantes')->select('*');
+
         $of_status = DB::table('ofertas_part')
         ->where('ofertas_part.id_part','=',$id_logado)
         ->where('ofertas_part.status','=',$status)
@@ -126,17 +133,47 @@ class IniciaController extends Controller
         ->leftjoin('necessidades_part','transacoes.id_nec_part','=','necessidades_part.id')
         ->leftjoin('necessidades','necessidades_part.id_nec','=','necessidades.id')
 
-        ->leftJoin('ofertas_part_1','transacoes.id_of_tr_part','=','ofertas_part_1.id')
+        /*->leftJoin('ofertas_part_1','transacoes.id_of_tr_part','=','ofertas_part_1.id')*/
+
+        ->leftjoinSub($ofertas_part_1, 'ofertas_part_1', function ($join) {
+            $join->on('transacoes.id_of_tr_part', '=', 'ofertas_part_1.id');
+        }) 
+
         ->leftjoin('ofertas','ofertas_part.id_of','=','ofertas.id')
-        ->leftjoin('ofertas_1','ofertas_part_1.id_of','=','ofertas_1.id')
-        
+
+        /*->leftjoin('ofertas_1','ofertas_part_1.id_of','=','ofertas_1.id')*/
+
+        ->leftjoinSub($ofertas_1, 'ofertas_1', function ($join) {
+            $join->on('ofertas_part_1.id_of', '=', 'ofertas_1.id');
+        })  
+
         ->leftjoin('categorias','ofertas.id_cat','=','categorias.id')
-        ->leftjoin('categorias_1','ofertas_1.id_cat','=','categorias_1.id')
-        ->leftjoin('categorias_2','necessidades.id_cat','=','categorias_2.id')
+
+        /*->leftjoin('categorias_1','ofertas_1.id_cat','=','categorias_1.id')*/
+
+        ->leftjoinSub($categorias_1, 'categorias_1', function ($join) {
+            $join->on('ofertas_1.id_cat', '=', 'categorias_1.id');
+        })  
+
+        /*->leftjoin('categorias_2','necessidades.id_cat','=','categorias_2.id')*/
+
+        ->leftjoinSub($categorias_2, 'categorias_2', function ($join) {
+            $join->on('necessidades.id_cat', '=', 'categorias_2.id');
+        })  
         
         ->leftjoin('participantes','ofertas_part.id_part','=','participantes.id')  
-        ->leftjoin('participantes_1','ofertas_part_1.id_part','=','participantes_1.id')
-        ->leftjoin('participantes_2','necessidades_part.id_part','=','participantes_2.id')
+
+        /*->leftjoin('participantes_1','ofertas_part_1.id_part','=','participantes_1.id')*/
+
+        ->leftjoinSub($participantes_1, 'participantes_1', function ($join) {
+            $join->on('ofertas_part_1.id_part', '=', 'participantes_1.id');
+        })  
+
+        /*->leftjoin('participantes_2','necessidades_part.id_part','=','participantes_2.id')*/
+
+        ->leftjoinSub($participantes_2, 'participantes_2', function ($join) {
+            $join->on('necessidades_part.id_part', '=', 'participantes_2.id');
+        })  
         
         ->select('ofertas_part.id as id_of','ofertas_part.id_part as id_partic_ofertas','ofertas_part.status as status_of',
          'ofertas_part.obs as obs_of','necessidades_part.obs as obs_nec','ofertas_part_1.obs as obs_of_tr',
