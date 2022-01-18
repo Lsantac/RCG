@@ -197,6 +197,46 @@ class IniciaController extends Controller
         /*->get();
         dd($of_status);*/
 
+        $cons_markers_ofs = DB::table('ofertas_part')
+            ->where('ofertas_part.id_part','=',$id_logado)
+            ->where('ofertas_part.status','=',2)
+
+            ->join('participantes','ofertas_part.id_part','=','participantes.id')
+            ->select('*')
+            ->get(); 
+
+        if($cons_markers_ofs){
+            $markers_of =  DB::table('markers_of')->where('id','>',0)->delete();
+            
+            foreach($cons_markers_ofs as $of){
+
+                    if($of->latitude <> null and $of->longitude <> null ){
+                
+                    if($of->latitude <> null){
+                        $lat = $of->latitude;
+                    }else{
+                        $lat = 0;
+                    }
+
+                    if($of->longitude <> null){
+                        $long = $of->longitude;
+                    }else{
+                        $long = 0;
+                    }
+
+                    $markers_of = DB::table('markers_of')->insert([
+                            'nome_part'=> $of->nome_part,
+                            'endereco'=> $of->endereco,
+                            'latitude'=> $lat,
+                            'longitude'=> $long,
+                    ]);
+
+                    
+                    }
+            
+            } 
+        }
+
         return view('cons_trans_ofertas_part',['of_status'=>$of_status,'status'=>$status]);
         
     }

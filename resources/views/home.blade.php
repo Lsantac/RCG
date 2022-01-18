@@ -156,6 +156,13 @@
     </div>
 
     <script>
+      function initialize() {
+        initMap_of();
+        initMap_nec();
+      }
+    </script>
+
+    <script>
       var customLabel = {
       restaurant: {
           label: 'R'
@@ -331,13 +338,10 @@
       
       
       <script    
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQZKTit2ice6KDwHxAc5iQVZQhoBwimjw&callback=initMap_of&libraries=&v=weekly"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQZKTit2ice6KDwHxAc5iQVZQhoBwimjw&callback=initialize&libraries=&v=weekly"
       async
       ></script>
 
-      <script    
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQZKTit2ice6KDwHxAc5iQVZQhoBwimjw&callback=initMap_nec&libraries=&v=weekly"
-      async
-      ></script>
+      
 
 @endsection
