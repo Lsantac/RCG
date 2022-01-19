@@ -8,7 +8,7 @@
         <h4 class="texto-oferta" style="color:rgb(197, 15, 233);">Transações em andamento para as Necessidades do Participante</h4> 
     @else
         @if($status == 3)
-            <h4 class="texto-oferta" style="color:rgb(15, 135, 233);">Transações com confirmação parcial para as Necessidades do Participante</h4> 
+            <h4 class="texto-oferta" style="color:rgb(15, 135, 233);">Transações de Necessidades com confirmação parcial para o Participante</h4> 
         @else
             @if($status == 4)
                 <h4 class="texto-oferta" style="color:rgb(101, 12, 218);">Transações Finalizadas para as Necessidades do Participante</h4> 
@@ -61,7 +61,7 @@
                         <td>
                           <div class="col">
                                   <div class="card" >
-                                        <div class="card-body header-necessidade">
+                                        <div class="card-body" style="background-color:rgb(245, 217, 199)">
                                         <div class="row align-items-start">
                                             <div class="col">
                                                 <div class="row">
@@ -96,7 +96,7 @@
                           <div class="row">
                             <div class="col">
                                         <div class="card" >
-                                              <div class="card-body header-oferta" >
+                                              <div class="card-body" style="background-color:rgb(199, 245, 207) " >
                                                    <div class="row align-items-start">
                                                       <div class="col">
                                                           <div class="row">
@@ -126,6 +126,7 @@
                                                            </div>
 
                                                            <div class="card-text texto_p">Participante : {{$nec_st->nome_part_of}} </div>
+                                                           <div class="card-text texto_p">Endereço : {{$nec_st->endereco_of}} , {{$nec_st->cidade_of}} </div>
                                                            <div class="card-text texto_p">Obs : {{$nec_st->obs_of}}</div>
                                                       </div>
                                                   </div>

@@ -279,7 +279,8 @@ class IniciaController extends Controller
          'ofertas_1.descricao as desc_of_tr','categorias_1.descricao as desc_cat_of_tr',
          'necessidades.descricao as desc_nec','categorias_2.descricao as desc_cat_nec',
          'participantes.nome_part as nome_part_of','participantes_1.nome_part as nome_part_of_tr',
-         'participantes_2.nome_part as nome_part_nec'
+         'participantes_1.endereco as endereco_of_tr','participantes_1.cidade as cidade_of_tr',
+         'participantes_2.nome_part as nome_part_nec','participantes_2.endereco as endereco_nec','participantes_2.cidade as cidade_nec'
          )
 
         ->orderBy('data_inic','desc')
@@ -365,6 +366,9 @@ class IniciaController extends Controller
          'categorias_1.descricao as desc_cat_nec',
 
          'participantes.nome_part as nome_part_of',
+         'participantes.endereco as endereco_of',
+         'participantes.cidade as cidade_of',
+         
          'participantes_1.nome_part as nome_part_nec'
          )
 

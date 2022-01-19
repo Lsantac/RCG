@@ -8,7 +8,7 @@
         <h4 class="texto-oferta" style="color:rgb(197, 15, 233);">Transações em andamento para as Ofertas do Participante</h4> 
     @else
         @if($status == 3)
-            <h4 class="texto-oferta" style="color:rgb(15, 135, 233);">Transações com confirmação parcial para as Ofertas do Participante</h4> 
+            <h4 class="texto-oferta" style="color:rgb(15, 135, 233);">Transações de Ofertas com confirmação parcial do Participante</h4> 
         @else
             @if($status == 4)
                 <h4 class="texto-oferta" style="color:rgb(101, 12, 218);">Transações Finalizadas para as Ofertas do Participante</h4> 
@@ -63,7 +63,7 @@
                           <div class="row">
                             <div class="col">
                                         <div class="card" >
-                                              <div class="card-body header-oferta" >
+                                              <div class="card-body" style="background-color:rgb(199, 245, 207) ">
                                                    <div class="row align-items-start">
                                                       <div class="col">
                                                           <div class="row">
@@ -107,9 +107,9 @@
                           <div class="col">
                                   <div class="card" >
                                     @if($of_st->fluxo == 'troca')
-                                        <div class="card-body header-troca">
+                                        <div class="card-body" style="background-color:rgb(172, 240, 223) ">
                                     @else
-                                        <div class="card-body header-necessidade">
+                                        <div class="card-body" style="background-color:rgb(245, 217, 199) ">
                                     @endif   
           
                                         <div class="row align-items-start">
@@ -134,6 +134,7 @@
 
                                                      <div class="card-text texto_p">Categoria : {{$of_st->desc_cat_of_tr}}</div>
                                                      <div class="card-text texto_p">Participante : {{$of_st->nome_part_of_tr}} </div>
+                                                     <div class="card-text texto_p">Endereço : {{$of_st->endereco_of_tr}} , {{$of_st->cidade_of_tr}} </div>
                                                      <div class="card-text texto_p">Obs : {{$of_st->obs_of_tr}}</div>   
                                                   @else
                                                     <div class="row">
@@ -155,6 +156,7 @@
 
                                                      <div class="card-text texto_p">Categoria : {{$of_st->desc_cat_nec}}</div>
                                                      <div class="card-text texto_p">Participante : {{$of_st->nome_part_nec}} </div>
+                                                     <div class="card-text texto_p">Endereço : {{$of_st->endereco_nec}} , {{$of_st->cidade_nec}} </div>
                                                      <div class="card-text texto_p">Obs : {{$of_st->obs_nec}}</div>   
                                                   @endif
                                             </div>

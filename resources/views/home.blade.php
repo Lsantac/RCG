@@ -37,9 +37,9 @@
                         <div class="col-11">
                           <p style="color:black;">
                             @if(($num_ofp_parc > 1) or ($num_ofp_parc == 0))
-                                Existem <span style="color:rgb(15, 135, 233);"><b>{{$num_ofp_parc}}</b></span> Ofertas com confirmações de Necessidades ou Trocas de outros participantes esperando sua finalização. 
+                                Existem <span style="color:rgb(15, 135, 233);"><b>{{$num_ofp_parc}}</b></span> transações de Ofertas com confirmações de Necessidades ou Trocas de outros participantes esperando sua finalização. 
                             @else
-                                Existe <span style="color:rgb(15, 135, 233);"><b>{{$num_ofp_parc}}</b></span> Oferta com confirmação de Necessidade ou Troca de outro participante esperando sua finalização. 
+                                Existe <span style="color:rgb(15, 135, 233);"><b>{{$num_ofp_parc}}</b></span> transação de Oferta com confirmação de Necessidade ou Troca de outro participante esperando sua finalização. 
                             @endif
                           </p>
                         </div>
@@ -81,9 +81,9 @@
                         <div class="col-11">
                           <p class="card-text" style="color:black;">
                             @if($num_mens_anda_nec > 1 or $num_mens_anda_nec == 0)
-                               Existem <span style="color:rgb(197, 15, 233);"><b>{{$num_mens_anda_nec}}</b></span> Necessidades com transações em andamento. 
+                               Existem <span style="color:rgb(197, 15, 233);"><b>{{$num_mens_anda_nec}}</b></span> transações em andamento. 
                             @else
-                               Existe <span style="color:rgb(197, 15, 233);"><b>{{$num_mens_anda_nec}}</b></span> Necessidade com transações em andamento. 
+                               Existe <span style="color:rgb(197, 15, 233);"><b>{{$num_mens_anda_nec}}</b></span> transação em andamento. 
                             @endif
                           </p>
                         </div>
@@ -98,9 +98,9 @@
                         <div class="col-11">
                           <p style="color:black;">
                             @if($num_nec_parc > 1 or $num_nec_parc == 0 )
-                               Existem <span style="color:rgb(15, 135, 233);"><b>{{$num_nec_parc}}</b></span> Necessidades com confirmações de Ofertas de outros participantes esperando sua finalização. 
+                               Existem <span style="color:rgb(15, 135, 233);"><b>{{$num_nec_parc}}</b></span> transações de Necessidades com confirmações de Ofertas de outros participantes esperando sua finalização. 
                             @else
-                               Existe <span style="color:rgb(15, 135, 233);"><b>{{$num_nec_parc}}</b></span> Necessidade com confirmação de Oferta de outro participante esperando sua finalização. 
+                               Existe <span style="color:rgb(15, 135, 233);"><b>{{$num_nec_parc}}</b></span> transação de Necessidade com confirmação de Oferta de outro participante esperando sua finalização. 
                             @endif
                           </p>
                         </div>
