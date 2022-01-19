@@ -36,6 +36,8 @@ function parseToXML($htmlStr){
         }else{
           if($row_markers['status']==4){
             echo 'color= "/icons/marcador_finalizado.png" ';
+          }else{
+            echo 'color= "/icons/marcador_laranja.png" ';
           }
         }  
 

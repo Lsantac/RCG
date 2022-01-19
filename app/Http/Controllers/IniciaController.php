@@ -91,11 +91,13 @@ class IniciaController extends Controller
              ->where('status','=',4)
 
              ->join('transacoes','necessidades_part.id','=','transacoes.id_nec_part')
-             ->count();     
+             ->count();   
+             
+             /*Calculo dos marcadores dos mapas -------------------------------------------------------------------------------*/
              
              $cons_markers_ofs = DB::table('ofertas_part')
             ->where('ofertas_part.id_part','=',$id_logado)
-            ->where('ofertas_part.status','=',2)
+            ->where('ofertas_part.status','>',1)
 
             ->join('transacoes','ofertas_part.id','=','transacoes.id_of_part')
             ->leftjoin('necessidades_part','transacoes.id_nec_part','=','necessidades_part.id')
@@ -128,7 +130,7 @@ class IniciaController extends Controller
                                 'endereco'=> $of->endereco,
                                 'latitude'=> $lat,
                                 'longitude'=> $long,
-                                'status'=>2,
+                                'status'=> $of->status,
                         ]);
 
                         
@@ -139,7 +141,7 @@ class IniciaController extends Controller
 
             $cons_markers_necs = DB::table('necessidades_part')
             ->where('necessidades_part.id_part','=',$id_logado)
-            ->where('necessidades_part.status','=',2)
+            ->where('necessidades_part.status','>',1)
 
             ->leftjoin('transacoes','necessidades_part.id','=','transacoes.id_nec_part')
             ->leftjoin('ofertas_part','transacoes.id_of_part','=','ofertas_part.id')
@@ -172,7 +174,7 @@ class IniciaController extends Controller
                                 'endereco'=> $nec->endereco,
                                 'latitude'=> $lat,
                                 'longitude'=> $long,
-                                'status'=>2,
+                                'status'=> $nec->status,
                         ]);
     
                         
@@ -180,6 +182,8 @@ class IniciaController extends Controller
                 
                 } 
             }    
+
+            /* Retorno para a pagina inicial com as variaveis respectivas ----------------------------------------------*/
 
             return view('home',[
                          'num_mens_anda_of_tr' => $num_mens_anda_of_tr,
