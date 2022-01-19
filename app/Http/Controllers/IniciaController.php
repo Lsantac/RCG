@@ -91,9 +91,97 @@ class IniciaController extends Controller
              ->where('status','=',4)
 
              ->join('transacoes','necessidades_part.id','=','transacoes.id_nec_part')
-             ->count();                 
+             ->count();     
+             
+             $cons_markers_ofs = DB::table('ofertas_part')
+            ->where('ofertas_part.id_part','=',$id_logado)
+            ->where('ofertas_part.status','=',2)
 
-             return view('home',[
+            ->join('transacoes','ofertas_part.id','=','transacoes.id_of_part')
+            ->leftjoin('necessidades_part','transacoes.id_nec_part','=','necessidades_part.id')
+            ->leftjoin('participantes','necessidades_part.id_part','=','participantes.id')
+
+            ->get(); 
+
+            $markers_of =  DB::table('markers_of')->where('id','>',0)->delete();
+
+            if($cons_markers_ofs){
+                
+                foreach($cons_markers_ofs as $of){
+
+                        if($of->latitude <> null and $of->longitude <> null ){
+                    
+                        if($of->latitude <> null){
+                            $lat = $of->latitude;
+                        }else{
+                            $lat = 0;
+                        }
+
+                        if($of->longitude <> null){
+                            $long = $of->longitude;
+                        }else{
+                            $long = 0;
+                        }
+
+                        $markers_of = DB::table('markers_of')->insert([
+                                'nome_part'=> $of->nome_part,
+                                'endereco'=> $of->endereco,
+                                'latitude'=> $lat,
+                                'longitude'=> $long,
+                                'status'=>2,
+                        ]);
+
+                        
+                        }
+                
+                } 
+            }
+
+            $cons_markers_necs = DB::table('necessidades_part')
+            ->where('necessidades_part.id_part','=',$id_logado)
+            ->where('necessidades_part.status','=',2)
+
+            ->leftjoin('transacoes','necessidades_part.id','=','transacoes.id_nec_part')
+            ->leftjoin('ofertas_part','transacoes.id_of_part','=','ofertas_part.id')
+            ->leftjoin('participantes','ofertas_part.id_part','=','participantes.id')
+
+            ->get(); 
+
+            $markers_nec =  DB::table('markers_nec')->where('id','>',0)->delete();
+
+            if($cons_markers_necs){
+                
+                foreach($cons_markers_necs as $nec){
+    
+                        if($nec->latitude <> null and $nec->longitude <> null ){
+                    
+                        if($nec->latitude <> null){
+                            $lat = $nec->latitude;
+                        }else{
+                            $lat = 0;
+                        }
+    
+                        if($nec->longitude <> null){
+                            $long = $nec->longitude;
+                        }else{
+                            $long = 0;
+                        }
+    
+                        $markers_nec = DB::table('markers_nec')->insert([
+                                'nome_part'=> $nec->nome_part,
+                                'endereco'=> $nec->endereco,
+                                'latitude'=> $lat,
+                                'longitude'=> $long,
+                                'status'=>2,
+                        ]);
+    
+                        
+                        }
+                
+                } 
+            }    
+
+            return view('home',[
                          'num_mens_anda_of_tr' => $num_mens_anda_of_tr,
                          'num_mens_anda_nec' => $num_mens_anda_nec,
                          'num_ofp_parc' => $num_ofp_parc,
@@ -194,48 +282,12 @@ class IniciaController extends Controller
         ->paginate(5);
         $of_status->appends($request->all());
 
-        /*->get();
-        dd($of_status);*/
+        /*->get();*/
+        /*dd($of_status);*/
 
-        $cons_markers_ofs = DB::table('ofertas_part')
-            ->where('ofertas_part.id_part','=',$id_logado)
-            ->where('ofertas_part.status','=',2)
+        
 
-            ->join('participantes','ofertas_part.id_part','=','participantes.id')
-            ->select('*')
-            ->get(); 
-
-        if($cons_markers_ofs){
-            $markers_of =  DB::table('markers_of')->where('id','>',0)->delete();
-            
-            foreach($cons_markers_ofs as $of){
-
-                    if($of->latitude <> null and $of->longitude <> null ){
-                
-                    if($of->latitude <> null){
-                        $lat = $of->latitude;
-                    }else{
-                        $lat = 0;
-                    }
-
-                    if($of->longitude <> null){
-                        $long = $of->longitude;
-                    }else{
-                        $long = 0;
-                    }
-
-                    $markers_of = DB::table('markers_of')->insert([
-                            'nome_part'=> $of->nome_part,
-                            'endereco'=> $of->endereco,
-                            'latitude'=> $lat,
-                            'longitude'=> $long,
-                    ]);
-
-                    
-                    }
-            
-            } 
-        }
+        
 
         return view('cons_trans_ofertas_part',['of_status'=>$of_status,'status'=>$status]);
         
@@ -247,7 +299,10 @@ class IniciaController extends Controller
 
         /*dd($status." ".$id_logado);*/
 
-
+        
+        $categorias_1= DB::table('categorias')->select('*');
+        $participantes_1= DB::table('participantes')->select('*');
+        
         $nec_status = DB::table('necessidades_part')
         ->where('necessidades_part.id_part','=',$id_logado)
         ->where('necessidades_part.status','=',$status)
@@ -261,10 +316,20 @@ class IniciaController extends Controller
         ->leftjoin('ofertas','ofertas_part.id_of','=','ofertas.id')
         
         ->leftjoin('categorias','ofertas.id_cat','=','categorias.id')
-        ->leftjoin('categorias_1','necessidades.id_cat','=','categorias_1.id')
+
+        /*->leftjoin('categorias_1','necessidades.id_cat','=','categorias_1.id')*/
+
+        ->leftjoinSub($categorias_1, 'categorias_1', function ($join) {
+            $join->on('necessidades.id_cat', '=', 'categorias_1.id');
+        })  
         
         ->leftjoin('participantes','ofertas_part.id_part','=','participantes.id')  
-        ->leftjoin('participantes_1','necessidades_part.id_part','=','participantes_1.id')
+
+        /*->leftjoin('participantes_1','necessidades_part.id_part','=','participantes_1.id')*/
+
+        ->leftjoinSub($participantes_1, 'participantes_1', function ($join) {
+            $join->on('necessidades_part.id_part', '=', 'participantes_1.id');
+        })
         
         ->select(
          'necessidades_part.id as id_nec',

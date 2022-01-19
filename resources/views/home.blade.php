@@ -9,7 +9,7 @@
             
             <div class="col">
                 <div class="card" style="width: 100%;">
-                    <h5 class="card-header header-oferta"><a style="text-decoration: none;" href="/ofertas_part/{{Session::get('id_logado')}}" class="texto-oferta bi-arrow-up-circle-fill"> Minhas Ofertas</a></h5>
+                    <h6 class="card-header header-oferta"><a style="text-decoration: none;" href="/ofertas_part/{{Session::get('id_logado')}}" class="texto-oferta bi-arrow-up-circle-fill"> Minhas Ofertas</a></h6>
                     <div class="card-body">
 
                       <a href="/cons_trans_ofertas_part/{{2}}/{{Session::get('id_logado')}}" style="text-decoration: none;">
@@ -70,7 +70,7 @@
             </div>
             <div class="col">
                 <div class="card" style="width: 100%;">
-                    <h5 class="card-header header-necessidade"><a style="text-decoration: none;" href="/necessidades_part/{{Session::get('id_logado')}}" class="texto-necessidade bi-arrow-down-circle-fill"> Minhas Necessidades</a></h5>
+                    <h6 class="card-header header-necessidade"><a style="text-decoration: none;" href="/necessidades_part/{{Session::get('id_logado')}}" class="texto-necessidade bi-arrow-down-circle-fill"> Minhas Necessidades</a></h6>
                     <div class="card-body">
 
                       <a href="/cons_trans_necessidades_part/{{2}}/{{Session::get('id_logado')}}" style="text-decoration: none;">
@@ -163,21 +163,96 @@
     </script>
 
     <script>
-      var customLabel = {
-      restaurant: {
-          label: 'R'
-      },
-      bar: {
-          label: 'B'
-      },
-      
-      };
 
+    var customLabel = {
+    restaurant: {
+      label: 'R'
+    },
+    bar: {
+      label: 'B'
+    },
+
+    };
+
+    function initMap_nec() {
+
+    var lati = <?php echo Session::get('latitude'); ?>;   
+    var longi = <?php echo Session::get('longitude'); ?>;   
+
+    var map_nec = new google.maps.Map(document.getElementById('map_nec'), {
+      center: new google.maps.LatLng(lati, longi),
+      zoom: 5
+    });
+
+    var infoWindow = new google.maps.InfoWindow;
+
+    // Change this depending on the name of your PHP or XML file
+    downloadUrl('/mapas/resultado_nec.php', function(data) {
+    var xml = data.responseXML;
+    var markers = xml.documentElement.getElementsByTagName('marker');
+    Array.prototype.forEach.call(markers, function(markerElem) {
+      var color = markerElem.getAttribute('color'); 
+      var name = markerElem.getAttribute('name');
+      var address = markerElem.getAttribute('address');
+      var type = markerElem.getAttribute('type');
+
+      //pega posição pelo endereço
+      var geocoder = new google.maps.Geocoder();
+      
+      geocoder.geocode( { address: address}, function(results, status) {
+
+      if (status == google.maps.GeocoderStatus.OK) {
+          var latitude = results[0].geometry.location.lat();
+          var longitude = results[0].geometry.location.lng();
+          //var latlng = results[0].geometry.location.LatLng();
+          //alert('Latitude : ' + latitude);
+        
+          } 
+      }); 
+      //===================================================================================
+
+      var point = new google.maps.LatLng(
+          parseFloat(markerElem.getAttribute('lat')),
+          parseFloat(markerElem.getAttribute('lng')));
+
+      //var point = '('+latitude+','+longitude+')';
+      //  alert(point);
+
+      var infowincontent = document.createElement('div');
+      var strong = document.createElement('strong');
+      strong.textContent = name
+      infowincontent.appendChild(strong);
+      infowincontent.appendChild(document.createElement('br'));
+
+      var text = document.createElement('text');
+      text.textContent = address
+      infowincontent.appendChild(text);
+      var icon = customLabel[type] || {};
+
+      var marker = new google.maps.Marker({
+          map: map_nec,
+          position: point,
+          
+          label: icon.label,
+          icon: {url: color}
+      });
+
+      marker.addListener('click', function() {
+              infoWindow.setContent(infowincontent);
+              infoWindow.open(map_nec, marker);
+              
+      });
+      
+    });
+    });
+    }  
+     
     function initMap_of() {
+
       var lati = <?php echo Session::get('latitude'); ?>;   
       var longi = <?php echo Session::get('longitude'); ?>;   
       
-      var map = new google.maps.Map(document.getElementById('map_of'), {
+      var map_of = new google.maps.Map(document.getElementById('map_of'), {
           center: new google.maps.LatLng(lati, longi),
           zoom: 5
       });
@@ -228,7 +303,7 @@
           var icon = customLabel[type] || {};
       
           var marker = new google.maps.Marker({
-              map: map,
+              map: map_of,
               position: point,
               
               label: icon.label,
@@ -237,90 +312,19 @@
       
           marker.addListener('click', function() {
                   infoWindow.setContent(infowincontent);
-                  infoWindow.open(map, marker);
+                  infoWindow.open(map_of, marker);
                   
           });
           
       });
       });
       }
-
-      function initMap_nec() {
-      var lati = <?php echo Session::get('latitude'); ?>;   
-      var longi = <?php echo Session::get('longitude'); ?>;   
-      
-      var map = new google.maps.Map(document.getElementById('map_nec'), {
-          center: new google.maps.LatLng(lati, longi),
-          zoom: 5
-      });
-      
-      var infoWindow = new google.maps.InfoWindow;
-      
-      // Change this depending on the name of your PHP or XML file
-      downloadUrl('/mapas/resultado_nec.php', function(data) {
-      var xml = data.responseXML;
-      var markers = xml.documentElement.getElementsByTagName('marker');
-      Array.prototype.forEach.call(markers, function(markerElem) {
-          var color = markerElem.getAttribute('color'); 
-          var name = markerElem.getAttribute('name');
-          var address = markerElem.getAttribute('address');
-          var type = markerElem.getAttribute('type');
-      
-          //pega posição pelo endereço
-          var geocoder = new google.maps.Geocoder();
-          
-          geocoder.geocode( { address: address}, function(results, status) {
-      
-          if (status == google.maps.GeocoderStatus.OK) {
-              var latitude = results[0].geometry.location.lat();
-              var longitude = results[0].geometry.location.lng();
-              //var latlng = results[0].geometry.location.LatLng();
-              //alert('Latitude : ' + latitude);
-             
-              } 
-          }); 
-          //===================================================================================
-      
-          var point = new google.maps.LatLng(
-              parseFloat(markerElem.getAttribute('lat')),
-              parseFloat(markerElem.getAttribute('lng')));
-      
-          //var point = '('+latitude+','+longitude+')';
-          //  alert(point);
-      
-          var infowincontent = document.createElement('div');
-          var strong = document.createElement('strong');
-          strong.textContent = name
-          infowincontent.appendChild(strong);
-          infowincontent.appendChild(document.createElement('br'));
-      
-          var text = document.createElement('text');
-          text.textContent = address
-          infowincontent.appendChild(text);
-          var icon = customLabel[type] || {};
-      
-          var marker = new google.maps.Marker({
-              map: map,
-              position: point,
-              
-              label: icon.label,
-              icon: {url: color}
-          });
-      
-          marker.addListener('click', function() {
-                  infoWindow.setContent(infowincontent);
-                  infoWindow.open(map, marker);
-                  
-          });
-          
-      });
-      });
-      }
-      
+           
       function downloadUrl(url, callback) {
       var request = window.ActiveXObject ?
       new ActiveXObject('Microsoft.XMLHTTP') :
       new XMLHttpRequest;
+
       
       request.onreadystatechange = function() {
       if (request.readyState == 4) {
