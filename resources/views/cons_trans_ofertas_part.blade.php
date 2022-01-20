@@ -20,13 +20,12 @@
     <h4 class="texto-nome-logado">{{Session::get('nomelogado')}}</h4> 
     <br>
 
-    <form class="row g-3" method="get" action="">
+    <form class="row g-3" method="get" action="/cons_trans_ofertas_part/{{$status}}/{{Session::get('id_logado')}}">
 
           @csrf
      
           <div class="col-sm-8">
-               <input class="form-control texto_m" name="consulta_of_part" value="" placeholder="Digite palavras para consulta..." type="search">
-               <input name="id_part" type="hidden" value=""> 
+               <input class="form-control texto_m" name="cons_of_tela_inic" value="{{Session::get('criterio_of_tela_inic')}}" placeholder="Digite palavras para consulta..." type="search">
           </div>
       
         <div class="col-sm">

@@ -206,7 +206,9 @@ class IniciaController extends Controller
         ->select('*')
         ->first();*/
 
-        /*dd($of_part_1);*/
+        /*dd(request('cons_of_tela_inic'));*/
+
+        $request->session()->put('criterio_of_tela_inic', request('cons_of_tela_inic')); 
 
         $ofertas_1= DB::table('ofertas')->select('*');
         $ofertas_part_1= DB::table('ofertas_part')->select('*');
@@ -215,9 +217,46 @@ class IniciaController extends Controller
         $participantes_1= DB::table('participantes')->select('*');
         $participantes_2= DB::table('participantes')->select('*');
 
+        $string = request('cons_of_tela_inic');
+
+        // split on 1+ whitespace & ignore empty (eg. trailing space)
+        $searchValues = preg_split('/\s+/', $string, -1, PREG_SPLIT_NO_EMPTY); 
+
         $of_status = DB::table('ofertas_part')
         ->where('ofertas_part.id_part','=',$id_logado)
         ->where('ofertas_part.status','=',$status)
+
+        ->where(function($query) use ($searchValues){
+            foreach ($searchValues as $value) {
+            $query->orwhere('ofertas_part_1.obs','like','%'.($value).'%')
+                  ->orwhere('necessidades_part.obs','like','%'.($value).'%')
+                  ->orwhere('ofertas_part.obs','like','%'.($value).'%')
+
+                  ->orwhere('ofertas.descricao','like','%'.($value).'%')
+                  ->orwhere('ofertas_1.descricao','like','%'.($value).'%')
+                  ->orwhere('necessidades.descricao','like','%'.($value).'%')
+
+                  ->orwhere('categorias.descricao','like','%'.($value).'%')
+                  ->orwhere('categorias_1.descricao','like','%'.($value).'%')
+                  ->orwhere('categorias_2.descricao','like','%'.($value).'%')
+
+                  ->orwhere('participantes_1.nome_part','like','%'.($value).'%')
+                  ->orwhere('participantes_1.endereco','like','%'.($value).'%')
+                  ->orwhere('participantes_1.cidade','like','%'.($value).'%')
+                  ->orwhere('participantes_1.estado','like','%'.($value).'%')
+                  ->orwhere('participantes_1.pais','like','%'.($value).'%')
+
+                  ->orwhere('participantes_2.nome_part','like','%'.($value).'%')
+                  ->orwhere('participantes_2.endereco','like','%'.($value).'%')
+                  ->orwhere('participantes_2.cidade','like','%'.($value).'%')
+                  ->orwhere('participantes_2.estado','like','%'.($value).'%')
+                  ->orwhere('participantes_2.pais','like','%'.($value).'%')
+                  
+                  ->orwhere('moedas.desc_moeda','like','%'.($value).'%')
+                  ;
+
+            }      
+      })
         
         ->leftjoin('transacoes','ofertas_part.id','=','transacoes.id_of_part')
         ->leftjoin('moedas','transacoes.id_moeda','=','moedas.id')
@@ -280,7 +319,9 @@ class IniciaController extends Controller
          'necessidades.descricao as desc_nec','categorias_2.descricao as desc_cat_nec',
          'participantes.nome_part as nome_part_of','participantes_1.nome_part as nome_part_of_tr',
          'participantes_1.endereco as endereco_of_tr','participantes_1.cidade as cidade_of_tr',
-         'participantes_2.nome_part as nome_part_nec','participantes_2.endereco as endereco_nec','participantes_2.cidade as cidade_nec'
+         'participantes_1.estado as estado_of_tr','participantes_1.pais as pais_of_tr',
+         'participantes_2.nome_part as nome_part_nec','participantes_2.endereco as endereco_nec','participantes_2.cidade as cidade_nec',
+         'participantes_2.estado as estado_nec','participantes_2.pais as pais_nec'
          )
 
         ->orderBy('data_inic','desc')
@@ -290,9 +331,6 @@ class IniciaController extends Controller
         /*->get();*/
         /*dd($of_status);*/
 
-        
-
-        
 
         return view('cons_trans_ofertas_part',['of_status'=>$of_status,'status'=>$status]);
         
@@ -304,13 +342,42 @@ class IniciaController extends Controller
 
         /*dd($status." ".$id_logado);*/
 
-        
+        $request->session()->put('criterio_nec_tela_inic', request('cons_nec_tela_inic')); 
+
         $categorias_1= DB::table('categorias')->select('*');
         $participantes_1= DB::table('participantes')->select('*');
+
+        $string = request('cons_nec_tela_inic');
+
+        // split on 1+ whitespace & ignore empty (eg. trailing space)
+        $searchValues = preg_split('/\s+/', $string, -1, PREG_SPLIT_NO_EMPTY); 
         
         $nec_status = DB::table('necessidades_part')
         ->where('necessidades_part.id_part','=',$id_logado)
         ->where('necessidades_part.status','=',$status)
+
+        ->where(function($query) use ($searchValues){
+            foreach ($searchValues as $value) {
+            $query->orwhere('ofertas_part.obs','like','%'.($value).'%')
+                  ->orwhere('necessidades_part.obs','like','%'.($value).'%')
+                  
+                  ->orwhere('ofertas.descricao','like','%'.($value).'%')
+                  ->orwhere('necessidades.descricao','like','%'.($value).'%')
+
+                  ->orwhere('categorias.descricao','like','%'.($value).'%')
+                  ->orwhere('categorias_1.descricao','like','%'.($value).'%')
+                  
+                  ->orwhere('participantes.nome_part','like','%'.($value).'%')
+                  ->orwhere('participantes.endereco','like','%'.($value).'%')
+                  ->orwhere('participantes.cidade','like','%'.($value).'%')
+                  ->orwhere('participantes.estado','like','%'.($value).'%')
+                  ->orwhere('participantes.pais','like','%'.($value).'%')
+
+                  ->orwhere('moedas.desc_moeda','like','%'.($value).'%')
+                  ;
+
+            }      
+      })
         
         ->leftjoin('transacoes','necessidades_part.id','=','transacoes.id_nec_part')
         ->leftjoin('moedas','transacoes.id_moeda','=','moedas.id')
@@ -368,6 +435,8 @@ class IniciaController extends Controller
          'participantes.nome_part as nome_part_of',
          'participantes.endereco as endereco_of',
          'participantes.cidade as cidade_of',
+         'participantes.estado as estado_of',
+         'participantes.pais as pais_of',
          
          'participantes_1.nome_part as nome_part_nec'
          )
