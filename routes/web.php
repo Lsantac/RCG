@@ -22,9 +22,9 @@ use App\Http\Controllers\IniciaController;
 */
 
 /*Tela Inicial */
-Route::get('/home', [IniciaController::class,'tela_inicial']);
-Route::get('/cons_trans_ofertas_part/{status}/{id_part}', [IniciaController::class,'cons_trans_ofertas_part']);
-Route::get('/cons_trans_necessidades_part/{status}/{id_part}', [IniciaController::class,'cons_trans_necessidades_part']);
+Route::get('/home', [IniciaController::class,'tela_inicial'])->middleware('islogged');
+Route::get('/cons_trans_ofertas_part/{status}/{id_part}', [IniciaController::class,'cons_trans_ofertas_part'])->middleware('islogged');;
+Route::get('/cons_trans_necessidades_part/{status}/{id_part}', [IniciaController::class,'cons_trans_necessidades_part'])->middleware('islogged');;
 
 /*Autenticações, login e logout */
 
@@ -53,18 +53,18 @@ Route::get('/', function () {
 
 /*Participantes*/
 Route::get('/participantes', [ParticipantesController::class,'show_none'])->middleware('islogged');
-Route::get('/consulta',  [ParticipantesController::class,'query'])->name('procura');
-Route::post('/participantes', [ParticipantesController::class,'store']);
-Route::get('/alterar_participantes/{id}',  [ParticipantesController::class,'show']);
-Route::get('/consultar_participante/{id}',  [ParticipantesController::class,'query_details']);
+Route::get('/consulta',  [ParticipantesController::class,'query'])->name('procura')->middleware('islogged');
+Route::post('/participantes', [ParticipantesController::class,'store'])->middleware('islogged');;
+Route::get('/alterar_participantes/{id}',  [ParticipantesController::class,'show'])->middleware('islogged');;
+Route::get('/consultar_participante/{id}',  [ParticipantesController::class,'query_details'])->middleware('islogged');;
 Route::post('/alterar_participantes/{id}',  [ParticipantesController::class,'update'])->middleware('islogged');
-Route::delete('/participantes/{id}',  [ParticipantesController::class,'destroy']);
+Route::delete('/participantes/{id}',  [ParticipantesController::class,'destroy'])->middleware('islogged');;
 
 /*Ofertas*/
 Route::get('/ofertas',  [OfertasController::class,'show_none'])->middleware('islogged');
-Route::get('/consultar_ofertas',  [OfertasController::class,'consultar_ofertas'])->name('consultar_ofertas');
-Route::get('/consultar_ofertas_part',  [OfertasController::class,'consultar_ofertas_part'])->name('consultar_ofertas_part');
-Route::get('/ofertas_part/{id}',  [OfertasController::class,'show_ofertas_part'])->name('show_ofertas_part');
+Route::get('/consultar_ofertas',  [OfertasController::class,'consultar_ofertas'])->name('consultar_ofertas')->middleware('islogged');;
+Route::get('/consultar_ofertas_part',  [OfertasController::class,'consultar_ofertas_part'])->name('consultar_ofertas_part')->middleware('islogged');
+Route::get('/ofertas_part/{id}',  [OfertasController::class,'show_ofertas_part'])->name('show_ofertas_part')->middleware('islogged');
 Route::post('incluir_ofertas_part',  [OfertasController::class,'incluir_ofertas_part'])->name('incluir_ofertas_part');
 Route::delete('/deleta_oferta_part/{id}',  [OfertasController::class,'deleta_oferta_part'])->name('deleta_oferta_part');
 Route::post('nova_oferta',  [OfertasController::class,'nova_oferta'])->name('nova_oferta');
@@ -72,38 +72,38 @@ Route::post('altera_oferta_part',  [OfertasController::class,'altera_oferta_part
 
 /*Necessidades*/
 Route::get('/necessidades',  [NecessidadesController::class,'show_none'])->middleware('islogged');
-Route::get('/consultar_necessidades',  [NecessidadesController::class,'consultar_necessidades'])->name('consultar_necessidades');
-Route::get('/consultar_necessidades_part',  [NecessidadesController::class,'consultar_necessidades_part'])->name('consultar_necessidades_part');
-Route::get('/necessidades_part/{id}',  [NecessidadesController::class,'show_necessidades_part'])->name('show_necessidades_part');
+Route::get('/consultar_necessidades',  [NecessidadesController::class,'consultar_necessidades'])->name('consultar_necessidades')->middleware('islogged');
+Route::get('/consultar_necessidades_part',  [NecessidadesController::class,'consultar_necessidades_part'])->name('consultar_necessidades_part')->middleware('islogged');
+Route::get('/necessidades_part/{id}',  [NecessidadesController::class,'show_necessidades_part'])->name('show_necessidades_part')->middleware('islogged');
 Route::post('incluir_necessidades_part',  [NecessidadesController::class,'incluir_necessidades_part'])->name('incluir_necessidades_part');
 Route::delete('/deleta_necessidade_part/{id}',  [NecessidadesController::class,'deleta_necessidade_part'])->name('deleta_necessidade_part');
 Route::post('nova_necessidade',  [NecessidadesController::class,'nova_necessidade'])->name('nova_necessidade');
 Route::post('altera_necessidade_part',  [NecessidadesController::class,'altera_necessidade_part'])->name('altera_necessidade_part');
 
 /*Transações*/
-Route::get('/trans_ofertas_part',  [TransacoesController::class,'trans_ofertas_part'])->name('trans_ofertas_part');
-Route::get('/trans_trocas_part',  [TransacoesController::class,'trans_trocas_part'])->name('trans_trocas_part');
-Route::get('/trans_necessidades_part',  [TransacoesController::class,'trans_necessidades_part'])->name('trans_necessidades_part');
-Route::get('/consultar_trans_nec_part',  [TransacoesController::class,'consultar_trans_nec_part'])->name('consultar_trans_nec_part');
-Route::get('/consultar_trans_of_part',  [TransacoesController::class,'consultar_trans_of_part'])->name('consultar_trans_of_part');
-Route::get('/consultar_trans_trocas_part',  [TransacoesController::class,'consultar_trans_trocas_part'])->name('consultar_trans_trocas_part');
-Route::get('/mens_transacoes_part',  [TransacoesController::class,'mens_transacoes_part'])->name('mens_transacoes_part');
-Route::get('/incluir_mens_trans',  [TransacoesController::class,'incluir_mens_trans'])->name('incluir_mensagem');
-Route::get('/finalizar_trans',  [TransacoesController::class,'finalizar_trans'])->name('finalizar_transacao');
+Route::get('/trans_ofertas_part',  [TransacoesController::class,'trans_ofertas_part'])->name('trans_ofertas_part')->middleware('islogged');
+Route::get('/trans_trocas_part',  [TransacoesController::class,'trans_trocas_part'])->name('trans_trocas_part')->middleware('islogged');
+Route::get('/trans_necessidades_part',  [TransacoesController::class,'trans_necessidades_part'])->name('trans_necessidades_part')->middleware('islogged');
+Route::get('/consultar_trans_nec_part',  [TransacoesController::class,'consultar_trans_nec_part'])->name('consultar_trans_nec_part')->middleware('islogged');
+Route::get('/consultar_trans_of_part',  [TransacoesController::class,'consultar_trans_of_part'])->name('consultar_trans_of_part')->middleware('islogged');
+Route::get('/consultar_trans_trocas_part',  [TransacoesController::class,'consultar_trans_trocas_part'])->name('consultar_trans_trocas_part')->middleware('islogged');
+Route::get('/mens_transacoes_part',  [TransacoesController::class,'mens_transacoes_part'])->name('mens_transacoes_part')->middleware('islogged');
+Route::get('/incluir_mens_trans',  [TransacoesController::class,'incluir_mens_trans'])->name('incluir_mensagem')->middleware('islogged');
+Route::get('/finalizar_trans',  [TransacoesController::class,'finalizar_trans'])->name('finalizar_transacao')->middleware('islogged');
 
 
 
 /*Redes*/
-Route::get('/consulta_redes',  [RedesController::class,'query_redes'])->name('consulta_redes');
+Route::get('/consulta_redes',  [RedesController::class,'query_redes'])->name('consulta_redes')->middleware('islogged');
 Route::delete('/deleta_rede_part/{id}',  [RedesController::class,'deleta_rede_part'])->name('deleta_rede_part');
 Route::get('/redes_part/{id}',  [RedesController::class,'show_redes'])->name('procura_redes_part');
 Route::post('incluir_redes_part',  [RedesController::class,'incluir_redes_part'])->name('incluir_redes_part');
 Route::post('nova_rede',  [RedesController::class,'nova_rede'])->name('nova_rede');
 
 /*Mapas*/
-Route::post('/mostramapa/{id}',[mapsController::class,'query_mapa'])->name('query_mapa');
-Route::get('/mostramapa/{id}',[mapsController::class,'query_mapa'])->name('query_mapa_get');
-Route::post('/mostra_varios_parts',[mapsController::class,'mostra_varios_parts'])->name('mostra_varios_parts');
+Route::post('/mostramapa/{id}',[mapsController::class,'query_mapa'])->name('query_mapa')->middleware('islogged');
+Route::get('/mostramapa/{id}',[mapsController::class,'query_mapa'])->name('query_mapa_get')->middleware('islogged');
+Route::post('/mostra_varios_parts',[mapsController::class,'mostra_varios_parts'])->name('mostra_varios_parts')->middleware('islogged');
 Route::get('/geocode', function ()
 {
     return view('geocode');
