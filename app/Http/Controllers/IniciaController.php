@@ -15,14 +15,14 @@ class IniciaController extends Controller
 
             $num_mens_anda_of = DB::table('ofertas_part')
             ->where('ofertas_part.id_part','=',$id_logado)
-            ->where('ofertas_part.status','=',2)
+            ->where('transacoes.id_st_trans','=',2)
 
             ->join('transacoes','ofertas_part.id','=','transacoes.id_of_part')
             ->count(); 
 
             $num_mens_anda_tr = DB::table('ofertas_part')
             ->where('ofertas_part.id_part','=',$id_logado)
-            ->where('ofertas_part.status','=',2)
+            ->where('transacoes.id_st_trans','=',2)
 
             ->join('transacoes','ofertas_part.id','=','transacoes.id_of_tr_part')
             ->count(); 
@@ -33,7 +33,7 @@ class IniciaController extends Controller
 
             $num_mens_anda_nec = DB::table('necessidades_part')
             ->where('necessidades_part.id_part','=',$id_logado)
-            ->where('necessidades_part.status','=',2)
+            ->where('transacoes.id_st_trans','=',2)
 
             ->join('transacoes','necessidades_part.id','=','transacoes.id_nec_part')
             ->count(); 
@@ -42,14 +42,14 @@ class IniciaController extends Controller
 
              $num_of_parc = DB::table('ofertas_part')
              ->where('ofertas_part.id_part','=',$id_logado)
-             ->where('ofertas_part.status','=',3)
+             ->where('transacoes.id_st_trans','=',3)
 
              ->join('transacoes','ofertas_part.id','=','transacoes.id_of_part')
              ->count(); 
 
              $num_of_tr_parc = DB::table('ofertas_part')
              ->where('ofertas_part.id_part','=',$id_logado)
-             ->where('ofertas_part.status','=',3)
+             ->where('transacoes.id_st_trans','=',3)
 
              ->join('transacoes','ofertas_part.id','=','transacoes.id_of_tr_part')
              ->count();
@@ -59,8 +59,8 @@ class IniciaController extends Controller
              /* Necessidades parcialmente finalizadas ------------------------------------------------------------------*/
              
              $num_nec_parc = DB::table('necessidades_part')
-             ->where('id_part','=',$id_logado)
-             ->where('status','=',3)
+             ->where('necessidades_part.id_part','=',$id_logado)
+             ->where('transacoes.id_st_trans','=',3)
 
              ->join('transacoes','necessidades_part.id','=','transacoes.id_nec_part')
              ->count();
@@ -68,15 +68,15 @@ class IniciaController extends Controller
              /* Ofertas totalmente finalizadas --------------------------------------------------------------------------*/
 
              $num_of_final = DB::table('ofertas_part')
-             ->where('id_part','=',$id_logado)
-             ->where('status','=',4)
+             ->where('ofertas_part.id_part','=',$id_logado)
+             ->where('transacoes.id_st_trans','=',4)
 
              ->join('transacoes','ofertas_part.id','=','transacoes.id_of_part')
              ->count();     
 
              $num_of_tr_final = DB::table('ofertas_part')
-             ->where('id_part','=',$id_logado)
-             ->where('status','=',4)
+             ->where('ofertas_part.id_part','=',$id_logado)
+             ->where('transacoes.id_st_trans','=',4)
 
              ->join('transacoes','ofertas_part.id','=','transacoes.id_of_tr_part')
              ->count(); 
@@ -87,8 +87,8 @@ class IniciaController extends Controller
              /* Necessidades totalmente finalizadas -------------------------------------------------------------------------*/
 
              $num_nec_final = DB::table('necessidades_part')
-             ->where('id_part','=',$id_logado)
-             ->where('status','=',4)
+             ->where('necessidades_part.id_part','=',$id_logado)
+             ->where('transacoes.id_st_trans','=',4)
 
              ->join('transacoes','necessidades_part.id','=','transacoes.id_nec_part')
              ->count();   
@@ -97,7 +97,7 @@ class IniciaController extends Controller
              
              $cons_markers_ofs = DB::table('ofertas_part')
             ->where('ofertas_part.id_part','=',$id_logado)
-            ->where('ofertas_part.status','>',1)
+            ->where('transacoes.id_st_trans','>',1)
 
             ->join('transacoes','ofertas_part.id','=','transacoes.id_of_part')
             ->leftjoin('necessidades_part','transacoes.id_nec_part','=','necessidades_part.id')
@@ -130,7 +130,7 @@ class IniciaController extends Controller
                                 'endereco'=> $of->endereco,
                                 'latitude'=> $lat,
                                 'longitude'=> $long,
-                                'status'=> $of->status,
+                                'status'=> $of->id_st_trans,
                         ]);
 
                         
@@ -141,7 +141,7 @@ class IniciaController extends Controller
 
             $cons_markers_necs = DB::table('necessidades_part')
             ->where('necessidades_part.id_part','=',$id_logado)
-            ->where('necessidades_part.status','>',1)
+            ->where('transacoes.id_st_trans','>',1)
 
             ->leftjoin('transacoes','necessidades_part.id','=','transacoes.id_nec_part')
             ->leftjoin('ofertas_part','transacoes.id_of_part','=','ofertas_part.id')
@@ -174,7 +174,7 @@ class IniciaController extends Controller
                                 'endereco'=> $nec->endereco,
                                 'latitude'=> $lat,
                                 'longitude'=> $long,
-                                'status'=> $nec->status,
+                                'status'=> $nec->id_st_trans,
                         ]);
     
                         
@@ -224,7 +224,7 @@ class IniciaController extends Controller
 
         $of_status = DB::table('ofertas_part')
         ->where('ofertas_part.id_part','=',$id_logado)
-        ->where('ofertas_part.status','=',$status)
+        ->where('transacoes.id_st_trans','=',$status)
 
         ->where(function($query) use ($searchValues){
             foreach ($searchValues as $value) {
@@ -354,7 +354,7 @@ class IniciaController extends Controller
         
         $nec_status = DB::table('necessidades_part')
         ->where('necessidades_part.id_part','=',$id_logado)
-        ->where('necessidades_part.status','=',$status)
+        ->where('transacoes.id_st_trans','=',$status)
 
         ->where(function($query) use ($searchValues){
             foreach ($searchValues as $value) {

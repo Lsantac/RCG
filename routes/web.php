@@ -91,8 +91,6 @@ Route::get('/mens_transacoes_part',  [TransacoesController::class,'mens_transaco
 Route::get('/incluir_mens_trans',  [TransacoesController::class,'incluir_mens_trans'])->name('incluir_mensagem')->middleware('islogged');
 Route::get('/finalizar_trans',  [TransacoesController::class,'finalizar_trans'])->name('finalizar_transacao')->middleware('islogged');
 
-
-
 /*Redes*/
 Route::get('/consulta_redes',  [RedesController::class,'query_redes'])->name('consulta_redes')->middleware('islogged');
 Route::delete('/deleta_rede_part/{id}',  [RedesController::class,'deleta_rede_part'])->name('deleta_rede_part');

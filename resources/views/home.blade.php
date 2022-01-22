@@ -37,9 +37,9 @@
                         <div class="col-11">
                           <p style="color:black;">
                             @if(($num_ofp_parc > 1) or ($num_ofp_parc == 0))
-                                Existem <span style="color:rgb(15, 135, 233);"><b>{{$num_ofp_parc}}</b></span> transações de Ofertas com confirmações de Necessidades ou Trocas de outros participantes esperando sua finalização. 
+                                Existem <span style="color:rgb(15, 135, 233);"><b>{{$num_ofp_parc}}</b></span> transações confirmadas parcialmente. 
                             @else
-                                Existe <span style="color:rgb(15, 135, 233);"><b>{{$num_ofp_parc}}</b></span> transação de Oferta com confirmação de Necessidade ou Troca de outro participante esperando sua finalização. 
+                                Existe <span style="color:rgb(15, 135, 233);"><b>{{$num_ofp_parc}}</b></span> transação confirmada parcialmente. 
                             @endif
                           </p>
                         </div>
@@ -54,11 +54,11 @@
                         <div class="col-11">
                               @if(($num_ofp_final > 1) or ($num_ofp_final == 0))
                                 <p style="color:black;">
-                                Existem <span style="color:rgb(101, 12, 218);"><b>{{$num_ofp_final}}</b></span> Ofertas já finalizadas. 
+                                Existem <span style="color:rgb(101, 12, 218);"><b>{{$num_ofp_final}}</b></span> transações já finalizadas. 
                                 </p>
                               @else
                                 <p style="color:black;">
-                                Existe <span style="color:rgb(101, 12, 218);"><b>{{$num_ofp_final}}</b></span> Oferta já finalizada. 
+                                Existe <span style="color:rgb(101, 12, 218);"><b>{{$num_ofp_final}}</b></span> transação já finalizada. 
                                 </p>
                               @endif
                         </div>
@@ -98,9 +98,9 @@
                         <div class="col-11">
                           <p style="color:black;">
                             @if($num_nec_parc > 1 or $num_nec_parc == 0 )
-                               Existem <span style="color:rgb(15, 135, 233);"><b>{{$num_nec_parc}}</b></span> transações de Necessidades com confirmações de Ofertas de outros participantes esperando sua finalização. 
+                               Existem <span style="color:rgb(15, 135, 233);"><b>{{$num_nec_parc}}</b></span> transações confirmadas parcialmente. 
                             @else
-                               Existe <span style="color:rgb(15, 135, 233);"><b>{{$num_nec_parc}}</b></span> transação de Necessidade com confirmação de Oferta de outro participante esperando sua finalização. 
+                               Existe <span style="color:rgb(15, 135, 233);"><b>{{$num_nec_parc}}</b></span> transação confirmada parcialmente. 
                             @endif
                           </p>
                         </div>
@@ -115,11 +115,11 @@
                         <div class="col-11">
                               @if($num_nec_final > 1 or $num_nec_final == 0)
                                 <p style="color:black;">
-                                Existem <span style="color:rgb(101, 12, 218);"><b>{{$num_nec_final}}</b></span> Necessidades já finalizadas. 
+                                Existem <span style="color:rgb(101, 12, 218);"><b>{{$num_nec_final}}</b></span> transações já finalizadas. 
                                 </p>
                               @else
                                 <p style="color:black;">
-                                Existe <span style="color:rgb(101, 12, 218);"><b>{{$num_nec_final}}</b></span> Necessidade já finalizada. 
+                                Existe <span style="color:rgb(101, 12, 218);"><b>{{$num_nec_final}}</b></span> transação já finalizada. 
                                 </p>
                               @endif
                         </div>
