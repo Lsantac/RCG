@@ -32,9 +32,6 @@ A proposta então é fazer um convite a todos para usar esse espaço para trocar
 Podem usar essa pagina para começar a experimentar isso, organizar grupos, fazer trocas, doações para quem precisa e também, dizer o que cada um precisa, dentro de um bom senso, sabendo que precisamos também exercitar o entendimento de que consumismo é acumulo de bens que poderiam estar sendo melhor usados por outros que não tem acesso ainda.
 Que todos tenha uma otima experiência e que essa proposta, que não é nova e já existe em outros niveis pelo mundo afora, possa ser ainda mais replicada.
 
-<p align="center">
-<a href="https://scontent.fsjk2-1.fna.fbcdn.net/v/t39.30808-6/265333853_6899485560091923_1881516341909774681_n.jpg?_nc_cat=108&ccb=1-5&_nc_sid=0debeb&_nc_eui2=AeEShvzWUyge1qmEf5P2o_2ia9AejxR1PFRr0B6PFHU8VN16JPA574rfh461nGGrbtU&_nc_ohc=JhyOzleyA4IAX-l7soA&_nc_ht=scontent.fsjk2-1.fna&oh=00_AT91WAE2UZqHPhmV4n1BKOqW_17wui-jBQiDjfhxxweWMA&oe=61F1418D" alt="Screens"></a>
-</p>    
 
 ## About Laravel
 
