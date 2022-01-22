@@ -32,6 +32,8 @@ A proposta então é fazer um convite a todos para usar esse espaço para trocar
 Podem usar essa pagina para começar a experimentar isso, organizar grupos, fazer trocas, doações para quem precisa e também, dizer o que cada um precisa, dentro de um bom senso, sabendo que precisamos também exercitar o entendimento de que consumismo é acumulo de bens que poderiam estar sendo melhor usados por outros que não tem acesso ainda.
 Que todos tenha uma otima experiência e que essa proposta, que não é nova e já existe em outros niveis pelo mundo afora, possa ser ainda mais replicada.
 
+<a href="https://github.com/Lsantac/RCG/blob/main/public/img/rede_colaborativa_global.jpg?raw=true" alt="tela"></a>
+https://github.com/Lsantac/RCG/blob/main/public/img/rede_colaborativa_global.jpg?raw=true
 
 ## About Laravel
 
