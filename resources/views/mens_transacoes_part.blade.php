@@ -248,7 +248,7 @@
                 @csrf
 
                 <!-- Button trigger modal Finalizar -->
-                <button type="button" class="btn btn-finalizar btn-sm" data-bs-toggle="modal" data-bs-target="#finalizar">
+                <button  id="botao_finalizar" onclick="verifica_zeros()"  type="button" class="btn btn-finalizar btn-sm" >
                   Finalizar
                 </button>
 
@@ -432,7 +432,7 @@
                   @if (Session::get('code') == 4)
                     Transação Finalizada Totalmente!
                   @else
-                    @if (Session::get('code') == 1) 
+                    @if (Session::get('code') < 2) 
                         Transação não pode ser finalizada ainda! Não existem ainda mensagens entre os participantes!
                     @endif    
                   @endif
@@ -469,7 +469,7 @@
 </div>
  
   
-@if (Session::has('code') && Session::get('code') <> 0) 
+@if (Session::has('code') && Session::get('code') < 2) 
     
     <script>
      $(document).ready(function(){
@@ -536,6 +536,33 @@
       }
     }
     
+  }
+
+  function verifica_zeros(){
+
+    var quant_nec = document.getElementById("QtNec").value; 
+    var quant_of = document.getElementById("QtOf").value; 
+    var pode_abrir_modal = true;
+
+    if(quant_nec == 0){
+          pode_abrir_modal = false;
+          document.getElementById("ModalTextoQt").innerHTML = "Quantidade da Necessidade não pode ser zero!";
+          $("#ModalAlertQt").modal("show");
+          
+      } 
+
+      if(quant_of == 0){
+          pode_abrir_modal = false;
+          document.getElementById("ModalTextoQt").innerHTML = "Quantidade da Oferta não pode ser zero!";
+          $("#ModalAlertQt").modal("show");
+        
+      }   
+
+      if(pode_abrir_modal){
+        $("#finalizar").modal("show");
+      }
+
+
   }
    
   </script>
