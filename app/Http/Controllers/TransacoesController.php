@@ -570,6 +570,8 @@ class TransacoesController extends Controller
             $id_nec_part = request('id_nec_part_t');
             $origem = request('origem');
 
+            /*dd($origem);*/
+
             $troca = 0;
 
             if($id_of_tr_part > 0){
@@ -950,8 +952,26 @@ class TransacoesController extends Controller
                   }   
 
             }else{
-                  /*ao incluir uma mensagem, um registro de transação é incluido junto */
-                  $code = 2;  
+                  $mens = DB::table('mensagens_trans')
+                  ->where('transacoes.id_nec_part', request('id_nec_part_t'))
+                  ->where('transacoes.id_of_part', request('id_of_part_t'))
+                  ->where('transacoes.id_of_tr_part', request('id_of_tr_part_t'))
+
+                  ->join('transacoes','mensagens_trans.id_trans','=','transacoes.id')
+
+                  ->select('*')
+                  ->first();
+
+                  /*dd($mens);*/
+
+                  if(!$mens){
+                      /*Senão tiver mensagem incluida ainda então não pode finalizar a transação */
+                      $code = 1;  
+                  }else{
+                      /*ao incluir uma mensagem, um registro de transação é incluido junto */
+                      $code = 2;  
+                  }
+                  
                   session()->flash('code', $code);
             } 
 
@@ -984,8 +1004,8 @@ class TransacoesController extends Controller
                 $oftrp->update(['status'=>3]);
             }else{
                 $oftrp->update(['status'=>$code]);
-            }                                   
- 
+            }         
+
             return back();     
 
       }
