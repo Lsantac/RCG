@@ -198,7 +198,11 @@
                             <input value="{{$of_st->id_nec_part}}" name="id_nec_part_t" type="hidden">
                             <input value="{{$of_st->id_of_part}}" name="id_of_part_t" type="hidden"> 
                             <input value="{{$of_st->id_of_tr_part}}" name="id_of_tr_part_t" type="hidden"> 
-                            <input value="of" name="origem" type="hidden"> 
+                            @if($of_st->fluxo == 'Troca')
+                               <input value="tr" name="origem" type="hidden"> 
+                            @else
+                               <input value="of" name="origem" type="hidden"> 
+                            @endif   
                             <button type="submit" class="btn btn-sm btn-mensagem bi-arrow-repeat texto_p">Detalhes da Transação</button>   
                            
                       </form>

@@ -95,8 +95,10 @@ class IniciaController extends Controller
              
              /*Calculo dos marcadores dos mapas -------------------------------------------------------------------------------*/
              
-             $participantes_1= DB::table('participantes')->select('*');
-             $ofertas_part_1= DB::table('ofertas_part')->select('*');
+             $participantes_tr= DB::table('participantes')->select('*');
+             $participantes_of= DB::table('participantes')->select('*');
+             $ofertas_part_tr= DB::table('ofertas_part')->select('*');
+             $ofertas_part_of= DB::table('ofertas_part')->select('*');
 
              $cons_markers_ofs = DB::table('ofertas_part')
             ->where('ofertas_part.id_part','=',$id_logado)
@@ -106,12 +108,20 @@ class IniciaController extends Controller
             ->leftjoin('necessidades_part','transacoes.id_nec_part','=','necessidades_part.id')
             ->leftjoin('participantes','necessidades_part.id_part','=','participantes.id')
 
-            ->leftjoinSub($ofertas_part_1, 'ofertas_part_1', function ($join) {
-                $join->on('transacoes.id_of_tr_part', '=', 'ofertas_part_1.id');
+            ->leftjoinSub($ofertas_part_tr, 'ofertas_part_tr', function ($join) {
+                $join->on('transacoes.id_of_tr_part', '=', 'ofertas_part_tr.id');
             })
 
-            ->leftjoinSub($participantes_1, 'participantes_1', function ($join) {
-                $join->on('ofertas_part_1.id_part', '=', 'participantes_1.id');
+            ->leftjoinSub($participantes_tr, 'participantes_tr', function ($join) {
+                $join->on('ofertas_part_tr.id_part', '=', 'participantes_tr.id');
+            }) 
+
+            ->leftjoinSub($ofertas_part_of, 'ofertas_part_of', function ($join) {
+                $join->on('transacoes.id_of_part', '=', 'ofertas_part_of.id');
+            })
+
+            ->leftjoinSub($participantes_of, 'participantes_of', function ($join) {
+                $join->on('ofertas_part_of.id_part', '=', 'participantes_of.id');
             }) 
 
             ->select('transacoes.id_st_trans',
@@ -121,10 +131,15 @@ class IniciaController extends Controller
             'participantes.latitude as lat_nec',
             'participantes.longitude as long_nec',
 
-            'participantes_1.nome_part as nome_part_tr',
-            'participantes_1.endereco as endereco_tr',
-            'participantes_1.latitude as lat_tr',
-            'participantes_1.longitude as long_tr'
+            'participantes_tr.nome_part as nome_part_tr',
+            'participantes_tr.endereco as endereco_tr',
+            'participantes_tr.latitude as lat_tr',
+            'participantes_tr.longitude as long_tr',
+
+            'participantes_of.nome_part as nome_part_of_trans',
+            'participantes_of.endereco as endereco_of_trans',
+            'participantes_of.latitude as lat_of_trans',
+            'participantes_of.longitude as long_of_trans'
             );
 
             /*->get(); */
@@ -137,12 +152,20 @@ class IniciaController extends Controller
             ->leftjoin('necessidades_part','transacoes.id_nec_part','=','necessidades_part.id')
             ->leftjoin('participantes','necessidades_part.id_part','=','participantes.id')
 
-            ->leftjoinSub($ofertas_part_1, 'ofertas_part_1', function ($join) {
-                $join->on('transacoes.id_of_tr_part', '=', 'ofertas_part_1.id');
+            ->leftjoinSub($ofertas_part_tr, 'ofertas_part_tr', function ($join) {
+                $join->on('transacoes.id_of_tr_part', '=', 'ofertas_part_tr.id');
             })
 
-            ->leftjoinSub($participantes_1, 'participantes_1', function ($join) {
-                $join->on('ofertas_part_1.id_part', '=', 'participantes_1.id');
+            ->leftjoinSub($participantes_tr, 'participantes_tr', function ($join) {
+                $join->on('ofertas_part_tr.id_part', '=', 'participantes_tr.id');
+            }) 
+
+            ->leftjoinSub($ofertas_part_of, 'ofertas_part_of', function ($join) {
+                $join->on('transacoes.id_of_part', '=', 'ofertas_part_of.id');
+            })
+
+            ->leftjoinSub($participantes_of, 'participantes_of', function ($join) {
+                $join->on('ofertas_part_of.id_part', '=', 'participantes_of.id');
             }) 
 
             ->select('transacoes.id_st_trans',
@@ -152,10 +175,15 @@ class IniciaController extends Controller
             'participantes.latitude as lat_nec',
             'participantes.longitude as long_nec',
 
-            'participantes_1.nome_part as nome_part_tr',
-            'participantes_1.endereco as endereco_tr',
-            'participantes_1.latitude as lat_tr',
-            'participantes_1.longitude as long_tr'
+            'participantes_tr.nome_part as nome_part_tr',
+            'participantes_tr.endereco as endereco_tr',
+            'participantes_tr.latitude as lat_tr',
+            'participantes_tr.longitude as long_tr',
+
+            'participantes_of.nome_part as nome_part_of_trans',
+            'participantes_of.endereco as endereco_of_trans',
+            'participantes_of.latitude as lat_of_trans',
+            'participantes_of.longitude as long_of_trans'
             )
 
             ->union($cons_markers_ofs)
@@ -196,23 +224,23 @@ class IniciaController extends Controller
 
                     }else{
 
-                        if($of->lat_tr <> null and $of->long_tr <> null ){
+                        if($of->lat_of_trans <> null and $of->long_of_trans <> null ){
                     
-                                if($of->lat_tr <> null){
-                                    $lat = $of->lat_tr;
+                                if($of->lat_of_trans <> null){
+                                    $lat = $of->lat_of_trans;
                                 }else{
                                     $lat = 0;
                                 }
 
-                                if($of->long_tr <> null){
-                                    $long = $of->long_tr;
+                                if($of->long_of_trans <> null){
+                                    $long = $of->long_of_trans;
                                 }else{
                                     $long = 0;
                                 }
 
                                 $markers_of = DB::table('markers_of')->insert([
-                                        'nome_part'=> $of->nome_part_tr,
-                                        'endereco'=> $of->endereco_tr,
+                                        'nome_part'=> $of->nome_part_of_trans,
+                                        'endereco'=> $of->endereco_of_trans,
                                         'latitude'=> $lat,
                                         'longitude'=> $long,
                                         'status'=> $of->id_st_trans,
