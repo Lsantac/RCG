@@ -105,7 +105,7 @@
                         <td>
                           <div class="col">
                                   <div class="card" >
-                                    @if($of_st->fluxo == 'troca')
+                                    @if($of_st->fluxo == 'Troca')
                                         <div class="card-body" style="background-color:rgb(172, 240, 223) ">
                                     @else
                                         <div class="card-body" style="background-color:rgb(245, 217, 199) ">
@@ -113,7 +113,7 @@
           
                                         <div class="row align-items-start">
                                             <div class="col">
-                                                  @if($of_st->fluxo == 'troca')
+                                                  @if($of_st->fluxo == 'Troca')
                                                      <div class="row">
                                                           <div class="col">
                                                               <h6 class="card-title texto-troca">Troca : {{$of_st->desc_of_tr}}</h6>       
@@ -205,10 +205,7 @@
                            
                        </td>
                        </tr>
-
-                       
-                     
-                     
+    
               @endforeach
 
           @else

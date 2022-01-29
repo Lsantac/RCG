@@ -216,7 +216,7 @@ class IniciaController extends Controller
         $categorias_2= DB::table('categorias')->select('*');
         $participantes_1= DB::table('participantes')->select('*');
         $participantes_2= DB::table('participantes')->select('*');
-
+        
         $string = request('cons_of_tela_inic');
 
         // split on 1+ whitespace & ignore empty (eg. trailing space)
@@ -228,9 +228,9 @@ class IniciaController extends Controller
 
         ->where(function($query) use ($searchValues){
             foreach ($searchValues as $value) {
-            $query->orwhere('ofertas_part_1.obs','like','%'.($value).'%')
+            $query->orwhere('ofertas_part.obs','like','%'.($value).'%')
                   ->orwhere('necessidades_part.obs','like','%'.($value).'%')
-                  ->orwhere('ofertas_part.obs','like','%'.($value).'%')
+                  ->orwhere('ofertas_part_1.obs','like','%'.($value).'%')
 
                   ->orwhere('ofertas.descricao','like','%'.($value).'%')
                   ->orwhere('ofertas_1.descricao','like','%'.($value).'%')
@@ -259,12 +259,11 @@ class IniciaController extends Controller
       })
         
         ->leftjoin('transacoes','ofertas_part.id','=','transacoes.id_of_part')
+
         ->leftjoin('moedas','transacoes.id_moeda','=','moedas.id')
 
         ->leftjoin('necessidades_part','transacoes.id_nec_part','=','necessidades_part.id')
         ->leftjoin('necessidades','necessidades_part.id_nec','=','necessidades.id')
-
-        /*->leftJoin('ofertas_part_1','transacoes.id_of_tr_part','=','ofertas_part_1.id')*/
 
         ->leftjoinSub($ofertas_part_1, 'ofertas_part_1', function ($join) {
             $join->on('transacoes.id_of_tr_part', '=', 'ofertas_part_1.id');
@@ -272,21 +271,15 @@ class IniciaController extends Controller
 
         ->leftjoin('ofertas','ofertas_part.id_of','=','ofertas.id')
 
-        /*->leftjoin('ofertas_1','ofertas_part_1.id_of','=','ofertas_1.id')*/
-
         ->leftjoinSub($ofertas_1, 'ofertas_1', function ($join) {
             $join->on('ofertas_part_1.id_of', '=', 'ofertas_1.id');
         })  
 
         ->leftjoin('categorias','ofertas.id_cat','=','categorias.id')
 
-        /*->leftjoin('categorias_1','ofertas_1.id_cat','=','categorias_1.id')*/
-
         ->leftjoinSub($categorias_1, 'categorias_1', function ($join) {
             $join->on('ofertas_1.id_cat', '=', 'categorias_1.id');
         })  
-
-        /*->leftjoin('categorias_2','necessidades.id_cat','=','categorias_2.id')*/
 
         ->leftjoinSub($categorias_2, 'categorias_2', function ($join) {
             $join->on('necessidades.id_cat', '=', 'categorias_2.id');
@@ -294,20 +287,17 @@ class IniciaController extends Controller
         
         ->leftjoin('participantes','ofertas_part.id_part','=','participantes.id')  
 
-        /*->leftjoin('participantes_1','ofertas_part_1.id_part','=','participantes_1.id')*/
-
         ->leftjoinSub($participantes_1, 'participantes_1', function ($join) {
             $join->on('ofertas_part_1.id_part', '=', 'participantes_1.id');
         })  
-
-        /*->leftjoin('participantes_2','necessidades_part.id_part','=','participantes_2.id')*/
 
         ->leftjoinSub($participantes_2, 'participantes_2', function ($join) {
             $join->on('necessidades_part.id_part', '=', 'participantes_2.id');
         })  
         
         ->select('ofertas_part.id as id_of','ofertas_part.id_part as id_partic_ofertas','ofertas_part.status as status_of',
-         'ofertas_part.obs as obs_of','necessidades_part.obs as obs_nec','ofertas_part_1.obs as obs_of_tr',
+         'ofertas_part.obs as obs_of','necessidades_part.obs as obs_nec',
+         
          'transacoes.id_of_part as id_of_part','moedas.desc_moeda as fluxo',
          'transacoes.id as id_trans','transacoes.id_nec_part as id_nec_part','transacoes.id_of_tr_part as id_of_tr_part',
          'transacoes.quant_of as quant_of','transacoes.quant_nec as quant_nec','transacoes.quant_of_tr as quant_of_tr',
@@ -315,24 +305,139 @@ class IniciaController extends Controller
          'transacoes.data_inic as data_inic','transacoes.data_final_nec_part as data_final_nec_part','transacoes.data_final_of_part as data_final_of_part',
          'transacoes.data_final_of_tr_part as data_final_of_tr_part',
          'ofertas.descricao as desc_of','categorias.descricao as desc_cat_of',
-         'ofertas_1.descricao as desc_of_tr','categorias_1.descricao as desc_cat_of_tr',
+         
          'necessidades.descricao as desc_nec','categorias_2.descricao as desc_cat_nec',
-         'participantes.nome_part as nome_part_of','participantes_1.nome_part as nome_part_of_tr',
-         'participantes_1.endereco as endereco_of_tr','participantes_1.cidade as cidade_of_tr',
-         'participantes_1.estado as estado_of_tr','participantes_1.pais as pais_of_tr',
+         'participantes.nome_part as nome_part_of',
+         
          'participantes_2.nome_part as nome_part_nec','participantes_2.endereco as endereco_nec','participantes_2.cidade as cidade_nec',
-         'participantes_2.estado as estado_nec','participantes_2.pais as pais_nec'
-         )
+         'participantes_2.estado as estado_nec','participantes_2.pais as pais_nec',
 
-        ->orderBy('data_inic','desc')
-        ->paginate(5);
-        $of_status->appends($request->all());
+         'ofertas_part_1.obs as obs_of_tr',
+         'ofertas_1.descricao as desc_of_tr','categorias_1.descricao as desc_cat_of_tr',
+         'participantes_1.nome_part as nome_part_of_tr',
+         'participantes_1.endereco as endereco_of_tr','participantes_1.cidade as cidade_of_tr',
+         'participantes_1.estado as estado_of_tr','participantes_1.pais as pais_of_tr'
+        );
 
+        /*->orderBy('data_inic','desc');*/
+        /*->paginate(5);*/
+        /*$of_status->appends($request->all());*/
+        
         /*->get();*/
         /*dd($of_status);*/
 
+        /* Consulta transações de troca e faz união com as ofertas normais ---------------------------------------------------------------------------------------*/
 
-        return view('cons_trans_ofertas_part',['of_status'=>$of_status,'status'=>$status]);
+        $of_status_tr_final = DB::table('ofertas_part')
+        ->where('ofertas_part.id_part','=',$id_logado)
+        ->where('transacoes.id_st_trans','=',$status)
+
+        ->where(function($query) use ($searchValues){
+            foreach ($searchValues as $value) {
+            $query->orwhere('ofertas_part.obs','like','%'.($value).'%')
+                  ->orwhere('necessidades_part.obs','like','%'.($value).'%')
+                  ->orwhere('ofertas_part_1.obs','like','%'.($value).'%')
+
+                  ->orwhere('ofertas.descricao','like','%'.($value).'%')
+                  ->orwhere('ofertas_1.descricao','like','%'.($value).'%')
+                  ->orwhere('necessidades.descricao','like','%'.($value).'%')
+
+                  ->orwhere('categorias.descricao','like','%'.($value).'%')
+                  ->orwhere('categorias_1.descricao','like','%'.($value).'%')
+                  ->orwhere('categorias_2.descricao','like','%'.($value).'%')
+
+                  ->orwhere('participantes_1.nome_part','like','%'.($value).'%')
+                  ->orwhere('participantes_1.endereco','like','%'.($value).'%')
+                  ->orwhere('participantes_1.cidade','like','%'.($value).'%')
+                  ->orwhere('participantes_1.estado','like','%'.($value).'%')
+                  ->orwhere('participantes_1.pais','like','%'.($value).'%')
+
+                  ->orwhere('participantes_2.nome_part','like','%'.($value).'%')
+                  ->orwhere('participantes_2.endereco','like','%'.($value).'%')
+                  ->orwhere('participantes_2.cidade','like','%'.($value).'%')
+                  ->orwhere('participantes_2.estado','like','%'.($value).'%')
+                  ->orwhere('participantes_2.pais','like','%'.($value).'%')
+                  
+                  ->orwhere('moedas.desc_moeda','like','%'.($value).'%')
+                  ;
+
+            }      
+      })
+        
+        ->leftjoin('transacoes','ofertas_part.id','=','transacoes.id_of_tr_part')
+
+        ->leftjoin('moedas','transacoes.id_moeda','=','moedas.id')
+
+        ->leftjoin('necessidades_part','transacoes.id_nec_part','=','necessidades_part.id')
+        ->leftjoin('necessidades','necessidades_part.id_nec','=','necessidades.id')
+
+        ->leftjoinSub($ofertas_part_1, 'ofertas_part_1', function ($join) {
+            $join->on('transacoes.id_of_tr_part', '=', 'ofertas_part_1.id');
+        }) 
+
+        ->leftjoin('ofertas','ofertas_part.id_of','=','ofertas.id')
+
+        ->leftjoinSub($ofertas_1, 'ofertas_1', function ($join) {
+            $join->on('ofertas_part_1.id_of', '=', 'ofertas_1.id');
+        })  
+
+        ->leftjoin('categorias','ofertas.id_cat','=','categorias.id')
+
+        ->leftjoinSub($categorias_1, 'categorias_1', function ($join) {
+            $join->on('ofertas_1.id_cat', '=', 'categorias_1.id');
+        })  
+
+        ->leftjoinSub($categorias_2, 'categorias_2', function ($join) {
+            $join->on('necessidades.id_cat', '=', 'categorias_2.id');
+        })  
+        
+        ->leftjoin('participantes','ofertas_part.id_part','=','participantes.id')  
+
+        ->leftjoinSub($participantes_1, 'participantes_1', function ($join) {
+            $join->on('ofertas_part_1.id_part', '=', 'participantes_1.id');
+        })  
+
+        ->leftjoinSub($participantes_2, 'participantes_2', function ($join) {
+            $join->on('necessidades_part.id_part', '=', 'participantes_2.id');
+        })  
+        
+        ->select('ofertas_part.id as id_of','ofertas_part.id_part as id_partic_ofertas','ofertas_part.status as status_of',
+         'ofertas_part.obs as obs_of','necessidades_part.obs as obs_nec',
+         
+         'transacoes.id_of_part as id_of_part','moedas.desc_moeda as fluxo',
+         'transacoes.id as id_trans','transacoes.id_nec_part as id_nec_part','transacoes.id_of_tr_part as id_of_tr_part',
+         'transacoes.quant_of as quant_of','transacoes.quant_nec as quant_nec','transacoes.quant_of_tr as quant_of_tr',
+         'transacoes.id_st_trans as id_st_trans','transacoes.quant_moeda as quant_moeda','transacoes.id_moeda as id_moeda',
+         'transacoes.data_inic as data_inic','transacoes.data_final_nec_part as data_final_nec_part','transacoes.data_final_of_part as data_final_of_part',
+         'transacoes.data_final_of_tr_part as data_final_of_tr_part',
+         'ofertas.descricao as desc_of','categorias.descricao as desc_cat_of',
+         
+         'necessidades.descricao as desc_nec','categorias_2.descricao as desc_cat_nec',
+         'participantes.nome_part as nome_part_of',
+         
+         'participantes_2.nome_part as nome_part_nec','participantes_2.endereco as endereco_nec','participantes_2.cidade as cidade_nec',
+         'participantes_2.estado as estado_nec','participantes_2.pais as pais_nec',
+
+         'ofertas_part_1.obs as obs_of_tr',
+         'ofertas_1.descricao as desc_of_tr','categorias_1.descricao as desc_cat_of_tr',
+         'participantes_1.nome_part as nome_part_of_tr',
+         'participantes_1.endereco as endereco_of_tr','participantes_1.cidade as cidade_of_tr',
+         'participantes_1.estado as estado_of_tr','participantes_1.pais as pais_of_tr'
+        )
+
+        ->union($of_status)
+        ->orderBy('data_inic','desc')
+        
+        ->paginate(5);
+        $of_status_tr_final->appends($request->all());
+        
+        /*->get();*/
+        /*dd($of_status_tr_final);*/
+
+
+        /*---------------------------------------------------------------------------------------------------------------------*/
+
+        return view('cons_trans_ofertas_part',['of_status'=>$of_status_tr_final,'status'=>$status]);
         
     }
     

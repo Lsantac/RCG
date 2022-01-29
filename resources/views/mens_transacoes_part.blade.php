@@ -320,7 +320,11 @@
                     <div class="modal-content">
                       <div class="modal-header cab-msg">
                         @if($origem == "of")
-                            <h5 class="modal-title" id="staticBackdropLabel">Nova mensagem para : {{$necps->nome_part}}</h5>
+                            @if(isset($necps))
+                               <h5 class="modal-title" id="staticBackdropLabel">Nova mensagem para : {{$necps->nome_part}}</h5>
+                            @else
+                               <h5 class="modal-title" id="staticBackdropLabel">Nova mensagem para : {{$oftrps->nome_part}}</h5>
+                            @endif
                         @else
                             <h5 class="modal-title" id="staticBackdropLabel">Nova mensagem para : {{$ofps->nome_part}}</h5>
                         @endif
@@ -542,29 +546,37 @@
 <script>
   function verifica_zeros(origem){
 
-    var quant_nec = document.getElementById("QtNec").value; 
+    var quant_fluxo = document.getElementById("QtFluxo").value;
 
     var pode_abrir_modal = true;
 
-    /*alert(origem);*/
+   /* alert(origem);*/
 
-    if(quant_nec == 0){
-          pode_abrir_modal = false;
-          document.getElementById("ModalTextoQt").innerHTML = "Quantidade da Necessidade não pode ser zero!";
-          $("#ModalAlertQt").modal("show");
-    } 
-    
-      if(origem == 'of'){
-        var quant_of = document.getElementById("QtOf").value; 
-          if(quant_of == 0){
-              pode_abrir_modal = false;
-              document.getElementById("ModalTextoQt").innerHTML = "Quantidade da Oferta não pode ser zero!";
-              $("#ModalAlertQt").modal("show");
-          }   
-      }
-      else
-      {
-              if($origem == 'tr'){
+   if(quant_fluxo == 0){
+      pode_abrir_modal = false;
+      document.getElementById("ModalTextoQt").innerHTML = "Quantidade de Fluxo não pode ser zero!";
+      $("#ModalAlertQt").modal("show");
+   } 
+
+    if(origem == 'nec'){
+          var quant_nec = document.getElementById("QtNec").value; 
+          if(quant_nec == 0){
+                pode_abrir_modal = false;
+                document.getElementById("ModalTextoQt").innerHTML = "Quantidade da Necessidade não pode ser zero!";
+                $("#ModalAlertQt").modal("show");
+          } 
+    }else{
+            if(origem == 'of'){
+              var quant_of = document.getElementById("QtOf").value; 
+                if(quant_of == 0){
+                    pode_abrir_modal = false;
+                    document.getElementById("ModalTextoQt").innerHTML = "Quantidade da Oferta não pode ser zero!";
+                    $("#ModalAlertQt").modal("show");
+                }   
+            }
+            else
+            {
+              if(origem == 'tr'){
                 var quant_tr = document.getElementById("QtOfTr").value; 
                   if(quant_tr == 0){
                       pode_abrir_modal = false;
@@ -572,8 +584,10 @@
                       $("#ModalAlertQt").modal("show");
                   }   
               }  
-            
-      }
+                  
+            }
+
+    }  
 
     if(pode_abrir_modal){
        $("#finalizar").modal("show");
