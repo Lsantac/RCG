@@ -116,7 +116,7 @@
                                                   @if($of_st->fluxo == 'Troca')
                                                      <div class="row">
                                                           <div class="col">
-                                                              <h6 class="card-title texto-troca">Troca : {{$of_st->desc_of_tr}}</h6>       
+                                                              <h6 class="card-title texto-troca">Troca : {{$of_st->desc_of_trans}}</h6>       
                                                           </div>
                                                           <div class="col texto_p">
                                                             @php
@@ -131,10 +131,10 @@
                                                         </div>
                                                       </div>
 
-                                                     <div class="card-text texto_p">Categoria : {{$of_st->desc_cat_of_tr}}</div>
-                                                     <div class="card-text texto_p">Participante : {{$of_st->nome_part_of_tr}} </div>
-                                                     <div class="card-text texto_p">Endereço : {{$of_st->endereco_of_tr}} , {{$of_st->cidade_of_tr}} </div>
-                                                     <div class="card-text texto_p">Obs : {{$of_st->obs_of_tr}}</div>   
+                                                     <div class="card-text texto_p">Categoria : {{$of_st->desc_cat_of_trans}}</div>
+                                                     <div class="card-text texto_p">Participante : {{$of_st->nome_part_of_trans}} </div>
+                                                     <div class="card-text texto_p">Endereço : {{$of_st->endereco_of_trans}} , {{$of_st->cidade_of_trans}} </div>
+                                                     <div class="card-text texto_p">Obs : {{$of_st->obs_of_trans}}</div>   
                                                   @else
                                                     <div class="row">
                                                         <div class="col">
@@ -176,7 +176,7 @@
                                                   <h6 class="card-title">Fluxo : {{$of_st->fluxo}}</h6>
                                                   <div class="card-text texto_p">Qt Fluxo : {{$of_st->quant_moeda}}</div>
                                                   <div class="card-text texto_p">Qt Oferta : {{$of_st->quant_of}}</div>
-                                                  @if($of_st->fluxo == 'troca')
+                                                  @if($of_st->fluxo == 'Troca')
                                                       <div class="card-text texto_p">Qt Troca : {{$of_st->quant_of_tr}}</div>
                                                   @else
                                                       <div class="card-text texto_p">Qt Necessidade : {{$of_st->quant_nec}}</div>
