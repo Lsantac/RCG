@@ -87,7 +87,7 @@
         </form>
       </div>
 
-      <div style="float: left; width: auto;">
+     <!-- <div style="float: left; width: auto;">
         <form style="display:inline;" action="" method="get">
           @csrf 
           
@@ -96,7 +96,7 @@
           <input value="{{$necp->id_nec_part}}" name="id_nec_part_t" type="hidden">
           
         </form>
-      </div>    
+      </div> -->
 
   <div style="float: left; width: auto;">
     <form style="display:inline;" action="{{route('trans_necessidades_part')}}" method="get">

@@ -90,7 +90,7 @@
         </form>
       </div>
 
-  <div style="float: left; width: auto;">
+ <!-- <div style="float: left; width: auto;">
     <form style="display:inline;" action="" method="get">
       @csrf 
       
@@ -99,7 +99,7 @@
       <input value="{{$ofp->id_of_part}}" name="id_of_part_t" type="hidden">
       
     </form>
-  </div>
+  </div> -->
 
   <div style="float: left; width: auto;" >
     <form style="display:inline;" action="{{route('trans_ofertas_part')}}" method="get">

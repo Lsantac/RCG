@@ -507,6 +507,19 @@
    @endif    
 @endif
 
+@if (count($trans)>0)
+    @if($trans[0]->desc_moeda == 'Troca' or $trans[0]->desc_moeda == 'Doação')
+        <script>
+              document.getElementById("QtFluxo").readOnly = true ;
+        </script>
+    @else
+        <script>
+          document.getElementById("QtFluxo").readOnly = false ;
+        </script>
+    @endif
+@endif
+
+
 <script>
   
   function verifica_quant(quant_disp,of_tr_nec) {

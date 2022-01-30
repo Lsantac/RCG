@@ -66,7 +66,7 @@
             <br>
             <a type="button" href="/ofertas_part/{{$participante->id}}" class="btn btn-ofertas bi-arrow-up-circle-fill texto_m"> Ofertas</a>   
             <a type="button" href="/necessidades_part/{{$participante->id}}" class="btn btn-necessidades bi-arrow-down-circle-fill texto_m"> Necessidades</a>   
-            <a type="button" href="/transacoes_part/{{$participante->id}}" class="btn btn-transacao bi-arrow-down-up texto_m"> Transações</a>   
+            <!--<a type="button" href="/transacoes_part/{{$participante->id}}" class="btn btn-transacao bi-arrow-down-up texto_m"> Transações</a> -->  
             <a type="button" href="/redes_part/{{$participante->id}}" class="btn btn-redes bi-snow texto_m"> Redes</a>   
             <a type="button" href="/mostramapa/{{$participante->id}}"  class="btn btn-mapa bi-globe texto_m"> Mapa</a>  
 
