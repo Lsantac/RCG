@@ -81,7 +81,7 @@
         </form>
       </div>
 
-  <div style="float: left; width: auto;">
+  <!--<div style="float: left; width: auto;">
     <form style="display:inline;" action="" method="get">
       @csrf 
       
@@ -90,7 +90,7 @@
       <input value="{{$ofp->id_of_part}}" name="id_of_part_t" type="hidden">
       
     </form>
-  </div>
+  </div> -->
 
     @if (count($of_tr_ps)>0)
         <div style="float:left; margin-left:20px;"  >

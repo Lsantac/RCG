@@ -281,6 +281,8 @@ class TransacoesController extends Controller
             $id_of_part = request('id_of_part_t');
             $id_logado = request('id_logado');
 
+            $request->session()->put('criterio_nec', request('criterio_nec'));
+
             $part = DB::table('participantes')->where('id',$id_part)
                                               ->select('participantes.*')
                                               ->first();
@@ -298,7 +300,7 @@ class TransacoesController extends Controller
 
                                              
                         
-            $string = request('consultar_trans_nec_part');
+            $string = request('criterio_nec');
            
             // split on 1+ whitespace & ignore empty (eg. trailing space)
             $searchValues = preg_split('/\s+/', $string, -1, PREG_SPLIT_NO_EMPTY);   
@@ -379,6 +381,8 @@ class TransacoesController extends Controller
             $id_nec_part = request('id_nec_part_t');
             $id_logado = request('id_logado');
 
+            $request->session()->put('criterio_of', request('criterio_of'));
+
             $part = DB::table('participantes')->where('id',$id_part)
                                               ->select('participantes.*')
                                               ->first();
@@ -397,7 +401,7 @@ class TransacoesController extends Controller
 
                                              
                         
-            $string = request('consultar_trans_of_part');
+            $string = request('criterio_of');
            
             // split on 1+ whitespace & ignore empty (eg. trailing space)
             $searchValues = preg_split('/\s+/', $string, -1, PREG_SPLIT_NO_EMPTY);   
