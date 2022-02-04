@@ -55,7 +55,7 @@
             <th scope="col">Data</th>
             <th scope="col">Quant</th>
             <th scope="col">Unidade</th>
-            <th scope="col" class="pcenter" colspan="2">Transações</th>
+            <th scope="col" colspan="2">Transações</th>
             <th scope="col" >Status</th>
             <th scope="col" >Local</th>
  
@@ -100,7 +100,7 @@
                     <td>
                       <div class="row">
                           
-                            <div class="col pcenter no-margin">
+                            <div class="col">
                                   @if($ofp->id_part <> Session::get('id_logado'))
                                     <form action="{{route('trans_trocas_part')}}" method="get">
                                       @csrf 

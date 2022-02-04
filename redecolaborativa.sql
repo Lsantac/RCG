@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 12-Jan-2022 às 22:10
+-- Tempo de geração: 04-Fev-2022 às 20:17
 -- Versão do servidor: 10.4.20-MariaDB
 -- versão do PHP: 8.0.9
 
@@ -30,46 +30,25 @@ SET time_zone = "+00:00";
 CREATE TABLE `categorias` (
   `id` int(11) NOT NULL,
   `descricao` varchar(255) NOT NULL,
-  `status` tinyint(1) NOT NULL
+  `status` tinyint(1) NOT NULL,
+  `id_part` int(11) DEFAULT NULL,
+  `id_rede` int(11) DEFAULT NULL,
+  `dt_inclusao` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Extraindo dados da tabela `categorias`
 --
 
-INSERT INTO `categorias` (`id`, `descricao`, `status`) VALUES
-(1, 'Alimentos', 0),
-(2, 'Vestuario', 0),
-(3, 'Serviços', 0),
-(4, 'Educação', 0),
-(5, 'Saúde', 0),
-(6, 'Permacultura', 0),
-(7, 'Artes Cênicas', 0),
-(8, 'Social', 0);
-
--- --------------------------------------------------------
-
---
--- Estrutura stand-in para vista `categorias_1`
--- (Veja abaixo para a view atual)
---
-CREATE TABLE `categorias_1` (
-`id` int(11)
-,`descricao` varchar(255)
-,`status` tinyint(1)
-);
-
--- --------------------------------------------------------
-
---
--- Estrutura stand-in para vista `categorias_2`
--- (Veja abaixo para a view atual)
---
-CREATE TABLE `categorias_2` (
-`id` int(11)
-,`descricao` varchar(255)
-,`status` tinyint(1)
-);
+INSERT INTO `categorias` (`id`, `descricao`, `status`, `id_part`, `id_rede`, `dt_inclusao`) VALUES
+(1, 'Alimentos', 0, NULL, NULL, NULL),
+(2, 'Vestuario', 0, NULL, NULL, NULL),
+(3, 'Serviços', 0, NULL, NULL, NULL),
+(4, 'Educação', 0, NULL, NULL, NULL),
+(5, 'Saúde', 0, NULL, NULL, NULL),
+(6, 'Permacultura', 0, NULL, NULL, NULL),
+(7, 'Artes Cênicas', 0, NULL, NULL, NULL),
+(8, 'Social', 0, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -121,20 +100,58 @@ CREATE TABLE `markers` (
 --
 
 INSERT INTO `markers` (`id`, `nome_part`, `endereco`, `latitude`, `longitude`, `type`) VALUES
-(829, 'Luiz Eduardo Castro', 'Rua Luiz Menezes , 111 , Vila Paraiba', -22.8105164, -45.1904182, NULL),
-(830, 'Luiz Eduardo Castro', 'Rua Luiz Menezes , 111 , Vila Paraiba', -22.8105164, -45.1904182, NULL),
-(828, 'Luiz Eduardo Castro', 'Rua Luiz Menezes , 111 , Vila Paraiba', -22.8105164, -45.1904182, NULL),
-(824, 'Luiz Eduardo Castro', 'Rua Luiz Menezes , 111 , Vila Paraiba', -22.8105164, -45.1904182, NULL),
-(825, 'Marcos da Silva', 'Rua Santa Clara , 100 , Copacabana', -22.9703426, -43.1876640, NULL),
-(827, 'Amanda Pereira', 'Rua Irlanda, 20', -16.7167072, -49.3069305, NULL),
-(826, 'Luiz Eduardo Castro', 'Rua Luiz Menezes , 111 , Vila Paraiba', -22.8105164, -45.1904182, NULL),
-(823, 'Ana Claudia', 'Rua do Catete, 200', -22.9254646, -43.1766167, NULL),
-(822, 'Ricardo Geraldo', 'R. Corumbá, 224 - Carlos Prates', -19.9150295, -43.9596977, NULL),
-(821, 'Luiz Eduardo Castro', 'Rua Luiz Menezes , 111 , Vila Paraiba', -22.8105164, -45.1904182, NULL),
-(819, 'Luiz Eduardo Castro', 'Rua Luiz Menezes , 111 , Vila Paraiba', -22.8105164, -45.1904182, NULL),
-(820, 'Luiz Eduardo Castro', 'Rua Luiz Menezes , 111 , Vila Paraiba', -22.8105164, -45.1904182, NULL),
-(817, 'Marcelo Shama', 'Rua Luiz Silveira Soares, 108 - Encantada', -28.0606689, -48.6789703, NULL),
-(818, 'Marcelo Shama', 'Rua Luiz Silveira Soares, 108 - Encantada', -28.0606689, -48.6789703, NULL);
+(978, 'Marcelo Shama', 'Rua Luiz Silveira Soares, 108 - Encantada', -28.0606689, -48.6789703, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `markers_nec`
+--
+
+CREATE TABLE `markers_nec` (
+  `id` int(11) NOT NULL,
+  `nome_part` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `endereco` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `latitude` float(10,7) NOT NULL,
+  `longitude` float(10,7) NOT NULL,
+  `type` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` int(11) NOT NULL DEFAULT 0
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `markers_nec`
+--
+
+INSERT INTO `markers_nec` (`id`, `nome_part`, `endereco`, `latitude`, `longitude`, `type`, `status`) VALUES
+(265, 'Ricardo Geraldo', 'R. Corumbá, 224 - Carlos Prates', -19.9150295, -43.9596977, NULL, 4);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `markers_of`
+--
+
+CREATE TABLE `markers_of` (
+  `id` int(11) NOT NULL,
+  `nome_part` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `endereco` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `latitude` float(10,7) NOT NULL,
+  `longitude` float(10,7) NOT NULL,
+  `type` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` int(11) NOT NULL DEFAULT 0
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `markers_of`
+--
+
+INSERT INTO `markers_of` (`id`, `nome_part`, `endereco`, `latitude`, `longitude`, `type`, `status`) VALUES
+(1012, 'Ricardo Geraldo', 'R. Corumbá, 224 - Carlos Prates', -19.9150295, -43.9596977, NULL, 4),
+(1011, 'Joao Batista', 'Rua Brasil 104', -22.7455845, -45.1327324, NULL, 3),
+(1010, 'Ana Claudia ', 'Rua do Catete, 200', -22.9254646, -43.1766167, NULL, 2),
+(1009, 'Amanda Pereira', 'Rua Irlanda, 20', -16.7167072, -49.3069305, NULL, 2),
+(1007, 'Marcelo Shama', 'Rua Luiz Silveira Soares, 108 - Encantada', -28.0606689, -48.6789703, NULL, 3),
+(1008, 'Marcos da Silva', 'Rua Santa Clara , 100 , Copacabana', -22.9703426, -43.1876640, NULL, 4);
 
 -- --------------------------------------------------------
 
@@ -167,7 +184,10 @@ INSERT INTO `mensagens_trans` (`id`, `id_trans`, `id_part`, `id_part_dest`, `men
 (175, 63, 26, 14, 'oi Ricardo, ta precisando de ator?', '2021-12-09 16:15:48', 'nec'),
 (176, 58, 26, 33, 'vamos fechar então.', '2021-12-10 17:59:48', 'of'),
 (177, 63, 26, 14, 'blz', '2021-12-10 18:05:05', 'nec'),
-(178, 62, 26, 14, 'está por ai?', '2022-01-11 21:56:16', 'of');
+(178, 62, 26, 14, 'está por ai?', '2022-01-11 21:56:16', 'of'),
+(179, 62, 14, 26, 'vamos finalizar então ok?', '2022-01-22 21:50:21', 'nec'),
+(180, 64, 26, 38, 'oi Shama vamos trocar feijão por terapia quantica ?', '2022-01-28 21:29:50', 'tr'),
+(181, 64, 26, 38, 'oi Shama', '2022-01-29 20:35:47', 'tr');
 
 -- --------------------------------------------------------
 
@@ -197,18 +217,22 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 CREATE TABLE `moedas` (
   `id` int(11) NOT NULL,
   `desc_moeda` varchar(255) NOT NULL,
-  `obs` text NOT NULL
+  `obs` text NOT NULL,
+  `id_part` int(11) DEFAULT NULL,
+  `id_rede` int(11) DEFAULT NULL,
+  `dt_inclusao` date DEFAULT NULL,
+  `status` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Extraindo dados da tabela `moedas`
 --
 
-INSERT INTO `moedas` (`id`, `desc_moeda`, `obs`) VALUES
-(1, 'Troca', ''),
-(2, 'Doação', ''),
-(3, 'Moeda A', ''),
-(4, 'Moeda B', '');
+INSERT INTO `moedas` (`id`, `desc_moeda`, `obs`, `id_part`, `id_rede`, `dt_inclusao`, `status`) VALUES
+(1, 'Troca', '', NULL, NULL, NULL, 0),
+(2, 'Doação', '', NULL, NULL, NULL, 0),
+(3, 'Moeda A', '', NULL, NULL, NULL, 0),
+(4, 'Moeda B', '', NULL, NULL, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -231,7 +255,14 @@ CREATE TABLE `moedas_part` (
 
 INSERT INTO `moedas_part` (`id`, `id_part`, `id_moeda`, `id_trans`, `quant_moeda`, `data`) VALUES
 (5, 26, 3, 40, 50, '2021-12-03'),
-(6, 14, 3, 40, -50, '2021-11-22');
+(6, 14, 3, 40, -50, '2021-11-22'),
+(7, 26, 3, 58, 100, '2022-01-20'),
+(8, 14, 3, 63, 1, '2022-01-24'),
+(9, 26, 2, 62, 1, '2022-01-22'),
+(10, 14, 2, 62, -1, '2022-01-22'),
+(11, 26, 3, 63, -1, '2022-01-24'),
+(12, 14, 4, 63, 1, '2022-01-24'),
+(13, 26, 4, 63, -1, '2022-01-24');
 
 -- --------------------------------------------------------
 
@@ -283,13 +314,13 @@ CREATE TABLE `necessidades_part` (
 --
 
 INSERT INTO `necessidades_part` (`id`, `id_nec`, `id_part`, `data`, `quant`, `obs`, `ranking`, `imagem`, `status`) VALUES
-(1, 1, 33, '2021-08-05', 5, 'Necessito de pessoas com aptidões em culinaria, chefes de cozinha, doceiras, pizzaiolos,comida árabe.', NULL, NULL, 3),
-(2, 2, 26, '2021-08-16', 1, 'Bioconstrutor para fazer casas de adobe.', NULL, NULL, 0),
+(1, 1, 33, '2021-08-05', 5, 'Necessito de pessoas com aptidões em culinaria, chefes de cozinha, doceiras, pizzaiolos,comida árabe.', NULL, NULL, 2),
+(2, 2, 26, '2021-08-16', 1, 'Bioconstrutor para fazer casas de adobe.', NULL, NULL, 1),
 (3, 3, 14, '2021-08-19', 1, 'Desenvolvedor de sistemas de banco de dados.', NULL, NULL, 2),
 (4, 1, 27, '2021-08-23', 1, 'Preciso de cozinheiro vegano com urgencia.', NULL, NULL, 1),
 (5, 4, 24, '2021-08-23', 1, 'Preciso de um profissional de permacultura para criar um sitio ecologico para futuramente virar uma ecovila.', NULL, NULL, 2),
 (6, 5, 27, '2021-09-07', 1, 'Jardineira Waldorf trabalho de manhã na escola Jardim Michaelis, Rio de Janeiro.', NULL, NULL, 0),
-(7, 6, 26, '2021-09-15', 1, 'Preciso de um ator para um filme que estou fazendo sobre ecovilas.', NULL, NULL, 2),
+(7, 6, 26, '2021-09-15', 1, 'Preciso de um ator para um filme que estou fazendo sobre ecovilas.', NULL, NULL, 4),
 (8, 7, 5, '2021-11-24', 5, 'Preciso de musicos para montar uma banda. Guitarrista, baterista, vocalista, tecladista e arranjador.', NULL, NULL, 1);
 
 -- --------------------------------------------------------
@@ -328,20 +359,6 @@ INSERT INTO `ofertas` (`id`, `descricao`, `status`, `id_cat`, `id_unid`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura stand-in para vista `ofertas_1`
--- (Veja abaixo para a view atual)
---
-CREATE TABLE `ofertas_1` (
-`id` int(11)
-,`descricao` varchar(255)
-,`status` tinyint(1)
-,`id_cat` int(11)
-,`id_unid` int(11)
-);
-
--- --------------------------------------------------------
-
---
 -- Estrutura da tabela `ofertas_part`
 --
 
@@ -364,36 +381,18 @@ CREATE TABLE `ofertas_part` (
 INSERT INTO `ofertas_part` (`id`, `id_of`, `id_part`, `data`, `quant`, `obs`, `ranking`, `imagem`, `status`) VALUES
 (3, 4, 26, '2021-07-29', 1, 'Analista de Sistemas php', 1, '', 0),
 (5, 5, 26, '2021-07-29', 1, 'Aplicação de Reiki a distancia.', 1, '', 0),
-(6, 3, 26, '2021-07-27', 5, 'sapateiro', 0, NULL, 0),
-(7, 2, 26, '2021-08-04', 2, 'Aulas de Pintura e artes em geral.', 0, NULL, 0),
-(8, 6, 24, '2021-08-04', 1, 'Psicologia infantil', 0, NULL, 0),
+(6, 3, 26, '2021-07-27', 5, 'sapateiro', 0, NULL, 1),
+(7, 2, 26, '2021-08-04', 2, 'Aulas de Pintura e artes em geral.', 0, NULL, 2),
+(8, 6, 24, '2021-08-04', 1, 'Psicologia infantil', 0, NULL, 1),
 (9, 7, 33, '2021-08-13', 1, 'Bioconstrutor capacitado em inumeras tecnicas como : Adobe, Pau-a-pique , Super-Adobe, Bambu, entre outros.', NULL, NULL, 0),
-(10, 1, 26, '2021-08-23', 1, 'Cozinha vegetariana e vegana. Sou bom mesmo. :-)', NULL, NULL, 0),
+(10, 1, 26, '2021-08-23', 1, 'Cozinha vegetariana e vegana. Sou bom mesmo. :-)', NULL, NULL, 2),
 (11, 10, 27, '2021-09-07', 1, 'Aulas de Shantala para gestantes. Horario a combinar.', NULL, NULL, 0),
-(12, 11, 14, '2021-09-15', 1, 'Sou ator de Hollywood famoso e bem requisitado. Ofereço meus talentos para filmes sobre regeneração global.', NULL, NULL, 2),
-(13, 12, 26, '2021-09-15', 2, 'ofereço companhia para bate papos e passeios, para quem se sentir solitário e quiser compartilhar suas experiencias de vida. Horario a combinar.', NULL, NULL, 1),
-(14, 9, 26, '2021-10-01', 2, 'tenho dois kilos de feijão para doar.', NULL, NULL, 3),
+(12, 11, 14, '2021-09-15', 1, 'Sou ator de Hollywood famoso e bem requisitado. Ofereço meus talentos para filmes sobre regeneração global.', NULL, NULL, 4),
+(13, 12, 26, '2021-09-15', 2, 'ofereço companhia para bate papos e passeios, para quem se sentir solitário e quiser compartilhar suas experiencias de vida. Horario a combinar.', NULL, NULL, 3),
+(14, 9, 26, '2021-10-01', 2, 'tenho dois kilos de feijão para doar.', NULL, NULL, 2),
 (15, 7, 26, '2021-10-01', 1, 'faço casas bem legais', NULL, NULL, 2),
-(16, 13, 38, '2021-10-27', 1, 'é muito bom', NULL, NULL, 0),
+(16, 13, 38, '2021-10-27', 1, 'é muito bom', NULL, NULL, 2),
 (17, 7, 38, '2021-10-27', 1, 'permacultor', NULL, NULL, 0);
-
--- --------------------------------------------------------
-
---
--- Estrutura stand-in para vista `ofertas_part_1`
--- (Veja abaixo para a view atual)
---
-CREATE TABLE `ofertas_part_1` (
-`id` int(11)
-,`id_of` int(11)
-,`id_part` int(11)
-,`data` date
-,`quant` float
-,`obs` text
-,`ranking` int(11)
-,`imagem` varchar(255)
-,`status` tinyint(1)
-);
 
 -- --------------------------------------------------------
 
@@ -432,7 +431,7 @@ INSERT INTO `participantes` (`id`, `nome_part`, `endereco`, `cidade`, `cep`, `es
 (6, 'Manoel Audaz', 'R. Antônio José Filho, 136 - Vila Isabel', 'Três Rios', '25811-180', 'RJ', 'Brasil', 'manoel@gmail.com', '', '', -22.1055679, -43.1898193, NULL, 0, NULL, '2021-05-15 23:14:11', '2021-05-16 00:03:15'),
 (7, 'Marcelo ', 'Rua Santo Dumont, 305', 'Resende', '12500', 'RJ', 'Brasil', 'marcelo@gmail.com', '123457890', '', -22.4755020, -44.4638138, NULL, 0, NULL, '2021-05-16 00:01:56', '2021-05-25 22:16:02'),
 (12, 'Joaquim Visconde', 'R. Oliveira Rocha, 28 - Jardim Botânico', 'Rio de Janeiro', '22461-070', 'RJ', 'Brasil', 'joaquim@gmail.com', '', '', -22.9616661, -43.2162437, NULL, 0, NULL, '2021-05-17 20:56:32', '2021-05-17 21:24:53'),
-(14, 'Ricardo Geraldo', 'R. Corumbá, 224 - Carlos Prates', 'Belo Horizonte', '30710-280', 'MG', 'Brasil', 'Ricardo@gmail.com', '$2y$10$aLYl2AYsNqFURLBwoy.H1e.tazHY4EYkESgtsbH8iBRcTU9CnQvMe', 'John Cool_1631045109.jpg', -19.9150295, -43.9596977, NULL, 0, NULL, '2021-05-26 17:24:06', '2021-09-15 17:09:50'),
+(14, 'Ricardo Geraldo', 'R. Corumbá, 224 - Carlos Prates', 'Belo Horizonte', '30710-280', 'MG', 'Brasil', 'Ricardo@gmail.com', '$2y$10$zHe1uQDUzY7ccT.QcWx12e0QG0GRTt/VN72Iv3IwmdgkXwk.h2Ljm', 'John Cool_1631045109.jpg', -19.9150295, -43.9596977, NULL, 0, NULL, '2021-05-26 17:24:06', '2021-09-15 17:09:50'),
 (16, 'Tatiana Silva', 'Rua Almeida Godinho, Lagoa, 1000 ', 'Rio de Janeiro', '22471-140', 'RJ', 'Brasil', 'tatiana@gmail.com', '$2y$10$V.xOOrc/.AHNsNs1urUK1eJeK3gZchsWOtch/D2Q1IxS8Sur6/nta', '', -22.9663811, -43.2026558, NULL, 0, NULL, '2021-05-26 17:34:13', '2021-05-26 17:34:13'),
 (22, 'Gustavo Alfredo', 'Rua Coronel Moreira Cesar 30,Icarai', 'Niteroi', '24230-060', 'RJ', 'Brasil', 'gustavo@gmail.com', '$2y$10$BLjpzKmMfZbU24VD.sRVxOV.KSDqXOKUxVD6MfkATv.uMO7o6GUSK', '', -22.9104176, -43.1069756, NULL, 0, NULL, '2021-05-28 21:50:25', '2021-05-28 21:50:25'),
 (24, 'Amanda Pereira', 'Rua Irlanda, 20', 'Goiania', '68552', 'GO', 'Brasil', 'amandinha@gmail.com', '$2y$10$rOMseaROi3kuX1UQ2E1RXunH4dCls1piOvN7Cw2Y80izyjB12Rzg2', 'Amanda Pereira_1638986834.jpg', -16.7167072, -49.3069305, NULL, 0, NULL, '2021-05-29 21:54:05', '2021-12-08 21:07:14'),
@@ -446,58 +445,6 @@ INSERT INTO `participantes` (`id`, `nome_part`, `endereco`, `cidade`, `cep`, `es
 (34, 'Paulo Lima', 'Av Cleo Bernardes', 'Santarém', '68005-970', 'PA', 'Brasil', 'paulolima@gmail.com', '$2y$10$byvBcMp6okSBzqwhLqmCeOqbW4jKgPIQrzY1DM9rqAiyt8u2jyTqm', NULL, -2.4424975, -54.7033043, NULL, 0, NULL, '2021-09-07 23:14:18', '2021-09-07 23:39:34'),
 (35, 'João da Silva', 'Av Nossa Senhora de Copacabana, 1000 , Copacabana', 'Rio de Janeiro', '21000', 'RJ', 'Brasil', 'joaodasilva@gmail.com', '$2y$10$W/EMGsDS8ZFgMVaKbDH93u17qS.mngZkKWWw3V7lR.xsQYh35P89S', 'João da Silva_1635273324.jpg', -22.9770336, -43.1906853, NULL, 0, NULL, '2021-10-26 21:27:55', '2021-10-26 21:35:24'),
 (38, 'Marcelo Shama', 'Rua Luiz Silveira Soares, 108 - Encantada', 'Garopaba', '88495-000', 'SC', 'Brasil', 'marceloshama@gmail.com', '$2y$10$vicG.yStiLkiMf97gCdV.OEuaq9a2AlnPjCvB0rollBVaUupfh6lW', 'Marcelo Shama_1635348782.jpg', -28.0606689, -48.6789703, NULL, 0, NULL, '2021-10-27 18:32:34', '2021-10-27 18:33:02');
-
--- --------------------------------------------------------
-
---
--- Estrutura stand-in para vista `participantes_1`
--- (Veja abaixo para a view atual)
---
-CREATE TABLE `participantes_1` (
-`id` int(11)
-,`nome_part` varchar(100)
-,`endereco` varchar(255)
-,`cidade` varchar(100)
-,`cep` varchar(20)
-,`estado` varchar(2)
-,`pais` varchar(50)
-,`email` varchar(255)
-,`senha` varchar(255)
-,`imagem` varchar(255)
-,`latitude` float(10,7)
-,`longitude` float(10,7)
-,`timezone` varchar(255)
-,`ranking` bigint(20)
-,`id_tipo_acesso` int(11)
-,`created_at` timestamp
-,`updated_at` timestamp
-);
-
--- --------------------------------------------------------
-
---
--- Estrutura stand-in para vista `participantes_2`
--- (Veja abaixo para a view atual)
---
-CREATE TABLE `participantes_2` (
-`id` int(11)
-,`nome_part` varchar(100)
-,`endereco` varchar(255)
-,`cidade` varchar(100)
-,`cep` varchar(20)
-,`estado` varchar(2)
-,`pais` varchar(50)
-,`email` varchar(255)
-,`senha` varchar(255)
-,`imagem` varchar(255)
-,`latitude` float(10,7)
-,`longitude` float(10,7)
-,`timezone` varchar(255)
-,`ranking` bigint(20)
-,`id_tipo_acesso` int(11)
-,`created_at` timestamp
-,`updated_at` timestamp
-);
 
 -- --------------------------------------------------------
 
@@ -681,12 +628,13 @@ CREATE TABLE `transacoes` (
 --
 
 INSERT INTO `transacoes` (`id`, `id_nec_part`, `id_of_part`, `id_of_tr_part`, `id_st_trans`, `quant_moeda`, `id_moeda`, `quant_of`, `quant_of_tr`, `quant_nec`, `data_inic`, `data_final_nec_part`, `data_final_of_part`, `data_final_of_tr_part`) VALUES
-(58, 1, 14, 0, 3, 100, 3, 2, 0, 0, '2021-12-08 15:41:00', NULL, '2021-12-10 15:03:16', NULL),
+(58, 1, 14, 0, 4, 100, 3, 2, 0, 2, '2021-12-08 15:41:00', '2022-01-20 18:19:12', '2022-01-20 18:21:25', NULL),
 (59, 5, 15, 0, 2, 0, NULL, 0, 0, 0, '2021-12-08 18:08:24', NULL, NULL, NULL),
 (60, 4, 14, 0, 2, 0, NULL, 0, 0, 0, '2021-12-09 12:52:27', NULL, NULL, NULL),
-(61, 8, 13, 0, 2, 0, NULL, 0, 0, 0, '2021-12-09 12:55:06', NULL, NULL, NULL),
-(62, 3, 15, 0, 2, 0, NULL, 0, 0, 0, '2021-12-09 13:15:07', NULL, NULL, NULL),
-(63, 7, 12, 0, 2, 0, NULL, 0, 0, 0, '2021-12-09 13:15:48', NULL, NULL, NULL);
+(61, 8, 13, 0, 3, 1, 2, 2, 0, 0, '2021-12-09 12:55:06', NULL, '2022-01-25 18:32:53', NULL),
+(62, 3, 15, 0, 4, 1, 2, 1, 0, 1, '2021-12-09 13:15:07', '2022-01-22 18:49:46', '2022-01-22 18:48:13', NULL),
+(63, 7, 12, 0, 4, 1, 4, 1, 0, 1, '2021-12-09 13:15:48', '2022-01-24 22:50:40', '2022-01-22 18:57:11', NULL),
+(64, 0, 16, 14, 3, 1, 1, 1, 2, 0, '2022-01-28 18:29:50', NULL, NULL, '2022-01-28 18:29:59');
 
 -- --------------------------------------------------------
 
@@ -728,62 +676,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `senha`, `created_at`, `updated_at`) VALUES
-(378, 'ricardo@gmail.com', '$2y$10$1X8Yu9wsHJ/2ZEfdQXI3w.UOf5bCsEPLGx2XaXl4drJhX4IdtCkBC', NULL, NULL),
-(425, 'Lsantac@gmail.com', '$2y$10$IjmjO7D8fO/CSZIuRB3ECeIrTk158tv.Skc3YW2rrejyuXdDAmmnW', NULL, NULL);
-
--- --------------------------------------------------------
-
---
--- Estrutura para vista `categorias_1`
---
-DROP TABLE IF EXISTS `categorias_1`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `categorias_1`  AS SELECT `categorias`.`id` AS `id`, `categorias`.`descricao` AS `descricao`, `categorias`.`status` AS `status` FROM `categorias` ;
-
--- --------------------------------------------------------
-
---
--- Estrutura para vista `categorias_2`
---
-DROP TABLE IF EXISTS `categorias_2`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `categorias_2`  AS SELECT `categorias`.`id` AS `id`, `categorias`.`descricao` AS `descricao`, `categorias`.`status` AS `status` FROM `categorias` ;
-
--- --------------------------------------------------------
-
---
--- Estrutura para vista `ofertas_1`
---
-DROP TABLE IF EXISTS `ofertas_1`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `ofertas_1`  AS SELECT `ofertas`.`id` AS `id`, `ofertas`.`descricao` AS `descricao`, `ofertas`.`status` AS `status`, `ofertas`.`id_cat` AS `id_cat`, `ofertas`.`id_unid` AS `id_unid` FROM `ofertas` ;
-
--- --------------------------------------------------------
-
---
--- Estrutura para vista `ofertas_part_1`
---
-DROP TABLE IF EXISTS `ofertas_part_1`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `ofertas_part_1`  AS SELECT `ofertas_part`.`id` AS `id`, `ofertas_part`.`id_of` AS `id_of`, `ofertas_part`.`id_part` AS `id_part`, `ofertas_part`.`data` AS `data`, `ofertas_part`.`quant` AS `quant`, `ofertas_part`.`obs` AS `obs`, `ofertas_part`.`ranking` AS `ranking`, `ofertas_part`.`imagem` AS `imagem`, `ofertas_part`.`status` AS `status` FROM `ofertas_part` ;
-
--- --------------------------------------------------------
-
---
--- Estrutura para vista `participantes_1`
---
-DROP TABLE IF EXISTS `participantes_1`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `participantes_1`  AS SELECT `participantes`.`id` AS `id`, `participantes`.`nome_part` AS `nome_part`, `participantes`.`endereco` AS `endereco`, `participantes`.`cidade` AS `cidade`, `participantes`.`cep` AS `cep`, `participantes`.`estado` AS `estado`, `participantes`.`pais` AS `pais`, `participantes`.`email` AS `email`, `participantes`.`senha` AS `senha`, `participantes`.`imagem` AS `imagem`, `participantes`.`latitude` AS `latitude`, `participantes`.`longitude` AS `longitude`, `participantes`.`timezone` AS `timezone`, `participantes`.`ranking` AS `ranking`, `participantes`.`id_tipo_acesso` AS `id_tipo_acesso`, `participantes`.`created_at` AS `created_at`, `participantes`.`updated_at` AS `updated_at` FROM `participantes` ;
-
--- --------------------------------------------------------
-
---
--- Estrutura para vista `participantes_2`
---
-DROP TABLE IF EXISTS `participantes_2`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `participantes_2`  AS SELECT `participantes`.`id` AS `id`, `participantes`.`nome_part` AS `nome_part`, `participantes`.`endereco` AS `endereco`, `participantes`.`cidade` AS `cidade`, `participantes`.`cep` AS `cep`, `participantes`.`estado` AS `estado`, `participantes`.`pais` AS `pais`, `participantes`.`email` AS `email`, `participantes`.`senha` AS `senha`, `participantes`.`imagem` AS `imagem`, `participantes`.`latitude` AS `latitude`, `participantes`.`longitude` AS `longitude`, `participantes`.`timezone` AS `timezone`, `participantes`.`ranking` AS `ranking`, `participantes`.`id_tipo_acesso` AS `id_tipo_acesso`, `participantes`.`created_at` AS `created_at`, `participantes`.`updated_at` AS `updated_at` FROM `participantes` ;
+(476, 'Lsantac@gmail.com', '$2y$10$F2wBYI629/ejoYvvp3munuYqtrK4YZ8dipILDwMB3Gah8GZ4e9RIm', NULL, NULL);
 
 --
 -- Índices para tabelas despejadas
@@ -795,7 +688,10 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 ALTER TABLE `categorias`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `descricao` (`descricao`),
-  ADD KEY `status` (`status`);
+  ADD KEY `status` (`status`),
+  ADD KEY `id_part` (`id_part`),
+  ADD KEY `id_rede` (`id_rede`),
+  ADD KEY `dt_inclusao` (`dt_inclusao`);
 
 --
 -- Índices para tabela `eventos`
@@ -823,6 +719,18 @@ ALTER TABLE `markers`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Índices para tabela `markers_nec`
+--
+ALTER TABLE `markers_nec`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Índices para tabela `markers_of`
+--
+ALTER TABLE `markers_of`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Índices para tabela `mensagens_trans`
 --
 ALTER TABLE `mensagens_trans`
@@ -844,7 +752,11 @@ ALTER TABLE `migrations`
 --
 ALTER TABLE `moedas`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `desc_moeda` (`desc_moeda`);
+  ADD UNIQUE KEY `desc_moeda` (`desc_moeda`),
+  ADD KEY `id_part` (`id_part`),
+  ADD KEY `id_rede` (`id_rede`),
+  ADD KEY `dt_inclusao` (`dt_inclusao`),
+  ADD KEY `status` (`status`);
 
 --
 -- Índices para tabela `moedas_part`
@@ -1033,13 +945,25 @@ ALTER TABLE `eventos_part`
 -- AUTO_INCREMENT de tabela `markers`
 --
 ALTER TABLE `markers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=831;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=979;
+
+--
+-- AUTO_INCREMENT de tabela `markers_nec`
+--
+ALTER TABLE `markers_nec`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=266;
+
+--
+-- AUTO_INCREMENT de tabela `markers_of`
+--
+ALTER TABLE `markers_of`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1013;
 
 --
 -- AUTO_INCREMENT de tabela `mensagens_trans`
 --
 ALTER TABLE `mensagens_trans`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=179;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=182;
 
 --
 -- AUTO_INCREMENT de tabela `migrations`
@@ -1057,7 +981,7 @@ ALTER TABLE `moedas`
 -- AUTO_INCREMENT de tabela `moedas_part`
 --
 ALTER TABLE `moedas_part`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de tabela `necessidades`
@@ -1141,7 +1065,7 @@ ALTER TABLE `tipos_acessos`
 -- AUTO_INCREMENT de tabela `transacoes`
 --
 ALTER TABLE `transacoes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 
 --
 -- AUTO_INCREMENT de tabela `unidades`
@@ -1153,7 +1077,7 @@ ALTER TABLE `unidades`
 -- AUTO_INCREMENT de tabela `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=445;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=488;
 
 --
 -- Restrições para despejos de tabelas
