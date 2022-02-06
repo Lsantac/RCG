@@ -9,6 +9,7 @@ use App\Http\Controllers\NecessidadesController;
 use App\Http\Controllers\TransacoesController;
 use App\Http\Controllers\UserAuthController;
 use App\Http\Controllers\IniciaController;
+use App\Http\Controllers\CategoriasController;
 
 /*
 |--------------------------------------------------------------------------
@@ -97,6 +98,12 @@ Route::delete('/deleta_rede_part/{id}',  [RedesController::class,'deleta_rede_pa
 Route::get('/redes_part/{id}',  [RedesController::class,'show_redes'])->name('procura_redes_part');
 Route::post('incluir_redes_part',  [RedesController::class,'incluir_redes_part'])->name('incluir_redes_part');
 Route::post('nova_rede',  [RedesController::class,'nova_rede'])->name('nova_rede');
+
+/*Categorias*/
+Route::get('/consulta_categorias',  [CategoriasController::class,'query_categorias'])->name('consulta_categorias')->middleware('islogged');
+Route::get('/categorias',  [CategoriasController::class,'show_categorias'])->name('show_categorias')->middleware('islogged');
+Route::delete('/deleta_categoria/{id}',  [CategoriasController::class,'deleta_categoria'])->name('deleta_categoria');
+Route::post('nova_categoria',  [CategoriasController::class,'nova_categoria'])->name('nova_categoria');
 
 /*Mapas*/
 Route::post('/mostramapa/{id}',[mapsController::class,'query_mapa'])->name('query_mapa')->middleware('islogged');

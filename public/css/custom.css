@@ -153,6 +153,11 @@
     background-color: rgb(7, 88, 4);
 }
 
+.btn-categoria {
+    color: white;
+    background-color: rgba(11, 64, 94, 0.767);
+}
+
 .btn-mapa {
     color: black;
     background-color: rgb(243, 187, 2);
@@ -202,6 +207,10 @@
 
 .texto-oferta {
     color: rgb(3, 110, 8);
+}
+
+.texto-categoria {
+    color: rgba(11, 64, 94, 0.767);
 }
 
 .texto-troca {

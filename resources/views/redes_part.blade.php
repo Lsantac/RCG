@@ -4,8 +4,8 @@
 
 <div class="container-fluid">
 
-    <h2>Redes do Participante</h2> 
-    <h5>{{$part->nome_part}}</h5> 
+    <h2 style="color:darkviolet">Redes do Participante</h2> 
+    <h5 class="texto-participante">{{$part->nome_part}}</h5> 
     <br>
 
     <div class='results'>

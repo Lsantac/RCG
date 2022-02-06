@@ -57,12 +57,14 @@
                   <li><a style="color: red;"  class="dropdown-item" href="{{route('auth.resetpass')}}">Resetar Senha</a></li>
                   @endif
 
-                  <li><a class="dropdown-item" href="/alterar_participantes/{{Session('id_logado')}}">Alterar Perfil</a></li>
-                  <li><a class="dropdown-item" href="#">Mapas</a></li>
-                  <li><a class="dropdown-item" href="#">Configurar Redes</a></li>
-                  <li><a class="dropdown-item" href="#">Categorias</a></li>
-                  <li><a class="dropdown-item" href="#">Unidades</a></li>
-                  <li><a class="dropdown-item" href="#">Moedas</a></li>
+                  @if(Session::get('id_logado') > 0)
+                    <li><a class="dropdown-item" href="/alterar_participantes/{{Session('id_logado')}}">Alterar Perfil</a></li>
+                    <li><a class="dropdown-item" href="#">Mapas</a></li>
+                    <li><a class="dropdown-item" href="#">Configurar Redes</a></li>
+                    <li><a class="dropdown-item" href="categorias">Categorias</a></li>
+                    <li><a class="dropdown-item" href="#">Unidades</a></li>
+                    <li><a class="dropdown-item" href="#">Moedas</a></li>
+                  @endif
                 </ul>
               </div>
               &nbsp&nbsp
