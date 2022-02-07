@@ -158,6 +158,11 @@
     background-color: rgba(11, 64, 94, 0.767);
 }
 
+.btn-moeda {
+    color: white;
+    background-color: rgba(11, 94, 87, 0.767);
+}
+
 .btn-mapa {
     color: black;
     background-color: rgb(243, 187, 2);
@@ -211,6 +216,10 @@
 
 .texto-categoria {
     color: rgba(11, 64, 94, 0.767);
+}
+
+.texto-moeda {
+    color: rgba(11, 94, 80, 0.767);
 }
 
 .texto-troca {

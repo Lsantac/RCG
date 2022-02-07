@@ -10,6 +10,7 @@ use App\Http\Controllers\TransacoesController;
 use App\Http\Controllers\UserAuthController;
 use App\Http\Controllers\IniciaController;
 use App\Http\Controllers\CategoriasController;
+use App\Http\Controllers\MoedasController;
 
 /*
 |--------------------------------------------------------------------------
@@ -104,6 +105,12 @@ Route::get('/consulta_categorias',  [CategoriasController::class,'query_categori
 Route::get('/categorias',  [CategoriasController::class,'show_categorias'])->name('show_categorias')->middleware('islogged');
 Route::delete('/deleta_categoria/{id}',  [CategoriasController::class,'deleta_categoria'])->name('deleta_categoria');
 Route::post('nova_categoria',  [CategoriasController::class,'nova_categoria'])->name('nova_categoria');
+
+/*Moedas*/
+Route::get('/consulta_moedas',  [MoedasController::class,'query_moedas'])->name('consulta_moedas')->middleware('islogged');
+Route::get('/moedas',  [MoedasController::class,'show_moedas'])->name('show_moedas')->middleware('islogged');
+Route::delete('/deleta_moeda/{id}',  [MoedasController::class,'deleta_moeda'])->name('deleta_moeda');
+Route::post('nova_moeda',  [MoedasController::class,'nova_moeda'])->name('nova_moeda');
 
 /*Mapas*/
 Route::post('/mostramapa/{id}',[mapsController::class,'query_mapa'])->name('query_mapa')->middleware('islogged');
