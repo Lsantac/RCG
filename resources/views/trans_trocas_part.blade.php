@@ -33,10 +33,12 @@
                     <td>{{$ofp->desc_cat}}</td>
 
                     <td>
-                      @php
-                          $date = new DateTime($ofp->data);
-                          echo $date->format('d-m-Y');
-                       @endphp
+                      @if($ofp->data)
+                          @php
+                              $date = new DateTime($ofp->data);
+                              echo $date->format('d-m-Y');
+                          @endphp
+                      @endif 
                     </td>
 
                     <td>{{$ofp->quant}}</td>

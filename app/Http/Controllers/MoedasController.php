@@ -17,24 +17,30 @@ class MoedasController extends Controller
 
         $moedas->appends($request->all());     
 
-        /*dd($cats); */
+        /*dd($moedas); */
 
         return view('moedas',['moedas' => $moedas]);
     }
 
     public function query_moedas(Request $request){
-    
-            
-            $request->session()->put('criterio', request('consulta'));
 
-            if(isset($_GET['consulta'])){
-                $moedas = DB::table('moedas')->where(function($query){
-                                                $query->where('desc_moeda','like','%'.request('consulta').'%'); 
-                                                                                                      
-                                              })
-                                              ->orderBy('desc_moeda')
-                                              
-                                              ->paginate(10);
+        $string = request('consulta');
+
+        // split on 1+ whitespace & ignore empty (eg. trailing space)
+        $searchValues = preg_split('/\s+/', $string, -1, PREG_SPLIT_NO_EMPTY);     
+    
+        $request->session()->put('criterio', request('consulta'));
+
+        if(isset($_GET['consulta'])){
+            $moedas = DB::table('moedas')->where(function($query) use ($searchValues){
+                                         foreach ($searchValues as $value) {
+                                                  $query->orwhere('desc_moeda','like','%'.($value).'%') 
+                                                        ->orwhere('obs','like','%'.($value).'%')
+                                                        ->orwhere('dt_criacao','like','%'.($value).'%')
+                                                  ;}                                                 
+                                         })
+                                         ->orderBy('desc_moeda')
+                                         ->paginate(10);
 
             $moedas->appends($request->all());
 
@@ -56,8 +62,8 @@ class MoedasController extends Controller
             $m = DB::table('moedas')->insert([
                 'desc_moeda' => request('desc_moeda'),
                 'obs'=>request('obs'),
-                'id_part_moeda'  => $id_part,
-                'dt_inclusao' => date('Y-m-d H:i:s')
+                'id_part_moeda' => $id_part,
+                'dt_criacao' => date('Y-m-d H:i:s')
             ]);
             if($m){
                 return back()->with('success','Moeda incluida com sucesso!');

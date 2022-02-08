@@ -199,10 +199,12 @@
                     <!--<td class="texto_p">{{$ofp->desc_of}}</td>
                     <td class="texto_p">{{$ofp->desc_cat}}</td>-->
                     <td class="texto_p">
-                      @php
-                          $date = new DateTime($ofp->data);
-                          echo $date->format('d-m-Y');
-                       @endphp
+                      @if($ofp->data)
+                          @php
+                              $date = new DateTime($ofp->data);
+                              echo $date->format('d-m-Y');
+                          @endphp
+                       @endif
                     </td>
                     <td class="texto_p">{{$ofp->quant}}</td>
                     <td class="texto_p">{{$ofp->desc_unid}}</td>

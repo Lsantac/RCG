@@ -193,10 +193,12 @@
                     <!--<td class="texto_p">{{$necp->desc_nec}}</td>
                     <td class="texto_p">{{$necp->desc_cat}}</td>-->
                     <td class="texto_p">
+                      @if($necp->data)
                         @php
                           $date = new DateTime($necp->data);
                           echo $date->format('d-m-Y');
                         @endphp
+                      @endif  
                     </td>
                     <td class="texto_p">{{$necp->quant}}</td>
                     <td class="texto_p">{{$necp->desc_unid}}</td>

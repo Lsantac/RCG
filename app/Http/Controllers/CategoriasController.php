@@ -55,7 +55,7 @@ class CategoriasController extends Controller
             $c = DB::table('categorias')->insert([
                 'descricao' => request('descricao'),
                 'id_part_cat'  => $id_part,
-                'dt_inclusao' => date('Y-m-d H:i:s')
+                'dt_criacao' => date('Y-m-d H:i:s')
             ]);
             if($c){
                 return back()->with('success','Categoria incluida com sucesso!');

@@ -983,6 +983,9 @@ class TransacoesController extends Controller
             /*dd($code);*/
 
             //Atualizar Status Ofertas e Necessidades
+
+            /*dd(request('id_of_part_t'));*/
+
             $ofp = DB::table('ofertas_part')->where('id',request('id_of_part_t'))
                                             ->select('ofertas_part.status');
             if(($disp_qt_of_trans - $QtOf) > 0){
@@ -1001,6 +1004,8 @@ class TransacoesController extends Controller
                }
 
             }
+
+            /*dd(request('id_of_tr_part_t'));*/
             
             $oftrp = DB::table('ofertas_part')->where('id',request('id_of_tr_part_t'))
                                               ->select('ofertas_part.status');

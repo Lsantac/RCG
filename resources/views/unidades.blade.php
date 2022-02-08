@@ -4,7 +4,7 @@
 
 <div class="container">
 
-    <h2 class="texto-moeda">Moedas</h2> 
+    <h2 class="texto-unidade">Unidades</h2> 
     <br>
 
     <div class='results'>
@@ -22,7 +22,7 @@
 
     </div>
 
-    <form class="row g-3" method="GET" action="consulta_moedas">
+    <form class="row g-3" method="GET" action="consulta_unidades">
 
           @csrf
      
@@ -37,24 +37,24 @@
           
           <!-- Button trigger modal -->
           
-          <button type="button" class="btn btn-moeda btn-sm" data-bs-toggle="modal" data-bs-target="#staticBackdropNovaMoeda">
-            Criar Nova Moeda
+          <button type="button" class="btn btn-unidade btn-sm" data-bs-toggle="modal" data-bs-target="#staticBackdropNovaUnidade">
+            Criar Nova Unidade
           </button>
         </div>
         
     </form>
     
 
-    <form action="{{route('nova_moeda')}}" method="post">
+    <form action="{{route('nova_unidade')}}" method="post">
       
       @csrf
 
-    <!-- Modal Criar Nova Moeda -->
-    <div class="modal fade" id="staticBackdropNovaMoeda" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <!-- Modal Criar Nova unidade -->
+    <div class="modal fade" id="staticBackdropNovaUnidade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
       <div class="modal-dialog modal-xl">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="staticBackdropLabel">Criar Nova Moeda</h5>
+            <h5 class="modal-title" id="staticBackdropLabel">Criar Nova Unidade</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           
@@ -62,13 +62,7 @@
                
               <div class="mb-3">
                 <label for="exampleFormControlTextarea1" class="form-label">Descrição</label>
-                <input type="text" class="form-control" id="exampleFormControlTextarea1" rows="3" name="desc_moeda" required>
-                
-              </div>
-
-              <div class="mb-3">
-                <label for="exampleFormControlTextarea2" class="form-label">Observações</label>
-                <textarea class="form-control" id="exampleFormControlTextarea2" rows="3" name="obs" required></textarea>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="descricao" required></textarea>
               </div>
 
           </div>
@@ -84,49 +78,46 @@
 
     <br>
 
-    @if (isset($moedas)) 
+    @if (isset($uns)) 
 
     <table class="table table-sm texto_m">
         <thead>
           <tr>
             <th scope="col">Descrição</th>
-            <th scope="col">Observações</th>
             <th scope="col">Dt Criação</th>
+
             <th>Ações</th>
           </tr>
         </thead>
         <tbody>
-          @if (count($moedas)>0)
+          @if (count($uns)>0)
 
-              @foreach($moedas as $moeda)
+              @foreach($uns as $un)
                 <div>
                   <tr>
                     
-                    <td>{{$moeda->desc_moeda}}</td>
-                    <td>{{$moeda->obs}}</td>
-
+                    <td>{{$un->descricao}}</td>
                     <td>
-                      @if($moeda->dt_criacao)
+                      @if($un->dt_criacao)
                           @php
-                              $date = new DateTime($moeda->dt_criacao);
+                              $date = new DateTime($un->dt_criacao);
                               echo $date->format('d-m-Y');
                           @endphp
                        @endif
                     </td>
-                    
                     <td>
-                      <button class="btn btn-danger btn-sm bi bi-trash" type="button" data-bs-toggle="modal" data-bs-target="#ModalExcluiMoeda-{{$moeda->id}}" >Excluir</button>
+                      <button class="btn btn-danger btn-sm bi bi-trash" type="button" data-bs-toggle="modal" data-bs-target="#ModalExcluiUnidade-{{$un->id}}" >Excluir</button>
 
-                      <form class="" action="/deleta_moeda/{{$moeda->id}}" method="POST">
+                      <form class="" action="/deleta_unidade/{{$un->id}}" method="POST">
                           @csrf
                           @method('DELETE')
                       
                           <!-- Modal -->
-                          <div class="modal fade" id="ModalExcluiMoeda-{{$moeda->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal fade" id="ModalExcluiUnidade-{{$un->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                               <div class="modal-content">
                                 <div class="modal-header">
-                                  <h5 class="modal-title" id="exampleModalLabel">Confirma Exclusão da Moeda "{{$moeda->desc_moeda}}" ?</h5>
+                                  <h5 class="modal-title" id="exampleModalLabel">Confirma Exclusão da Unidade "{{$un->descricao}}" ?</h5>
                                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                
@@ -153,7 +144,7 @@
       </table>
 
       <div class="pagination">
-           {{$moedas->links('layouts.paginationlinks')}}
+           {{$uns->links('layouts.paginationlinks')}}
            
       </div>
 

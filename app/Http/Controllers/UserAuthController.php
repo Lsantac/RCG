@@ -20,9 +20,9 @@ class UserAuthController extends Controller
 {
     function login(StoreUserRequest $request){
 
-        /*if(session()->has('email')){
+        if(session()->has('email')){
             return redirect('/')->with('fail','Já existe um participante logado nessa maquina!');
-        }else{*/
+        }else{
 
                 $part = DB::table('participantes')->where('email','=',request('email'))->first();
                 
@@ -63,7 +63,7 @@ class UserAuthController extends Controller
                          return redirect('/')->with('fail','Senha inválida!');
                     }
 
-                /*}*/
+                }
         }
 
     }

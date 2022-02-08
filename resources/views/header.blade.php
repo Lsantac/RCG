@@ -55,15 +55,15 @@
 
                   @if(Session::get('id_tipo_acesso_logado') == 1)
                      <li><a style="color: red;"  class="dropdown-item" href="{{route('auth.resetpass')}}">Resetar Senha</a></li>
-                     <li><a class="dropdown-item" href="#">Unidades</a></li>
+                     <li><a class="dropdown-item" href="/unidades">Unidades</a></li>
                   @endif
 
                   @if(Session::get('id_logado') > 0)
                     <li><a class="dropdown-item" href="/alterar_participantes/{{Session('id_logado')}}">Alterar Perfil</a></li>
                     <!--<li><a class="dropdown-item" href="#">Mapas</a></li>-->
                     <!--<li><a class="dropdown-item" href="#">Configurar Redes</a></li>-->
-                    <li><a class="dropdown-item" href="categorias">Categorias</a></li>
-                    <li><a class="dropdown-item" href="moedas">Moedas</a></li>
+                    <li><a class="dropdown-item" href="/categorias">Categorias</a></li>
+                    <li><a class="dropdown-item" href="/moedas">Moedas</a></li>
                   @endif
                 </ul>
               </div>

@@ -11,6 +11,7 @@ use App\Http\Controllers\UserAuthController;
 use App\Http\Controllers\IniciaController;
 use App\Http\Controllers\CategoriasController;
 use App\Http\Controllers\MoedasController;
+use App\Http\Controllers\UnidadesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -105,6 +106,12 @@ Route::get('/consulta_categorias',  [CategoriasController::class,'query_categori
 Route::get('/categorias',  [CategoriasController::class,'show_categorias'])->name('show_categorias')->middleware('islogged');
 Route::delete('/deleta_categoria/{id}',  [CategoriasController::class,'deleta_categoria'])->name('deleta_categoria');
 Route::post('nova_categoria',  [CategoriasController::class,'nova_categoria'])->name('nova_categoria');
+
+/*Unidades*/
+Route::get('/consulta_unidades',  [UnidadesController::class,'query_unidades'])->name('consulta_unidades')->middleware('islogged');
+Route::get('/unidades',  [UnidadesController::class,'show_unidades'])->name('show_unidades')->middleware('islogged');
+Route::delete('/deleta_unidade/{id}',  [UnidadesController::class,'deleta_unidade'])->name('deleta_unidade');
+Route::post('nova_unidade',  [UnidadesController::class,'nova_unidade'])->name('nova_unidade');
 
 /*Moedas*/
 Route::get('/consulta_moedas',  [MoedasController::class,'query_moedas'])->name('consulta_moedas')->middleware('islogged');
