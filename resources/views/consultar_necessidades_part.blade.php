@@ -226,10 +226,22 @@
                                           {{App\Http\Controllers\NecessidadesController::verifica_sugestoes_nec(Session::get('id_logado'),$necp->desc_cat,$necp->desc_nec,$necp->obs,1)}}
                                           </span>
                               </button>
-                              <input value="1" name="filtra_id_logado" type="hidden">
+                              <input value="true" name="filtra_id_logado" type="hidden">
                               <input value="{{$part->id}}" name="id_part_t" type="hidden">
                               <input value="{{$necp->id_nec_part}}" name="id_nec_part_t" type="hidden">
                         </form>
+                      @else
+                          <form action="{{route('trans_necessidades_part')}}" method="get">
+                            @csrf 
+                            <button type="submit" class="btn btn-sm btn-sugestoes bi-arrow-down-up texto_p">
+                              Sugestões <span class="badge sugestao-of-nec">
+                                        {{App\Http\Controllers\NecessidadesController::verifica_sugestoes_nec(Session::get('id_logado'),$necp->desc_cat,$necp->desc_nec,$necp->obs,0)}}
+                                        </span>
+                            </button>
+                            <input value="0" name="filtra_id_logado" type="hidden">
+                            <input value="{{$part->id}}" name="id_part_t" type="hidden">
+                            <input value="{{$necp->id_nec_part}}" name="id_nec_part_t" type="hidden">
+                          </form>
                       @endif  
                     </td>
                     

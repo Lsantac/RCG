@@ -185,7 +185,9 @@ class TransacoesController extends Controller
             $filtra_id_logado = request('filtra_id_logado');
             $id_part = request('id_part_t');
             $id_nec_part = request('id_nec_part_t');
-            $id_logado = request('id_logado');
+            $id_logado = Session('id_logado');
+
+            /*dd($filtra_id_logado,$id_logado);*/
 
             $part = DB::table('participantes')->where('id',$id_part)
                                               ->select('participantes.*')
@@ -208,13 +210,17 @@ class TransacoesController extends Controller
             $string = $necps[0]->desc_cat." ".$necps[0]->desc_nec." ".$necps[0]->obs;
            
             // split on 1+ whitespace & ignore empty (eg. trailing space)
-            $searchValues = preg_split('/\s+/', $string, -1, PREG_SPLIT_NO_EMPTY);   
+            $searchValues = preg_split('/\s+/', $string, -1, PREG_SPLIT_NO_EMPTY); 
+            
+            /*dd($searchValues);*/
             
             $ofps = DB::table('ofertas_part')->where(function($verif) use ($filtra_id_logado,$id_part,$id_logado){
                                                 if($filtra_id_logado){
-                                                $verif->where('ofertas_part.id_part',"<>",$id_part);
+                                                    $verif->where('ofertas_part.id_part',"<>",$id_part);
+                                                    
                                                 }else{
-                                                $verif->where('ofertas_part.id_part',"=",$id_logado);
+                                                    $verif->where('ofertas_part.id_part',"=",$id_logado);
+                                                    /*dd('= id_logado');*/
                                                 }                                               
                                                 })
             
@@ -250,7 +256,8 @@ class TransacoesController extends Controller
                       ->orderBy('distancia','asc')
                       ->paginate(10);
     
-          
+          /*dd($ofps);*/
+
           $ofps->appends($request->all());   
 
           $nome_part_cab = "";

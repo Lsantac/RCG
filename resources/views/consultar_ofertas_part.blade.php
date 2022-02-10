@@ -225,29 +225,47 @@
                     @endif   
 
                     <td>
-                        <form action="{{route('trans_ofertas_part')}}" method="get">
-                              @csrf 
-                              <button type="submit" class="btn btn-sm btn-sugestoes bi-arrow-down-up texto_p">
-                                Sugestões <span class="badge sugestao-of-nec">
-                                          @if(Session::get('id_logado') == $part->id)
-                                             {{App\Http\Controllers\OfertasController::verifica_sugestoes_of(Session::get('id_logado'),$ofp->desc_cat,$ofp->desc_of,$ofp->obs,1)}}
-                                          @else
-                                             {{App\Http\Controllers\OfertasController::verifica_sugestoes_of(Session::get('id_logado'),$ofp->desc_cat,$ofp->desc_of,$ofp->obs,0)}}
-                                          @endif
-                                          </span>
-                              </button>
-                              
-                              @if(Session::get('id_logado') == $part->id)
-                                 <input value="1" name="filtra_id_logado" type="hidden">
-                                 <input value="{{$part->id}}" name="id_part_t" type="hidden">   
-                                 <input value="" name="nome_part_cab" type="hidden">   
-                              @else
-                                 <input value="0" name="filtra_id_logado" type="hidden">
-                                 <input value="{{Session::get('id_logado')}}" name="id_part_t" type="hidden">
-                                 <input value="{{$part->nome_part}}" name="nome_part_cab" type="hidden">   
-                              @endif 
-                              <input value="{{$ofp->id_of_part}}" name="id_of_part_t" type="hidden">
-                        </form>
+                        @if(Session::get('id_logado') == $part->id)  
+
+                            <form action="{{route('trans_ofertas_part')}}" method="get">
+                                  @csrf 
+                                  <button type="submit" class="btn btn-sm btn-sugestoes bi-arrow-down-up texto_p">
+                                    Sugestões <span class="badge sugestao-of-nec">
+                                                  @if(Session::get('id_logado') == $part->id)
+                                                    {{App\Http\Controllers\OfertasController::verifica_sugestoes_of(Session::get('id_logado'),$ofp->desc_cat,$ofp->desc_of,$ofp->obs,true)}}
+                                                  @else
+                                                    <!--{{App\Http\Controllers\OfertasController::verifica_sugestoes_of(Session::get('id_logado'),$ofp->desc_cat,$ofp->desc_of,$ofp->obs,false)}}-->
+                                                  @endif
+                                              </span>
+                                  </button>
+                                  
+                                  @if(Session::get('id_logado') == $part->id)
+                                    <input value="true" name="filtra_id_logado" type="hidden">
+                                    <input value="{{$part->id}}" name="id_part_t" type="hidden">   
+                                    <input value="" name="nome_part_cab" type="hidden">   
+                                  @else
+                                    <input value="false" name="filtra_id_logado" type="hidden">
+                                    <input value="{{Session::get('id_logado')}}" name="id_part_t" type="hidden">
+                                    <input value="{{$part->nome_part}}" name="nome_part_cab" type="hidden">   
+                                  @endif 
+                                  <input value="{{$ofp->id_of_part}}" name="id_of_part_t" type="hidden">
+                            </form>
+                        @else
+
+                            <form action="{{route('trans_trocas_part')}}" method="get">
+                                  @csrf 
+                                  <input value="{{$ofp->id_part}}" name="id_part_t" type="hidden">
+                                  <input value="{{$ofp->id_of_part}}" name="id_of_part_t" type="hidden">
+                                  <input value="false" name="filtra_id_logado" type="hidden">
+                                  <input value="{{Session::get('id_logado')}}" name="id_logado" type="hidden">
+
+                                  <p><button type="submit" class="btn btn-sm btn-trocar bi-arrow-repeat texto_p">&nbspTrocar</button></p>   
+                            </form>
+
+                        @endif
+
+
+
                     </td>
                     
                     <td>
