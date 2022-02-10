@@ -22,6 +22,29 @@ class MoedasController extends Controller
         return view('moedas',['moedas' => $moedas]);
     }
 
+    public function consulta_saldos($id,Request $request){
+
+        $id_part = $id;
+        $saldos = DB::table('moedas_part')->where('id_part',"=",$id_part)
+
+        ->groupBy('id_moeda','id_part')
+        ->select('id_moeda','id_part')
+        /*->sum('quant_moeda'); */
+        ->get();
+
+        
+
+        /*->join('moedas','moedas_part.id_moeda','=','moedas.id')*/
+        /*->orderBy('desc_moeda')*/
+        /*->paginate(10);*/
+               
+        dd($saldos); 
+
+        $saldos->appends($request->all());     
+
+        return view('consulta_saldos',['saldos' => $saldos]);
+    }
+
     public function query_moedas(Request $request){
 
         $string = request('consulta');

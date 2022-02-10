@@ -118,6 +118,7 @@ Route::get('/consulta_moedas',  [MoedasController::class,'query_moedas'])->name(
 Route::get('/moedas',  [MoedasController::class,'show_moedas'])->name('show_moedas')->middleware('islogged');
 Route::delete('/deleta_moeda/{id}',  [MoedasController::class,'deleta_moeda'])->name('deleta_moeda');
 Route::post('nova_moeda',  [MoedasController::class,'nova_moeda'])->name('nova_moeda');
+Route::get('/consulta_saldos/{id}',  [MoedasController::class,'consulta_saldos'])->name('consulta_saldos')->middleware('islogged');
 
 /*Mapas*/
 Route::post('/mostramapa/{id}',[mapsController::class,'query_mapa'])->name('query_mapa')->middleware('islogged');

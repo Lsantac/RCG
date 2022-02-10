@@ -64,6 +64,7 @@
                     <!--<li><a class="dropdown-item" href="#">Configurar Redes</a></li>-->
                     <li><a class="dropdown-item" href="/categorias">Categorias</a></li>
                     <li><a class="dropdown-item" href="/moedas">Moedas</a></li>
+                    <li><a class="dropdown-item" href="/consulta_saldos/{{Session('id_logado')}}">Consulta Saldos</a></li>
                   @endif
                 </ul>
               </div>
