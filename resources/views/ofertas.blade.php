@@ -56,7 +56,8 @@
             <th scope="col">Quant</th>
             <th scope="col">Unidade</th>
             <th scope="col" colspan="2">Transações</th>
-            <th scope="col" >Status</th>
+            <th scope="col" >Status Of</th>
+            <th scope="col">Status Trans</th>
             <th scope="col" >Local</th>
  
           </tr>
@@ -119,7 +120,6 @@
                                                   {{App\Http\Controllers\OfertasController::verifica_sugestoes_of(Session::get('id_logado'),$ofp->desc_cat,$ofp->desc_of,$ofp->obs,1)}}
                                                   </span>
                                       </button>
-
                                       <input value="1" name="filtra_id_logado" type="hidden">
                                       <input value="{{$ofp->id_part}}" name="id_part_t" type="hidden">
                                       <input value="{{$ofp->id_of_part}}" name="id_of_part_t" type="hidden">
@@ -145,7 +145,48 @@
                             @endif
                         @endif  
                     @endif    
-                    
+
+                    <td>
+                      <div class="row">
+                        <div class="col-1 texto-em-andamento">
+                          <span style="font-size:smaller;">
+                          @php
+                             echo App\Http\Controllers\IniciaController::consulta_status_transacoes_of_anda($ofp->id_of_part)."  "
+                          @endphp  
+                        </span>
+                        </div>
+
+                        <div class="col-2 texto-em-andamento">
+                          <h6 class="bi bi-chat-left-dots-fill"></h6>
+                        </div>
+
+                        <div class="col-1">
+                          <span class="texto-em-andamento" style="font-size:smaller;">
+                          @php
+                             echo App\Http\Controllers\IniciaController::consulta_status_transacoes_of_parc($ofp->id_of_part)."  "
+                          @endphp  
+                        </span>
+                        </div>
+
+                        <div class="col-2 texto-parc-finalizada">
+                          <h6 class="bi bi-check-circle-fill"></h6>
+                        </div>
+
+                        <div class="col-1">
+                          <span class="texto-finalizada" style="font-size:smaller;">
+                          @php
+                             echo App\Http\Controllers\IniciaController::consulta_status_transacoes_of_final($ofp->id_of_part)."  "
+                          @endphp  
+                        </span>
+                        </div>
+
+                        <div class="col-1 texto-finalizada">
+                          <h6 class="bi bi-check-circle-fill"></h6>
+                        </div>
+
+                      </div>
+                    </td>
+
                     <td>
                           <div style="" class="col">
                           @if($ofp->latitude<>null)

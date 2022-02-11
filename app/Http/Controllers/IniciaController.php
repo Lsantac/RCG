@@ -7,6 +7,47 @@ use Illuminate\Support\Facades\DB;
 
 class IniciaController extends Controller
 {
+
+    public static function consulta_status_transacoes_of_anda($id_of_part){
+
+        /*Ofertas com transações em andamento*/
+
+        $num_mens_anda_of = DB::table('transacoes')
+        ->where('transacoes.id_of_part','=',$id_of_part)
+        ->where('transacoes.id_st_trans','=',2)
+        ->count(); 
+
+        return($num_mens_anda_of);
+
+    }
+
+    public static function consulta_status_transacoes_of_parc($id_of_part){
+
+        /*Ofertas com transações parcialmente finalizadas*/
+
+        $num_mens_parc_of = DB::table('transacoes')
+        ->where('transacoes.id_of_part','=',$id_of_part)
+        ->where('transacoes.id_st_trans','=',3)
+        ->count(); 
+
+        return($num_mens_parc_of);
+
+    }
+
+    public static function consulta_status_transacoes_of_final($id_of_part){
+
+        /*Ofertas com transações totalmente finalizadas*/
+
+        $num_mens_final_of = DB::table('transacoes')
+        ->where('transacoes.id_of_part','=',$id_of_part)
+        ->where('transacoes.id_st_trans','=',4)
+        ->count(); 
+
+        return($num_mens_final_of);
+
+    }
+
+
     public function tela_inicial(request $request){
 
            $id_logado = Session('id_logado');

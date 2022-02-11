@@ -4,8 +4,8 @@
 
 <div class="container">
 
-    <h2 class="texto-moeda">Saldos das Moedas do Participante</h2> 
-    <h4 class="texto-moeda">{{Session::get('nome_logado')}}</h4> 
+    <h3 class="texto-moeda">Saldos das Moedas do Participante</h3> 
+    <h5 class="texto-participante">{{Session('nomelogado')}}</h5> 
     <br>
 
     @if (isset($saldos)) 
@@ -15,21 +15,22 @@
           <tr>
             <th scope="col">Moeda</th>
             <th scope="col">Saldo</th>
-            
           </tr>
         </thead>
         <tbody>
           @if (count($saldos)>0)
-
               @foreach($saldos as $sd)
                 <div>
                   <tr>
                     <td>{{$sd->desc_moeda}}</td>
-                    <td>{{$sd->saldo}}</td>
+                    <td>
+                      @php
+                         echo number_format($sd->tot_moeda,2,",",".");
+                      @endphp
+                      
                     </td>
                   </tr>
                 </div> 
-                
               @endforeach
 
           @else
