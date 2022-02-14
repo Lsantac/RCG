@@ -105,38 +105,52 @@
         <label for="estado" class="form-label">Estado</label>
         <select id="estado" value="{{old('estado')}}" name="estado" class="form-select @error('estado') is-invalid @enderror">
             <option selected>{{old('estado')}}</option>
-            <option>SP</option>
-            <option>MG</option>
-            <option>RS</option>
-            <option>BA</option>
-            <option>PR</option>
-            <option>SC</option>
-            <option>GO</option>
-            <option>MT</option>
+            <option>AC</option>
+            <option>AL</option>
             <option>AM</option>
-            <option>RN</option>
+            <option>AP</option>
+            <option>BA</option>
+            <option>CE</option>
+            <option>DF</option>
+            <option>ES</option>
+            <option>GO</option>
+            <option>MA</option>
+            <option>MG</option>
+            <option>MS</option>
+            <option>MT</option>
             <option>PA</option>
+            <option>PB</option>
+            <option>PE</option>
+            <option>PI</option>
+            <option>PR</option>
+            <option>RJ</option>
+            <option>RN</option>
             <option>RO</option>
             <option>RR</option>
-            <option>RJ</option>
-            <option>PB</option>
-
+            <option>RS</option>
+            <option>SC</option>
+            <option>SE</option>
+            <option>SP</option>
+            <option>TO</option>
         </select>
-        @error('estado')
-        <div class="invalid-feedback">
-            {{$message}}
-        </div>      
-        @enderror
+
+            @error('estado')
+            <div class="invalid-feedback">
+                {{$message}}
+            </div>      
+            @enderror
         </div>
+
         <br>
+
         <div class="col-md-2">
-        <label for="cep" class="form-label">Cep</label>
-        <input type="text" value="{{old('cep')}}" class="form-control @error('cep') is-invalid @enderror" id="cep" name="cep">
-        @error('cep')
-        <div class="invalid-feedback">
-            {{$message}}
-        </div>      
-        @enderror
+            <label for="cep" class="form-label">Cep</label>
+            <input type="text" value="{{old('cep')}}" class="form-control @error('cep') is-invalid @enderror" id="cep" name="cep">
+            @error('cep')
+            <div class="invalid-feedback">
+                {{$message}}
+            </div>      
+            @enderror
         </div>
 
         <div class="col-md-2">
