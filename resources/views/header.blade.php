@@ -22,13 +22,13 @@
             </li>
            
             <li class="nav-item">
-              <a class="nav-link" href="/redes">Redes</a>
+              <a class="nav-link" href="">Redes</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/projetos">Projetos</a>
+              <a class="nav-link" href="">Projetos</a>
             </li> 
             <li class="nav-item">
-              <a class="nav-link" href="/eventos">Eventos</a>
+              <a class="nav-link" href="">Eventos</a>
             </li> 
           </ul>
           <form class="d-flex" action="{{route('auth.logout')}}" method="POST">

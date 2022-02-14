@@ -56,8 +56,8 @@
             <th scope="col">Quant</th>
             <th scope="col">Unidade</th>
             <th scope="col" colspan="2">Transações</th>
-            <th scope="col" >Status Of</th>
-            <th scope="col">Status Trans</th>
+            <!-- <th scope="col" >Status Of</th>-->
+            <th scope="col">Status</th>
             <th scope="col" >Local</th>
  
           </tr>
@@ -132,7 +132,7 @@
                     </td>    
                     <td></td>
 
-                    @if($ofp->status == 2)
+                  <!--  @if($ofp->status == 2)
                         <td class="texto_p texto-em-andamento"><h4 class="bi bi-chat-left-dots-fill"></h4></td>
                     @else
                         @if(($ofp->status == 3))
@@ -144,14 +144,14 @@
                                 <td class="texto_p"></td>
                             @endif
                         @endif  
-                    @endif    
+                    @endif    -->
 
                     <td>
                       <div class="row">
                         <div class="col-1 texto-em-andamento">
-                          <span style="font-size:smaller;">
+                          <span>
                           @php
-                             echo App\Http\Controllers\IniciaController::consulta_status_transacoes_of_anda($ofp->id_of_part)."  "
+                             echo App\Http\Controllers\IniciaController::consulta_status_transacoes_of_anda($ofp->id_of_part)
                           @endphp  
                         </span>
                         </div>
@@ -160,10 +160,10 @@
                           <h6 class="bi bi-chat-left-dots-fill"></h6>
                         </div>
 
-                        <div class="col-1">
-                          <span class="texto-em-andamento" style="font-size:smaller;">
+                        <div class="col-1 texto-parc-finalizada">
+                          <span >
                           @php
-                             echo App\Http\Controllers\IniciaController::consulta_status_transacoes_of_parc($ofp->id_of_part)."  "
+                             echo App\Http\Controllers\IniciaController::consulta_status_transacoes_of_parc($ofp->id_of_part)
                           @endphp  
                         </span>
                         </div>
@@ -172,10 +172,10 @@
                           <h6 class="bi bi-check-circle-fill"></h6>
                         </div>
 
-                        <div class="col-1">
-                          <span class="texto-finalizada" style="font-size:smaller;">
+                        <div class="col-1 texto-finalizada">
+                          <span >
                           @php
-                             echo App\Http\Controllers\IniciaController::consulta_status_transacoes_of_final($ofp->id_of_part)."  "
+                             echo App\Http\Controllers\IniciaController::consulta_status_transacoes_of_final($ofp->id_of_part)
                           @endphp  
                         </span>
                         </div>

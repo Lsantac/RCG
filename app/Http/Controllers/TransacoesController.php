@@ -13,6 +13,33 @@ use Illuminate\View\View;
 class TransacoesController extends Controller
 {
    
+    public function altera_mensagem(request $request){
+
+       $mensagem = request('mensagem');
+       $id = request('id');
+
+       $msg = DB::table('mensagens_trans')
+       ->where('id',$id)
+       ->update(['mensagem'=>$mensagem])
+       ;
+                                          
+       return back();                                          
+
+    }
+
+    public function deleta_mensagem(request $request){
+
+      $id = request('id');
+
+      $msg = DB::table('mensagens_trans')
+      ->where('id',$id)
+      ->delete()
+      ;
+                                         
+      return back();                                          
+
+   }
+
     public function trans_ofertas_part(request $request){
     
         /*$id_part = $id;*/
@@ -674,7 +701,7 @@ class TransacoesController extends Controller
                                             ->join('moedas','transacoes.id_moeda','=','moedas.id') 
                                             ->get();
 
-           /*dd($trans);                                          */
+           /*dd($trans);*/
                                             
            $soma_qt_of_trans = DB::table('transacoes')->where('transacoes.id_of_part',$id_of_part)
                                                       ->sum('transacoes.quant_of');                                                          

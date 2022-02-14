@@ -87,11 +87,17 @@ Route::post('altera_necessidade_part',  [NecessidadesController::class,'altera_n
 Route::get('/trans_ofertas_part',  [TransacoesController::class,'trans_ofertas_part'])->name('trans_ofertas_part')->middleware('islogged');
 Route::get('/trans_trocas_part',  [TransacoesController::class,'trans_trocas_part'])->name('trans_trocas_part')->middleware('islogged');
 Route::get('/trans_necessidades_part',  [TransacoesController::class,'trans_necessidades_part'])->name('trans_necessidades_part')->middleware('islogged');
+
 Route::get('/consultar_trans_nec_part',  [TransacoesController::class,'consultar_trans_nec_part'])->name('consultar_trans_nec_part')->middleware('islogged');
 Route::get('/consultar_trans_of_part',  [TransacoesController::class,'consultar_trans_of_part'])->name('consultar_trans_of_part')->middleware('islogged');
 Route::get('/consultar_trans_trocas_part',  [TransacoesController::class,'consultar_trans_trocas_part'])->name('consultar_trans_trocas_part')->middleware('islogged');
+
 Route::get('/mens_transacoes_part',  [TransacoesController::class,'mens_transacoes_part'])->name('mens_transacoes_part')->middleware('islogged');
+
 Route::get('/incluir_mens_trans',  [TransacoesController::class,'incluir_mens_trans'])->name('incluir_mensagem')->middleware('islogged');
+Route::post('/altera_mensagem',  [TransacoesController::class,'altera_mensagem'])->name('altera_mensagem')->middleware('islogged');
+Route::delete('/deleta_mensagem',  [TransacoesController::class,'deleta_mensagem'])->name('deleta_mensagem')->middleware('islogged');
+
 Route::get('/finalizar_trans',  [TransacoesController::class,'finalizar_trans'])->name('finalizar_transacao')->middleware('islogged');
 
 /*Redes*/

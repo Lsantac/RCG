@@ -47,6 +47,45 @@ class IniciaController extends Controller
 
     }
 
+    public static function consulta_status_transacoes_nec_anda($id_nec_part){
+
+        /*Necessidades com transações em andamento*/
+
+        $num_mens_anda_nec = DB::table('transacoes')
+        ->where('transacoes.id_nec_part','=',$id_nec_part)
+        ->where('transacoes.id_st_trans','=',2)
+        ->count(); 
+
+        return($num_mens_anda_nec);
+
+    }
+
+    public static function consulta_status_transacoes_nec_parc($id_nec_part){
+
+        /*Necessidades com transações parcialmente finalizadas*/
+
+        $num_mens_parc_nec = DB::table('transacoes')
+        ->where('transacoes.id_nec_part','=',$id_nec_part)
+        ->where('transacoes.id_st_trans','=',3)
+        ->count(); 
+
+        return($num_mens_parc_nec);
+
+    }
+
+    public static function consulta_status_transacoes_nec_final($id_nec_part){
+
+        /*Necessidades com transações totlamente finalizadas*/
+
+        $num_mens_final_nec = DB::table('transacoes')
+        ->where('transacoes.id_nec_part','=',$id_nec_part)
+        ->where('transacoes.id_st_trans','=',4)
+        ->count(); 
+
+        return($num_mens_final_nec);
+
+    }
+
 
     public function tela_inicial(request $request){
 

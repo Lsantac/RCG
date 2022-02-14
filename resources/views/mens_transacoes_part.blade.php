@@ -32,7 +32,7 @@
             <br>
             <div class="row">
                 <div class="col-3">
-                  <a href="#" class="btn btn-primary btn-sm">Ver Perfil</a>    
+                  <a href="/consultar_participante/{{$ofps->id_part}}" class="btn btn-primary btn-sm">Ver Perfil</a>    
                 </div>
                 <div class="col-9">
                   <div style="color:rgb(13, 122, 13); text-decoration:double;" class="card-text texto_m"> 
@@ -74,7 +74,7 @@
               <br>
               <div class="row">
                 <div class="col-3">
-                  <a href="#" class="btn btn-primary btn-sm">Ver Perfil</a>    
+                  <a href="/consultar_participante/{{$necps->id_part}}" class="btn btn-primary btn-sm">Ver Perfil</a>    
                 </div>
                 <div class="col-9">
                   <div style="color:rgb(122, 66, 13); text-decoration:double;" class="card-text texto_m"> 
@@ -109,7 +109,7 @@
               <br>
               <div class="row">
                 <div class="col-3">
-                  <a href="#" class="btn btn-primary btn-sm">Ver Perfil</a>    
+                  <a href="/consultar_participante/{{$oftrps->id_part}}" class="btn btn-primary btn-sm">Ver Perfil</a>    
                 </div>
                 <div class="col-9">
                   <div style="color:rgb(13, 122, 107); text-decoration:double;" class="card-text texto_m"> 
@@ -400,6 +400,96 @@
 
                     <td class="texto_m ">{{$msg->nome_part_mens}}</td>
                     <td class="texto_m ">{{$msg->mensagem}}</td>
+
+                    <td>
+                        @if(Session::get('id_logado') == $msg->id_part)  
+                           @if(isset($trans[0])) 
+                               @if(($trans[0]->data_final_of_part == null) AND ($trans[0]->data_final_nec_part == NULL) AND ($trans[0]->data_final_of_tr_part == NULL))
+                                   <button class="btn btn-editar btn-sm bi bi-pencil texto_p" type="submit" data-bs-toggle="modal" data-bs-target="#EditarMensagem-{{$msg->id}}">
+                                    Editar</button>
+                               @endif 
+                           @else     
+                              <button class="btn btn-editar btn-sm bi bi-pencil texto_p" type="submit" data-bs-toggle="modal" data-bs-target="#EditarMensagem-{{$msg->id}}">
+                               Editar</button>
+                           @endif
+
+                        @endif  
+
+                        <form action="{{route('altera_mensagem')}}" method="post">
+                          @csrf 
+                            <!-- Modal Alterar Mensagem-->
+                            <div class="modal fade" id="EditarMensagem-{{$msg->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                              <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h5 class="modal-title" id="staticBackdropLabel">Alterar mensagem de : <span class="texto-participante">{{$msg->nome_part_mens}}</span> </h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                  </div>
+                                        <div class="modal-body">
+                                          <div class="mb-3">
+                                            <input value="{{$msg->id}}" name="id" type="hidden">
+                                            
+                                            <label for="mensagem" class="form-label">Mensagem :</label>
+                                            <textarea type="text" class="form-control" id="mensagem" name="mensagem" value="">{{$msg->mensagem}}</textarea>
+                                          </div>
+                                          
+                                      </div>
+                                      <div class="modal-footer">
+                                        <button type="button" class="btn btn-sair" data-bs-dismiss="modal">Sair</button>
+                                        <button type="submit" class="btn btn-primary">Alterar</button>
+                                      </div>
+                                </div>
+                              </div>
+                            </div>
+                          </form>
+                    </td>    
+
+                    <td>
+ 
+                      @if(Session::get('id_logado') == $msg->id_part)  
+                           @if(isset($trans[0])) 
+                               @if(($trans[0]->data_final_of_part == null) AND ($trans[0]->data_final_nec_part == NULL) AND ($trans[0]->data_final_of_tr_part == NULL))
+                                   <button class="btn btn-danger btn-sm bi bi-trash texto_p" type="button" data-bs-toggle="modal" data-bs-target="#ModalExcluiMensagem-{{$msg->id}}" >
+                                   Excluir</button>
+                               @endif 
+                           @else     
+                              <button class="btn btn-danger btn-sm bi bi-trash texto_p" type="button" data-bs-toggle="modal" data-bs-target="#ModalExcluiMensagem-{{$msg->id}}" >
+                              Excluir</button>
+                           @endif
+
+                        @endif  
+
+                      <form class="" action="{{route('deleta_mensagem')}}" method="POST">
+                            @csrf
+                            @method('DELETE')
+
+                            <input value="{{$msg->id}}" name="id" type="hidden">
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="ModalExcluiMensagem-{{$msg->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                              <div class="modal-dialog">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                       <h5 class="modal-title" id="staticBackdropLabel">Confirma Exclusão da mensagem de : <span class="texto-participante">{{$msg->nome_part_mens}}</span> ?</h5>
+                                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                  </div>
+                                  <div class="modal-body">
+                                    <div class="mb-3">
+                                      <input value="{{$msg->id}}" name="id" type="hidden">
+                                      
+                                      <label for="mensagem" class="form-label">Mensagem :</label>
+                                      <textarea readonly="readonly" type="text" class="form-control" id="mensagem" name="mensagem" value="">{{$msg->mensagem}}</textarea>
+                                    </div>
+                                  
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Sair</button>
+                                    <button type="submit" class="btn btn-danger">Excluir</button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                      </form>
+                  </td>
 
                 </tr>
               @endforeach

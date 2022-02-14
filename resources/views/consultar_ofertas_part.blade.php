@@ -210,7 +210,7 @@
                     <td class="texto_p">{{$ofp->desc_unid}}</td>
                    
                     
-                    @if($ofp->status == 2)
+                  <!--  @if($ofp->status == 2)
                         <td class="texto_p texto-em-andamento"><h4 class="bi bi-chat-left-dots-fill"></h4></td>
                     @else
                         @if(($ofp->status == 3))
@@ -222,7 +222,9 @@
                                 <td class="texto_p"></td>
                             @endif
                         @endif  
-                    @endif   
+                    @endif -->
+
+                    
 
                     <td>
                         @if(Session::get('id_logado') == $part->id)  
@@ -266,6 +268,47 @@
 
 
 
+                    </td>
+
+                    <td>
+                      <div class="row">
+                        <div class="col-1 texto-em-andamento">
+                          <span>
+                          @php
+                             echo App\Http\Controllers\IniciaController::consulta_status_transacoes_of_anda($ofp->id_of_part)
+                          @endphp  
+                        </span>
+                        </div>
+
+                        <div class="col-2 texto-em-andamento">
+                          <h6 class="bi bi-chat-left-dots-fill"></h6>
+                        </div>
+
+                        <div class="col-1 texto-parc-finalizada">
+                          <span >
+                          @php
+                             echo App\Http\Controllers\IniciaController::consulta_status_transacoes_of_parc($ofp->id_of_part)
+                          @endphp  
+                        </span>
+                        </div>
+
+                        <div class="col-2 texto-parc-finalizada">
+                          <h6 class="bi bi-check-circle-fill"></h6>
+                        </div>
+
+                        <div class="col-1 texto-finalizada">
+                          <span >
+                          @php
+                             echo App\Http\Controllers\IniciaController::consulta_status_transacoes_of_final($ofp->id_of_part)
+                          @endphp  
+                        </span>
+                        </div>
+
+                        <div class="col-1 texto-finalizada">
+                          <h6 class="bi bi-check-circle-fill"></h6>
+                        </div>
+
+                      </div>
                     </td>
                     
                     <td>

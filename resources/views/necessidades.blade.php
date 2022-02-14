@@ -132,7 +132,7 @@
                     </td>    
                     <td></td>
                     
-                    @if($necp->status == 2)
+                   <!-- @if($necp->status == 2)
                         <td class="texto_p texto-em-andamento"><h4 class="bi bi-chat-left-dots-fill"></h4></td>
                     @else
                         @if(($necp->status == 3))
@@ -144,7 +144,48 @@
                                 <td class="texto_p"></td>
                             @endif
                         @endif  
-                    @endif    
+                    @endif -->
+
+                    <td>
+                      <div class="row">
+                        <div class="col-1 texto-em-andamento">
+                          <span >
+                          @php
+                             echo App\Http\Controllers\IniciaController::consulta_status_transacoes_nec_anda($necp->id_nec_part)
+                          @endphp  
+                        </span>
+                        </div>
+
+                        <div class="col-2 texto-em-andamento">
+                          <h6 class="bi bi-chat-left-dots-fill"></h6>
+                        </div>
+
+                        <div class="col-1 texto-parc-finalizada">
+                          <span >
+                          @php
+                             echo App\Http\Controllers\IniciaController::consulta_status_transacoes_nec_parc($necp->id_nec_part)
+                          @endphp  
+                        </span>
+                        </div>
+
+                        <div class="col-2 texto-parc-finalizada">
+                          <h6 class="bi bi-check-circle-fill"></h6>
+                        </div>
+
+                        <div class="col-1 texto-finalizada">
+                          <span >
+                          @php
+                             echo App\Http\Controllers\IniciaController::consulta_status_transacoes_nec_final($necp->id_nec_part)
+                          @endphp  
+                        </span>
+                        </div>
+
+                        <div class="col-1 texto-finalizada">
+                          <h6 class="bi bi-check-circle-fill"></h6>
+                        </div>
+
+                      </div>
+                    </td>
                     
                     <td>
                           <div style="" class="col">
