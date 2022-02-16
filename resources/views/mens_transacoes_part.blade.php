@@ -305,10 +305,16 @@
                           
                           @csrf
 
+                          @if(($origem == "of"  and $trans[0]->data_final_of_part > 0) or 
+                              ($origem == "nec" and $trans[0]->data_final_nec_part > 0) or 
+                              ($origem == "tr"  and $trans[0]->data_final_of_tr_part > 0)) 
+                                  <button  id="botao_cancelar" type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#cancelar">
+                                    Cancelar
+                                  </button>      
+                          @endif
+                            
                           <!-- Button trigger modal Cancelar -->
-                          <button  id="botao_cancelar" type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#cancelar">
-                            Cancelar
-                          </button>
+                          
 
                           <div class="modal fade" id="cancelar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
@@ -317,10 +323,25 @@
                                   <h5 class="modal-title" id="exampleModalLabel">Cancela confirmação da Transação?</h5>
                                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
+
+                                <div class="modal-body">
+                                  <div class="mb-3">
+                                    <label for="mensagem_motivo" class="form-label">Motivo do cancelamento :</label>
+                                    <textarea class="form-control" id="mensagem_motivo" name="mensagem_motivo" rows="3"></textarea>
+                                  </div>
+                                </div>
                                 
                                 <input value="{{Session('id_logado')}}" name="id_logado" id="id_logado" type="hidden">
                                 <input value="{{$trans[0]->id}}" name="id_trans" id="id_trans" type="hidden">
                                 <input value="{{$origem}}" name="origem" id="origem" type="hidden">
+
+                                <input value="{{$ofps->id_part}}" name="id_part_of" id="id_part_of" type="hidden">
+
+                                @if(isset($oftrps))
+                                   <input value="{{$oftrps->id_part}}" name="id_part_of_tr" id="id_part_of_tr" type="hidden">
+                                @else
+                                   <input value="{{$necps->id_part}}" name="id_part_nec" id="id_part_nec" type="hidden">
+                                @endif
                                 
                                 <div class="modal-footer">
                                   <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Sair</button>
@@ -432,7 +453,12 @@
 
               @foreach($msgs as $msg)
                  
-                 <tr>
+                 @if(!$msg->canc_conf)            
+                    <tr>
+                 @else
+                    <tr style="background-color:rgb(243, 237, 156)">
+                 @endif 
+                 
                     <td class="texto_m">
                       @php
                           $date = new DateTime($msg->data);
@@ -444,7 +470,7 @@
                     <td class="texto_m ">{{$msg->mensagem}}</td>
 
                     <td>
-                        @if(Session::get('id_logado') == $msg->id_part)  
+                        @if(Session::get('id_logado') == $msg->id_part and ($msg->canc_conf == false))  
                            @if(isset($trans[0])) 
                                @if(($trans[0]->data_final_of_part == null) AND ($trans[0]->data_final_nec_part == NULL) AND ($trans[0]->data_final_of_tr_part == NULL))
                                    <button class="btn btn-editar btn-sm bi bi-pencil texto_p" type="submit" data-bs-toggle="modal" data-bs-target="#EditarMensagem-{{$msg->id}}">
@@ -488,7 +514,7 @@
 
                     <td>
  
-                      @if(Session::get('id_logado') == $msg->id_part)  
+                      @if(Session::get('id_logado') == $msg->id_part and ($msg->canc_conf == false))  
                            @if(isset($trans[0])) 
                                @if(($trans[0]->data_final_of_part == null) AND ($trans[0]->data_final_nec_part == NULL) AND ($trans[0]->data_final_of_tr_part == NULL))
                                    <button class="btn btn-danger btn-sm bi bi-trash texto_p" type="button" data-bs-toggle="modal" data-bs-target="#ModalExcluiMensagem-{{$msg->id}}" >
@@ -499,7 +525,7 @@
                               Excluir</button>
                            @endif
 
-                        @endif  
+                      @endif  
 
                       <form class="" action="{{route('deleta_mensagem')}}" method="POST">
                             @csrf

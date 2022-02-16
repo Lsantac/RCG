@@ -15,15 +15,15 @@ class TransacoesController extends Controller
 
    public function cancelar_transacao(request $request){
 
-      $id = request('id_trans');
+      $id_trans = request('id_trans');
       $origem = request('origem');
 
       $trans = DB::table('transacoes')
-      ->where('id',$id)
+      ->where('id',$id_trans)
       ;
 
       $trans_cons = DB::table('transacoes')
-      ->where('id',$id)
+      ->where('id',$id_trans)
       ->first();
 
       /*dd($trans , $trans_cons);*/
@@ -49,7 +49,37 @@ class TransacoesController extends Controller
             if(($trans_cons->data_final_nec_part == null) AND ($trans_cons->data_final_of_part == null) AND ($trans_cons->data_final_of_tr_part == null)){
                $trans->update(['id_st_trans'=>2]);
             }   
-         }         
+         }  
+
+         $id_part_of = request('id_part_of');
+         $id_part_nec = request('id_part_nec');
+         $id_part_of_tr = request('id_part_of_tr');
+         $mensagem_motivo = request('mensagem_motivo');
+
+         /*dd($mensagem_motivo);*/
+
+
+         $id_part_dest = 0;
+            if($origem == "of") {
+               if($id_part_nec > 0){
+                  $id_part_dest = $id_part_nec;
+               }else{
+                  $id_part_dest = $id_part_of_tr;
+               }
+            }else{
+                  $id_part_dest = $id_part_of;
+            }
+         
+         $msgs_i = DB::table('mensagens_trans')->insert([
+            'id_trans' => $id_trans,
+            'id_part' => request('id_logado'), 
+            'id_part_dest' => $id_part_dest, 
+            'mensagem' => "Cancelamento da confirmação. " . $mensagem_motivo,
+            'data' => date('Y-m-d H:i:s'),
+            'of_nec_tr' => $origem,
+            'canc_conf' => true
+            
+      ]);
 
       }
                                   
