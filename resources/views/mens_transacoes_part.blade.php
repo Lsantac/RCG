@@ -241,57 +241,99 @@
                   </div>
                 @endif
 
+                <br>
 
-              <!-- Modal -->
-              <form id='finalizar_transacao'  action="{{route('finalizar_transacao')}}" method="get">
-                
-                @csrf
+                <div class="row">
+                  <div class="col-3">
+                      <!-- Modal -->
+                      <form id='finalizar_transacao'  action="{{route('finalizar_transacao')}}" method="get">
+                        
+                        @csrf
 
-                <!-- Button trigger modal Finalizar -->
-                <button  id="botao_finalizar" onclick="verifica_zeros('{{$origem}}')"  type="button" class="btn btn-finalizar btn-sm" >
-                  Finalizar 
-                </button>
+                        <!-- Button trigger modal Finalizar -->
+                        <button  id="botao_finalizar" onclick="verifica_zeros('{{$origem}}')"  type="button" class="btn btn-finalizar btn-sm" >
+                          Finalizar 
+                        </button>
 
-                <div class="modal fade" id="finalizar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                  <div class="modal-dialog">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Finalizar Transação?</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                      </div>
-                      <div class="modal-body">
-                         Concorda com os termos combinados nas mensagens e nas definições da transação? 
-                         <br>
-                         Para que a transação seja concluida completamente, é preciso que as duas partes confirmem. 
-                      </div>
+                        <div class="modal fade" id="finalizar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Finalizar Transação?</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+                              <div class="modal-body">
+                                Concorda com os termos combinados nas mensagens e nas definições da transação? 
+                                <br>
+                                Para que a transação seja finalizada completamente, é preciso que as duas partes confirmem. 
+                              </div>
 
-                      <input value="{{Session('id_logado')}}" name="id_logado" id="id_logado" type="hidden">
-                      <input value="{{$ofps->id_part}}" name="id_part_of" id="id_part_of" type="hidden">
-                      <input value="{{$ofps->id_of_part}}" name="id_of_part_t" id="id_of_part_t" type="hidden">
+                              <input value="{{Session('id_logado')}}" name="id_logado" id="id_logado" type="hidden">
+                              <input value="{{$ofps->id_part}}" name="id_part_of" id="id_part_of" type="hidden">
+                              <input value="{{$ofps->id_of_part}}" name="id_of_part_t" id="id_of_part_t" type="hidden">
 
-                      <input value="{{$disp_qt_of_trans}}" name="disp_qt_of_trans" id="disp_qt_of_trans" type="hidden">
-                      <input value="{{$disp_qt_of_tr_trans}}" name="disp_qt_of_tr_trans" id="disp_qt_of_tr_trans" type="hidden">
-                      <input value="{{$disp_qt_nec_trans}}" name="disp_qt_nec_trans" id="disp_qt_nec_trans" type="hidden">
+                              <input value="{{$disp_qt_of_trans}}" name="disp_qt_of_trans" id="disp_qt_of_trans" type="hidden">
+                              <input value="{{$disp_qt_of_tr_trans}}" name="disp_qt_of_tr_trans" id="disp_qt_of_tr_trans" type="hidden">
+                              <input value="{{$disp_qt_nec_trans}}" name="disp_qt_nec_trans" id="disp_qt_nec_trans" type="hidden">
 
-                      @if(isset($oftrps))
-                         <input value="{{$oftrps->id_part}}" name="id_part_of_tr" id="id_part_of_tr" type="hidden">
-                         <input value="{{$oftrps->id_of_part}}" name="id_of_tr_part_t" id="id_of_tr_part_t" type="hidden">
-                         <input value="0" name="id_nec_part_t" id="id_nec_part_t" type="hidden">
-                      @else
-                         <input value="{{$necps->id_part}}" name="id_part_nec" id="id_part_nec" type="hidden">
-                         <input value="{{$necps->id_nec_part}}" name="id_nec_part_t" id="id_nec_part_t" type="hidden">
-                         <input value="0" name="id_of_tr_part_t" id="id_of_tr_part_t" type="hidden">
-                      @endif
-                      
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Sair</button>
-                        <button type="submit" class="btn btn-primary">Confirmar</button>
-                      </div>
-                    </div>
+                              @if(isset($oftrps))
+                                <input value="{{$oftrps->id_part}}" name="id_part_of_tr" id="id_part_of_tr" type="hidden">
+                                <input value="{{$oftrps->id_of_part}}" name="id_of_tr_part_t" id="id_of_tr_part_t" type="hidden">
+                                <input value="0" name="id_nec_part_t" id="id_nec_part_t" type="hidden">
+                              @else
+                                <input value="{{$necps->id_part}}" name="id_part_nec" id="id_part_nec" type="hidden">
+                                <input value="{{$necps->id_nec_part}}" name="id_nec_part_t" id="id_nec_part_t" type="hidden">
+                                <input value="0" name="id_of_tr_part_t" id="id_of_tr_part_t" type="hidden">
+                              @endif
+                              
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Sair</button>
+                                <button type="submit" class="btn btn-finalizar">Confirmar</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                      </form>  
+
                   </div>
-                </div>
 
-              </form>  
+                  
+                  <div class="col">
+                        <!-- Modal -->
+                        <form id='cancelar_transacao'  action="{{route('cancelar_transacao')}}" method="get">
+                          
+                          @csrf
+
+                          <!-- Button trigger modal Cancelar -->
+                          <button  id="botao_cancelar" type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#cancelar">
+                            Cancelar
+                          </button>
+
+                          <div class="modal fade" id="cancelar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="exampleModalLabel">Cancela confirmação da Transação?</h5>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                
+                                <input value="{{Session('id_logado')}}" name="id_logado" id="id_logado" type="hidden">
+                                <input value="{{$trans[0]->id}}" name="id_trans" id="id_trans" type="hidden">
+                                <input value="{{$origem}}" name="origem" id="origem" type="hidden">
+                                
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Sair</button>
+                                  <button type="submit" class="btn btn-warning">Cancelar</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                        </form>  
+                  </div>
+              
+                </div>
 
         </div>
       </div>
@@ -435,8 +477,8 @@
                                           
                                       </div>
                                       <div class="modal-footer">
-                                        <button type="button" class="btn btn-sair" data-bs-dismiss="modal">Sair</button>
-                                        <button type="submit" class="btn btn-primary">Alterar</button>
+                                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Sair</button>
+                                        <button type="submit" class="btn btn-editar">Alterar</button>
                                       </div>
                                 </div>
                               </div>
@@ -700,7 +742,6 @@
   }
    
   </script>
-
 
 
 @endsection

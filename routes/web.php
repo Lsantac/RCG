@@ -99,6 +99,7 @@ Route::post('/altera_mensagem',  [TransacoesController::class,'altera_mensagem']
 Route::delete('/deleta_mensagem',  [TransacoesController::class,'deleta_mensagem'])->name('deleta_mensagem')->middleware('islogged');
 
 Route::get('/finalizar_trans',  [TransacoesController::class,'finalizar_trans'])->name('finalizar_transacao')->middleware('islogged');
+Route::get('/cancelar_transacao',  [TransacoesController::class,'cancelar_transacao'])->name('cancelar_transacao')->middleware('islogged');
 
 /*Redes*/
 Route::get('/consulta_redes',  [RedesController::class,'query_redes'])->name('consulta_redes')->middleware('islogged');

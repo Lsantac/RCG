@@ -12,6 +12,50 @@ use Illuminate\View\View;
 
 class TransacoesController extends Controller
 {
+
+   public function cancelar_transacao(request $request){
+
+      $id = request('id_trans');
+      $origem = request('origem');
+
+      $trans = DB::table('transacoes')
+      ->where('id',$id)
+      ;
+
+      $trans_cons = DB::table('transacoes')
+      ->where('id',$id)
+      ->first();
+
+      /*dd($trans , $trans_cons);*/
+
+     /* dd($origem);*/
+      
+      if(isset($trans)){
+         if($origem == "of"){
+            $trans->update(['data_final_of_part'=>null]);
+         }else{
+            if($origem == "nec"){
+               $trans->update(['data_final_nec_part'=>null]);
+            }else{
+                if($origem =="tr"){
+                   $trans->update(['data_final_of_tr_part'=>null]);
+                } 
+            }  
+         }
+
+         if(($trans_cons->data_final_nec_part <> null) OR ($trans_cons->data_final_of_part <> null) OR ($trans_cons->data_final_of_tr_part <> null)){
+            $trans->update(['id_st_trans'=>3]);
+         }else{
+            if(($trans_cons->data_final_nec_part == null) AND ($trans_cons->data_final_of_part == null) AND ($trans_cons->data_final_of_tr_part == null)){
+               $trans->update(['id_st_trans'=>2]);
+            }   
+         }         
+
+      }
+                                  
+      return back();                                          
+
+   }
    
     public function altera_mensagem(request $request){
 

@@ -54,6 +54,28 @@
     height: 90%;
 }
 
+.btn-transacao {
+    color: white;
+    background-color: rgb(81, 0, 156);
+    font-style: italic;
+}
+
+.btn-finalizar {
+    color: white;
+    background-color: rgb(81, 0, 156);
+}
+
+.btn-mapa-geral {
+    color: white;
+    background-color: rgb(100, 48, 24);
+    font-style: italic;
+}
+
+.btn-detalhes {
+    color: purple;
+    background: plum;
+}
+
 .btn-green {
     color: rgb(41, 58, 3);
     background-color: rgb(133, 233, 145);
@@ -144,8 +166,8 @@
 }
 
 .btn-editar {
-    color: white;
-    background-color: rgb(26, 98, 116);
+    color: black;
+    background-color: rgb(248, 104, 8);
 }
 
 .btn-trocar {
@@ -254,28 +276,6 @@
 .tabela-oferta {
     color: rgb(7, 75, 10);
     background-color: white;
-}
-
-.btn-transacao {
-    color: white;
-    background-color: rgb(81, 0, 156);
-    font-style: italic;
-}
-
-.btn-finalizar {
-    color: white;
-    background-color: rgb(81, 0, 156);
-}
-
-.btn-mapa-geral {
-    color: white;
-    background-color: rgb(100, 48, 24);
-    font-style: italic;
-}
-
-.btn-detalhes {
-    color: purple;
-    background: plum;
 }
 
 .red-message {
