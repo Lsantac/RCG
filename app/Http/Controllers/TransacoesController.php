@@ -22,10 +22,6 @@ class TransacoesController extends Controller
       ->where('id',$id_trans)
       ;
 
-      $trans_cons = DB::table('transacoes')
-      ->where('id',$id_trans)
-      ->first();
-
       /*dd($trans , $trans_cons);*/
 
      /* dd($origem);*/
@@ -43,6 +39,12 @@ class TransacoesController extends Controller
             }  
          }
 
+         $trans_cons = DB::table('transacoes')
+         ->where('id',$id_trans)
+         ->first();
+   
+         /*dd($trans_cons->data_final_nec_part,$trans_cons->data_final_of_part,$trans_cons->data_final_of_tr_part);*/
+
          if(($trans_cons->data_final_nec_part <> null) OR ($trans_cons->data_final_of_part <> null) OR ($trans_cons->data_final_of_tr_part <> null)){
             $trans->update(['id_st_trans'=>3]);
          }else{
@@ -57,7 +59,6 @@ class TransacoesController extends Controller
          $mensagem_motivo = request('mensagem_motivo');
 
          /*dd($mensagem_motivo);*/
-
 
          $id_part_dest = 0;
             if($origem == "of") {
@@ -78,11 +79,12 @@ class TransacoesController extends Controller
             'data' => date('Y-m-d H:i:s'),
             'of_nec_tr' => $origem,
             'canc_conf' => true
-            
-      ]);
+         ]);
+
+          
 
       }
-                                  
+                            
       return back();                                          
 
    }
@@ -814,6 +816,7 @@ class TransacoesController extends Controller
               $disp_qt_nec_trans = $necps->quant - round($soma_qt_nec_trans,2); 
               $disp_qt_of_tr_trans = 0;
 
+              
               return view('mens_transacoes_part',['part'  =>$part,
                                                 'ofps'  =>$ofps,
                                                 'necps' =>$necps,

@@ -300,22 +300,22 @@
 
                   
                   <div class="col">
+                    @if(isset($trans[0]))
                         <!-- Modal -->
                         <form id='cancelar_transacao'  action="{{route('cancelar_transacao')}}" method="get">
                           
                           @csrf
-
-                          @if(($origem == "of"  and $trans[0]->data_final_of_part > 0) or 
-                              ($origem == "nec" and $trans[0]->data_final_nec_part > 0) or 
-                              ($origem == "tr"  and $trans[0]->data_final_of_tr_part > 0)) 
-                                  <button  id="botao_cancelar" type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#cancelar">
-                                    Cancelar
-                                  </button>      
-                          @endif
+                          
+                              @if(($origem == "of"  and $trans[0]->data_final_of_part > 0) or 
+                                  ($origem == "nec" and $trans[0]->data_final_nec_part > 0) or 
+                                  ($origem == "tr"  and $trans[0]->data_final_of_tr_part > 0)) 
+                                      <button  id="botao_cancelar" type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#cancelar">
+                                        Cancelar
+                                      </button>      
+                              @endif 
                             
                           <!-- Button trigger modal Cancelar -->
-                          
-
+                     
                           <div class="modal fade" id="cancelar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                               <div class="modal-content">
@@ -337,6 +337,10 @@
 
                                 <input value="{{$ofps->id_part}}" name="id_part_of" id="id_part_of" type="hidden">
 
+                                <input value="{{$disp_qt_of_trans}}" name="disp_qt_of_trans" id="disp_qt_of_trans" type="hidden">
+                                <input value="{{$disp_qt_of_tr_trans}}" name="disp_qt_of_tr_trans" id="disp_qt_of_tr_trans" type="hidden">
+                                <input value="{{$disp_qt_nec_trans}}" name="disp_qt_nec_trans" id="disp_qt_nec_trans" type="hidden">
+
                                 @if(isset($oftrps))
                                    <input value="{{$oftrps->id_part}}" name="id_part_of_tr" id="id_part_of_tr" type="hidden">
                                 @else
@@ -345,13 +349,16 @@
                                 
                                 <div class="modal-footer">
                                   <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Sair</button>
-                                  <button type="submit" class="btn btn-warning">Cancelar</button>
+                                  <button type="submit" onclick="pega_valor_qtof()"   class="btn btn-warning">Cancelar</button>
                                 </div>
                               </div>
                             </div>
                           </div>
 
-                        </form>  
+                        </form> 
+
+                     @endif     
+
                   </div>
               
                 </div>
@@ -712,6 +719,13 @@
     }
     
   }
+</script>
+
+<script>
+     function pega_valor_qtof(){
+       document.getElementById("QtOf_canc").value = document.getElementById("QtOf").value;
+     }
+
 </script>
 
 <script>
