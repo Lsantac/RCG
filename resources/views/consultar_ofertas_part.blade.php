@@ -23,6 +23,12 @@
           </div>
       @endif
 
+      @if(Session::get('fail type'))
+          <div class="alert alert-danger">
+              {{Session::get('fail type')}}
+          </div>
+      @endif
+
     </div>
 
     <form class="row g-3" method="get" action="{{route('consultar_ofertas_part')}}">
@@ -84,7 +90,7 @@
 
                           <div class="col-10" style="align-self: flex-end;">
                              <label for="sel_image" class="form-label texto_m">Selecionar imagem</label>
-                              <input  onchange ="mostra_imagem(this)" class="form-control form-control-sm @error('sel_imagem') is-invalid @enderror" name="sel_imagem" id="sel_imagem" type="file" accept=".jpg,.png,.jpeg">
+                              <input  onchange ="mostra_imagem(this)" class="form-control form-control-sm @error('sel_image') is-invalid @enderror" name="sel_image" id="sel_image" type="file" accept=".jpg,.png,.jpeg">
                               <label class="form-label red-message">{{Session::get('fail image')}}</label>
                           </div>
                          

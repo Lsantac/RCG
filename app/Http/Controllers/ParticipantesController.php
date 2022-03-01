@@ -185,6 +185,7 @@ class ParticipantesController extends Controller
 
               $part->ranking = 0;
 
+              
               if($request->hasFile('part_image')){
                 $file = $request->file('part_image');
                 $extension = $file->getClientOriginalExtension();
@@ -194,7 +195,7 @@ class ParticipantesController extends Controller
                   return back()->with('fail image','tamanho maior do que o permitido!');
                 }
                 
-                if ($extension == 'jpg' or $extension == 'jpeg'){
+                if ($extension == 'jpg' or $extension == 'jpeg' or $extension == 'png' ){
 
                     //Deleta a imagem anterior antes de incluir a nova.
                     $file_name_ant = $part->imagem;

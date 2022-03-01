@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\participantes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Http\Requests\StoreAlterPartRequest;
 
 class ofertasController extends Controller
 {
@@ -269,7 +270,7 @@ class ofertasController extends Controller
       return view('consultar_ofertas_part',['part' => $participante,'ofps'=>$ofps,'ofs'=>$ofs,'cats'=>$cats,'unids'=>$unids]);
     }
 
-  public function incluir_ofertas_part(Request $request) {
+  public function incluir_ofertas_part(StoreAlterPartRequest $request) {
 
        
    /* $ofps = DB::table('ofertas_part')->where('id_of',request('id_of'))
@@ -278,25 +279,35 @@ class ofertasController extends Controller
                     
     /*if(!$ofps){*/
 
-          if($request->hasFile('sel_imagem')){
-              $file = $request->file('sel_imagem');
+          /*dd($request->hasFile('sel_image'));*/
+
+          if($request->hasFile('sel_image')){
+              $file = $request->file('sel_image');
               $extension = $file->getClientOriginalExtension();
-              $filename = request('id_of').$extension;
-              $file->move('uploads/of_img/',$filename);
+
+              
+              if($extension == 'jpg' or $extension == 'jpeg' or $extension == 'png'){
+                 $filename = request('id_of').$extension;
+                 $file->move('uploads/of_img/',$filename);
+
+                 
+              
+              }else{
+                  return back()->with('fail type','Tipo de imagem não permitido!');
+              }
               
            }
 
-        $ofps_i = DB::table('ofertas_part')->insert([
-            'id_of' => request('id_of'),
-            'id_part' => request('id_part'),
-            'data' => request('data_of'),
-            'quant' => request('quant_of'),
-            'obs' => request('obs_of'),
-            'imagem'=>$filename
-        ]);
- 
-
-        return back()->with('success','Oferta incluida com sucesso para o participante!');
+           $ofps_i = DB::table('ofertas_part')->insert([
+                            'id_of' => request('id_of'),
+                            'id_part' => request('id_part'),
+                            'data' => request('data_of'),
+                            'quant' => request('quant_of'),
+                            'obs' => request('obs_of'),
+                            'imagem'=>$filename
+                        ]);
+                        
+            return back()->with('success','Oferta incluida com sucesso para o participante!');
 
     /*}else{
         return back()->with('fail','Oferta já existente para esse participante!');
