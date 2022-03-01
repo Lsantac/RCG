@@ -68,6 +68,29 @@
                 </div>
 
                       <div class="modal-body">
+
+                        <div class="row">
+                          <div class="col-2">
+                                <figure class="figure">
+
+                                  @if(!@empty($ofs->imagem))
+                                      <img src="/uploads/of_img/{{$ofs->imagem}}" class="imagem-of-nec">
+                                  @else
+                                      <img src="/img/logo.jpg" class="figure-img img-fluid imagem-of-nec img-thumbnail ">
+                                  @endif 
+                          
+                               </figure>
+                          </div>
+
+                          <div class="col-10" style="align-self: flex-end;">
+                             <label for="of_image" class="form-label texto_m">Selecionar imagem</label>
+                              <input class="form-control form-control-sm @error('of_imagem') is-invalid @enderror" name="of_imagem" id="of_imagem" type="file" accept=".jpg,.png,.jpeg">
+                              <label class="form-label red-message">{{Session::get('fail image')}}</label>
+                          </div>
+                         
+                        </div>
+
+
                         <div class="mb-3">
 
                           <input value="{{$part->id}}" name="id_part" type="hidden">

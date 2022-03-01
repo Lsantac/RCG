@@ -256,7 +256,7 @@ class ofertasController extends Controller
                                     ->join('unidades','ofertas.id_unid','=','unidades.id')
                                     
                                     ->select('participantes.id as id_part','participantes.latitude','participantes.longitude',
-                                    'participantes.nome_part','ofertas_part.id as id_of_part',
+                                    'participantes.nome_part','ofertas_part.id as id_of_part','ofertas_part.imagem',
                                     'ofertas_part.id_of','ofertas_part.quant','ofertas_part.data','ofertas_part.obs',
                                     'ofertas.descricao as desc_of','ofertas_part.status',
                                     'categorias.descricao as desc_cat','unidades.descricao as desc_unid')
@@ -272,24 +272,35 @@ class ofertasController extends Controller
   public function incluir_ofertas_part(Request $request) {
 
        
-    $ofps = DB::table('ofertas_part')->where('id_of',request('id_of'))
+   /* $ofps = DB::table('ofertas_part')->where('id_of',request('id_of'))
                                      ->where('id_part',request('id_part'))
-                                     ->first();
+                                     ->first();*/
                     
-    if(!$ofps){
+    /*if(!$ofps){*/
+
+          if($request->hasFile('of_imagem')){
+              $file = $request->file('of_imagem');
+              $extension = $file->getClientOriginalExtension();
+              $filename = request('id_of').$extension;
+              $file->move('uploads/of_img/',$filename);
+              
+           }
+
         $ofps_i = DB::table('ofertas_part')->insert([
             'id_of' => request('id_of'),
             'id_part' => request('id_part'),
             'data' => request('data_of'),
             'quant' => request('quant_of'),
-            'obs' => request('obs_of')
-
+            'obs' => request('obs_of'),
+            'imagem'=>$filename
         ]);
+ $a=1;
+
         return back()->with('success','Oferta incluida com sucesso para o participante!');
 
-    }else{
+    /*}else{
         return back()->with('fail','Oferta já existente para esse participante!');
-    }
+    }*/
 
                   
   }  

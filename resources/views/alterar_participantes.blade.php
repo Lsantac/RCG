@@ -10,23 +10,6 @@
 
         <h2 class="texto-participante">Alterar Participante</h2> 
 
-        <figure class="figure">
-
-            @if(!@empty($participante->imagem))
-                <img src="/uploads/participantes/{{Session('imagem_logado')}}" class="imagem-part rounded-pill">
-            @else
-                <img src="/img/logo.jpg" class="figure-img img-fluid rounded-pill imagem-part img-thumbnail ">
-            @endif 
-
-            <!--<img src="/uploads/participantes/{{$participante->imagem}}" class="figure-img img-fluid rounded imagem-part img-thumbnail" alt="...">-->
-        </figure>
-
-        <div class="row">
-            <label for="part_image" class="form-label">Alterar imagem</label>
-            <input class="form-control form-control-sm @error('part_image') is-invalid @enderror" name="part_image" id="part_image" type="file" accept=".jpg,.png,.jpeg">
-            <label class="form-label red-message">{{Session::get('fail image')}}</label>
-        </div>
-
         <div class='results'>
             @if(Session::get('success'))
                 <div class="alert alert-success">
@@ -41,6 +24,22 @@
             @endif
 
        </div>
+
+       <figure class="figure">
+
+            @if(!@empty($participante->imagem))
+                <img src="/uploads/participantes/{{Session('imagem_logado')}}" class="imagem-part rounded-pill">
+            @else
+                <img src="/img/logo.jpg" class="figure-img img-fluid rounded-pill imagem-part img-thumbnail ">
+            @endif 
+    
+        </figure>
+
+        <div class="row">
+                <label for="part_image" class="form-label">Selecionar imagem</label>
+                <input class="form-control @error('part_image') is-invalid @enderror" name="part_image" id="part_image" type="file" accept=".jpg,.png,.jpeg">
+                <label class="form-label red-message">{{Session::get('fail image')}}</label>
+        </div>
         
         <div class="col-6">
         <label for="Nome" class="form-label">Nome</label>
