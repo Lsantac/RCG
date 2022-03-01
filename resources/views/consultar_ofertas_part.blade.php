@@ -74,17 +74,17 @@
                                 <figure class="figure">
 
                                   @if(!@empty($ofs->imagem))
-                                      <img src="/uploads/of_img/{{$ofs->imagem}}" class="imagem-of-nec">
+                                      <img id="imagem_of"  src="/uploads/of_img/{{$ofs->imagem}}" class="imagem-of-nec">
                                   @else
-                                      <img src="/img/logo.jpg" class="figure-img img-fluid imagem-of-nec img-thumbnail ">
+                                      <img id="imagem_of" src="/img/logo.jpg" class="figure-img img-fluid imagem-of-nec img-thumbnail ">
                                   @endif 
                           
                                </figure>
                           </div>
 
                           <div class="col-10" style="align-self: flex-end;">
-                             <label for="of_image" class="form-label texto_m">Selecionar imagem</label>
-                              <input class="form-control form-control-sm @error('of_imagem') is-invalid @enderror" name="of_imagem" id="of_imagem" type="file" accept=".jpg,.png,.jpeg">
+                             <label for="sel_image" class="form-label texto_m">Selecionar imagem</label>
+                              <input  onchange ="mostra_imagem(this)" class="form-control form-control-sm @error('sel_imagem') is-invalid @enderror" name="sel_imagem" id="sel_imagem" type="file" accept=".jpg,.png,.jpeg">
                               <label class="form-label red-message">{{Session::get('fail image')}}</label>
                           </div>
                          
@@ -192,8 +192,9 @@
             <th scope="col" class="texto_p">Data</th>
             <th scope="col" class="texto_p">Quant</th>
             <th scope="col" class="texto_p">Unidade</th>
-            <th scope="col" class="texto_p">Status</th>
             <th scope="col" class="texto_p">Transações</th>
+            <th scope="col" class="texto_p">Status</th>
+            
             @if(Session::get('id_logado') == $part->id)  
                 <th scope="col" class="texto_p" >Ações</th>
             @endif
@@ -441,6 +442,28 @@
     @endif 
 
 <div>
+
+  <script>
+     
+     function mostra_imagem(input){
+
+              if (input.files && input.files[0]) {
+
+                var reader = new FileReader();
+                
+                reader.onload = function (e) {
+                      $('#imagem_of')
+                      .attr('src', e.target.result);
+                      /*.width(150)
+                      .height(200);*/
+                };
+                reader.readAsDataURL(input.files[0]);
+                
+              }
+
+     }
+
+  </script>
 
 @endsection
 

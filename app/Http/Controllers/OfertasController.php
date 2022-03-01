@@ -278,8 +278,8 @@ class ofertasController extends Controller
                     
     /*if(!$ofps){*/
 
-          if($request->hasFile('of_imagem')){
-              $file = $request->file('of_imagem');
+          if($request->hasFile('sel_imagem')){
+              $file = $request->file('sel_imagem');
               $extension = $file->getClientOriginalExtension();
               $filename = request('id_of').$extension;
               $file->move('uploads/of_img/',$filename);
@@ -294,7 +294,7 @@ class ofertasController extends Controller
             'obs' => request('obs_of'),
             'imagem'=>$filename
         ]);
- $a=1;
+ 
 
         return back()->with('success','Oferta incluida com sucesso para o participante!');
 

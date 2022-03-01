@@ -163,8 +163,9 @@
             <th scope="col" class="texto_p">Data</th>
             <th scope="col" class="texto_p">Quant</th>
             <th scope="col" class="texto_p">Unidade</th>
-            <th scope="col" class="texto_p" >Status</th>
             <th scope="col" class="texto_p" style="text-align:left;">Transações</th>
+            <th scope="col" class="texto_p" >Status</th>
+            
             @if(Session::get('id_logado') == $part->id)  
                 <th scope="col" class="texto_p" >Ações</th>
             @endif
