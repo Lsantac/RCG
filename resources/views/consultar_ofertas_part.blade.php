@@ -29,6 +29,12 @@
           </div>
       @endif
 
+      @if(Session::get('fail size'))
+          <div class="alert alert-danger">
+              {{Session::get('fail size')}}
+          </div>
+      @endif
+
     </div>
 
     <form class="row g-3" method="get" action="{{route('consultar_ofertas_part')}}">
@@ -60,7 +66,7 @@
         
     </form>
 
-    <form action="{{route('incluir_ofertas_part')}}" method="post">
+    <form action="{{route('incluir_ofertas_part')}}" method="post" enctype="multipart/form-data">
 
          @csrf
       
@@ -78,24 +84,17 @@
                         <div class="row">
                           <div class="col-2">
                                 <figure class="figure">
-
-                                  @if(!@empty($ofs->imagem))
-                                      <img id="imagem_of"  src="/uploads/of_img/{{$ofs->imagem}}" class="imagem-of-nec">
-                                  @else
                                       <img id="imagem_of" src="/img/logo.jpg" class="figure-img img-fluid imagem-of-nec img-thumbnail ">
-                                  @endif 
-                          
-                               </figure>
+                                </figure>
                           </div>
 
                           <div class="col-10" style="align-self: flex-end;">
-                             <label for="sel_image" class="form-label texto_m">Selecionar imagem</label>
-                              <input  onchange ="mostra_imagem(this)" class="form-control form-control-sm @error('sel_image') is-invalid @enderror" name="sel_image" id="sel_image" type="file" accept=".jpg,.png,.jpeg">
+                             <label for="sel_img" class="form-label texto_m">Selecionar imagem</label>
+                              <input  name="sel_img" id="sel_img" type="file" accept=".jpg,.png,.jpeg" onchange ="mostra_imagem(this, 'inclusao')" class="form-control form-control-sm @error('sel_img') is-invalid @enderror" >
                               <label class="form-label red-message">{{Session::get('fail image')}}</label>
                           </div>
                          
                         </div>
-
 
                         <div class="mb-3">
 
@@ -296,8 +295,6 @@
 
                         @endif
 
-
-
                     </td>
 
                     <td>
@@ -347,7 +344,7 @@
                             Editar</button>
                         @endif  
 
-                        <form action="{{route('altera_oferta_part')}}" method="post">
+                        <form action="{{route('altera_oferta_part')}}" method="post" enctype="multipart/form-data">
                           @csrf 
                             <!-- Modal Alterar Oferta-->
                             <div class="modal fade" id="EditarOferta-{{$ofp->id_of_part}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -358,9 +355,33 @@
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                   </div>
                                         <div class="modal-body">
+
+                                          <div class="row">
+                                            <div class="col-2">
+                                                  <figure class="figure">
+                  
+                                                    @if(!@empty($ofp->imagem))
+                                                        <img id="imagem_of_alt"  src="/uploads/of_img/{{$ofp->imagem}}" class="imagem-of-nec">
+                                                    @else
+                                                        <img id="imagem_of_alt" src="/img/logo.jpg" class="figure-img img-fluid imagem-of-nec img-thumbnail ">
+                                                    @endif 
+                                            
+                                                 </figure>
+                                                 
+                                            </div>
+                  
+                                            <div class="col-10" style="align-self: flex-end;">
+                                               <label for="sel_img_alt" class="form-label texto_m">Selecionar imagem</label>
+                                                <input  name="sel_img_alt" id="sel_img_alt" type="file" accept=".jpg,.png,.jpeg" onchange ="mostra_imagem(this)" class="form-control form-control-sm @error('sel_img_alt') is-invalid @enderror" >
+                                                <label class="form-label red-message">{{Session::get('fail image')}}</label>
+                                            </div>
+                                           
+                                          </div>
+
                                           <div class="mb-3">
                                             <input value="{{$part->id}}" name="id_part" type="hidden">
                                             <input value="{{$ofp->id_of_part}}" name="id_of_part" type="hidden">
+                                            
                                             
                                             <label for="FormControl_id_of" class="form-label">Selecione um tipo de Oferta</label>
                                             <select type="text" name="id_of" id="FormControl_id_of" class="form-select" aria-label="Default select example" required>
@@ -451,17 +472,19 @@
 
   <script>
      
-     function mostra_imagem(input){
+     function mostra_imagem(input,$modo){
 
               if (input.files && input.files[0]) {
 
                 var reader = new FileReader();
                 
                 reader.onload = function (e) {
-                      $('#imagem_of')
-                      .attr('src', e.target.result);
-                      /*.width(150)
-                      .height(200);*/
+                      if($modo == 'inclusao'){
+                        $('#imagem_of').attr('src', e.target.result);
+                      }else{
+                        $('#imagem_of_alt').attr('src', e.target.result);
+                      }
+                      
                 };
                 reader.readAsDataURL(input.files[0]);
                 

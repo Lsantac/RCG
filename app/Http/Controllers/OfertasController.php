@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\participantes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Http\Requests\StoreAlterPartRequest;
+use Illuminate\Support\Facades\File;
 
 class ofertasController extends Controller
 {
@@ -226,12 +226,14 @@ class ofertasController extends Controller
                                           ->join('categorias','ofertas.id_cat','=','categorias.id')
                                           ->join('unidades','ofertas.id_unid','=','unidades.id')
 
-                                          ->select('participantes.id as id_part','participantes.latitude','participantes.longitude','participantes.nome_part','ofertas_part.id as id_of_part',
+                                          ->select('participantes.id as id_part','participantes.latitude','participantes.longitude',
+                                                'participantes.nome_part','ofertas_part.id as id_of_part',
                                                 'ofertas_part.id_of','ofertas_part.quant','ofertas_part.data','ofertas_part.obs','ofertas.descricao as desc_of',
-                                                'ofertas_part.status',
+                                                'ofertas_part.status','ofertas_part.imagem',
                                                 'categorias.descricao as desc_cat','unidades.descricao as desc_unid')
 
-                                          ->orderBy('data','desc')
+                                          ->orderBy('data','DESC')
+                                          ->orderBy('id_of','DESC')
                                           ->paginate(5);
 
       }
@@ -263,6 +265,7 @@ class ofertasController extends Controller
                                     'categorias.descricao as desc_cat','unidades.descricao as desc_unid')
 
                                     ->orderBy('data','desc')
+                                    ->orderBy('id_of','DESC')
                                     ->paginate(5);
 
       /*dd($ofps);      */
@@ -270,7 +273,7 @@ class ofertasController extends Controller
       return view('consultar_ofertas_part',['part' => $participante,'ofps'=>$ofps,'ofs'=>$ofs,'cats'=>$cats,'unids'=>$unids]);
     }
 
-  public function incluir_ofertas_part(StoreAlterPartRequest $request) {
+  public function incluir_ofertas_part(Request $request) {
 
        
    /* $ofps = DB::table('ofertas_part')->where('id_of',request('id_of'))
@@ -279,19 +282,24 @@ class ofertasController extends Controller
                     
     /*if(!$ofps){*/
 
-          /*dd($request->hasFile('sel_image'));*/
+          /*dd($request->hasFile('sel_img'));*/
 
-          if($request->hasFile('sel_image')){
-              $file = $request->file('sel_image');
+          if($request->hasFile('sel_img')){
+              $file = $request->file('sel_img');
+
+              $size = $file->getSize();
+
+              if($size > 5000000){
+                 return back()->with('fail size','tamanho maior do que o permitido!');
+              }
+
               $extension = $file->getClientOriginalExtension();
-
               
               if($extension == 'jpg' or $extension == 'jpeg' or $extension == 'png'){
-                 $filename = request('id_of').$extension;
-                 $file->move('uploads/of_img/',$filename);
 
-                 
-              
+                $filename = request('id_of').'.'.$extension;
+                $file->move('uploads/of_img/',$filename);
+
               }else{
                   return back()->with('fail type','Tipo de imagem não permitido!');
               }
@@ -328,13 +336,44 @@ class ofertasController extends Controller
   }  
 
   public function altera_oferta_part(Request $request){
+
+    if($request->hasFile('sel_img_alt')){
+      $file = $request->file('sel_img_alt');
+
+      $size = $file->getSize();
+
+      if($size > 5000000){
+         return back()->with('fail size','tamanho maior do que o permitido!');
+      }
+
+      $extension = $file->getClientOriginalExtension();
       
+      if($extension == 'jpg' or $extension == 'jpeg' or $extension == 'png'){
+
+        $ofp = DB::table('ofertas_part')->where('id',request('id_of_part'))->first();
+
+        if($ofp){
+          //Deleta a imagem anterior antes de incluir a nova.
+          $file_name_ant = $ofp->imagem;
+          File::delete(public_path('uploads/of_img/'.$file_name_ant));
+        }
+
+        $filename = request('id_of').'_'.time().'.'.$extension;
+        $file->move('uploads/of_img/',$filename);
+
+      }else{
+          return back()->with('fail type','Tipo de imagem não permitido!');
+      }
+      
+    }
+
     $rp = DB::table('ofertas_part')->where('id',request('id_of_part'))
                                    ->update(['id_of' => request('id_of'),
                                             'id_part' => request('id_part'),
                                             'data' => request('data_of'), 
                                             'quant' => request('quant_of'), 
                                             'obs' => request('obs_of'), 
+                                            'imagem'=>$filename
                                             ], 
                                   );  
                                   
