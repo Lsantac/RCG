@@ -389,7 +389,7 @@
                   
                                             <div class="col-10" style="align-self: flex-end;">
                                                <label for="sel_img_alt" class="form-label texto_m">Selecionar imagem</label>
-                                                <input  name="sel_img_alt" id="sel_img_alt" type="file" accept=".jpg,.png,.jpeg" onchange ="mostra_imagem(this,'editar',{{$ofp->id_of_part}})" class="form-control form-control-sm @error('sel_img_alt') is-invalid @enderror" >
+                                                <input name="sel_img_alt" id="sel_img_alt" type="file" accept=".jpg,.png,.jpeg" onchange ="mostra_imagem(this,'editar',{{$ofp->id_of_part}})" class="form-control form-control-sm @error('sel_img_alt') is-invalid @enderror" >
                                                 <label class="form-label red-message">{{Session::get('fail image')}}</label>
                                             </div>
                                            

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\participantes;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 
 class NecessidadesController extends Controller
 {
@@ -221,13 +222,15 @@ class NecessidadesController extends Controller
                                           ->join('categorias','necessidades.id_cat','=','categorias.id')
                                           ->join('unidades','necessidades.id_unid','=','unidades.id')
 
-                                          ->select('participantes.id as id_part','participantes.latitude','participantes.longitude','participantes.nome_part','necessidades_part.id as id_nec_part',
+                                          ->select('participantes.id as id_part','participantes.latitude','participantes.longitude','participantes.nome_part',
+                                                'necessidades_part.id as id_nec_part',
                                                 'participantes.endereco','participantes.cidade','participantes.estado','participantes.pais',
                                                 'necessidades_part.id_nec','necessidades_part.quant','necessidades_part.data','necessidades_part.obs','necessidades.descricao as desc_nec',
-                                                'necessidades_part.status',
+                                                'necessidades_part.status','necessidades_part.imagem',
                                                 'categorias.descricao as desc_cat','unidades.descricao as desc_unid')
 
                                           ->orderBy('data','desc')
+                                          ->orderBy('id_nec_part','desc')
                                           ->paginate(5);
 
       }
@@ -252,13 +255,15 @@ class NecessidadesController extends Controller
                                     ->join('categorias','necessidades.id_cat','=','categorias.id')
                                     ->join('unidades','necessidades.id_unid','=','unidades.id')
                                     
-                                    ->select('participantes.id as id_part','participantes.latitude','participantes.longitude','participantes.nome_part','necessidades_part.id as id_nec_part',
+                                    ->select('participantes.id as id_part','participantes.latitude','participantes.longitude','participantes.nome_part',
+                                                'necessidades_part.id as id_nec_part',
                                                 'participantes.endereco','participantes.cidade','participantes.estado','participantes.pais',
                                                 'necessidades_part.id_nec','necessidades_part.quant','necessidades_part.data','necessidades_part.obs','necessidades.descricao as desc_nec',
-                                                'necessidades_part.status',
+                                                'necessidades_part.status','necessidades_part.imagem',
                                                 'categorias.descricao as desc_cat','unidades.descricao as desc_unid')
 
                                     ->orderBy('data','desc')
+                                    ->orderBy('id_nec_part','desc')
                                     ->paginate(5);
 
       
@@ -268,24 +273,49 @@ class NecessidadesController extends Controller
   public function incluir_necessidades_part(Request $request) {
 
        
-    $necps = DB::table('necessidades_part')->where('id_nec',request('id_nec'))
+    /*$necps = DB::table('necessidades_part')->where('id_nec',request('id_nec'))
                                      ->where('id_part',request('id_part'))
-                                     ->first();
+                                     ->first();*/
+
+
+      if($request->hasFile('sel_img')){
+      $file = $request->file('sel_img');
+
+      $size = $file->getSize();
+
+      if($size > 5000000){
+          return back()->with('fail size','tamanho maior do que o permitido!');
+      }
+
+      $extension = $file->getClientOriginalExtension();
+      
+      if($extension == 'jpg' or $extension == 'jpeg' or $extension == 'png'){
+
+        $filename = request('id_nec').'.'.$extension;
+        $file->move('uploads/nec_img/',$filename);
+
+      }else{
+          return back()->with('fail type','Tipo de imagem não permitido!');
+      }
+      
+    }
+
                     
-    if(!$necps){
+    /*if(!$necps){*/
         $necps_i = DB::table('necessidades_part')->insert([
             'id_nec' => request('id_nec'),
             'id_part' => request('id_part'),
             'data' => request('data_nec'),
             'quant' => request('quant_nec'),
-            'obs' => request('obs_nec')
+            'obs' => request('obs_nec'),
+            'imagem' => $filename
 
         ]);
         return back()->with('success','necessidade incluida com sucesso para o participante!');
 
-    }else{
+    /*}else{
         return back()->with('fail','necessidade já existente para esse participante!');
-    }
+    }*/
 
                   
   }  
@@ -302,16 +332,57 @@ class NecessidadesController extends Controller
   }  
 
   public function altera_necessidade_part(Request $request){
+
+
+    if($request->hasFile('sel_img_alt')){
+      $file = $request->file('sel_img_alt');
+
+      $size = $file->getSize();
+
+      if($size > 5000000){
+         return back()->with('fail size','tamanho maior do que o permitido!');
+      }
+
+      $extension = $file->getClientOriginalExtension();
       
-    $rp = DB::table('necessidades_part')->where('id',request('id_nec_part'))
+      if($extension == 'jpg' or $extension == 'jpeg' or $extension == 'png'){
+
+        $necp = DB::table('necessidades_part')->where('id',request('id_nec_part'))->first();
+
+        if($necp){
+          //Deleta a imagem anterior antes de incluir a nova.
+          $file_name_ant = $necp->imagem;
+          File::delete(public_path('uploads/nec_img/'.$file_name_ant));
+        }
+
+        $filename = request('id_nec').'_'.time().'.'.$extension;
+        $file->move('uploads/nec_img/',$filename);
+
+        $rp = DB::table('necessidades_part')->where('id',request('id_nec_part'))
                                    ->update(['id_nec' => request('id_nec'),
                                             'id_part' => request('id_part'),
                                             'data' => request('data_nec'), 
                                             'quant' => request('quant_nec'), 
                                             'obs' => request('obs_nec'), 
+                                            'imagem'=>$filename
                                             ], 
                                   );  
-                                  
+
+      }else{
+          return back()->with('fail type','Tipo de imagem não permitido!');
+      }
+      
+    }else{
+
+      $rp = DB::table('necessidades_part')->where('id',request('id_nec_part'))
+                                   ->update(['id_nec' => request('id_nec'),
+                                            'id_part' => request('id_part'),
+                                            'data' => request('data_nec'), 
+                                            'quant' => request('quant_nec'), 
+                                            'obs' => request('obs_nec') 
+                                            ], 
+                                  );  
+    }
           
     if($rp){
       return back()->with('success','necessidade do participante alterada com sucesso!');

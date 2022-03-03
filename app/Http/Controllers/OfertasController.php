@@ -233,7 +233,7 @@ class ofertasController extends Controller
                                                 'categorias.descricao as desc_cat','unidades.descricao as desc_unid')
 
                                           ->orderBy('data','DESC')
-                                          ->orderBy('id_of','DESC')
+                                          ->orderBy('id_of_part','DESC')
                                           ->paginate(5);
 
       }
@@ -265,7 +265,7 @@ class ofertasController extends Controller
                                     'categorias.descricao as desc_cat','unidades.descricao as desc_unid')
 
                                     ->orderBy('data','desc')
-                                    ->orderBy('id_of','DESC')
+                                    ->orderBy('id_of_part','DESC')
                                     ->paginate(5);
 
       /*dd($ofps);      */
@@ -337,6 +337,8 @@ class ofertasController extends Controller
 
   public function altera_oferta_part(Request $request){
 
+
+
     if($request->hasFile('sel_img_alt')){
       $file = $request->file('sel_img_alt');
 
@@ -365,19 +367,29 @@ class ofertasController extends Controller
           return back()->with('fail type','Tipo de imagem não permitido!');
       }
       
-    }
+      $rp = DB::table('ofertas_part')->where('id',request('id_of_part'))
+      ->update(['id_of' => request('id_of'),
+               'id_part' => request('id_part'),
+               'data' => request('data_of'), 
+               'quant' => request('quant_of'), 
+               'obs' => request('obs_of'), 
+               'imagem'=>$filename
+               ], 
+      );   
 
-    $rp = DB::table('ofertas_part')->where('id',request('id_of_part'))
+    }else{
+
+      $rp = DB::table('ofertas_part')->where('id',request('id_of_part'))
                                    ->update(['id_of' => request('id_of'),
                                             'id_part' => request('id_part'),
                                             'data' => request('data_of'), 
                                             'quant' => request('quant_of'), 
-                                            'obs' => request('obs_of'), 
-                                            'imagem'=>$filename
+                                            'obs' => request('obs_of') 
                                             ], 
                                   );  
-                                  
-          
+
+    }
+      
     if($rp){
       return back()->with('success','Oferta do participante alterada com sucesso!');
     }else{

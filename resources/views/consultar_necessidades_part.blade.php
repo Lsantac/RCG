@@ -49,7 +49,7 @@
         
     </form>
 
-    <form action="{{route('incluir_necessidades_part')}}" method="post">
+    <form action="{{route('incluir_necessidades_part')}}" method="post" enctype="multipart/form-data">
 
       @csrf
       
@@ -63,6 +63,22 @@
                 </div>
 
                       <div class="modal-body">
+
+                        <div class="row">
+                          <div class="col-2">
+                                <figure class="figure">
+                                      <img id="imagem_nec" src="/img/logo.jpg" class="figure-img img-fluid imagem-of-nec img-thumbnail ">
+                                </figure>
+                          </div>
+
+                          <div class="col-10" style="align-self: flex-end;">
+                             <label for="sel_img" class="form-label texto_m">Selecionar imagem</label>
+                              <input  name="sel_img" id="sel_img" type="file" accept=".jpg,.png,.jpeg" onchange ="mostra_imagem(this, 'inclusao',0)" class="form-control form-control-sm @error('sel_img') is-invalid @enderror" >
+                              <label class="form-label red-message">{{Session::get('fail image')}}</label>
+                          </div>
+                         
+                        </div>
+
                         <div class="mb-3">
 
                           <input value="{{$part->id}}" name="id_part" type="hidden">
@@ -157,7 +173,7 @@
     @if (isset($necps)) 
 
     <table class="table table-sm">
-        <thead>
+        <thead style="border-bottom: 1px solid black;">
           <tr>
             <th scope="col" class="texto_p">Descrição</th>
             <th scope="col" class="texto_p">Data</th>
@@ -180,19 +196,36 @@
                   <tr>
 
                     <td>
-                      <div class="card " style="width: 40rem;">
-                        <div class="card-body">
-                          <h5 class="card-title texto-necessidade">Necessidade : {{$necp->desc_nec}}</h5>
-                          <h6 style="color:rgb(97, 75, 4)" class="card-subtitle mb-2">Categoria : {{$necp->desc_cat}} </h6>
-                          <p class="card-text">Obs : {{$necp->obs}}</p>
-                          <!--<a href="#" class="card-link">Card link</a>
-                          <a href="#" class="card-link">Another link</a>-->
+
+                      <div class="" style="width:50rem;">
+                        <div class="">
+
+                          <div class="row">
+                            <div class="col-1" >
+                                <figure class="figure">
+                    
+                                  @if(!@empty($necp->imagem))
+                                      <img id="imagem_nec_cons"  src="/uploads/nec_img/{{$necp->imagem}}" class="imagem-of-nec-cons">
+                                  @else
+                                      <img id="imagem_nec_cons" src="/img/logo.jpg" class="imagem-of-nec-cons">
+                                  @endif 
+                          
+                              </figure>
+                            </div>
+
+                            <div class="col" style="padding-left: 30px;">
+                              <h5 style="font-size:15px;"  class="card-title texto-necessidade">Necessidade : {{$necp->desc_nec}}</h5>
+                              <h6 style="color:rgb(97, 75, 4)" class="card-subtitle mb-2 texto_m">Categoria : {{$necp->desc_cat}} </h6>
+                              <p class="card-text texto_m">Obs : {{$necp->obs}}</p>    
+                            </div>
+                            
+                          </div>
+
                         </div>
                       </div>
+
                     </td>
 
-                    <!--<td class="texto_p">{{$necp->desc_nec}}</td>
-                    <td class="texto_p">{{$necp->desc_cat}}</td>-->
                     <td class="texto_p">
                       @if($necp->data)
                         @php
@@ -292,7 +325,7 @@
                            <button class="btn btn-editar btn-sm bi bi-pencil texto_p" type="submit" data-bs-toggle="modal" data-bs-target="#Editarnecessidade-{{$necp->id_nec_part}}"> Editar</button>
                         @endif   
 
-                        <form action="{{route('altera_necessidade_part')}}" method="post">
+                        <form action="{{route('altera_necessidade_part')}}" method="post" enctype="multipart/form-data">
                           @csrf 
                             <!-- Modal Alterar necessidade-->
                             <div class="modal fade" id="Editarnecessidade-{{$necp->id_nec_part}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -303,6 +336,29 @@
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                   </div>
                                         <div class="modal-body">
+
+                                          <div class="row">
+                                            <div class="col-2">
+                                                  <figure class="figure">
+                  
+                                                    @if(!@empty($necp->imagem))
+                                                        <img id="imagem_nec_alt-{{$necp->id_nec_part}}"  src="/uploads/nec_img/{{$necp->imagem}}" class="imagem-of-nec">
+                                                    @else
+                                                        <img id="imagem_nec_alt-{{$necp->id_nec_part}}" src="/img/logo.jpg" class="figure-img img-fluid imagem-of-nec img-thumbnail ">
+                                                    @endif 
+                                            
+                                                 </figure>
+                                                 
+                                            </div>
+                  
+                                            <div class="col-10" style="align-self: flex-end;">
+                                               <label for="sel_img_alt" class="form-label texto_m">Selecionar imagem</label>
+                                                <input  name="sel_img_alt" id="sel_img_alt" type="file" accept=".jpg,.png,.jpeg" onchange ="mostra_imagem(this,'editar',{{$necp->id_nec_part}})" class="form-control form-control-sm @error('sel_img_alt') is-invalid @enderror" >
+                                                <label class="form-label red-message">{{Session::get('fail image')}}</label>
+                                            </div>
+                                           
+                                          </div>
+
                                           <div class="mb-3">
                                             <input value="{{$part->id}}" name="id_part" type="hidden">
                                             <input value="{{$necp->id_nec_part}}" name="id_nec_part" type="hidden">
@@ -383,7 +439,6 @@
               <td></td>    
               <td></td>    
               <td></td>    
-              <td></td>    
           @endif 
 
         </tbody>
@@ -397,6 +452,33 @@
     @endif 
 
 <div>
+
+  <script>
+     
+    function mostra_imagem(input,$modo,$id_nec_part){
+
+             if (input.files && input.files[0]) {
+
+               var reader = new FileReader();
+
+               reader.onload = function (e) {
+                     if($modo == 'inclusao'){
+                       $('#imagem_nec').attr('src', e.target.result);
+                     }else{
+                       if($modo == 'editar'){
+                          $('#imagem_nec_alt-' + $id_nec_part).attr('src', e.target.result);
+                          
+                       }
+                     }
+                     
+               };
+               reader.readAsDataURL(input.files[0]);
+               
+             }
+
+    }
+
+ </script>
 
 @endsection
 
