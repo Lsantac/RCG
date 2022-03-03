@@ -90,7 +90,7 @@
 
                           <div class="col-10" style="align-self: flex-end;">
                              <label for="sel_img" class="form-label texto_m">Selecionar imagem</label>
-                              <input  name="sel_img" id="sel_img" type="file" accept=".jpg,.png,.jpeg" onchange ="mostra_imagem(this, 'inclusao')" class="form-control form-control-sm @error('sel_img') is-invalid @enderror" >
+                              <input  name="sel_img" id="sel_img" type="file" accept=".jpg,.png,.jpeg" onchange ="mostra_imagem(this, 'inclusao',0)" class="form-control form-control-sm @error('sel_img') is-invalid @enderror" >
                               <label class="form-label red-message">{{Session::get('fail image')}}</label>
                           </div>
                          
@@ -214,13 +214,30 @@
                 <div>
                   <tr>
                     <td>
-                      <div class="card" style="width: 40rem;">
-                        <div class="card-body">
-                          <h5 class="card-title texto-oferta">Oferta : {{$ofp->desc_of}}</h5>
-                          <h6 style="color:rgb(4, 97, 97)" class="card-subtitle mb-2">Categoria : {{$ofp->desc_cat}} </h6>
-                          <p class="card-text">Obs : {{$ofp->obs}}</p>
-                          <!--<a href="#" class="card-link">Card link</a>
-                          <a href="#" class="card-link">Another link</a>-->
+                      <div class="" style="width:50rem;">
+                        <div class="">
+
+                          <div class="row">
+                            <div class="col-1" >
+                                <figure class="figure">
+                    
+                                  @if(!@empty($ofp->imagem))
+                                      <img id="imagem_of_cons"  src="/uploads/of_img/{{$ofp->imagem}}" class="imagem-of-nec-cons">
+                                  @else
+                                      <img id="imagem_of_cons" src="/img/logo.jpg" class="imagem-of-nec-cons">
+                                  @endif 
+                          
+                              </figure>
+                            </div>
+
+                            <div class="col" style="padding-left: 30px;">
+                                <h5 style="font-size:15px;"  class="card-title texto-oferta">Oferta : {{$ofp->desc_of}}</h5>
+                                <h6 style="color:rgb(4, 97, 97)" class="card-subtitle mb-2 texto_m">Categoria : {{$ofp->desc_cat}} </h6>
+                                <p class="card-text texto_m">Obs : {{$ofp->obs}}</p>    
+                            </div>
+                            
+                          </div>
+
                         </div>
                       </div>
                     </td>
@@ -361,9 +378,9 @@
                                                   <figure class="figure">
                   
                                                     @if(!@empty($ofp->imagem))
-                                                        <img id="imagem_of_alt"  src="/uploads/of_img/{{$ofp->imagem}}" class="imagem-of-nec">
+                                                        <img id="imagem_of_alt-{{$ofp->id_of_part}}"  src="/uploads/of_img/{{$ofp->imagem}}" class="imagem-of-nec">
                                                     @else
-                                                        <img id="imagem_of_alt" src="/img/logo.jpg" class="figure-img img-fluid imagem-of-nec img-thumbnail ">
+                                                        <img id="imagem_of_alt-{{$ofp->id_of_part}}" src="/img/logo.jpg" class="figure-img img-fluid imagem-of-nec img-thumbnail ">
                                                     @endif 
                                             
                                                  </figure>
@@ -372,7 +389,7 @@
                   
                                             <div class="col-10" style="align-self: flex-end;">
                                                <label for="sel_img_alt" class="form-label texto_m">Selecionar imagem</label>
-                                                <input  name="sel_img_alt" id="sel_img_alt" type="file" accept=".jpg,.png,.jpeg" onchange ="mostra_imagem(this)" class="form-control form-control-sm @error('sel_img_alt') is-invalid @enderror" >
+                                                <input  name="sel_img_alt" id="sel_img_alt" type="file" accept=".jpg,.png,.jpeg" onchange ="mostra_imagem(this,'editar',{{$ofp->id_of_part}})" class="form-control form-control-sm @error('sel_img_alt') is-invalid @enderror" >
                                                 <label class="form-label red-message">{{Session::get('fail image')}}</label>
                                             </div>
                                            
@@ -472,17 +489,20 @@
 
   <script>
      
-     function mostra_imagem(input,$modo){
+     function mostra_imagem(input,$modo,$id_of_part){
 
               if (input.files && input.files[0]) {
 
                 var reader = new FileReader();
-                
+
                 reader.onload = function (e) {
                       if($modo == 'inclusao'){
                         $('#imagem_of').attr('src', e.target.result);
                       }else{
-                        $('#imagem_of_alt').attr('src', e.target.result);
+                        if($modo == 'editar'){
+                           $('#imagem_of_alt-' + $id_of_part).attr('src', e.target.result);
+                           
+                        }
                       }
                       
                 };
