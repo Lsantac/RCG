@@ -51,7 +51,7 @@
     <table class="table table-sm">
         <thead class="texto_m">
           <tr>
-            <th scope="col">Descrição</th>
+            <th scope="col" colspan="2">Descrição</th>
             <th scope="col">Data</th>
             <th scope="col">Quant</th>
             <th scope="col">Unidade</th>
@@ -68,11 +68,23 @@
               @foreach($ofps as $ofp)
                 <div>
                   <td>
-                    <div class="card" style="width: 45rem;">
+                    <div class="col-1" >
+                              <figure class="figure">
+                  
+                                @if(!@empty($ofp->imagem))
+                                    <img id="imagem_of_cons"  src="/uploads/of_img/{{$ofp->imagem}}" class="imagem-of-nec-cons">
+                                @else
+                                    <img id="imagem_of_cons" src="/img/logo.jpg" class="imagem-of-nec-cons">
+                                @endif 
+                        
+                            </figure>
+                      </div>
+                  </td>
+                  <td>
+                    <div style="width: 45rem;">
 
-                      <div class="card-body">
-
-                           <div class="row align-items-start">
+                      <div>
+                          <div class="row align-items-start">
                                <div class="col">
                                     <h5 style="font-size:15px;"   class="card-title texto-oferta">Oferta : {{$ofp->desc_of}}</h5>
                                     <h6 style="color:rgb(4, 97, 97)"  class="card-subtitle mb-2 texto_m">Categoria : {{$ofp->desc_cat}} </h6>
@@ -83,8 +95,7 @@
                                     <p class="texto_m">Endereço : {{$ofp->endereco}} , {{$ofp->cidade}} {{$ofp->estado}} - {{$ofp->pais}}</p>
                                </div>
                         
-                            </div>
-
+                          </div>
                       </div>
                     </div>
                   </td>

@@ -51,7 +51,7 @@
     <table class="table table-sm">
         <thead class="texto_m">
           <tr>
-            <th scope="col">Descrição</th>
+            <th scope="col" colspan="2">Descrição</th>
             <th scope="col">Data</th>
             <th scope="col">Quant</th>
             <th scope="col">Unidade</th>
@@ -67,11 +67,23 @@
               @foreach($necps as $necp)
                 <div>
                   <td>
-                    <div class="card" style="width: 45rem;">
+                    <div class="col-1" >
+                              <figure class="figure">
+                  
+                                @if(!@empty($necp->imagem))
+                                    <img id="imagem_nec_cons"  src="/uploads/nec_img/{{$necp->imagem}}" class="imagem-of-nec-cons">
+                                @else
+                                    <img id="imagem_nec_cons" src="/img/logo.jpg" class="imagem-of-nec-cons">
+                                @endif 
+                        
+                            </figure>
+                      </div>
+                  </td>
+                  <td>
+                    <div style="width: 45rem;">
 
-                      <div class="card-body">
-
-                           <div class="row align-items-start">
+                      <div>
+                            <div class="row align-items-start">
                                <div class="col">
                                     <h5 style="font-size:15px;"   class="card-title texto-necessidade">Necessidade : {{$necp->desc_nec}}</h5>
                                     <h6 style="color:rgb(97, 75, 4)"  class="card-subtitle mb-2 texto_m">Categoria : {{$necp->desc_cat}} </h6>
