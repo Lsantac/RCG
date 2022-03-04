@@ -23,7 +23,7 @@
     <table class="table table-sm tabela-oferta">
         <thead>
           <tr>
-            <th scope="col" class="texto_p">Oferta</th>
+            <th scope="col" class="texto_p ">Oferta</th>
             <th scope="col" class="texto_p">Categoria</th>
             <th scope="col" class="texto_p">Data</th>
             <th scope="col" class="texto_p">Quant</th>
@@ -152,9 +152,8 @@
     <table class="table table-sm tabela-necessidade">
         <thead>
           <tr>
-            <th scope="col" class="texto_p">Descrição</th>
-            <!--<th scope="col" class="texto_p">Necessidade</th>
-            <th scope="col" class="texto_p">Categoria</th>-->
+            <th scope="col" class="texto_p" colspan="2">Descrição</th>
+            
             <th scope="col" class="texto_p">Data</th>
             <th scope="col" class="texto_p">Quant</th>
             <th scope="col" class="texto_p">Unidade</th>
@@ -173,8 +172,22 @@
                 <div>
                   <tr>
                       <td>
-                      <div class="card" style="width: 58rem;">
-                        <div class="card-body">
+                        <div class="col-1" >
+                                  <figure class="figure">
+                      
+                                    @if(!@empty($necp->imagem))
+                                        <img id="imagem_nec_cons"  src="/uploads/nec_img/{{$necp->imagem}}" class="imagem-of-nec-cons">
+                                    @else
+                                        <img id="imagem_nec_cons" src="/img/logo.jpg" class="imagem-of-nec-cons">
+                                    @endif 
+                            
+                                </figure>
+                          </div>
+                      </td>
+                    
+                      <td>
+                      <div  style="width: 58rem;">
+                        <div >
                           <h5 class="card-title ">Necessidade : {{$necp->desc_nec}}</h5>
                           <h6 style="color:rgb(196, 104, 0)" class="card-subtitle mb-2 texto_p">Categoria : {{$necp->desc_cat}} </h6>
                           <p class="card-text texto_p">Obs : {{$necp->obs}}</p>

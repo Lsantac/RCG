@@ -156,8 +156,7 @@
     <table class="table table-sm tabela-oferta">
         <thead>
           <tr>
-            <th scope="col" class="texto_p">Descrição</th>
-            
+            <th scope="col" class="texto_p" colspan="2">Descrição</th>
             <th scope="col" class="texto_p">Data</th>
             <th scope="col" class="texto_p">Quant</th>
             <th scope="col" class="texto_p">Unidade</th>
@@ -173,15 +172,27 @@
                 <div>
                   <tr>
                     <td>
-                      <div class="card" style="width: 58rem;">
-                        <div class="card-body">
+                      <div class="col-1" >
+                                <figure class="figure">
+                    
+                                  @if(!@empty($ofp->imagem))
+                                      <img id="imagem_of_cons"  src="/uploads/of_img/{{$ofp->imagem}}" class="imagem-of-nec-cons">
+                                  @else
+                                      <img id="imagem_of_cons" src="/img/logo.jpg" class="imagem-of-nec-cons">
+                                  @endif 
+                          
+                              </figure>
+                        </div>
+                    </td>
+                    <td>
+                      <div style="width: 58rem;">
+                        <div>
                           <h5 class="card-title ">Oferta : {{$ofp->desc_of}}</h5>
                           <h6 style="color:rgb(6, 155, 30)" class="card-subtitle mb-2 texto_p">Categoria : {{$ofp->desc_cat}} </h6>
                           <p class="card-text texto_p">Obs : {{$ofp->obs}}</p>
                           <p style="color:rgb(4, 82, 155)" class="card-subtitle mb-1 texto_p">Participante : {{$ofp->nome_part}}</p>
                           <p style="color:rgb(4, 82, 155)" class="card-subtitle mb-1 texto_p">Endereço : {{$ofp->endereco}} , {{$ofp->cidade}} </p>
-                          <!--<a href="#" class="card-link">Card link</a>
-                          <a href="#" class="card-link">Another link</a>-->
+                          
                         </div>
                       </div>
                     </td>

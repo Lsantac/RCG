@@ -135,8 +135,10 @@ class TransacoesController extends Controller
                                          ->join('categorias','ofertas.id_cat','=','categorias.id')
                                          ->join('unidades','ofertas.id_unid','=','unidades.id')
                                       
-                                         ->select('participantes.id as id_part','participantes.nome_part','participantes.latitude','participantes.longitude','participantes.nome_part','ofertas_part.id as id_of_part',
-                                                  'ofertas_part.id_of','ofertas_part.quant','ofertas_part.data','ofertas_part.obs','ofertas.descricao as desc_of',
+                                         ->select('participantes.id as id_part','participantes.nome_part','participantes.latitude','participantes.longitude',
+                                                  'participantes.nome_part','ofertas_part.id as id_of_part',
+                                                  'ofertas_part.id_of','ofertas_part.quant','ofertas_part.imagem',
+                                                  'ofertas_part.data','ofertas_part.obs','ofertas.descricao as desc_of',
                                                   'categorias.descricao as desc_cat','unidades.descricao as desc_unid')
                                          ->get();
         
@@ -178,7 +180,7 @@ class TransacoesController extends Controller
             
             ->selectRaw('participantes.id as id_part,participantes.nome_part,participantes.latitude,participantes.longitude,
                         participantes.nome_part,necessidades_part.id as id_nec_part,participantes.endereco,participantes.cidade,
-                       necessidades_part.id_nec,necessidades_part.quant,necessidades_part.data,
+                       necessidades_part.id_nec,necessidades_part.quant,necessidades_part.data,necessidades_part.imagem,
                        necessidades_part.obs,necessidades.descricao as desc_nec,
                        categorias.descricao as desc_cat,unidades.descricao as desc_unid,
                        (6371 * (2 *
@@ -233,8 +235,10 @@ class TransacoesController extends Controller
                                              ->join('categorias','ofertas.id_cat','=','categorias.id')
                                              ->join('unidades','ofertas.id_unid','=','unidades.id')
                                           
-                                             ->select('participantes.id as id_part','participantes.nome_part','participantes.latitude','participantes.longitude','participantes.nome_part','ofertas_part.id as id_of_part',
-                                                      'ofertas_part.id_of','ofertas_part.quant','ofertas_part.data','ofertas_part.obs','ofertas.descricao as desc_of',
+                                             ->select('participantes.id as id_part','participantes.nome_part','participantes.latitude','participantes.longitude',
+                                                      'participantes.nome_part','ofertas_part.id as id_of_part',
+                                                      'ofertas_part.id_of','ofertas_part.quant','ofertas_part.data','ofertas_part.imagem',
+                                                      'ofertas_part.obs','ofertas.descricao as desc_of',
                                                       'categorias.descricao as desc_cat','unidades.descricao as desc_unid')
                                              ->get();
 
@@ -261,7 +265,7 @@ class TransacoesController extends Controller
                 
                 ->selectRaw('participantes.id as id_part,participantes.nome_part,participantes.latitude,participantes.longitude,
                             participantes.nome_part,ofertas_part.id as id_of_part,participantes.endereco,participantes.cidade,
-                           ofertas_part.id_of,ofertas_part.quant,ofertas_part.data,
+                           ofertas_part.id_of,ofertas_part.quant,ofertas_part.data,ofertas_part.imagem,
                            ofertas_part.obs,ofertas.descricao as desc_of,
                            categorias.descricao as desc_cat,unidades.descricao as desc_unid,'.$sql_dist) 
                      
@@ -304,7 +308,8 @@ class TransacoesController extends Controller
                                           
                                              ->select('participantes.id as id_part','participantes.nome_part','participantes.latitude',
                                              'participantes.longitude','participantes.nome_part','necessidades_part.id as id_nec_part',
-                                                      'necessidades_part.id_nec','necessidades_part.quant','necessidades_part.data','necessidades_part.obs',
+                                                      'necessidades_part.id_nec','necessidades_part.quant','necessidades_part.data',
+                                                      'necessidades_part.obs','necessidades_part.imagem',
                                                       'necessidades.descricao as desc_nec',
                                                       'categorias.descricao as desc_cat','unidades.descricao as desc_unid')
                                              ->get();
@@ -346,7 +351,7 @@ class TransacoesController extends Controller
                 ->selectRaw('participantes.id as id_part,participantes.nome_part,participantes.latitude,participantes.longitude,
                             participantes.nome_part,
                             ofertas_part.id as id_of_part,participantes.endereco,participantes.cidade,
-                            ofertas_part.id_of,ofertas_part.quant,ofertas_part.data,
+                            ofertas_part.id_of,ofertas_part.quant,ofertas_part.data,ofertas_part.imagem,
                             ofertas_part.obs,ofertas.descricao as desc_of,
                             categorias.descricao as desc_cat,unidades.descricao as desc_unid,
                            (6371 * (2 *
@@ -404,7 +409,8 @@ class TransacoesController extends Controller
                                              ->join('unidades','ofertas.id_unid','=','unidades.id')
                                           
                                              ->select('participantes.id as id_part','participantes.nome_part','participantes.latitude','participantes.longitude','participantes.nome_part','ofertas_part.id as id_of_part',
-                                                      'ofertas_part.id_of','ofertas_part.quant','ofertas_part.data','ofertas_part.obs','ofertas.descricao as desc_of',
+                                                      'ofertas_part.id_of','ofertas_part.quant','ofertas_part.imagem',
+                                                      'ofertas_part.data','ofertas_part.obs','ofertas.descricao as desc_of',
                                                       'categorias.descricao as desc_cat','unidades.descricao as desc_unid')
                                              ->get();
 
@@ -447,7 +453,7 @@ class TransacoesController extends Controller
                 ->selectRaw('participantes.id as id_part,participantes.nome_part,participantes.latitude,participantes.longitude,
                             participantes.nome_part,necessidades_part.id as id_nec_part,
                             participantes.endereco,participantes.cidade,participantes.cep,participantes.email,participantes.estado,
-                           necessidades_part.id_nec,necessidades_part.quant,necessidades_part.data,
+                           necessidades_part.id_nec,necessidades_part.quant,necessidades_part.data,necessidades_part.imagem,
                            necessidades_part.obs,necessidades.descricao as desc_nec,
                            categorias.descricao as desc_cat,unidades.descricao as desc_unid,
                            (6371 * (2
@@ -505,7 +511,9 @@ class TransacoesController extends Controller
                                           
                                              ->select('participantes.id as id_part','participantes.nome_part','participantes.latitude',
                                              'participantes.longitude','participantes.nome_part','necessidades_part.id as id_nec_part',
-                                             'necessidades_part.id_nec','necessidades_part.quant','necessidades_part.data','necessidades_part.obs','necessidades.descricao as desc_nec',
+                                             'necessidades_part.id_nec','necessidades_part.quant',
+                                             'necessidades_part.data','necessidades_part.imagem',
+                                             'necessidades_part.obs','necessidades.descricao as desc_nec',
                                              'categorias.descricao as desc_cat','unidades.descricao as desc_unid')
                                              ->get();
 
@@ -549,7 +557,7 @@ class TransacoesController extends Controller
                 ->selectRaw('participantes.id as id_part,participantes.nome_part,participantes.latitude,participantes.longitude,
                             participantes.nome_part,ofertas_part.id as id_of_part,
                             participantes.endereco,participantes.cidade,participantes.cep,participantes.email,participantes.estado,
-                           ofertas_part.id_of,ofertas_part.quant,ofertas_part.data,
+                           ofertas_part.id_of,ofertas_part.quant,ofertas_part.data,ofertas_part.imagem,
                            ofertas_part.obs,ofertas.descricao as desc_of,
                            categorias.descricao as desc_cat,unidades.descricao as desc_unid,
                            (6371 * (2
@@ -604,7 +612,9 @@ class TransacoesController extends Controller
                                              ->join('unidades','ofertas.id_unid','=','unidades.id')
                                           
                                              ->select('participantes.id as id_part','participantes.nome_part','participantes.latitude','participantes.longitude','participantes.nome_part','ofertas_part.id as id_of_part',
-                                                      'ofertas_part.id_of','ofertas_part.quant','ofertas_part.data','ofertas_part.obs','ofertas.descricao as desc_of',
+                                                      'ofertas_part.id_of','ofertas_part.quant',
+                                                      'ofertas_part.data','ofertas_part.imagem',
+                                                      'ofertas_part.obs','ofertas.descricao as desc_of',
                                                       'categorias.descricao as desc_cat','unidades.descricao as desc_unid')
                                              ->get();
 
@@ -653,7 +663,7 @@ class TransacoesController extends Controller
                 ->selectRaw('participantes.id as id_part,participantes.nome_part,participantes.latitude,participantes.longitude,
                             participantes.nome_part,ofertas_part.id as id_of_part,
                             participantes.endereco,participantes.cidade,participantes.cep,participantes.email,participantes.estado,
-                           ofertas_part.id_of,ofertas_part.quant,ofertas_part.data,
+                           ofertas_part.id_of,ofertas_part.quant,ofertas_part.data,ofertas_part.imagem,
                            ofertas_part.obs,ofertas.descricao as desc_of,
                            categorias.descricao as desc_cat,unidades.descricao as desc_unid,'.$sql_dist) 
                      
@@ -710,7 +720,8 @@ class TransacoesController extends Controller
             ->select('participantes.id as id_part','participantes.nome_part','participantes.latitude','participantes.longitude',
                   'participantes.nome_part',
                   'ofertas_part.id as id_of_part',
-                  'ofertas_part.id_of','ofertas_part.quant','ofertas_part.data','ofertas_part.obs','ofertas.descricao as desc_of',
+                  'ofertas_part.id_of','ofertas_part.quant','ofertas_part.data','ofertas_part.imagem',
+                  'ofertas_part.obs','ofertas.descricao as desc_of',
                   'categorias.descricao as desc_cat','unidades.descricao as desc_unid')
             ->first();
              
@@ -725,7 +736,8 @@ class TransacoesController extends Controller
                       ->select('participantes.id as id_part','participantes.nome_part','participantes.latitude','participantes.longitude',
                               'participantes.nome_part',
                               'ofertas_part.id as id_of_part',
-                              'ofertas_part.id_of','ofertas_part.quant','ofertas_part.data','ofertas_part.obs','ofertas.descricao as desc_of',
+                              'ofertas_part.id_of','ofertas_part.quant','ofertas_part.data','ofertas_part.imagem',
+                              'ofertas_part.obs','ofertas.descricao as desc_of',
                               'categorias.descricao as desc_cat','unidades.descricao as desc_unid')
                       ->first();
 
@@ -739,7 +751,7 @@ class TransacoesController extends Controller
                   
                   ->selectRaw('participantes.id as id_part,participantes.nome_part,participantes.latitude,participantes.longitude,
                               participantes.nome_part,necessidades_part.id as id_nec_part,participantes.endereco,participantes.cidade,
-                             necessidades_part.id_nec,necessidades_part.quant,necessidades_part.data,
+                             necessidades_part.id_nec,necessidades_part.quant,necessidades_part.data,necessidades_part.imagem,
                              necessidades_part.obs,necessidades.descricao as desc_nec,
                              categorias.descricao as desc_cat,unidades.descricao as desc_unid') 
                        
