@@ -187,7 +187,7 @@
                     <td>
                       <div style="width: 58rem;">
                         <div>
-                          <h5 class="card-title ">Oferta : {{$ofp->desc_of}}</h5>
+                          <h5 class="card-title ">{{$ofp->desc_of}}</h5>
                           <h6 style="color:rgb(6, 155, 30)" class="card-subtitle mb-2 texto_p">Categoria : {{$ofp->desc_cat}} </h6>
                           <p class="card-text texto_p">Obs : {{$ofp->obs}}</p>
                           <p style="color:rgb(4, 82, 155)" class="card-subtitle mb-1 texto_p">Participante : {{$ofp->nome_part}}</p>

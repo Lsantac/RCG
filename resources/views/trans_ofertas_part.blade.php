@@ -188,7 +188,7 @@
                       <td>
                       <div  style="width: 58rem;">
                         <div >
-                          <h5 class="card-title ">Necessidade : {{$necp->desc_nec}}</h5>
+                          <h5 class="card-title ">{{$necp->desc_nec}}</h5>
                           <h6 style="color:rgb(196, 104, 0)" class="card-subtitle mb-2 texto_p">Categoria : {{$necp->desc_cat}} </h6>
                           <p class="card-text texto_p">Obs : {{$necp->obs}}</p>
                           <p style="color:rgb(148, 48, 2)" class="card-subtitle mb-1 texto_p">Participante : {{$necp->nome_part}}</p>

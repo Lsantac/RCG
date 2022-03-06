@@ -524,12 +524,15 @@ class IniciaController extends Controller
 
          'ofertas_part.id_part as id_partic_ofertas',
          'ofertas_part.status as status_of',
+         'ofertas_part.imagem as imagem_of',
+         'ofertas_part_tr.imagem as imagem_of_tr',
 
          'ofertas_part.obs as obs_of',
          'ofertas_part_of.obs as obs_of_trans',
          'ofertas_part_tr.obs as obs_of_tr',
 
          'necessidades_part.obs as obs_nec',
+         'necessidades_part.imagem as imagem_nec',
          'necessidades.descricao as desc_nec',
          
          'moedas.desc_moeda as fluxo',
@@ -679,62 +682,65 @@ class IniciaController extends Controller
         })  
         
         ->select(
-            'ofertas_part.id as id_of',
-            'ofertas.descricao as desc_of',
-            'ofertas_of.descricao as desc_of_trans',
-            'ofertas_tr.descricao as desc_of_tr',
-   
-            'ofertas_part.id_part as id_partic_ofertas',
-            'ofertas_part.status as status_of',
-   
-            'ofertas_part.obs as obs_of',
-            'ofertas_part_of.obs as obs_of_trans',
-            'ofertas_part_tr.obs as obs_of_tr',
-   
-            'necessidades_part.obs as obs_nec',
-            'necessidades.descricao as desc_nec',
-            
-            'moedas.desc_moeda as fluxo',
-   
-            'transacoes.id_of_part as id_of_part',
-            'transacoes.id as id_trans',
-            'transacoes.id_nec_part as id_nec_part',
-            'transacoes.id_of_tr_part as id_of_tr_part',
-            'transacoes.quant_of as quant_of',
-            'transacoes.quant_nec as quant_nec',
-            'transacoes.quant_of_tr as quant_of_tr',
-            'transacoes.id_st_trans as id_st_trans',
-            'transacoes.quant_moeda as quant_moeda',
-            'transacoes.id_moeda as id_moeda',
-            'transacoes.data_inic as data_inic',
-            'transacoes.data_final_nec_part as data_final_nec_part',
-            'transacoes.data_final_of_part as data_final_of_part',
-            'transacoes.data_final_of_tr_part as data_final_of_tr_part',
-   
-            'categorias.descricao as desc_cat_of',
-            'categorias_of.descricao as desc_cat_of_trans',
-            'categorias_tr.descricao as desc_cat_of_tr',
-            'categorias_nec.descricao as desc_cat_nec',
-   
-            'participantes.nome_part as nome_part_of',
-   
-            'participantes_of.nome_part as nome_part_of_trans',
-            'participantes_of.endereco as endereco_of_trans',
-            'participantes_of.cidade as cidade_of_trans',
-            'participantes_of.estado as estado_of_trans',
-            'participantes_of.pais as pais_of_trans',
-            
-            'participantes_nec.nome_part as nome_part_nec',
-            'participantes_nec.endereco as endereco_nec',
-            'participantes_nec.cidade as cidade_nec',
-            'participantes_nec.estado as estado_nec',
-            'participantes_nec.pais as pais_nec',
-   
-            'participantes_tr.nome_part as nome_part_of_tr',
-            'participantes_tr.endereco as endereco_of_tr',
-            'participantes_tr.cidade as cidade_of_tr',
-            'participantes_tr.estado as estado_of_tr',
-            'participantes_tr.pais as pais_of_tr'
+         'ofertas_part.id as id_of',
+         'ofertas.descricao as desc_of',
+         'ofertas_of.descricao as desc_of_trans',
+         'ofertas_tr.descricao as desc_of_tr',
+
+         'ofertas_part.id_part as id_partic_ofertas',
+         'ofertas_part.status as status_of',
+         'ofertas_part.imagem as imagem_of',
+         'ofertas_part_tr.imagem as imagem_of_tr',
+
+         'ofertas_part.obs as obs_of',
+         'ofertas_part_of.obs as obs_of_trans',
+         'ofertas_part_tr.obs as obs_of_tr',
+
+         'necessidades_part.obs as obs_nec',
+         'necessidades_part.imagem as imagem_nec',
+         'necessidades.descricao as desc_nec',
+         
+         'moedas.desc_moeda as fluxo',
+
+         'transacoes.id_of_part as id_of_part',
+         'transacoes.id as id_trans',
+         'transacoes.id_nec_part as id_nec_part',
+         'transacoes.id_of_tr_part as id_of_tr_part',
+         'transacoes.quant_of as quant_of',
+         'transacoes.quant_nec as quant_nec',
+         'transacoes.quant_of_tr as quant_of_tr',
+         'transacoes.id_st_trans as id_st_trans',
+         'transacoes.quant_moeda as quant_moeda',
+         'transacoes.id_moeda as id_moeda',
+         'transacoes.data_inic as data_inic',
+         'transacoes.data_final_nec_part as data_final_nec_part',
+         'transacoes.data_final_of_part as data_final_of_part',
+         'transacoes.data_final_of_tr_part as data_final_of_tr_part',
+
+         'categorias.descricao as desc_cat_of',
+         'categorias_of.descricao as desc_cat_of_trans',
+         'categorias_tr.descricao as desc_cat_of_tr',
+         'categorias_nec.descricao as desc_cat_nec',
+
+         'participantes.nome_part as nome_part_of',
+
+         'participantes_of.nome_part as nome_part_of_trans',
+         'participantes_of.endereco as endereco_of_trans',
+         'participantes_of.cidade as cidade_of_trans',
+         'participantes_of.estado as estado_of_trans',
+         'participantes_of.pais as pais_of_trans',
+         
+         'participantes_nec.nome_part as nome_part_nec',
+         'participantes_nec.endereco as endereco_nec',
+         'participantes_nec.cidade as cidade_nec',
+         'participantes_nec.estado as estado_nec',
+         'participantes_nec.pais as pais_nec',
+
+         'participantes_tr.nome_part as nome_part_of_tr',
+         'participantes_tr.endereco as endereco_of_tr',
+         'participantes_tr.cidade as cidade_of_tr',
+         'participantes_tr.estado as estado_of_tr',
+         'participantes_tr.pais as pais_of_tr'
            )
    
         ->union($of_status)
@@ -743,8 +749,8 @@ class IniciaController extends Controller
         ->paginate(5);
         $of_status_tr_final->appends($request->all());
         
-        /*->get();*/
-        /*dd($of_status_tr_final);*/
+        /*->get();
+        dd($of_status_tr_final);*/
 
 
         /*---------------------------------------------------------------------------------------------------------------------*/
