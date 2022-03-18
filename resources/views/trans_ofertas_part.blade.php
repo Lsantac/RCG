@@ -16,14 +16,15 @@
 
     <h4 class="texto-oferta" style="color:rgb(91, 19, 207);">Sugestões de Transações para a oferta do Participante</h4> 
     <h5 class="texto-nome-logado">{{$nome_part_cab}}</h5> 
-    <br>
+   
 
      @if (isset($ofps)) 
 
     <table class="table table-sm tabela-oferta">
         <thead>
           <tr>
-            <th scope="col" class="texto_p ">Oferta</th>
+            <th scope="col" class="texto_p">Imagem</th>
+            <th scope="col" class="texto_p">Descrição</th>
             <th scope="col" class="texto_p">Categoria</th>
             <th scope="col" class="texto_p">Data</th>
             <th scope="col" class="texto_p">Quant</th>
@@ -37,6 +38,20 @@
               @foreach($ofps as $ofp)
                 <div>
                   <tr>
+                    <td>
+                      <div class="col-1" >
+                                <figure class="figure">
+                    
+                                  @if(!@empty($ofp->imagem))
+                                      <img id="imagem_of_cons"  src="/uploads/of_img/{{$ofp->imagem}}" class="imagem-pequena">
+                                  @else
+                                      <img id="imagem_of_cons" src="/img/logo.jpg" class="imagem-pequena">
+                                  @endif 
+                          
+                              </figure>
+                        </div>
+                    </td>
+
                     <td class="texto_p">{{$ofp->desc_of}}</td>
                     <td class="texto_p">{{$ofp->desc_cat}}</td>
 
@@ -60,9 +75,6 @@
       </table>
 
     @endif 
-
-    <br>
-    
 
     <h4 class="texto-necessidade">Necessidades de outros Participantes</h4> 
     <br>
@@ -152,8 +164,8 @@
     <table class="table table-sm tabela-necessidade">
         <thead>
           <tr>
-            <th scope="col" class="texto_p" colspan="2">Descrição</th>
-            
+            <th scope="col" class="texto_p" >Imagem</th>
+            <th scope="col" class="texto_p" >Descrição</th>
             <th scope="col" class="texto_p">Data</th>
             <th scope="col" class="texto_p">Quant</th>
             <th scope="col" class="texto_p">Unidade</th>
@@ -208,24 +220,46 @@
                     <td class="texto_p">{{$necp->quant}}</td>
                     <td class="texto_p">{{$necp->desc_unid}}</td>
 
-                    @php
-                      $status = App\Http\Controllers\TransacoesController::verifica_status_trans_of_nec_tr (
-                      $ofp->id_of_part,$necp->id_nec_part,0);
-                    @endphp  
-                   
-                    @if($status == 2)
-                        <td class="texto_p texto-em-andamento"><h4 class="bi bi-chat-left-dots-fill"></h4></td>
-                    @else
-                        @if(($status == 3))
-                            <td class="texto_p texto-parc-finalizada"><h4 class="bi bi-check-circle-fill"></h4></td>
-                        @else 
-                            @if($status == 4)
-                                <td class="texto_p texto-finalizada"><h4 class="bi bi-check-circle-fill"></h4></td>
-                            @else  
-                                <td class="texto_p"></td>
-                            @endif
-                        @endif  
-                    @endif    
+                    <td>
+                      <div class="row">
+                        <div class="col-1 texto-em-andamento">
+                          <span >
+                          @php
+                             echo App\Http\Controllers\IniciaController::consulta_status_transacoes_nec_anda($necp->id_nec_part)
+                          @endphp  
+                        </span>
+                        </div>
+
+                        <div class="col-2 texto-em-andamento">
+                          <h6 class="bi bi-chat-left-dots-fill"></h6>
+                        </div>
+
+                        <div class="col-1 texto-parc-finalizada">
+                          <span >
+                          @php
+                             echo App\Http\Controllers\IniciaController::consulta_status_transacoes_nec_parc($necp->id_nec_part)
+                          @endphp  
+                        </span>
+                        </div>
+
+                        <div class="col-2 texto-parc-finalizada">
+                          <h6 class="bi bi-check-circle-fill"></h6>
+                        </div>
+
+                        <div class="col-1 texto-finalizada">
+                          <span >
+                          @php
+                             echo App\Http\Controllers\IniciaController::consulta_status_transacoes_nec_final($necp->id_nec_part)
+                          @endphp  
+                        </span>
+                        </div>
+
+                        <div class="col-1 texto-finalizada">
+                          <h6 class="bi bi-check-circle-fill"></h6>
+                        </div>
+
+                      </div>
+                    </td>
                     
                     <td>
                       <form action="{{route('mens_transacoes_part')}}" method="get">

@@ -51,7 +51,8 @@
     <table class="table table-sm">
         <thead class="texto_m">
           <tr>
-            <th scope="col" colspan="2">Descrição</th>
+            <th scope="col">Imagem</th>
+            <th scope="col">Descrição</th>
             <th scope="col">Data</th>
             <th scope="col">Quant</th>
             <th scope="col">Unidade</th>
@@ -144,7 +145,7 @@
                     </td>    
                     <td></td>
                     
-                   <!-- @if($necp->status == 2)
+                   {{-- @if($necp->status == 2)
                         <td class="texto_p texto-em-andamento"><h4 class="bi bi-chat-left-dots-fill"></h4></td>
                     @else
                         @if(($necp->status == 3))
@@ -156,7 +157,7 @@
                                 <td class="texto_p"></td>
                             @endif
                         @endif  
-                    @endif -->
+                    @endif --}}
 
                     <td>
                       <div class="row">

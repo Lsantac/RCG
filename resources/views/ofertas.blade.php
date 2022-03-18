@@ -51,7 +51,8 @@
     <table class="table table-sm">
         <thead class="texto_m">
           <tr>
-            <th scope="col" colspan="2">Descrição</th>
+            <th scope="col" >Imagem</th>
+            <th scope="col" >Descrição</th>
             <th scope="col">Data</th>
             <th scope="col">Quant</th>
             <th scope="col">Unidade</th>

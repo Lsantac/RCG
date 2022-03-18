@@ -137,7 +137,11 @@
                                               <figure class="figure">
                                                 @if($of_st->fluxo == 'Troca')                  
                                                     @if(!@empty($of_st->imagem_of_tr))
-                                                        <img id="imagem_of_tr_cons"  src="/uploads/of_img/{{$of_st->imagem_of_tr}}" class="imagem-of-nec-cons">
+                                                        @if($of_st->imagem_of_tr <> $of_st->imagem_of)
+                                                            <img id="imagem_of_tr_cons"  src="/uploads/of_img/{{$of_st->imagem_of_tr}}" class="imagem-of-nec-cons">
+                                                        @else
+
+                                                        @endif
                                                     @else
                                                         <img id="imagem_of_tr_cons" src="/img/logo.jpg" class="imagem-of-nec-cons">
                                                     @endif 
