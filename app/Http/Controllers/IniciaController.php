@@ -658,7 +658,7 @@ class IniciaController extends Controller
         /*dados da oferta de troca da transacao -------------------------------------------------------------------------------*/
 
         ->leftjoinSub($ofertas_part_tr, 'ofertas_part_tr', function ($join) {
-            $join->on('transacoes.id_of_tr_part', '=', 'ofertas_part_tr.id');
+            $join->on('transacoes.id_of_part', '=', 'ofertas_part_tr.id');
         }) 
         ->leftjoinSub($ofertas_tr, 'ofertas_tr', function ($join) {
             $join->on('ofertas_part_tr.id_of', '=', 'ofertas_tr.id');

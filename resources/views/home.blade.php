@@ -157,8 +157,8 @@
 
     <script>
       function initialize() {
-        initMap_of();
         initMap_nec();
+        initMap_of();
       }
     </script>
 

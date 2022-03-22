@@ -26,10 +26,11 @@ function parseToXML($htmlStr){
     while ($row_markers = mysqli_fetch_assoc($resultado_markers)){
       // Add to XML document node
       echo '<marker ';
-      //echo 'color= "http://maps.google.com/mapfiles/kml/pal3/icon48.png" ';
+     // echo 'color= "http://maps.google.com/mapfiles/kml/pal3/icon48.png" ';
 
       if($row_markers['status']==2){
         echo 'color= "/icons/marcador_andamento.png" ';
+        
      }else{
        if($row_markers['status']==3){
           echo 'color= "/icons/marcador_parcial.png" ';
@@ -39,7 +40,7 @@ function parseToXML($htmlStr){
          }else{
             echo 'color= "/icons/marcador_verde.png" ';
          }
-       }  
+      }  
 
      };
 

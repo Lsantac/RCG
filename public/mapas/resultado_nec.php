@@ -29,15 +29,15 @@ function parseToXML($htmlStr){
       //echo 'color= "http://maps.google.com/mapfiles/kml/pal3/icon48.png" ';
 
       if($row_markers['status']==2){
-         echo 'color= "/icons/marcador_andamento.png" ';
+         echo 'color = "/icons/marcador_andamento.png" ';
       }else{
         if($row_markers['status']==3){
-           echo 'color= "/icons/marcador_parcial.png" ';
+           echo 'colo r= "/icons/marcador_parcial.png" ';
         }else{
           if($row_markers['status']==4){
-            echo 'color= "/icons/marcador_finalizado.png" ';
+            echo 'color = "/icons/marcador_finalizado.png" ';
           }else{
-            echo 'color= "/icons/marcador_laranja.png" ';
+            echo 'color = "/icons/marcador_laranja.png" ';
           }
         }  
 
