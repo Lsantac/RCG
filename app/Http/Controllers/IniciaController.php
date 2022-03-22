@@ -831,11 +831,12 @@ class IniciaController extends Controller
          'necessidades_part.id_part as id_partic_necessidades',
          'necessidades_part.status as status_nec',
          'necessidades_part.obs as obs_nec',
+         'necessidades_part.imagem as imagem_nec',
 
          'necessidades.descricao as desc_nec',
          
          'ofertas_part.obs as obs_of',
-
+         'ofertas_part.imagem as imagem_of',
          'ofertas.descricao as desc_of',
 
          'moedas.desc_moeda as fluxo',
@@ -865,6 +866,7 @@ class IniciaController extends Controller
          )
 
         ->orderBy('data_inic','desc')
+
         ->paginate(5);
         $nec_status->appends($request->all());
 

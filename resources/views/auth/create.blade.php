@@ -10,10 +10,10 @@
         
         <h2 class="texto-participante">Novo Participante</h2> 
         <figure class="figure">
-            <img src="/img/logo.jpg" class="figure-img img-fluid rounded imagem-part img-thumbnail" alt="...">
+            <img id="imagem_part" src="/img/logo.jpg" class="figure-img img-fluid rounded imagem-part img-thumbnail" alt="...">
         </figure>
         
-        <input class="btn-arquivo" name="part_image" id="part_image" type="file" accept=".jpg,.png,.jpeg">
+        <input class="btn-arquivo" onchange ="mostra_imagem(this, 'inclusao',0)" name="part_image" id="part_image" type="file" accept=".jpg,.png,.jpeg">
         
         <div class='results'>
              @if(Session::get('success'))
@@ -179,5 +179,32 @@
         </div>
     </form>
 </div>
+
+<script>
+     
+    function mostra_imagem(input,$modo,$id_of_part){
+
+             if (input.files && input.files[0]) {
+
+               var reader = new FileReader();
+
+               reader.onload = function (e) {
+                     if($modo == 'inclusao'){
+                       $('#imagem_part').attr('src', e.target.result);
+                     }else{
+                       if($modo == 'editar'){
+                          $('#imagem_of_alt-' + $id_of_part).attr('src', e.target.result);
+                          
+                       }
+                     }
+                     
+               };
+               reader.readAsDataURL(input.files[0]);
+               
+             }
+
+    }
+
+ </script>
 
 @endsection

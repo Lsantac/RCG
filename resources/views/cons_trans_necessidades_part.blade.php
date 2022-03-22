@@ -62,33 +62,62 @@
                           <div class="col">
                                   <div class="card" >
                                         <div class="card-body" style="background-color:rgb(245, 217, 199)">
-                                        <div class="row align-items-start">
-                                            <div class="col">
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <h6 class="card-title texto-necessidade">Necessidade : {{$nec_st->desc_nec}}</h6>       
-                                                    </div>
-                                                    <div class="col texto_p">
-                                                      @php
-                                                          if($nec_st->data_final_nec_part <> null){
-                                                            $date = new DateTime($nec_st->data_final_nec_part);
-                                                            echo "Confirmada em : ".$date->format('d-m-Y'). " (UTC: ".$date->format('H:i').")" ;
-                                                          }
-                                                      @endphp
 
-                                                    </div>
-
-                                                  </div>
+                                          <div class="row">
+                                                <div class="col-2">
+                                                    <figure class="figure">
+                                                      
+                                                        @if(!@empty($nec_st->imagem_nec))
+                                                            <img id="imagem_nec_cons"  src="/uploads/nec_img/{{$nec_st->imagem_nec}}" class="imagem-of-nec-cons">
+                                                        @else
+                                                            <img id="imagem_nec_cons" src="/img/logo.jpg" class="imagem-of-nec-cons">
+                                                        @endif 
+                                                  
+                                                      </figure>
                                                 </div>
 
-                                                  <div class="card-text texto_p">Categoria : {{$nec_st->desc_cat_nec}}</div>
-                                                  <div class="card-text texto_p">Participante : {{$nec_st->nome_part_nec}} </div>
-                                                  <div class="card-text texto_p">Obs : {{$nec_st->obs_nec}}</div>   
-                                                  
-                                            </div>
-                                        </div>
-                                    </div>
+                                                <div class="col">
+                                                    <div class="row align-items-start">
+                                                    
+                                                          <div class="col">
+                                                            <div class="row">
+                                                                  <div class="col">
+                                                                      <h6 class="texto-necessidade">Necessidade : {{$nec_st->desc_nec}}</h6>       
+                                                                  </div>
+                                                                  <div class="col texto_p">
+                                                                    @php
+                                                                        if($nec_st->data_final_nec_part <> null){
+                                                                          $date = new DateTime($nec_st->data_final_nec_part);
+                                                                          echo "Confirmada em : ".$date->format('d-m-Y'). " (UTC: ".$date->format('H:i').")" ;
+                                                                        }
+                                                                    @endphp
+
+                                                                  </div>
+                                                              </div>
+                                                          </div>
+
+                                                          <div class="card-text texto_p">Categoria : {{$nec_st->desc_cat_nec}} </div>
+                                                          <div class="texto_p">
+                                                              @php
+                                                                  if($nec_st->data_inic <> null){
+                                                                    $date = new DateTime($nec_st->data_inic);
+                                                                    echo "Início : ".$date->format('d-m-Y'). " (UTC: ".$date->format('H:i').")" ;
+                                                                  }
+                                                              @endphp
+                                                          </div>
+
+                                                          <div class="card-text texto_p">Participante : {{$nec_st->nome_part_nec}} </div>
+                                                          <div class="card-text texto_p">Obs : {{$nec_st->obs_nec}}</div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                          </div>
+
+                                        </div> 
+
                                   </div>
+                                  
                             </div>
                         </td>
                         
@@ -97,39 +126,59 @@
                             <div class="col">
                                         <div class="card" >
                                               <div class="card-body" style="background-color:rgb(199, 245, 207) " >
-                                                   <div class="row align-items-start">
-                                                      <div class="col">
-                                                          <div class="row">
-                                                                <div class="col">
-                                                                     <h6 class="card-title texto-oferta">Oferta : {{$nec_st->desc_of}}</h6>       
-                                                                </div>
-                                                                <div class="col texto_p">
-                                                                  @php
-                                                                      if($nec_st->data_final_of_part <> null){
-                                                                        $date = new DateTime($nec_st->data_final_of_part);
-                                                                        echo "Confirmada em : ".$date->format('d-m-Y'). " (UTC: ".$date->format('H:i').")" ;
-                                                                      }
-                                                                  @endphp
 
-                                                                </div>
-                                                              </div>
+                                                    <div class="row">
+                                                          <div class="col-2">
+                                                              <figure class="figure">
+                                                                
+                                                                  @if(!@empty($nec_st->imagem_of))
+                                                                      <img id="imagem_of_cons"  src="/uploads/of_img/{{$nec_st->imagem_of}}" class="imagem-of-nec-cons">
+                                                                  @else
+                                                                      <img id="imagem_of_cons" src="/img/logo.jpg" class="imagem-of-nec-cons">
+                                                                  @endif 
+                                                            
+                                                                </figure>
                                                           </div>
 
-                                                           <div class="card-text texto_p">Categoria : {{$nec_st->desc_cat_of}} </div>
-                                                           <div class="texto_p">
-                                                           @php
-                                                              if($nec_st->data_inic <> null){
-                                                                $date = new DateTime($nec_st->data_inic);
-                                                                echo "Início : ".$date->format('d-m-Y'). " (UTC: ".$date->format('H:i').")" ;
-                                                              }
-                                                           @endphp
-                                                           </div>
 
-                                                           <div class="card-text texto_p">Participante : {{$nec_st->nome_part_of}} </div>
-                                                           <div class="card-text texto_p">Endereço : {{$nec_st->endereco_of}} , {{$nec_st->cidade_of}} </div>
-                                                           <div class="card-text texto_p">Obs : {{$nec_st->obs_of}}</div>
-                                                      </div>
-                                                  </div>
+                                                          <div class="col">
+
+                                                            <div class="row align-items-start">
+                                                                <div class="col">
+                                                                    <div class="row">
+                                                                          <div class="col">
+                                                                              <h6 class="card-title texto-oferta">Oferta : {{$nec_st->desc_of}}</h6>       
+                                                                          </div>
+                                                                          <div class="col texto_p">
+                                                                            @php
+                                                                                if($nec_st->data_final_of_part <> null){
+                                                                                  $date = new DateTime($nec_st->data_final_of_part);
+                                                                                  echo "Confirmada em : ".$date->format('d-m-Y'). " (UTC: ".$date->format('H:i').")" ;
+                                                                                }
+                                                                            @endphp
+
+                                                                          </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="card-text texto_p">Categoria : {{$nec_st->desc_cat_of}} </div>
+                                                                    <div class="texto_p">
+                                                                    @php
+                                                                        if($nec_st->data_inic <> null){
+                                                                          $date = new DateTime($nec_st->data_inic);
+                                                                          echo "Início : ".$date->format('d-m-Y'). " (UTC: ".$date->format('H:i').")" ;
+                                                                        }
+                                                                    @endphp
+                                                                    </div>
+
+                                                                    <div class="card-text texto_p">Participante : {{$nec_st->nome_part_of}} </div>
+                                                                    <div class="card-text texto_p">Endereço : {{$nec_st->endereco_of}} , {{$nec_st->cidade_of}} </div>
+                                                                    <div class="card-text texto_p">Obs : {{$nec_st->obs_of}}</div>
+                                                                </div>
+                                                            </div>
+                                                          </div>
+                                                    </div>
+
                                               </div>
                                         </div>
                               </div>

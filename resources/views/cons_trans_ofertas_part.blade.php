@@ -230,7 +230,7 @@
 
                         <td>
                           <div class="col">
-                                  <div class="card" style="width: 20rem;" >
+                                  <div class="card" style="width: 10rem;" >
 
                                     <div class="card-body header-trans">
           

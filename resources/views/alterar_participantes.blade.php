@@ -28,16 +28,16 @@
        <figure class="figure">
 
             @if(!@empty($participante->imagem))
-                <img src="/uploads/participantes/{{Session('imagem_logado')}}" class="imagem-part rounded-pill">
+                <img id="imagem_part" src="/uploads/participantes/{{Session('imagem_logado')}}" class="imagem-part rounded-pill">
             @else
-                <img src="/img/logo.jpg" class="figure-img img-fluid rounded-pill imagem-part img-thumbnail ">
+                <img id="imagem_part" src="/img/logo.jpg" class="figure-img img-fluid rounded-pill imagem-part img-thumbnail ">
             @endif 
     
         </figure>
 
         <div class="row">
                 <label for="part_image" class="form-label">Selecionar imagem</label>
-                <input class="form-control @error('part_image') is-invalid @enderror" name="part_image" id="part_image" type="file" accept=".jpg,.png,.jpeg">
+                <input class="form-control @error('part_image') is-invalid @enderror" onchange ="mostra_imagem(this, 'inclusao',0)" name="part_image" id="part_image" type="file" accept=".jpg,.png,.jpeg">
                 <label class="form-label red-message">{{Session::get('fail image')}}</label>
         </div>
         
@@ -167,5 +167,33 @@
         
     </form>
 </div>
+
+<script>
+     
+    function mostra_imagem(input,$modo,$id_of_part){
+
+             if (input.files && input.files[0]) {
+
+               var reader = new FileReader();
+
+               reader.onload = function (e) {
+                     if($modo == 'inclusao'){
+                       $('#imagem_part').attr('src', e.target.result);
+                     }else{
+                       if($modo == 'editar'){
+                          $('#imagem_of_alt-' + $id_of_part).attr('src', e.target.result);
+                          
+                       }
+                     }
+                     
+               };
+               reader.readAsDataURL(input.files[0]);
+               
+             }
+
+    }
+
+ </script>
+
 
 @endsection
