@@ -4,13 +4,15 @@
 @section('content')
 
     <div class="container">
-      
+
         <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
 
             
             <div class="carousel-inner">
-
+                
                 <div class="carousel-item active">
+                     <h1 style="text-align: center; color:blue;">Rede Colaborativa Global</h1>
+
                                 <img src="/img/imagem2.jpg" class="d-block" 
                                 
                                 style="width:60vmax; display: block;
