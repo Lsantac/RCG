@@ -25,7 +25,8 @@ use App\Http\Controllers\UnidadesController;
 */
 
 /*Tela Inicial */
-Route::get('/home', [IniciaController::class,'tela_inicial'])->middleware('islogged');
+Route::get('/home', [IniciaController::class,'home'])->middleware('islogged');
+Route::get('/inicio', [IniciaController::class,'inicio'])->middleware('islogged');
 Route::get('/cons_trans_ofertas_part/{status}/{id_part}', [IniciaController::class,'cons_trans_ofertas_part'])->middleware('islogged');;
 Route::get('/cons_trans_necessidades_part/{status}/{id_part}', [IniciaController::class,'cons_trans_necessidades_part'])->middleware('islogged');;
 
@@ -52,6 +53,7 @@ Route::any('resetpass', function () {
 
 Route::get('/', function () {
     return view('auth.login');
+    //return view('home');
 });
 
 /*Participantes*/

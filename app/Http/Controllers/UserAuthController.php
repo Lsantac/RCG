@@ -52,7 +52,7 @@ class UserAuthController extends Controller
                                  'senha' =>Hash::make(request('senha'))],
                             ]);
 
-                            return redirect('home');
+                            return redirect('inicio');
 
                             /*if($query){
                                 return redirect('home');
@@ -126,7 +126,7 @@ class UserAuthController extends Controller
         session()->pull('latitude');
         session()->pull('longitude');
         
-        return redirect('/');
+        return redirect('/home');
     }
 
     public function alterpass(){

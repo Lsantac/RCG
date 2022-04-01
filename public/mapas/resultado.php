@@ -27,7 +27,9 @@ function parseToXML($htmlStr){
       // Add to XML document node
       echo '<marker ';
       //echo 'color= "http://maps.google.com/mapfiles/kml/pal3/icon48.png" ';
+
       echo 'color= "/icons/icon4.png" ';
+
       echo 'name="' . parseToXML($row_markers['nome_part']) . '" ';
       echo 'address="' . parseToXML($row_markers['endereco']) . '" ';
       echo 'lat="' . $row_markers['latitude'] . '" ';

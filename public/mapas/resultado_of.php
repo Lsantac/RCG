@@ -26,23 +26,39 @@ function parseToXML($htmlStr){
     while ($row_markers = mysqli_fetch_assoc($resultado_markers)){
       // Add to XML document node
       echo '<marker ';
-     // echo 'color= "http://maps.google.com/mapfiles/kml/pal3/icon48.png" ';
+      //echo 'color= "http://maps.google.com/mapfiles/kml/pal3/icon48.png" ';
 
-      if($row_markers['status']==2){
-        echo 'color= "/icons/marcador_andamento.png" ';
-        
-     }else{
-       if($row_markers['status']==3){
-          echo 'color= "/icons/marcador_parcial.png" ';
-       }else{
-         if($row_markers['status']==4){
-           echo 'color= "/icons/marcador_finalizado.png" ';
+      if (file_exists('http://redecolaborativa.ddns.net:8221/RedeColaborativa/public/icons')){
+        if($row_markers['status']==2){
+          echo 'color= "http://redecolaborativa.ddns.net:8221/RedeColaborativa/public/icons/marcador_andamento.png" ';
+        }else{
+         if($row_markers['status']==3){
+            echo 'color= "http://redecolaborativa.ddns.net:8221/RedeColaborativa/public/icons/marcador_parcial.png" ';
          }else{
-            echo 'color= "/icons/marcador_verde.png" ';
-         }
-      }  
+           if($row_markers['status']==4){
+             echo 'color= "http://redecolaborativa.ddns.net:8221/RedeColaborativa/public/icons/marcador_finalizado.png" ';
+           }else{
+              echo 'color= "http://redecolaborativa.ddns.net:8221/RedeColaborativa/public/icons/marcador_verde.png" ';
+           }
+         }  
+      }
+    }else{
+          if($row_markers['status']==2){
+            echo 'color= "http://192.168.15.14:8221/RedeColaborativa/public/icons/marcador_andamento.png" ';
+          }else{
+              if($row_markers['status']==3){
+                  echo 'color= "http://192.168.15.14:8221/RedeColaborativa/public/icons/marcador_parcial.png" ';
+              }else{
+                if($row_markers['status']==4){
+                  echo 'color= "http://192.168.15.14:8221/RedeColaborativa/public/icons/marcador_finalizado.png" ';
+                }else{
+                    echo 'color= "http://192.168.15.14:8221/RedeColaborativa/public/icons/marcador_verde.png" ';
+                }
+              }  
 
-     };
+          };
+    }
+      
 
       echo 'name="' . parseToXML($row_markers['nome_part']) . '" ';
       echo 'address="' . parseToXML($row_markers['endereco']) . '" ';

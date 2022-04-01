@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\DB;
 class IniciaController extends Controller
 {
 
+    public function home(request $request){
+        return view('home');
+    }    
+
     public static function consulta_status_transacoes_of_anda($id_of_part){
 
         /*Ofertas com transações em andamento*/
@@ -87,7 +91,7 @@ class IniciaController extends Controller
     }
 
 
-    public function tela_inicial(request $request){
+    public function inicio(request $request){
 
            $id_logado = Session('id_logado');
 
@@ -378,7 +382,7 @@ class IniciaController extends Controller
 
             /* Retorno para a pagina inicial com as variaveis respectivas ----------------------------------------------*/
 
-            return view('home',[
+            return view('inicio',[
                          'num_mens_anda_of_tr' => $num_mens_anda_of_tr,
                          'num_mens_anda_nec' => $num_mens_anda_nec,
                          'num_ofp_parc' => $num_ofp_parc,
