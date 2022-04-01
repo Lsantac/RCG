@@ -2,7 +2,7 @@
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container-fluid ">
-        <a class="navbar-brand" href="#">RCG</a>
+        <a class="navbar-brand" href="/home">RCG</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -77,10 +77,9 @@
               </form>
 
           @else
-              <form class="d-flex" action="{{route('auth.login')}}" method="POST">
-                    @csrf
-                    <button class="btn btn-blue btn-sm" type="submit">Login</button>  
-              </form>
+              <button class="btn btn-blue btn-sm" type="button"><a style="color:white; text-decoration:none;" href="/login">Login</a></button>  
+              
+              
           @endif
 
         </div>

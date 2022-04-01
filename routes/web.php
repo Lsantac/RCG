@@ -52,8 +52,13 @@ Route::any('resetpass', function () {
 });
 
 Route::get('/', function () {
+    //return view('auth.login');
+    return view('home');
+});
+
+Route::get('/login', function () {
     return view('auth.login');
-    //return view('home');
+    
 });
 
 /*Participantes*/
