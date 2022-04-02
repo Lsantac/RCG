@@ -12,9 +12,9 @@
 
         <figure class="figure">
             @if(!@empty($participante->imagem))
-                <img src="/uploads/participantes/{{$participante->imagem}}" class="imagem-part rounded-pill">
+                <img src="/uploads/participantes/{{$participante->imagem}}" class="imagem-part rounded">
             @else
-                <img src="/img/logo.jpg" class="figure-img img-fluid rounded-pill imagem-part img-thumbnail">
+                <img src="/img/logo.jpg" class="figure-img img-fluid rounded imagem-part img-thumbnail">
             @endif 
         </figure>
         

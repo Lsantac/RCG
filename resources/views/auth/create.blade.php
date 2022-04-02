@@ -9,12 +9,19 @@
         @csrf 
         
         <h2 class="texto-participante">Novo Participante</h2> 
-        <figure class="figure">
-            <img id="imagem_part" src="/img/logo.jpg" class="figure-img img-fluid rounded imagem-part img-thumbnail" alt="...">
-        </figure>
-        
-        <input class="btn-arquivo" onchange ="mostra_imagem(this, 'inclusao',0)" name="part_image" id="part_image" type="file" accept=".jpg,.png,.jpeg">
-        
+
+        <div class="row">
+            <div class="col-2" >
+                 <figure style="margin: 0 0 0rem;">
+                    <img  id="imagem_part" src="/img/logo.jpg" class="figure-img img-fluid rounded imagem-part img-thumbnail" alt="...">
+                </figure>
+            </div>
+            <div class="col-10" style="align-self: flex-end;">
+                <input class="btn-arquivo" onchange ="mostra_imagem(this, 'inclusao',0)" name="part_image" id="part_image" type="file" accept=".jpg,.png,.jpeg">    
+            </div>
+            
+        </div>
+
         <div class='results'>
              @if(Session::get('success'))
                  <div class="alert alert-success">
@@ -174,8 +181,8 @@
         </div>
         
         <div class="col-12">
-        <br>
-        <button type="submit" class="btn btn-primary">Confirmar</button>
+        
+        <button type="submit" class="btn btn-primary texto_m">Confirmar</button>
         </div>
     </form>
 </div>

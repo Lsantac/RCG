@@ -11,7 +11,7 @@
             <div class="carousel-inner">
                 
                 <div class="carousel-item active">
-                     <h1 style="text-align: center; color:blue;">Rede Colaborativa Global</h1>
+                     <h1 style="text-align: center; color:blue;">{{$ident->nome_ident}}</h1>
 
                                 <img src="/img/imagem2.jpg" class="d-block" 
                                 
@@ -22,6 +22,7 @@
 
 
               <div class="carousel-item">
+                <h1 style="text-align: center; color:blue;">{{$ident->nome_ident}}</h1>
                 <img src="/img/imagem6.webp" class="d-block" 
 
                 style="width:60vmax; display: block;
@@ -31,6 +32,7 @@
               </div>
 
               <div class="carousel-item">
+                <h1 style="text-align: center; color:blue;">{{$ident->nome_ident}}</h1>
                 <img src="/img/imagem9.jpg" class="d-block" 
 
                 style="width:60vmax; height:auto; display: block;
@@ -40,6 +42,7 @@
               </div>
 
               <div class="carousel-item">
+                <h1 style="text-align: center; color:blue;">{{$ident->nome_ident}}</h1>
                 <img src="/img/imagem8.jpg" class="d-block" 
                 
                 style="width:60vmax; display: block;
@@ -50,6 +53,7 @@
              
 
               <div class="carousel-item">
+                <h1 style="text-align: center; color:blue;">{{$ident->nome_ident}}</h1>
                 <img src="/img/imagem3.jpg" class="d-block" 
                 
                 style="width:60vmax; display: block;

@@ -51,10 +51,10 @@ Route::any('resetpass', function () {
     return view('auth.resetpass');
 });
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     //return view('auth.login');
     return view('home');
-});
+});*/
 
 Route::get('/login', function () {
     return view('auth.login');

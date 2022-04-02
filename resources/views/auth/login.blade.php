@@ -57,7 +57,7 @@
                 </div>
                 <br>               
                 <button type="submit" class="btn btn-primary">Entrar</button>
-                <a class="btn btn-success" href="novo_participante" role="button">Novo Participante</a>
+                <!-- <a class="btn btn-success" href="novo_participante" role="button">Novo Participante</a> -->
                 
             
             </form>

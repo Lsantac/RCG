@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Database\Console\DbCommand;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -11,6 +12,15 @@ class IniciaController extends Controller
     public function home(request $request){
         return view('home');
     }    
+
+    public function ident(request $request){
+
+        $ident = DB::table('identidade')->first();
+
+       /* dd($ident);*/
+        
+        return view('home',['ident'=>$ident]);
+    }
 
     public static function consulta_status_transacoes_of_anda($id_of_part){
 

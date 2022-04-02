@@ -21,13 +21,13 @@ class UserAuthController extends Controller
     function login(StoreUserRequest $request){
 
         if(session()->has('email')){
-            return redirect('/')->with('fail','Já existe um participante logado nessa maquina!');
+            return redirect('/home')->with('fail','Já existe um participante logado nessa maquina!');
         }else{
 
                 $part = DB::table('participantes')->where('email','=',request('email'))->first();
                 
                 if(!$part){
-                return redirect('/')->with('success','Voce é um Novo Participante! Faça seu cadastro primeiro.');
+                return redirect('/home')->with('success','Voce é um Novo Participante! Faça seu cadastro primeiro.');
                 }
                 else{
 
@@ -60,7 +60,7 @@ class UserAuthController extends Controller
                                 return redirect('/')->with('fail','Aconteceu algum erro! Participante não foi registrado.');
                             }*/
                     }else{
-                         return redirect('/')->with('fail','Senha inválida!');
+                         return redirect('/home')->with('fail','Senha inválida!');
                     }
 
                 }

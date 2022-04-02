@@ -28,16 +28,16 @@
        <figure class="figure">
 
             @if(!@empty($participante->imagem))
-                <img id="imagem_part" src="/uploads/participantes/{{Session('imagem_logado')}}" class="imagem-part rounded-pill">
+                <img id="imagem_part" src="/uploads/participantes/{{Session('imagem_logado')}}" class="imagem-part rounded">
             @else
-                <img id="imagem_part" src="/img/logo.jpg" class="figure-img img-fluid rounded-pill imagem-part img-thumbnail ">
+                <img id="imagem_part" src="/img/logo.jpg" class="figure-img img-fluid rounded imagem-part img-thumbnail ">
             @endif 
     
         </figure>
 
         <div class="row">
-                <label for="part_image" class="form-label">Selecionar imagem</label>
-                <input class="form-control @error('part_image') is-invalid @enderror" onchange ="mostra_imagem(this, 'inclusao',0)" name="part_image" id="part_image" type="file" accept=".jpg,.png,.jpeg">
+                <label for="part_image" class="form-label texto_m">Selecionar imagem</label>
+                <input class="form-control texto_m @error('part_image') is-invalid @enderror" onchange ="mostra_imagem(this, 'inclusao',0)" name="part_image" id="part_image" type="file" accept=".jpg,.png,.jpeg">
                 <label class="form-label red-message">{{Session::get('fail image')}}</label>
         </div>
         
@@ -154,7 +154,7 @@
         
         <div class="col-12">
         <br>
-        <button type="submit" style="margin-right: 50px" class="btn btn-primary texto_p">Confirmar Dados</button>
+        <button type="submit" style="margin-right: 50px" class="btn btn-primary texto_m">Confirmar Dados</button>
         
         <a type="button" href="/ofertas_part/{{$participante->id}}" class="btn btn-ofertas bi-arrow-up-circle-fill texto_m"> Ofertas</a>   
         <a type="button" href="/necessidades_part/{{$participante->id}}" class="btn btn-necessidades bi-arrow-down-circle-fill texto_m"> Necessidades</a>   
