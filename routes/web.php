@@ -12,6 +12,7 @@ use App\Http\Controllers\IniciaController;
 use App\Http\Controllers\CategoriasController;
 use App\Http\Controllers\MoedasController;
 use App\Http\Controllers\UnidadesController;
+use App\Http\Controllers\IdentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +31,9 @@ Route::get('/', [IniciaController::class,'ident']);
 Route::get('/inicio', [IniciaController::class,'inicio'])->middleware('islogged');
 Route::get('/cons_trans_ofertas_part/{status}/{id_part}', [IniciaController::class,'cons_trans_ofertas_part'])->middleware('islogged');;
 Route::get('/cons_trans_necessidades_part/{status}/{id_part}', [IniciaController::class,'cons_trans_necessidades_part'])->middleware('islogged');;
+
+/*Configura Identidade */
+Route::get('/identidade', [IdentController::class,'conf_ident'])->middleware('islogged');
 
 /*Autenticações, login e logout */
 
