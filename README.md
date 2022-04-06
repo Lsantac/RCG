@@ -1,4 +1,8 @@
 
+
+
+
+
 ## Sobre Rede Colaborativa Global
 
 O mundo atual sofre com sistemas economicos competitivos e com prosperidade para poucos grupos que conseguem se unir com o objetivo de acumular recursos cada vez mais, defendendo interesses proprios e na ilusão de que é possivel existir um mundo Justo , Feliz e Prospero de verdade, onde cada grupo de pessoas, familias, paises e culturas, esteja com medo do outro, criando divisões, fronteiras, guerras, e competição onde para que um grupo possa prosperar o outro tenha que se privar de ter os recursos basicos de que precisa para ser Feliz. É um jogo de perde-ganha e que como temos visto exaustivamente pelo mundo a muito tempo, está levando nossa civilização a um colapso iminente.
@@ -14,6 +18,14 @@ The Global Collaborative Network proposes to encourage people to exercise the ex
 The proposal then is to invite everyone to use this porject to exchange resources, help each other, and that this has no borders, nor culture, nor religion, nor any type of condition, the main motivation being the desire to see the other happy and prosperous, and in doing so, by circulating more and more resources, we will also be able to receive what we can, as we get to know more and more people, and create more collaborative networks, which can be local or broader, according to the creativity of each one.
 You can use this program to start experimenting with this, organize groups,create colaborative coins, make exchanges, donations to those in need and also, say what each one needs, in a good sense, knowing that we also need to exercise the understanding that consumerism is an accumulation of goods that could be better used by others who don't have access yet.
 May everyone have a great experience and that this proposal, which is not new and already exists in other levels around the world, can be replicated even more.
+
+Tela Inicial mostrando Ofertas e Necessidades do Participante :
+
+![inicio](https://user-images.githubusercontent.com/70023684/161860810-cf3950c9-9072-4155-a24c-2fcf4618a1a0.jpg)
+
+Tela de Transação entre quem faz a Oferta e quem tem a Necessidade :
+
+![detalhes_da_transação](https://user-images.githubusercontent.com/70023684/161861210-133f0690-5c1d-4fde-991f-a2f462f81273.jpg)
 
 
 
