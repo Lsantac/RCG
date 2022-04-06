@@ -44,9 +44,9 @@
         height: 100px;
     }
     
-    .imagem-of-nec-cons {
-        width: 70px;
-        height: 70px;
+    .imagem-sis {
+        width: 10vmax;
+        height: 10vmax;
     }
     
     .imagem-pequena {
@@ -336,6 +336,10 @@
     
     .texto_m {
         font-size: 14px;
+    }
+    
+    .texto_g {
+        font-size: 20px;
     }
     
     .texto_g {

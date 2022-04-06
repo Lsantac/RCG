@@ -25,9 +25,10 @@
                 <h1 style="text-align: center; color:blue;">{{$ident->nome_ident}}</h1>
                 <img src="/img/imagem6.webp" class="d-block" 
 
-                style="width:60vmax; display: block;
-                margin-left: auto;
-                margin-right: auto;" alt="...">
+                style="width: 60vmax;height: 45vmax;
+                 margin-left: auto;
+                margin-right: auto;"
+                 alt="...">
 
               </div>
 
