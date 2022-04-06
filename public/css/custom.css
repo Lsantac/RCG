@@ -44,9 +44,14 @@
         height: 100px;
     }
     
+    .imagem-of-nec-cons {
+        width: 70px;
+        height: 70px;
+    }
+    
     .imagem-sis {
-        width: 10vmax;
-        height: 10vmax;
+        width: 7vmax;
+        height: 7vmax;
     }
     
     .imagem-pequena {
