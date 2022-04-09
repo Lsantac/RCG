@@ -11,13 +11,14 @@
           
           <h3 class="texto-m text-center" style="color:dodgerblue;">Identidade do Sistema</h3> 
           
-          <form class="row g-3 needs-validation" novalidate action="" method="post" enctype="multipart/form-data">
+          <form class="row g-3" action="{{route('altera_ident')}}" method="post" enctype="multipart/form-data">
+
+            @csrf
+
             <div class="col-md-12">
-              <label for="validationNomeSis" class="form-label">Nome</label>
-              <input type="text" class="form-control" id="validationNomeSis" value="{{$ident->nome_ident}}" required>
-              <div class="valid-feedback">
-                Parece Bom!
-              </div>
+              <label for="nome_ident" class="form-label">Nome</label>
+              <input type="text" class="form-control" id="nome_ident" name="nome_ident" value="{{$ident->nome_ident}}" required>
+              
               <br>
             </div>
 
@@ -31,8 +32,8 @@
                 <div class="col-9" style="align-self: flex-end;">
                     <label for="sel_img" class="form-label texto_m">Selecionar Logo</label>
                      <input  name="sel_img" id="sel_img" type="file" accept=".jpg,.png,.jpeg" onchange ="mostra_imagem(this, 'inclusao',0)" class="form-control form-control-sm @error('sel_img') is-invalid @enderror" >
-                     <label class="form-label red-message">{{Session::get('fail image')}}</label>
-                 </div>
+                     
+                </div>
           
             </div>
            
@@ -40,6 +41,7 @@
               <button class="btn btn-primary" type="submit">Confirmar</button>
             </div>
           </form>
+          
         </div>
       </div>
     

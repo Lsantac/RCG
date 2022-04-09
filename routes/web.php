@@ -34,6 +34,7 @@ Route::get('/cons_trans_necessidades_part/{status}/{id_part}', [IniciaController
 
 /*Configura Identidade */
 Route::get('/identidade', [IdentController::class,'conf_ident'])->middleware('islogged');
+Route::post('/altera_ident', [IdentController::class,'altera_ident'])->name('altera_ident');
 
 /*Autenticações, login e logout */
 
