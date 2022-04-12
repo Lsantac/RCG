@@ -24,6 +24,7 @@ class UserAuthController extends Controller
             return redirect('/home')->with('fail','Já existe um participante logado nessa maquina!');
         }else{
 
+                $ident = DB::table('identidade')->first();
                 $part = DB::table('participantes')->where('email','=',request('email'))->first();
                 
                 if(!$part){
@@ -39,6 +40,8 @@ class UserAuthController extends Controller
                             $request->session()->put('id_tipo_acesso_logado', $part->id_tipo_acesso);
                             $request->session()->put('latitude', $part->latitude);
                             $request->session()->put('longitude', $part->longitude);
+                            $request->session()->put('logo',$ident->logo);
+                            $request->session()->put('nome_ident',$ident->nome_ident);
                             
                             /*$user = new users();
 

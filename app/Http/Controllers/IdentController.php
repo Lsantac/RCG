@@ -8,7 +8,31 @@ use Illuminate\Support\Facades\File;
 
 
 class IdentController extends Controller
+
 {
+
+    public static function consulta_logo(){
+            
+            $ident = DB::table('identidade')->first();
+
+            $logo = $ident->logo;
+    
+            return $logo;
+    
+
+    }
+
+    public static function consulta_nome_ident(){
+            
+            $ident = DB::table('identidade')->first();
+
+            $nome = $ident->nome_ident;
+    
+            return $nome;
+    
+
+    }
+
     public function conf_ident(request $request){
 
         $ident = DB::table('identidade')->first();
@@ -22,7 +46,8 @@ class IdentController extends Controller
 
        /* dd(request('nome_ident'));*/
 
-       $request->session()->put('NomeSistema', request('nome_ident'));
+       $request->session()->put('nome_ident', request('nome_ident'));
+       
         
         if($request->hasFile('sel_img')){
           $file = $request->file('sel_img');
@@ -47,6 +72,8 @@ class IdentController extends Controller
 
             $ident = DB::table('identidade')->where('id',1)             
                      ->update(['nome_ident' => request('nome_ident'),'logo'=>$filename]);
+
+            $request->session()->put('logo', $filename);
 
             $ident = DB::table('identidade')->where('id',1)->first();                                              
             /*dd($ident);                      */
