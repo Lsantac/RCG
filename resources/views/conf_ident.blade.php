@@ -8,6 +8,30 @@
 
     <div class="card" style="width:40vmax;margin:auto;">
         <div class="card-body">
+
+          @if(Session::get('success'))
+              <div class="alert alert-success">
+                  {{Session::get('success')}}
+              </div>
+          @endif
+
+          @if(Session::get('fail'))
+              <div class="alert alert-danger">
+                  {{Session::get('fail')}}
+              </div>
+          @endif
+
+          @if(Session::get('fail type'))
+              <div class="alert alert-danger">
+                  {{Session::get('fail type')}}
+              </div>
+          @endif
+
+          @if(Session::get('fail size'))
+              <div class="alert alert-danger">
+                  {{Session::get('fail size')}}
+              </div>
+          @endif
           
           <h3 class="texto-m text-center" style="color:dodgerblue;">Identidade do Sistema</h3> 
           

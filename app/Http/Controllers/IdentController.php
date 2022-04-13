@@ -54,7 +54,7 @@ class IdentController extends Controller
     
           $size = $file->getSize();
     
-          if($size > 5000000){
+          if($size > 500000){
              return back()->with('fail size','tamanho maior do que o permitido!');
           }
     
