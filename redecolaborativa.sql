@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 07-Mar-2022 às 19:44
+-- Tempo de geração: 21-Abr-2022 às 16:12
 -- Versão do servidor: 10.4.20-MariaDB
 -- versão do PHP: 8.0.9
 
@@ -85,6 +85,37 @@ CREATE TABLE `eventos_part` (
 -- --------------------------------------------------------
 
 --
+-- Estrutura da tabela `identidade`
+--
+
+CREATE TABLE `identidade` (
+  `id` int(11) NOT NULL,
+  `nome_ident` varchar(255) NOT NULL,
+  `logo` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `identidade`
+--
+
+INSERT INTO `identidade` (`id`, `nome_ident`, `logo`) VALUES
+(1, 'Rede Colaborativa Global', 'logo.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `identidade_imgs`
+--
+
+CREATE TABLE `identidade_imgs` (
+  `id` int(11) NOT NULL,
+  `imagem` text NOT NULL,
+  `descr_img` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura da tabela `markers`
 --
 
@@ -102,15 +133,16 @@ CREATE TABLE `markers` (
 --
 
 INSERT INTO `markers` (`id`, `nome_part`, `endereco`, `latitude`, `longitude`, `type`) VALUES
-(1021, 'Marcos da Silva', 'Rua Santa Clara , 100 , Copacabana', -22.9703426, -43.1876640, NULL),
-(1020, 'Luiz Eduardo Castro', 'Rua Luiz Menezes , 111 , Vila Paraiba', -22.8105164, -45.1904182, NULL),
-(1019, 'Ricardo Geraldo', 'R. Corumbá, 224 - Carlos Prates', -19.9150295, -43.9596977, NULL),
-(1018, 'Ana Claudia', 'Rua do Catete, 200', -22.9254646, -43.1766167, NULL),
-(1013, 'Luiz Eduardo Castro', 'Rua Luiz Menezes , 111 , Vila Paraiba', -22.8105164, -45.1904182, NULL),
-(1014, 'Joao Batista', 'Rua Brasil 104', -22.7455845, -45.1327324, NULL),
-(1015, 'Luiz Eduardo Castro', 'Rua Luiz Menezes , 111 , Vila Paraiba', -22.8105164, -45.1904182, NULL),
-(1016, 'Ana Claudia', 'Rua do Catete, 200', -22.9254646, -43.1766167, NULL),
-(1017, 'Amanda Pereira', 'Rua Irlanda, 20', -16.7167072, -49.3069305, NULL);
+(1336, 'Luiz Eduardo Castro', 'Rua Luiz Menezes , 111 , Vila Paraiba', -22.8105164, -45.1904182, NULL),
+(1337, 'Marcos da Silva', 'Rua Santa Clara , 100 , Copacabana', -22.9703426, -43.1876640, NULL),
+(1335, 'Ricardo Geraldo', 'R. Corumbá, 224 - Carlos Prates', -19.9150295, -43.9596977, NULL),
+(1333, 'Amanda Pereira', 'Rua Irlanda, 20', -16.7167072, -49.3069305, NULL),
+(1334, 'Ana Claudia', 'Rua do Catete, 200', -22.9254646, -43.1766167, NULL),
+(1331, 'Luiz Eduardo Castro', 'Rua Luiz Menezes , 111 , Vila Paraiba', -22.8105164, -45.1904182, NULL),
+(1332, 'Ana Claudia', 'Rua do Catete, 200', -22.9254646, -43.1766167, NULL),
+(1330, 'Joao Batista', 'Rua Brasil 104', -22.7455845, -45.1327324, NULL),
+(1328, 'Marcelo Shama', 'Rua Luiz Silveira Soares, 108 - Encantada', -28.0606689, -48.6789703, NULL),
+(1329, 'Luiz Eduardo Castro', 'Rua Luiz Menezes , 111 , Vila Paraiba', -22.8105164, -45.1904182, NULL);
 
 -- --------------------------------------------------------
 
@@ -133,7 +165,7 @@ CREATE TABLE `markers_nec` (
 --
 
 INSERT INTO `markers_nec` (`id`, `nome_part`, `endereco`, `latitude`, `longitude`, `type`, `status`) VALUES
-(488, 'Ricardo Geraldo', 'R. Corumbá, 224 - Carlos Prates', -19.9150295, -43.9596977, NULL, 4);
+(1022, 'Ricardo Geraldo', 'R. Corumbá, 224 - Carlos Prates', -19.9150295, -43.9596977, NULL, 4);
 
 -- --------------------------------------------------------
 
@@ -156,14 +188,15 @@ CREATE TABLE `markers_of` (
 --
 
 INSERT INTO `markers_of` (`id`, `nome_part`, `endereco`, `latitude`, `longitude`, `type`, `status`) VALUES
-(2302, 'Marcelo Shama', 'Rua Luiz Silveira Soares, 108 - Encantada', -28.0606689, -48.6789703, NULL, 2),
-(2301, 'Ricardo Geraldo', 'R. Corumbá, 224 - Carlos Prates', -19.9150295, -43.9596977, NULL, 4),
-(2300, 'Joao Batista', 'Rua Brasil 104', -22.7455845, -45.1327324, NULL, 3),
-(2299, 'Ana Claudia ', 'Rua do Catete, 200', -22.9254646, -43.1766167, NULL, 2),
-(2298, 'Amanda Pereira', 'Rua Irlanda, 20', -16.7167072, -49.3069305, NULL, 2),
-(2297, 'Marcos da Silva', 'Rua Santa Clara , 100 , Copacabana', -22.9703426, -43.1876640, NULL, 4),
-(2296, 'Ana Claudia ', 'Rua do Catete, 200', -22.9254646, -43.1766167, NULL, 2),
-(2295, 'Marcelo Shama', 'Rua Luiz Silveira Soares, 108 - Encantada', -28.0606689, -48.6789703, NULL, 2);
+(7031, 'Marcelo Shama', 'Rua Luiz Silveira Soares, 108 - Encantada', -28.0606689, -48.6789703, NULL, 3),
+(7030, 'Ricardo Geraldo', 'R. Corumbá, 224 - Carlos Prates', -19.9150295, -43.9596977, NULL, 4),
+(7029, 'Joao Batista', 'Rua Brasil 104', -22.7455845, -45.1327324, NULL, 3),
+(7028, 'Ana Claudia ', 'Rua do Catete, 200', -22.9254646, -43.1766167, NULL, 2),
+(7026, 'Marcos da Silva', 'Rua Santa Clara , 100 , Copacabana', -22.9703426, -43.1876640, NULL, 4),
+(7027, 'Amanda Pereira', 'Rua Irlanda, 20', -16.7167072, -49.3069305, NULL, 2),
+(7025, 'Ana Claudia ', 'Rua do Catete, 200', -22.9254646, -43.1766167, NULL, 2),
+(7023, 'Marcelo Shama', 'Rua Luiz Silveira Soares, 108 - Encantada', -28.0606689, -48.6789703, NULL, 3),
+(7024, 'Marcelo Shama', 'Rua Luiz Silveira Soares, 108 - Encantada', -28.0606689, -48.6789703, NULL, 2);
 
 -- --------------------------------------------------------
 
@@ -207,7 +240,10 @@ INSERT INTO `mensagens_trans` (`id`, `id_trans`, `id_part`, `id_part_dest`, `men
 (200, 64, 26, 38, 'Cancelamento da confirmação. de novo', '2022-02-18 21:59:56', 'tr', 1),
 (201, 66, 26, 38, 'Olá Marcelo!', '2022-03-05 21:57:28', 'of', 0),
 (202, 67, 26, 38, 'vamos trocar feijão por reiki ??', '2022-03-05 23:35:15', 'tr', 0),
-(203, 68, 26, 27, 'oi Ana, vamos trocar aulas?', '2022-03-05 23:50:13', 'tr', 0);
+(203, 68, 26, 27, 'oi Ana, vamos trocar aulas? heim?', '2022-03-22 13:39:31', 'tr', 0),
+(204, 62, 26, 14, 'Ola', '2022-03-22 00:18:53', 'of', 0),
+(205, 69, 26, 24, 'olá!', '2022-03-23 18:57:07', 'of', 0),
+(206, 66, 26, 38, 'olá Shama', '2022-04-21 16:27:55', 'of', 0);
 
 -- --------------------------------------------------------
 
@@ -342,12 +378,12 @@ INSERT INTO `necessidades_part` (`id`, `id_nec`, `id_part`, `data`, `quant`, `ob
 (2, 2, 26, '2021-08-16', 1, 'Bioconstrutor para fazer casas de adobe.', NULL, '2_1646333534.jpg', 1),
 (3, 3, 14, '2021-08-19', 1, 'Desenvolvedor de sistemas de banco de dados.', NULL, NULL, 2),
 (4, 1, 27, '2021-08-23', 1, 'Preciso de cozinheiro vegano com urgencia.', NULL, NULL, 2),
-(5, 4, 24, '2021-08-23', 1, 'Preciso de um profissional de permacultura para criar um sitio ecologico para futuramente virar uma ecovila.', NULL, NULL, 1),
+(5, 4, 24, '2021-08-23', 1, 'Preciso de um profissional de permacultura para criar um sitio ecologico para futuramente virar uma ecovila.', NULL, NULL, 2),
 (6, 5, 27, '2021-09-07', 1, 'Jardineira Waldorf trabalho de manhã na escola Jardim Michaelis, Rio de Janeiro.', NULL, NULL, 2),
 (7, 6, 26, '2021-09-15', 1, 'Preciso de um ator para um filme que estou fazendo sobre ecovilas.', NULL, '6_1646332030.jpg', 4),
 (8, 7, 5, '2021-11-24', 5, 'Preciso de musicos para montar uma banda. Guitarrista, baterista, vocalista, tecladista e arranjador.', NULL, NULL, 3),
 (9, 8, 26, '2022-03-03', 10, 'comida organica, vegetariana. muito gostosa.', NULL, '8_1646332608.jpg', 0),
-(10, 9, 38, '2022-03-05', 10, 'grupo para desenvolver curso', NULL, '9.jpg', 2);
+(10, 9, 38, '2022-03-05', 10, 'grupo para desenvolver curso', NULL, '9.jpg', 3);
 
 -- --------------------------------------------------------
 
@@ -414,15 +450,17 @@ INSERT INTO `ofertas_part` (`id`, `id_of`, `id_part`, `data`, `quant`, `obs`, `r
 (9, 7, 33, '2021-08-13', 1, 'Bioconstrutor capacitado em inumeras tecnicas como : Adobe, Pau-a-pique , Super-Adobe, Bambu, entre outros.', NULL, NULL, 0),
 (10, 1, 26, '2021-08-23', 1, 'Cozinha vegetariana e vegana. Sou bom mesmo. :-)', NULL, NULL, 0),
 (11, 10, 27, '2021-09-07', 1, 'Aulas de Shantala para gestantes. Horario a combinar.', NULL, NULL, 2),
-(12, 11, 14, '2021-09-15', 1, 'Sou ator de Hollywood famoso e bem requisitado. Ofereço meus talentos para filmes sobre regeneração global.', NULL, NULL, 4),
+(12, 11, 14, '2021-09-15', 1, 'Sou ator de Hollywood famoso e bem requisitado. Ofereço meus talentos para filmes sobre regeneração global.', NULL, '11_1647973638.jpg', 4),
 (13, 12, 26, '2021-09-15', 2, 'ofereço companhia para bate papos e passeios, para quem se sentir solitário e quiser compartilhar suas experiencias de vida. Horario a combinar.\r\nGosto de ir ao teatro e criar peças.', NULL, NULL, 3),
-(14, 9, 26, '2021-10-01', 2, 'tenho dois kilos de feijão para doar.', NULL, NULL, 2),
+(14, 9, 26, '2021-10-01', 2, 'tenho dois kilos de feijão para doar.', NULL, '9_1647635444.jpg', 3),
 (15, 7, 26, '2021-10-01', 1, 'faço casas bem legais', NULL, '7_1646403021.jpg', 2),
 (16, 13, 38, '2021-10-27', 1, 'é muito bom', NULL, '13_1646511808.jpg', 3),
-(17, 7, 38, '2021-10-27', 1, 'permacultor', NULL, NULL, 2),
-(20, 13, 26, '2022-03-02', 1, 'terapia permacultural', NULL, '13_1646315419.jpg', 2),
-(21, 8, 26, '2022-03-02', 1, 'gosto de bebês', NULL, '8_1646318786.jpg', 0),
-(22, 15, 26, '2022-03-03', 1, 'Casa em otimo estado num lugar maravilhoso na mata atlantica e totalmente sustentável.', NULL, '15_1646333417.jpg', 1);
+(17, 7, 38, '2021-10-27', 1, 'permacultor quantico', NULL, '7_1647636775.jpg', 2),
+(20, 13, 26, '2022-03-02', 1, 'terapia permacultural', NULL, '13_1646315419.jpg', 3),
+(21, 8, 26, '2022-03-02', 1, 'gosto de bebês', NULL, '8_1648141614.jpg', 2),
+(22, 15, 26, '2022-03-03', 1, 'Casa em otimo estado num lugar maravilhoso na mata atlantica e totalmente sustentável.', NULL, '15_1646333417.jpg', 1),
+(23, 12, 26, '2022-04-12', 1, 'Companhia para conversar sobre espiritualidade.', NULL, '12.jpg', 0),
+(24, 3, 26, '2022-04-21', 1, 'Faço sapatos de couro.', NULL, '3.jpg', 0);
 
 -- --------------------------------------------------------
 
@@ -466,7 +504,7 @@ INSERT INTO `participantes` (`id`, `nome_part`, `endereco`, `cidade`, `cep`, `es
 (22, 'Gustavo Alfredo', 'Rua Coronel Moreira Cesar 30,Icarai', 'Niteroi', '24230-060', 'RJ', 'Brasil', 'gustavo@gmail.com', '$2y$10$BLjpzKmMfZbU24VD.sRVxOV.KSDqXOKUxVD6MfkATv.uMO7o6GUSK', '', -22.9104176, -43.1069756, NULL, 0, NULL, '2021-05-28 21:50:25', '2021-05-28 21:50:25'),
 (24, 'Amanda Pereira', 'Rua Irlanda, 20', 'Goiania', '68552', 'GO', 'Brasil', 'amandinha@gmail.com', '$2y$10$rOMseaROi3kuX1UQ2E1RXunH4dCls1piOvN7Cw2Y80izyjB12Rzg2', 'Amanda Pereira_1638986834.jpg', -16.7167072, -49.3069305, NULL, 0, NULL, '2021-05-29 21:54:05', '2021-12-08 21:07:14'),
 (25, 'Bianca', 'Rua Pouso Alto', 'Itamonte', '37466-000', 'MG', 'Brasil', 'bianca@gmail.com', '$2y$10$i8FOjrwGkofaysz0OhBdPeOhZeX.CJjHmISuiiWzTRE6aTb2Yq6Ui', NULL, -22.2761383, -44.8721161, NULL, 0, NULL, '2021-05-29 22:01:41', '2021-05-29 22:01:41'),
-(26, 'Luiz Eduardo Castro', 'Rua Luiz Menezes , 111 , Vila Paraiba', 'Guaratinguetá', '12500', 'SP', 'Brasil', 'Lsantac@gmail.com', '$2y$10$IKOmMY3J2bzpIDOm2GH5He3iAGtH/LXcVZqT/FJrjwLPQqPatts7.', 'Luiz Eduardo Castro_1646162303.jpg', -22.8105164, -45.1904182, NULL, 0, 1, '2021-06-01 01:29:36', '2022-03-01 22:18:23'),
+(26, 'Luiz Eduardo Castro', 'Rua Luiz Menezes , 111 , Vila Paraiba', 'Guaratinguetá - Vila Paraiba', '12500', 'SP', 'Brasil', 'Lsantac@gmail.com', '$2y$10$IKOmMY3J2bzpIDOm2GH5He3iAGtH/LXcVZqT/FJrjwLPQqPatts7.', 'Luiz Eduardo Castro_1648060370.jpg', -22.8105164, -45.1904182, NULL, 0, 1, '2021-06-01 01:29:36', '2022-03-23 21:32:50'),
 (27, 'Ana Claudia ', 'Rua do Catete, 200', 'Rio de Janeiro', '22220-000', 'RJ', 'Brasil', 'anaclaudia@gmail.com', '$2y$10$u2.FJ0y3LRAImEWGSc7xQe1a32Ac.VA1Mj4cEOKZMnd4hDdZA904a', 'Ana Claudia_1623160847.JPG', -22.9254646, -43.1766167, NULL, 0, NULL, '2021-06-02 01:11:04', '2021-06-08 17:00:47'),
 (28, 'Pedro Augusto', 'Rua Augusta, 129', 'São Paulo', '01305-900', 'AM', 'Brasil', 'pedro@gmail.com', '$2y$10$Q9u6J7oANAT3BD3jBsxzWOubBNbikXvNHK4VKZ8t3eINNxMpdlP.W', '', -23.5505238, -46.6473541, NULL, 0, NULL, '2021-06-04 21:48:47', '2021-06-04 21:48:47'),
 (29, 'Luiz Augusto', 'R. Maj. Carvalho, 115 - Várzea', 'Teresopolis', '25953-460', 'RJ', 'Brasil', 'augusto@gmail.com', '$2y$10$uGE7QIDlRgsk1IjlDO7iyO9U55JMUJMHrKmp3Ai2cPvsxxFVMhmmq', '', -22.4152031, -42.9689827, NULL, 0, NULL, '2021-06-04 22:46:33', '2021-06-06 01:18:19'),
@@ -475,7 +513,9 @@ INSERT INTO `participantes` (`id`, `nome_part`, `endereco`, `cidade`, `cep`, `es
 (34, 'Paulo Lima', 'Av Cleo Bernardes', 'Santarém', '68005-970', 'PA', 'Brasil', 'paulolima@gmail.com', '$2y$10$byvBcMp6okSBzqwhLqmCeOqbW4jKgPIQrzY1DM9rqAiyt8u2jyTqm', NULL, -2.4424975, -54.7033043, NULL, 0, NULL, '2021-09-07 23:14:18', '2021-09-07 23:39:34'),
 (35, 'João da Silva', 'Av Nossa Senhora de Copacabana, 1000 , Copacabana', 'Rio de Janeiro', '21000', 'RJ', 'Brasil', 'joaodasilva@gmail.com', '$2y$10$W/EMGsDS8ZFgMVaKbDH93u17qS.mngZkKWWw3V7lR.xsQYh35P89S', 'João da Silva_1635273324.jpg', -22.9770336, -43.1906853, NULL, 0, NULL, '2021-10-26 21:27:55', '2021-10-26 21:35:24'),
 (38, 'Marcelo Shama', 'Rua Luiz Silveira Soares, 108 - Encantada', 'Garopaba', '88495-000', 'SC', 'Brasil', 'marceloshama@gmail.com', '$2y$10$vicG.yStiLkiMf97gCdV.OEuaq9a2AlnPjCvB0rollBVaUupfh6lW', 'Marcelo Shama_1635348782.jpg', -28.0606689, -48.6789703, NULL, 0, NULL, '2021-10-27 18:32:34', '2021-10-27 18:33:02'),
-(39, 'Pedro de Alcantara', 'Quinta da Boa Vista, São Cristovão', 'Rio de Janeiro', '22210-999', 'RJ', 'Brasil', 'pedrodealcantara@gmail.com', '$2y$10$xzgRxhiroVg6QIV650X4TeKRNh4MWMF9aNlCB7yfxltQki2TFsWSC', 'Pedro de Alcantara_1644872371.png', -22.9051933, -43.2217865, NULL, 0, NULL, '2022-02-14 23:59:31', '2022-02-14 23:59:31');
+(39, 'Pedro de Alcantara', 'Quinta da Boa Vista, São Cristovão', 'Rio de Janeiro', '22210-999', 'RJ', 'Brasil', 'pedrodealcantara@gmail.com', '$2y$10$xzgRxhiroVg6QIV650X4TeKRNh4MWMF9aNlCB7yfxltQki2TFsWSC', 'Pedro de Alcantara_1644872371.png', -22.9051933, -43.2217865, NULL, 0, NULL, '2022-02-14 23:59:31', '2022-02-14 23:59:31'),
+(40, 'Ana Castro', 'Praia do Flamengo', 'Rio de Janeiro', '22210030', 'RJ', 'Brasil', 'anapedag@gmail.com', '$2y$10$q/ujHvTC3AkO.M9453YuX.CP23PSPD9gEy9JiGB9OyRdfvw6uxjiK', NULL, -22.9301987, -43.1741142, NULL, 0, NULL, '2022-03-22 02:58:19', '2022-03-22 02:58:19'),
+(41, 'Amigo das Estrelas', 'Rua principal', 'Alto Paraiso', '88495-000', 'GO', 'Brasil', 'starfriend@gmail.com', '$2y$10$RUolVJi0NXxOk/Q2xnd.v.WSehd6ATR/7TZbg3iUZDqJ/62c7NsLu', 'Amigo das Estrelas_1649251273.jpg', -14.1340199, -47.5139809, NULL, 0, NULL, '2022-04-06 16:21:13', '2022-04-06 16:22:59');
 
 -- --------------------------------------------------------
 
@@ -665,11 +705,12 @@ INSERT INTO `transacoes` (`id`, `id_nec_part`, `id_of_part`, `id_of_tr_part`, `i
 (61, 8, 13, 0, 3, 1, 2, 2, 0, 0, '2021-12-09 12:55:06', NULL, '2022-02-12 21:31:52', NULL),
 (62, 3, 15, 0, 4, 1, 2, 1, 0, 1, '2021-12-09 13:15:07', '2022-01-22 18:49:46', '2022-01-22 18:48:13', NULL),
 (63, 7, 12, 0, 4, 1, 4, 1, 0, 1, '2021-12-09 13:15:48', '2022-01-24 22:50:40', '2022-01-22 18:57:11', NULL),
-(64, 0, 16, 14, 2, 1, 1, 1, 2, 0, '2022-01-28 18:29:50', NULL, NULL, NULL),
+(64, 0, 16, 14, 3, 1, 1, 1, 2, 0, '2022-01-28 18:29:50', NULL, NULL, '2022-03-18 13:54:52'),
 (65, 6, 7, 0, 2, 0, NULL, 0, 0, 0, '2022-02-11 20:49:43', NULL, NULL, NULL),
-(66, 10, 20, 0, 2, 0, NULL, 0, 0, 0, '2022-03-05 18:57:28', NULL, NULL, NULL),
+(66, 10, 20, 0, 3, 1, 3, 1, 0, 0, '2022-03-05 18:57:28', NULL, '2022-04-21 13:31:28', NULL),
 (67, 0, 17, 14, 2, 1, 1, 0, 0, 0, '2022-03-05 20:35:15', NULL, NULL, NULL),
-(68, 0, 11, 7, 2, 1, 1, 0, 0, 0, '2022-03-05 20:50:13', NULL, NULL, NULL);
+(68, 0, 11, 7, 2, 1, 1, 0, 0, 0, '2022-03-05 20:50:13', NULL, NULL, NULL),
+(69, 5, 21, 0, 2, 0, NULL, 0, 0, 0, '2022-03-23 15:57:07', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -712,7 +753,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `senha`, `created_at`, `updated_at`) VALUES
-(545, 'Lsantac@gmail.com', '$2y$10$zgr5JSDv3Edj/S7Lezxqz.f14l4RcYtqXaBesZ9Yt3OZs6wsKo0A6', NULL, NULL);
+(571, 'anapedag@gmail.com', '$2y$10$M2EHtaPKCtygrnDhWbW7COL1gXf/19MylFKqWT8f0qeYJGtSrtlQe', NULL, NULL),
+(662, 'Lsantac@gmail.com', '$2y$10$LEb3M5yKTRD7VonQyFaJxehtXIw/N.IzznSj8WPJ.kadJQcaXYAOW', NULL, NULL);
 
 --
 -- Índices para tabelas despejadas
@@ -747,6 +789,18 @@ ALTER TABLE `eventos_part`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `id_eve_id_part` (`id_eve`,`id_part`) USING BTREE,
   ADD KEY `id_part` (`id_part`);
+
+--
+-- Índices para tabela `identidade`
+--
+ALTER TABLE `identidade`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Índices para tabela `identidade_imgs`
+--
+ALTER TABLE `identidade_imgs`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Índices para tabela `markers`
@@ -863,7 +917,9 @@ ALTER TABLE `participantes`
   ADD KEY `cep` (`cep`),
   ADD KEY `senha` (`senha`),
   ADD KEY `id_tipo_acesso` (`id_tipo_acesso`),
-  ADD KEY `timezone` (`timezone`);
+  ADD KEY `timezone` (`timezone`),
+  ADD KEY `created_at` (`created_at`),
+  ADD KEY `updated_at` (`updated_at`);
 
 --
 -- Índices para tabela `projetos`
@@ -980,28 +1036,40 @@ ALTER TABLE `eventos_part`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT de tabela `identidade`
+--
+ALTER TABLE `identidade`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de tabela `identidade_imgs`
+--
+ALTER TABLE `identidade_imgs`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de tabela `markers`
 --
 ALTER TABLE `markers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1022;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1338;
 
 --
 -- AUTO_INCREMENT de tabela `markers_nec`
 --
 ALTER TABLE `markers_nec`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=489;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1023;
 
 --
 -- AUTO_INCREMENT de tabela `markers_of`
 --
 ALTER TABLE `markers_of`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2303;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7032;
 
 --
 -- AUTO_INCREMENT de tabela `mensagens_trans`
 --
 ALTER TABLE `mensagens_trans`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=204;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=207;
 
 --
 -- AUTO_INCREMENT de tabela `migrations`
@@ -1043,13 +1111,13 @@ ALTER TABLE `ofertas`
 -- AUTO_INCREMENT de tabela `ofertas_part`
 --
 ALTER TABLE `ofertas_part`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT de tabela `participantes`
 --
 ALTER TABLE `participantes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT de tabela `projetos`
@@ -1103,7 +1171,7 @@ ALTER TABLE `tipos_acessos`
 -- AUTO_INCREMENT de tabela `transacoes`
 --
 ALTER TABLE `transacoes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
 
 --
 -- AUTO_INCREMENT de tabela `unidades`
@@ -1115,7 +1183,7 @@ ALTER TABLE `unidades`
 -- AUTO_INCREMENT de tabela `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=546;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=663;
 
 --
 -- Restrições para despejos de tabelas

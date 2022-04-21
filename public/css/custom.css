@@ -44,6 +44,15 @@
         height: 100px;
     }
     
+    .responsive {
+        width: 100%;
+        max-width: 70px;
+        height: auto;
+        border: 1px solid #ddd;
+        border-radius: 1px;
+        padding: 1px;
+    }
+    
     .imagem-of-nec-cons {
         width: 70px;
         height: 70px;
