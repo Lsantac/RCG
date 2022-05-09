@@ -26,15 +26,15 @@ class UserAuthController extends Controller
 
                 $ident = DB::table('identidade')->first();
                 $part = DB::table('participantes')->where('email','=',request('email'))->first();
-                
+
                 if(!$part){
                 return redirect('/home')->with('success','Voce é um Novo Participante! Faça seu cadastro primeiro.');
                 }
                 else{
 
                     if(Hash::check($request->senha, $part->senha)){
-                            $request->session()->put('nomelogado', $part->nome_part); 
-                            $request->session()->put('email', $part->email); 
+                            $request->session()->put('nomelogado', $part->nome_part);
+                            $request->session()->put('email', $part->email);
                             $request->session()->put('imagem_logado', $part->imagem);
                             $request->session()->put('id_logado', $part->id);
                             $request->session()->put('id_tipo_acesso_logado', $part->id_tipo_acesso);
@@ -42,7 +42,7 @@ class UserAuthController extends Controller
                             $request->session()->put('longitude', $part->longitude);
                             $request->session()->put('logo',$ident->logo);
                             $request->session()->put('nome_ident',$ident->nome_ident);
-                            
+
                             /*$user = new users();
 
                             $user->email = request('email');
@@ -74,7 +74,7 @@ class UserAuthController extends Controller
     function create(StorePartRequest $request){
 
         $part = new participantes();
-    
+
         $part->nome_part = request('nome_part');
         $part->endereco = request('endereco');
         $part->cidade = request('cidade');
@@ -84,13 +84,13 @@ class UserAuthController extends Controller
         $part->email =request('email');
         $part->senha = Hash::make(request('senha'));
 
-        $endereco_geocode = request('endereco').",".request('cidade').",".request('pais'); 
+        $endereco_geocode = request('endereco').",".request('cidade').",".request('pais');
         $geo = helper::GetGeoCode($endereco_geocode);
 
         $part->latitude = $geo['lat'];
         $part->longitude = $geo['long'];
 
-        $part->ranking = 0; 
+        $part->ranking = 0;
 
         if($request->hasFile('part_image')){
            $file = $request->file('part_image');
@@ -98,29 +98,29 @@ class UserAuthController extends Controller
            $filename = request('nome_part').'_'.time().'.'.$extension;
            $file->move('uploads/participantes/',$filename);
            $part->imagem = $filename;
-           $request->session()->put('imagem_logado', $part->imagem); 
+           $request->session()->put('imagem_logado', $part->imagem);
         }
-    
+
         $query = $part->save();
-        
+
         if($query){
             return redirect('/')->with('success','Olá '.$part->nome_part.'! Voce foi incluído com successo! Bem Vindo ao Sistema Rede Colaborativa Global! Faça do Planeta um lugar melhor para se viver! ');
         }else{
             return back()->with('fail','Aconteceu algum erro! '.$part->nome_part.' não foi incluido.');
         }
-       
+
     }
-    
+
     public function logout(){
-    
+
         $email = session('email');
-        
+
         $user = DB::table('users')->where('email','=',$email);
-        
-        /*$user = users::FindOrfail($id);*/  
+
+        /*$user = users::FindOrfail($id);*/
         $user->delete();
-      
-        session()->pull('email');      
+
+        session()->pull('email');
         session()->pull('nomelogado');
         session()->pull('imagem_logado');
         session()->pull('id_logado');
@@ -128,39 +128,39 @@ class UserAuthController extends Controller
         session()->pull('id_tipo_acesso_logado');
         session()->pull('latitude');
         session()->pull('longitude');
-        
+
         return redirect('/home');
     }
 
     public function alterpass(){
-             
+
         if(session('email')<> null){
            return redirect('alterpass');
-         
+
         }else{
            return redirect('/')->with('podealterar','Para alterar a senha é preciso estar logado primeiro');
-          
+
         }
-        
-    }   
+
+    }
 
     public function resetpass(){
-             
+
         if(session('email')<> null){
            return redirect('resetpass');
-         
+
         }else{
            return redirect('/')->with('poderesetar','Para resetar a senha é preciso estar logado primeiro');
-          
+
         }
-        
-    }   
+
+    }
 
 
     public function alterpassok(AlterPassRequest $request){
 
         $p = DB::table('participantes')->where('email','=',Session('email'))->first();
-          
+
         if($p)
         {
            if(Hash::check($request->senha,$p->senha))
@@ -172,22 +172,22 @@ class UserAuthController extends Controller
              if($ok){
                return redirect('/')->with('success','Senha alterada com sucesso!');
              }else{
-               return back()->with('fail','Erro ao salvar nova senha');  
+               return back()->with('fail','Erro ao salvar nova senha');
              }
            }
            else
            {
-             return back()->with('fail','Senha inválida');   
-            }    
+             return back()->with('fail','Senha inválida');
+            }
         }else{
-            return back()->with('fail','Erro ao consultar email');   
+            return back()->with('fail','Erro ao consultar email');
         }
     }
 
     public function resetpassok(ResetPassRequest $request){
 
         $p = DB::table('participantes')->where('email','=',request('email'))->first();
-          
+
         if($p)
         {
             $ok = DB::table('participantes')
@@ -197,11 +197,11 @@ class UserAuthController extends Controller
              if($ok){
                return redirect('/')->with('success','Senha resetada com sucesso!');
              }else{
-               return back()->with('fail','Erro ao resetar senha');  
+               return back()->with('fail','Erro ao resetar senha');
              }
-           
+
         }else{
-            return back()->with('fail','Erro ao consultar email');   
+            return back()->with('fail','Erro ao consultar email');
         }
     }
 }

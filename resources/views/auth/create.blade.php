@@ -6,21 +6,28 @@
 <div class="container">
 
     <form action="{{route('auth.create')}}" method="POST"  class="row g-3" enctype="multipart/form-data">
-        @csrf 
-        
-        <h2 class="texto-participante">Novo Participante</h2> 
+        @csrf
 
+        <h2 class="texto-participante">Novo Participante</h2>
         <div class="row">
+            <label for="part_image" class="form-label">
+                Foto de perfil
+            </label>
+            <input id="part_image" accept="image/*" data-msg-placeholder="Selecione sua foto de perfil"
+                name="part_image" type="file" class="file" data-browse-on-zone-click="true"
+                >
+        </div>
+        <!-- <div class="row">
             <div class="col-2" >
                  <figure style="margin: 0 0 0rem;">
                     <img  id="imagem_part" src="/img/logo.jpg" class="figure-img img-fluid rounded imagem-part img-thumbnail" alt="...">
                 </figure>
             </div>
             <div class="col-10" style="align-self: flex-end;">
-                <input class="btn-arquivo" onchange ="mostra_imagem(this, 'inclusao',0)" name="part_image" id="part_image" type="file" accept=".jpg,.png,.jpeg">    
+                <input class="btn-arquivo" onchange ="mostra_imagem(this, 'inclusao',0)" name="part_image" id="part_image" type="file" accept=".jpg,.png,.jpeg">
             </div>
-            
-        </div>
+
+        </div> -->
 
         <div class='results'>
              @if(Session::get('success'))
@@ -43,18 +50,18 @@
         @error('nome_part')
         <div class="invalid-feedback">
             {{$message}}
-        </div>      
+        </div>
         @enderror
         </div>
 
         <br>
         <div class="col-6">
-        <label for="email" class="form-label">Email</label>            
+        <label for="email" class="form-label">Email</label>
         <input type="text" id="email" name="email" value="{{old('email')}}" class="form-control @error('email') is-invalid @enderror" aria-label="email">
         @error('email')
         <div class="invalid-feedback">
             {{$message}}
-        </div>      
+        </div>
         @enderror
         </div>
         <br>
@@ -65,7 +72,7 @@
             @error('senha')
             <div class="invalid-feedback">
                 {{$message}}
-            </div>      
+            </div>
             @enderror
         </div>
         <div class="col-md-2">
@@ -74,27 +81,27 @@
             @error('senha2')
             <div class="invalid-feedback">
                 {{$message}}
-            </div>      
+            </div>
             @enderror
         </div>
-       
+
         <div class="col-12">
         <label for="endereco" class="form-label">Endereço</label>
         <input type="text" value="{{old('endereco')}}" class="form-control @error('endereco') is-invalid @enderror" id="endereco" name="endereco" placeholder="Rua, Bairro">
         @error('endereco')
         <div class="invalid-feedback">
             {{$message}}
-        </div>      
+        </div>
         @enderror
         </div>
-        
+
         <div class="col-md-6">
         <label for="cidade" class="form-label">Cidade</label>
         <input type="text" value="{{old('cidade')}}" class="form-control @error('cidade') is-invalid @enderror" id="cidade" name="cidade">
         @error('cidade')
         <div class="invalid-feedback">
             {{$message}}
-        </div>      
+        </div>
         @enderror
         </div>
 
@@ -104,7 +111,7 @@
             @error('pais')
             <div class="invalid-feedback">
                  {{$message}}
-            </div>      
+            </div>
             @enderror
         </div>
 
@@ -144,7 +151,7 @@
             @error('estado')
             <div class="invalid-feedback">
                 {{$message}}
-            </div>      
+            </div>
             @enderror
         </div>
 
@@ -156,7 +163,7 @@
             @error('cep')
             <div class="invalid-feedback">
                 {{$message}}
-            </div>      
+            </div>
             @enderror
         </div>
 
@@ -166,7 +173,7 @@
             @error('latitude')
             <div class="invalid-feedback">
                 {{$message}}
-            </div>      
+            </div>
             @enderror
         </div>
 
@@ -176,19 +183,19 @@
             @error('longitude')
             <div class="invalid-feedback">
                 {{$message}}
-            </div>      
+            </div>
             @enderror
         </div>
-        
+
         <div class="col-12">
-        
+
         <button type="submit" class="btn btn-primary texto_m">Confirmar</button>
         </div>
     </form>
 </div>
 
 <script>
-     
+
     function mostra_imagem(input,$modo,$id_of_part){
 
              if (input.files && input.files[0]) {
@@ -201,13 +208,13 @@
                      }else{
                        if($modo == 'editar'){
                           $('#imagem_of_alt-' + $id_of_part).attr('src', e.target.result);
-                          
+
                        }
                      }
-                     
+
                };
                reader.readAsDataURL(input.files[0]);
-               
+
              }
 
     }
