@@ -301,7 +301,7 @@ class ofertasController extends Controller
               
               if($extension == 'jpg' or $extension == 'jpeg' or $extension == 'png'){
 
-                $filename = request('id_of').'.'.$extension;
+                $filename = request('id_of').'_'.request('id_part').'_'.time().'.'.$extension;
                 $file->move('uploads/of_img/',$filename);
 
               }else{
@@ -364,7 +364,7 @@ class ofertasController extends Controller
           File::delete(public_path('uploads/of_img/'.$file_name_ant));
         }
 
-        $filename = request('id_of').'_'.time().'.'.$extension;
+        $filename = request('id_of').'_'.request('id_part').'_'.time().'.'.$extension;
         $file->move('uploads/of_img/',$filename);
 
       }else{

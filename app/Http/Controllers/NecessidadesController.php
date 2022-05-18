@@ -296,7 +296,7 @@ class NecessidadesController extends Controller
       
       if($extension == 'jpg' or $extension == 'jpeg' or $extension == 'png'){
 
-        $filename = request('id_nec').'.'.$extension;
+        $filename = request('id_nec').'_'.request('id_part').'_'.time().'.'.$extension;
         $file->move('uploads/nec_img/',$filename);
 
       }else{
@@ -360,7 +360,7 @@ class NecessidadesController extends Controller
           File::delete(public_path('uploads/nec_img/'.$file_name_ant));
         }
 
-        $filename = request('id_nec').'_'.time().'.'.$extension;
+        $filename = request('id_nec').'_'.request('id_part').'_'.time().'.'.$extension;
         $file->move('uploads/nec_img/',$filename);
 
         $rp = DB::table('necessidades_part')->where('id',request('id_nec_part'))
