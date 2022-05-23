@@ -13,7 +13,7 @@
             <label for="part_image" class="form-label">
                 Foto de perfil
             </label>
-            <input id="part_image" accept="image/*" data-msg-placeholder="Selecione sua foto de perfil"
+            <input id="part_image" accept=".jpg,.png,.jpeg" data-msg-placeholder="Selecione sua foto de perfil"
                 name="part_image" type="file" class="file" data-browse-on-zone-click="true"
                 >
         </div>

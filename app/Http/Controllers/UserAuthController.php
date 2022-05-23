@@ -75,6 +75,23 @@ class UserAuthController extends Controller
 
         $part = new participantes();
 
+        if($request->hasFile('part_image')){
+           $file = $request->file('part_image');
+           $extension = $file->getClientOriginalExtension();
+
+           $size = $file->getSize();
+
+           if($size > 5000000){
+             return back()->with('fail image','tamanho maior do que o permitido!');
+           }
+
+           $filename = request('nome_part').'_'.time().'.'.$extension;
+
+           $file->move('uploads/participantes/',$filename);
+           $part->imagem = $filename;
+           $request->session()->put('imagem_logado', $part->imagem);
+        }
+
         $part->nome_part = request('nome_part');
         $part->endereco = request('endereco');
         $part->cidade = request('cidade');
@@ -91,15 +108,7 @@ class UserAuthController extends Controller
         $part->longitude = $geo['long'];
 
         $part->ranking = 0;
-
-        if($request->hasFile('part_image')){
-           $file = $request->file('part_image');
-           $extension = $file->getClientOriginalExtension();
-           $filename = request('nome_part').'_'.time().'.'.$extension;
-           $file->move('uploads/participantes/',$filename);
-           $part->imagem = $filename;
-           $request->session()->put('imagem_logado', $part->imagem);
-        }
+        $part->id_tipo_acesso = 1;
 
         $query = $part->save();
 
