@@ -58,9 +58,21 @@
                     <div class="col-1">
                         <figure class="figure">
 
-                            @if(!@empty($ofp->imagem))
-                            <img id="imagem_of_cons" src="/uploads/of_img/{{$ofp->imagem}}" class="imagem-of-nec-cons"> @else
-                            <img id="imagem_of_cons" src="/img/logo.jpg" class="imagem-of-nec-cons"> @endif
+                            <div class="d-block d-lg-none d-md-none d-xl-none d-xxl-none">
+                                @if(!@empty($ofp->imagem))
+                                   <img id="imagem_of_cons" src="/uploads/of_img/{{$ofp->imagem}}" class="imagem-of-nec-cons-p">
+                                @else
+                                   <img id="imagem_of_cons" src="/img/logo.jpg" class="imagem-of-nec-cons-p">
+                                @endif
+                            </div>
+                            <div class="d-none d-sm-none d-md-block d-lg-block d-xl-block d-xxl-block">
+                                @if(!@empty($ofp->imagem))
+                                   <img id="imagem_of_cons" src="/uploads/of_img/{{$ofp->imagem}}" class="imagem-of-nec-cons">
+                                @else
+                                   <img id="imagem_of_cons" src="/img/logo.jpg" class="imagem-of-nec-cons">
+                                @endif
+                            </div>
+                            
 
                         </figure>
                     </div>
@@ -77,7 +89,7 @@
                                 </div>
                                 <div class="d-lg-none">
                                     <p><h6 class="texto_m">Nome : {{$ofp->nome_part}} </h6></p>
-                                    <h5 class="texto_p">Endereço : {{$ofp->endereco}} , {{$ofp->cidade}} {{$ofp->estado}} - {{$ofp->pais}}</h5>
+                                    <p class="texto_p">Endereço : {{$ofp->endereco}} , {{$ofp->cidade}} {{$ofp->estado}} - {{$ofp->pais}}</p>
                                 </div>
                                 <!-- <div class="col"> -->
                                 <div class="col d-none d-sm-none d-sx-none d-md-none d-lg-block">
@@ -90,11 +102,19 @@
                     </div>
                 </td>
 
-                <td class="texto_m">
-                    @php $date = new DateTime($ofp->data); echo $date->format('d-m-Y'); @endphp
-                </td>
-                <td class="texto_m">{{$ofp->quant}}</td>
-                <td class="texto_m">{{$ofp->desc_unid}}</td>
+                
+                    <td>
+                        <div class="texto_m d-none d-sm-none d-md-none d-lg-block d-xl-block d-xxl-block">
+                            @php $date = new DateTime($ofp->data); echo $date->format('d-m-Y'); @endphp
+                        </div>
+                        <div class="texto_p d-xs-block d-sm-block d-md-block d-lg-none d-xl-none d-xxl-none">
+                            @php $date = new DateTime($ofp->data); echo $date->format('d-m-Y'); @endphp
+                        </div>
+                        
+                    </td>
+                    <td class="texto_m">{{$ofp->quant}}</td>
+                    <td class="texto_m">{{$ofp->desc_unid}}</td>
+                
 
                 <td>
                     <div class="row">
@@ -154,10 +174,11 @@
                           @endphp  
                         </span>
                         </div>
-
-                        <div class="col-2 texto-em-andamento">
+                        
+                        <div class="col-2 texto-em-andamento d-none d-sm-none d-md-none d-lg-block d-xl-block d-xxl-block">
                             <h6 class="bi bi-chat-left-dots-fill"></h6>
                         </div>
+                        
 
                         <div class="col-1 texto-parc-finalizada">
                             <span>
@@ -167,7 +188,7 @@
                         </span>
                         </div>
 
-                        <div class="col-2 texto-parc-finalizada">
+                        <div class="col-2 texto-parc-finalizada d-none d-sm-none d-md-none d-lg-block d-xl-block d-xxl-block">
                             <h6 class="bi bi-check-circle-fill"></h6>
                         </div>
 
@@ -179,7 +200,7 @@
                         </span>
                         </div>
 
-                        <div class="col-1 texto-finalizada">
+                        <div class="col-1 texto-finalizada d-none d-sm-none d-md-none d-lg-block d-xl-block d-xxl-block">
                             <h6 class="bi bi-check-circle-fill"></h6>
                         </div>
 

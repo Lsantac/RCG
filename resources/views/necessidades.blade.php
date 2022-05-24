@@ -71,17 +71,27 @@
                     <div class="col-1" >
                               <figure class="figure">
                   
-                                @if(!@empty($necp->imagem))
-                                    <img id="imagem_nec_cons"  src="/uploads/nec_img/{{$necp->imagem}}" class="imagem-of-nec-cons">
-                                @else
-                                    <img id="imagem_nec_cons" src="/img/logo.jpg" class="imagem-of-nec-cons">
-                                @endif 
+                                <div class="d-block d-lg-none d-md-none d-xl-none d-xxl-none">
+                                    @if(!@empty($necp->imagem))
+                                        <img id="imagem_nec_cons"  src="/uploads/nec_img/{{$necp->imagem}}" class="imagem-of-nec-cons-p">
+                                    @else
+                                        <img id="imagem_nec_cons" src="/img/logo.jpg" class="imagem-of-nec-cons-p">
+                                    @endif 
+                                </div>
+
+                                <div class="d-none d-sm-none d-md-block d-lg-block d-xl-block d-xxl-block">
+                                     @if(!@empty($necp->imagem))
+                                        <img id="imagem_nec_cons"  src="/uploads/nec_img/{{$necp->imagem}}" class="imagem-of-nec-cons">
+                                     @else
+                                        <img id="imagem_nec_cons" src="/img/logo.jpg" class="imagem-of-nec-cons">
+                                     @endif 
+                                </div>
                         
                             </figure>
                       </div>
                   </td>
                   <td>
-                    <div style="width: 45rem;">
+                    <div style="width: auto;">
 
                       <div>
                             <div class="row align-items-start">
@@ -90,7 +100,13 @@
                                     <h6 style="color:rgb(97, 75, 4)"  class="card-subtitle mb-2 texto_m">Categoria : {{$necp->desc_cat}} </h6>
                                     <p class="card-text texto_m">Obs : {{$necp->obs}}</p>
                                </div>
-                               <div class="col">
+
+                               <div class="d-lg-none">
+                                <p></p><h6 class="texto_m">Nome : {{$necp->nome_part}} </h6></p>
+                                <p class="texto_p">Endereço : {{$necp->endereco}} , {{$necp->cidade}} {{$necp->estado}} - {{$necp->pais}}</p>
+                               </div>
+
+                               <div class="col d-none d-sm-none d-sx-none d-md-none d-lg-block">
                                     <h6 class="texto_m">Nome : {{$necp->nome_part}} </h6>
                                     <p class="texto_m">Endereço : {{$necp->endereco}} , {{$necp->cidade}} {{$necp->estado}} - {{$necp->pais}}</p>
                                </div>
@@ -101,11 +117,13 @@
                     </div>
                   </td>
 
-                  <td class="texto_m">
-                    @php
-                        $date = new DateTime($necp->data);
-                        echo $date->format('d-m-Y');
-                     @endphp
+                  <td>
+                      <div class="texto_m d-none d-sm-none d-md-none d-lg-block d-xl-block d-xxl-block">
+                          @php $date = new DateTime($necp->data); echo $date->format('d-m-Y'); @endphp
+                      </div>
+                      <div class="texto_p d-xs-block d-sm-block d-md-block d-lg-none d-xl-none d-xxl-none">
+                          @php $date = new DateTime($necp->data); echo $date->format('d-m-Y'); @endphp
+                      </div>
                   </td>
                   <td class="texto_m">{{$necp->quant}}</td>
                   <td class="texto_m">{{$necp->desc_unid}}</td>
@@ -169,7 +187,7 @@
                         </span>
                         </div>
 
-                        <div class="col-2 texto-em-andamento">
+                        <div class="col-2 texto-em-andamento d-none d-sm-none d-md-none d-lg-block d-xl-block d-xxl-block">
                           <h6 class="bi bi-chat-left-dots-fill"></h6>
                         </div>
 
@@ -181,7 +199,7 @@
                         </span>
                         </div>
 
-                        <div class="col-2 texto-parc-finalizada">
+                        <div class="col-2 texto-parc-finalizada d-none d-sm-none d-md-none d-lg-block d-xl-block d-xxl-block">
                           <h6 class="bi bi-check-circle-fill"></h6>
                         </div>
 
@@ -193,7 +211,7 @@
                         </span>
                         </div>
 
-                        <div class="col-1 texto-finalizada">
+                        <div class="col-3 texto-finalizada d-none d-sm-none d-md-none d-lg-block d-xl-block d-xxl-block">
                           <h6 class="bi bi-check-circle-fill"></h6>
                         </div>
 

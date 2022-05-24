@@ -14,7 +14,7 @@
         @endif
     </div>
 
-    <h4 class="texto-oferta" style="color:rgb(91, 19, 207);">Sugestões de Transações para a oferta do Participante</h4> 
+    <h4 class="" style="color:rgb(91, 19, 207);">Sugestões de Transações para a oferta do Participante</h4> 
     <h5 class="texto-nome-logado">{{$nome_part_cab}}</h5> 
    
 
@@ -186,19 +186,28 @@
                       <td>
                         <div class="col-1" >
                                   <figure class="figure">
-                      
-                                    @if(!@empty($necp->imagem))
-                                        <img id="imagem_nec_cons"  src="/uploads/nec_img/{{$necp->imagem}}" class="imagem-of-nec-cons">
-                                    @else
-                                        <img id="imagem_nec_cons" src="/img/logo.jpg" class="imagem-of-nec-cons">
-                                    @endif 
-                            
+
+                                    <div class="d-block d-lg-none d-md-none d-xl-none d-xxl-none">
+                                      @if(!@empty($necp->imagem))
+                                         <img id="imagem_nec_cons"  src="/uploads/nec_img/{{$necp->imagem}}" class="imagem-of-nec-cons-p">
+                                      @else
+                                        <img id="imagem_nec_cons" src="/img/logo.jpg" class="imagem-of-nec-cons-p">
+                                      @endif 
+                                    </div>
+                                    <div class="d-none d-sm-none d-md-block d-lg-block d-xl-block d-xxl-block">
+                                        @if(!@empty($necp->imagem))
+                                           <img id="imagem_nec_cons"  src="/uploads/nec_img/{{$necp->imagem}}" class="imagem-of-nec-cons">
+                                        @else
+                                          <img id="imagem_nec_cons" src="/img/logo.jpg" class="imagem-of-nec-cons">
+                                        @endif 
+                                    </div>
+                             
                                 </figure>
                           </div>
                       </td>
                     
                       <td>
-                      <div  style="width: 58rem;">
+                      <div  style="width: auto;">
                         <div >
                           <h5 class="card-title ">{{$necp->desc_nec}}</h5>
                           <h6 style="color:rgb(196, 104, 0)" class="card-subtitle mb-2 texto_p">Categoria : {{$necp->desc_cat}} </h6>
@@ -230,7 +239,7 @@
                         </span>
                         </div>
 
-                        <div class="col-2 texto-em-andamento">
+                        <div class="col-2 texto-em-andamento d-none d-sm-none d-md-none d-lg-block d-xl-block d-xxl-block">
                           <h6 class="bi bi-chat-left-dots-fill"></h6>
                         </div>
 
@@ -242,7 +251,7 @@
                         </span>
                         </div>
 
-                        <div class="col-2 texto-parc-finalizada">
+                        <div class="col-2 texto-parc-finalizada d-none d-sm-none d-md-none d-lg-block d-xl-block d-xxl-block">
                           <h6 class="bi bi-check-circle-fill"></h6>
                         </div>
 
@@ -254,7 +263,7 @@
                         </span>
                         </div>
 
-                        <div class="col-1 texto-finalizada">
+                        <div class="col-1 texto-finalizada d-none d-sm-none d-md-none d-lg-block d-xl-block d-xxl-block">
                           <h6 class="bi bi-check-circle-fill"></h6>
                         </div>
 

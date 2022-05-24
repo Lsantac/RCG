@@ -164,19 +164,30 @@
                     <td>
                       <div class="col-1" >
                                 <figure class="figure">
+
+                                  <div class="d-block d-lg-none d-md-none d-xl-none d-xxl-none">
+                                    @if(!@empty($of_tr_p->imagem))
+                                       <img id="imagem_of_tr_cons"  src="/uploads/of_img/{{$of_tr_p->imagem}}" class="imagem-of-nec-cons-p">
+                                    @else
+                                       <img id="imagem_of_tr_cons" src="/img/logo.jpg" class="imagem-of-nec-cons-p">
+                                    @endif   
+                                  </div>
                     
-                                  @if(!@empty($of_tr_p->imagem))
-                                      <img id="imagem_of_tr_cons"  src="/uploads/of_img/{{$of_tr_p->imagem}}" class="imagem-of-nec-cons">
-                                  @else
-                                      <img id="imagem_of_tr_cons" src="/img/logo.jpg" class="imagem-of-nec-cons">
-                                  @endif 
+                                  <div class="d-none d-sm-none d-md-block d-lg-block d-xl-block d-xxl-block">
+                                    @if(!@empty($of_tr_p->imagem))
+                                       <img id="imagem_of_tr_cons"  src="/uploads/of_img/{{$of_tr_p->imagem}}" class="imagem-of-nec-cons">
+                                    @else
+                                       <img id="imagem_of_tr_cons" src="/img/logo.jpg" class="imagem-of-nec-cons">
+                                    @endif   
+                                  </div>
+                                  
                           
                               </figure>
                         </div>
                     </td>
 
                       <td>
-                      <div style="width: 58rem;">
+                      <div style="width: auto;">
                           <h5 class="card-title">Oferta : {{$of_tr_p->desc_of}}</h5>
                           <h6 style="color:rgb(6, 155, 30)" class="card-subtitle mb-2 texto_p">Categoria : {{$of_tr_p->desc_cat}} </h6>
                           <p class="card-text texto_p">Obs : {{$of_tr_p->obs}}</p>
@@ -210,7 +221,7 @@
                         </span>
                         </div>
 
-                        <div class="col-2 texto-em-andamento">
+                        <div class="col-2 texto-em-andamento d-none d-sm-none d-md-none d-lg-block d-xl-block d-xxl-block">
                           <h6 class="bi bi-chat-left-dots-fill"></h6>
                         </div>
 
@@ -222,7 +233,7 @@
                         </span>
                         </div>
 
-                        <div class="col-2 texto-parc-finalizada">
+                        <div class="col-2 texto-parc-finalizada d-none d-sm-none d-md-none d-lg-block d-xl-block d-xxl-block">
                           <h6 class="bi bi-check-circle-fill"></h6>
                         </div>
 
@@ -234,7 +245,7 @@
                         </span>
                         </div>
 
-                        <div class="col-1 texto-finalizada">
+                        <div class="col-1 texto-finalizada d-none d-sm-none d-md-none d-lg-block d-xl-block d-xxl-block">
                           <h6 class="bi bi-check-circle-fill"></h6>
                         </div>
 
