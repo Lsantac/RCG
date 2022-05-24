@@ -195,8 +195,8 @@
     <table  class="table table-sm">
         <thead style="border-bottom: 1px solid black;">
           <tr>
+            <th scope="col" class="texto_p">Imagem</th>
             <th scope="col" class="texto_p">Descrição</th>
-            <!--<th scope="col" class="texto_p">Categoria</th>-->
             <th scope="col" class="texto_p">Data</th>
             <th scope="col" class="texto_p">Quant</th>
             <th scope="col" class="texto_p">Unidade</th>
@@ -217,32 +217,33 @@
                 <div>
                   <tr>
                     <td>
-                      <div class="" style="width:50rem;">
-                        <div class="">
+                        <div class="col-1" >
+                             <figure class="figure">
 
-                          <div class="row">
-                            <div class="col-1" >
-                                <figure class="figure">
-
+                              <div class="d-block d-lg-none d-md-none d-xl-none d-xxl-none">
+                                @if(!@empty($ofp->imagem))
+                                   <img id="imagem_of_cons" src="/uploads/of_img/{{$ofp->imagem}}" class="imagem-of-nec-cons-p">
+                                @else
+                                   <img id="imagem_of_cons" src="/img/logo.jpg" class="imagem-of-nec-cons-p">
+                                @endif
+                              </div>
+                              <div class="d-none d-sm-none d-md-block d-lg-block d-xl-block d-xxl-block">
                                   @if(!@empty($ofp->imagem))
-                                      <img id="imagem_of_cons"  src="/uploads/of_img/{{$ofp->imagem}}" class="imagem-of-nec-cons">
+                                    <img id="imagem_of_cons" src="/uploads/of_img/{{$ofp->imagem}}" class="imagem-of-nec-cons">
                                   @else
-                                      <img id="imagem_of_cons" src="/img/logo.jpg" class="imagem-of-nec-cons">
+                                    <img id="imagem_of_cons" src="/img/logo.jpg" class="imagem-of-nec-cons">
                                   @endif
+                              </div>
 
                               </figure>
-                            </div>
-
-                            <div class="col" style="padding-left: 30px;">
-                                <h5 style="font-size:15px;"  class="card-title texto-oferta">Oferta : {{$ofp->desc_of}}</h5>
-                                <h6 style="color:rgb(4, 97, 97)" class="card-subtitle mb-2 texto_m">Categoria : {{$ofp->desc_cat}} </h6>
-                                <p class="card-text texto_m">Obs : {{$ofp->obs}}</p>
-                            </div>
-
-                          </div>
-
                         </div>
-                      </div>
+                    </td>
+                    <td>
+                        <div class="col" style="width: auto;">
+                            <h5 style="font-size:15px;"  class="card-title texto-oferta">Oferta : {{$ofp->desc_of}}</h5>
+                            <h6 style="color:rgb(4, 97, 97)" class="card-subtitle mb-2 texto_m">Categoria : {{$ofp->desc_cat}} </h6>
+                            <p class="card-text texto_m">Obs : {{$ofp->obs}}</p>
+                        </div>
                     </td>
 
                     <!--<td class="texto_p">{{$ofp->desc_of}}</td>
@@ -272,8 +273,6 @@
                             @endif
                         @endif
                     @endif -->
-
-
 
                     <td>
                         @if(Session::get('id_logado') == $part->id)
@@ -327,7 +326,7 @@
                         </span>
                         </div>
 
-                        <div class="col-2 texto-em-andamento">
+                        <div class="col-2 texto-em-andamento d-none d-sm-none d-md-none d-lg-block d-xl-block d-xxl-block">
                           <h6 class="bi bi-chat-left-dots-fill"></h6>
                         </div>
 
@@ -339,7 +338,7 @@
                         </span>
                         </div>
 
-                        <div class="col-2 texto-parc-finalizada">
+                        <div class="col-2 texto-parc-finalizada d-none d-sm-none d-md-none d-lg-block d-xl-block d-xxl-block">
                           <h6 class="bi bi-check-circle-fill"></h6>
                         </div>
 
@@ -351,7 +350,7 @@
                         </span>
                         </div>
 
-                        <div class="col-1 texto-finalizada">
+                        <div class="col-1 texto-finalizada d-none d-sm-none d-md-none d-lg-block d-xl-block d-xxl-block">
                           <h6 class="bi bi-check-circle-fill"></h6>
                         </div>
 
@@ -359,111 +358,121 @@
                     </td>
 
                     <td>
-                        @if(Session::get('id_logado') == $part->id)
-                           <button class="btn btn-editar btn-sm bi bi-pencil texto_p" type="submit" data-bs-toggle="modal" data-bs-target="#EditarOferta-{{$ofp->id_of_part}}">
-                            Editar</button>
-                        @endif
+                        <div class="row">
 
-                        <form action="{{route('altera_oferta_part')}}" method="post" enctype="multipart/form-data">
-                          @csrf
-                            <!-- Modal Alterar Oferta-->
-                            <div class="modal fade" id="EditarOferta-{{$ofp->id_of_part}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                              <div class="modal-dialog modal-lg">
-                                <div class="modal-content">
-                                  <div class="modal-header">
-                                    <h5 class="modal-title" id="staticBackdropLabel">Alterar Oferta de : {{$part->nome_part}}</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                  </div>
-                                        <div class="modal-body">
+                        <div class="col">
 
-                                          <div class="row">
-                                            <div class="col-2">
-                                                  <figure class="figure">
+                              @if(Session::get('id_logado') == $part->id)
+                                <button class="btn btn-editar btn-sm bi bi-pencil texto_p" type="submit" data-bs-toggle="modal" data-bs-target="#EditarOferta-{{$ofp->id_of_part}}">
+                                  Editar</button>
+                              @endif
 
-                                                    @if(!@empty($ofp->imagem))
-                                                        <img id="imagem_of_alt-{{$ofp->id_of_part}}"  src="/uploads/of_img/{{$ofp->imagem}}" class="imagem-of-nec">
-                                                    @else
-                                                        <img id="imagem_of_alt-{{$ofp->id_of_part}}" src="/img/logo.jpg" class="figure-img img-fluid imagem-of-nec img-thumbnail ">
-                                                    @endif
+                              <form action="{{route('altera_oferta_part')}}" method="post" enctype="multipart/form-data">
+                                @csrf
+                                  <!-- Modal Alterar Oferta-->
+                                  <div class="modal fade" id="EditarOferta-{{$ofp->id_of_part}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg">
+                                      <div class="modal-content">
+                                        <div class="modal-header">
+                                          <h5 class="modal-title" id="staticBackdropLabel">Alterar Oferta de : {{$part->nome_part}}</h5>
+                                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                              <div class="modal-body">
 
-                                                 </figure>
+                                                <div class="row">
+                                                  <div class="col-2">
+                                                        <figure class="figure">
+
+                                                          @if(!@empty($ofp->imagem))
+                                                              <img id="imagem_of_alt-{{$ofp->id_of_part}}"  src="/uploads/of_img/{{$ofp->imagem}}" class="imagem-of-nec">
+                                                          @else
+                                                              <img id="imagem_of_alt-{{$ofp->id_of_part}}" src="/img/logo.jpg" class="figure-img img-fluid imagem-of-nec img-thumbnail ">
+                                                          @endif
+
+                                                      </figure>
+
+                                                  </div>
+
+                                                  <div class="col-10" style="align-self: flex-end;">
+                                                    <label for="sel_img_alt" class="form-label texto_m">Selecionar imagem</label>
+                                                      <input name="sel_img_alt" id="sel_img_alt" type="file" accept=".jpg,.png,.jpeg" onchange ="mostra_imagem(this,'editar',{{$ofp->id_of_part}})" class="form-control form-control-sm @error('sel_img_alt') is-invalid @enderror" >
+                                                      <label class="form-label red-message">{{Session::get('fail image')}}</label>
+                                                  </div>
+
+                                                </div>
+
+                                                <div class="mb-3">
+                                                  <input value="{{$part->id}}" name="id_part" type="hidden">
+                                                  <input value="{{$ofp->id_of_part}}" name="id_of_part" type="hidden">
+
+
+                                                  <label for="FormControl_id_of" class="form-label">Selecione um tipo de Oferta</label>
+                                                  <select type="text" name="id_of" id="FormControl_id_of" class="form-select" aria-label="Default select example" required>
+                                                    <option value="{{$ofp->id_of}}" selected>{{$ofp->desc_of}}</option>
+                                                    @foreach ($ofs as $of)
+                                                      <option value="{{$of->id}}">
+                                                            {{$of->descricao}}
+                                                      </option>
+                                                    @endforeach
+                                                  </select>
+                                                  <br>
+
+                                                  <label for="data_of" class="form-label">Data</label>
+                                                  <input type="date" value="{{$ofp->data}}"  class="form-control" id="data_of" name="data_of" required>
+                                                  <br>
+
+                                                  <label for="quant_of" class="form-label">Quantidade</label>
+                                                  <input type="number" step="0.010" value="{{$ofp->quant}}" class="form-control" id="quant_of" name="quant_of" required>
+
+                                                  <br>
+
+                                                  <label for="obs_of" class="form-label">Observações</label>
+                                                  <textarea type="text" class="form-control" id="obs_of" name="obs_of" value="">{{$ofp->obs}}</textarea>
+                                                </div>
 
                                             </div>
-
-                                            <div class="col-10" style="align-self: flex-end;">
-                                               <label for="sel_img_alt" class="form-label texto_m">Selecionar imagem</label>
-                                                <input name="sel_img_alt" id="sel_img_alt" type="file" accept=".jpg,.png,.jpeg" onchange ="mostra_imagem(this,'editar',{{$ofp->id_of_part}})" class="form-control form-control-sm @error('sel_img_alt') is-invalid @enderror" >
-                                                <label class="form-label red-message">{{Session::get('fail image')}}</label>
+                                            <div class="modal-footer">
+                                              <button type="button" class="btn btn-sair" data-bs-dismiss="modal">Sair</button>
+                                              <button type="submit" class="btn btn-primary">Alterar</button>
                                             </div>
-
-                                          </div>
-
-                                          <div class="mb-3">
-                                            <input value="{{$part->id}}" name="id_part" type="hidden">
-                                            <input value="{{$ofp->id_of_part}}" name="id_of_part" type="hidden">
-
-
-                                            <label for="FormControl_id_of" class="form-label">Selecione um tipo de Oferta</label>
-                                            <select type="text" name="id_of" id="FormControl_id_of" class="form-select" aria-label="Default select example" required>
-                                              <option value="{{$ofp->id_of}}" selected>{{$ofp->desc_of}}</option>
-                                              @foreach ($ofs as $of)
-                                                <option value="{{$of->id}}">
-                                                      {{$of->descricao}}
-                                                </option>
-                                              @endforeach
-                                            </select>
-                                            <br>
-
-                                            <label for="data_of" class="form-label">Data</label>
-                                            <input type="date" value="{{$ofp->data}}"  class="form-control" id="data_of" name="data_of" required>
-                                            <br>
-
-                                            <label for="quant_of" class="form-label">Quantidade</label>
-                                            <input type="number" step="0.010" value="{{$ofp->quant}}" class="form-control" id="quant_of" name="quant_of" required>
-
-                                            <br>
-
-                                            <label for="obs_of" class="form-label">Observações</label>
-                                            <textarea type="text" class="form-control" id="obs_of" name="obs_of" value="">{{$ofp->obs}}</textarea>
-                                          </div>
-
                                       </div>
-                                      <div class="modal-footer">
-                                        <button type="button" class="btn btn-sair" data-bs-dismiss="modal">Sair</button>
-                                        <button type="submit" class="btn btn-primary">Alterar</button>
-                                      </div>
-                                </div>
-                              </div>
-                            </div>
-                          </form>
-                    </td>
-                    <td>
-                        @if(Session::get('id_logado') == $part->id)
-                            <button class="btn btn-danger btn-sm bi bi-trash texto_p" type="button" data-bs-toggle="modal" data-bs-target="#ModalExcluiOferta-{{$ofp->id_of_part}}" >
-                             Excluir</button>
-                        @endif
-
-                        <form class="" action="/deleta_oferta_part/{{$ofp->id_of_part}}" method="POST">
-                              @csrf
-                              @method('DELETE')
-
-                              <!-- Modal -->
-                              <div class="modal fade" id="ModalExcluiOferta-{{$ofp->id_of_part}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                  <div class="modal-content">
-                                    <div class="modal-header">
-                                      <h5 class="modal-title" id="exampleModalLabel">Confirma Exclusão da Oferta "{{$ofp->desc_of}}" para {{$part->nome_part}} ?</h5>
-                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-
-                                    <div class="modal-footer">
-                                      <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Sair</button>
-                                      <button type="submit" class="btn btn-danger">Excluir</button>
                                     </div>
                                   </div>
-                                </div>
-                              </div>
-                        </form>
+                                </form>
+
+                        </div> 
+                        <div class="col">
+
+                              @if(Session::get('id_logado') == $part->id)
+                                  <button class="btn btn-danger btn-sm bi bi-trash texto_p" type="button" data-bs-toggle="modal" data-bs-target="#ModalExcluiOferta-{{$ofp->id_of_part}}" >
+                                  Excluir</button>
+                              @endif
+                          
+                              <form action="/deleta_oferta_part/{{$ofp->id_of_part}}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="ModalExcluiOferta-{{$ofp->id_of_part}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                      <div class="modal-dialog">
+                                        <div class="modal-content">
+                                          <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Confirma Exclusão da Oferta "{{$ofp->desc_of}}" para {{$part->nome_part}} ?</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                          </div>
+
+                                          <div class="modal-footer">
+                                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Sair</button>
+                                            <button type="submit" class="btn btn-danger">Excluir</button>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                              </form>
+                        </div>                        
+
+                      </div>
+
                     </td>
 
                   </tr>

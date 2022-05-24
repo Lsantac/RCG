@@ -70,9 +70,9 @@
                                                              <figure class="figure">
                                                               
                                                                 @if(!@empty($of_st->imagem_of))
-                                                                    <img id="imagem_of_cons"  src="/uploads/of_img/{{$of_st->imagem_of}}" class="responsive">
+                                                                    <img id="imagem_of_cons"  src="/uploads/of_img/{{$of_st->imagem_of}}" class="imagem-of-nec-cons">
                                                                 @else
-                                                                    <img id="imagem_of_cons" src="/img/logo.jpg" class="responsive">
+                                                                    <img id="imagem_of_cons" src="/img/logo.jpg" class="imagem-of-nec-cons">
                                                                 @endif 
                                                           
                                                               </figure>
@@ -133,23 +133,23 @@
                                     @endif   
 
                                     <div class="row">
-                                         <div class="col-2">
+                                         <div style="width:auto;">
                                               <figure class="figure">
                                                 @if($of_st->fluxo == 'Troca')                  
                                                     @if(!@empty($of_st->imagem_of_tr))
                                                         @if($of_st->imagem_of_tr <> $of_st->imagem_of)
-                                                            <img id="imagem_of_tr_cons"  src="/uploads/of_img/{{$of_st->imagem_of_tr}}" class="responsive">
+                                                            <img id="imagem_of_tr_cons"  src="/uploads/of_img/{{$of_st->imagem_of_tr}}" class="imagem-of-nec-cons">
                                                         @else
 
                                                         @endif
                                                     @else
-                                                        <img id="imagem_of_tr_cons" src="/img/logo.jpg" class="responsive">
+                                                        <img id="imagem_of_tr_cons" src="/img/logo.jpg" class="imagem-of-nec-cons">
                                                     @endif 
                                                 @else
                                                    @if(!@empty($of_st->imagem_nec))
-                                                        <img id="imagem_nec_cons"  src="/uploads/nec_img/{{$of_st->imagem_nec}}" class="responsive">
+                                                        <img id="imagem_nec_cons"  src="/uploads/nec_img/{{$of_st->imagem_nec}}" class="imagem-of-nec-cons">
                                                    @else
-                                                        <img id="imagem_nec_cons" src="/img/logo.jpg" class="responsive">
+                                                        <img id="imagem_nec_cons" src="/img/logo.jpg" class="imagem-of-nec-cons">
                                                    @endif 
 
                                                 @endif

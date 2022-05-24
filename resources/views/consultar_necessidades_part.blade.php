@@ -178,6 +178,7 @@
     <table class="table table-sm">
         <thead style="border-bottom: 1px solid black;">
           <tr>
+            <th scope="col" class="texto_p">Imagem</th>
             <th scope="col" class="texto_p">Descrição</th>
             <th scope="col" class="texto_p">Data</th>
             <th scope="col" class="texto_p">Quant</th>
@@ -197,36 +198,35 @@
               @foreach($necps as $necp)
                 <div>
                   <tr>
-
                     <td>
+                        <figure class="figure">
 
-                      <div class="" style="width:50rem;">
-                        <div class="">
-
-                          <div class="row">
-                            <div class="col-1" >
-                                <figure class="figure">
-
-                                  @if(!@empty($necp->imagem))
-                                      <img id="imagem_nec_cons"  src="/uploads/nec_img/{{$necp->imagem}}" class="imagem-of-nec-cons">
-                                  @else
-                                      <img id="imagem_nec_cons" src="/img/logo.jpg" class="imagem-of-nec-cons">
-                                  @endif
-
-                              </figure>
-                            </div>
-
-                            <div class="col" style="padding-left: 30px;">
-                              <h5 style="font-size:15px;"  class="card-title texto-necessidade">Necessidade : {{$necp->desc_nec}}</h5>
-                              <h6 style="color:rgb(97, 75, 4)" class="card-subtitle mb-2 texto_m">Categoria : {{$necp->desc_cat}} </h6>
-                              <p class="card-text texto_m">Obs : {{$necp->obs}}</p>
-                            </div>
-
+                          <div class="d-block d-lg-none d-md-none d-xl-none d-xxl-none">
+                            @if(!@empty($necp->imagem))
+                                <img id="imagem_nec_cons"  src="/uploads/nec_img/{{$necp->imagem}}" class="imagem-of-nec-cons-p">
+                            @else
+                                <img id="imagem_nec_cons" src="/img/logo.jpg" class="imagem-of-nec-cons-p">
+                            @endif 
                           </div>
 
-                        </div>
-                      </div>
+                          <div class="d-none d-sm-none d-md-block d-lg-block d-xl-block d-xxl-block">
+                              @if(!@empty($necp->imagem))
+                                  <img id="imagem_nec_cons"  src="/uploads/nec_img/{{$necp->imagem}}" class="imagem-of-nec-cons">
+                              @else
+                                  <img id="imagem_nec_cons" src="/img/logo.jpg" class="imagem-of-nec-cons">
+                              @endif 
+                          </div>
 
+                      </figure>
+            
+                    </td>
+
+                    <td>
+                        <div class="col" style="width:auto;">
+                          <h5 style="font-size:15px;"  class="card-title texto-necessidade">Necessidade : {{$necp->desc_nec}}</h5>
+                          <h6 style="color:rgb(97, 75, 4)" class="card-subtitle mb-2 texto_m">Categoria : {{$necp->desc_cat}} </h6>
+                          <p class="card-text texto_m">Obs : {{$necp->obs}}</p>
+                        </div>
                     </td>
 
                     <td class="texto_p">
@@ -292,7 +292,7 @@
                         </span>
                         </div>
 
-                        <div class="col-2 texto-em-andamento">
+                        <div class="col-2 texto-em-andamento d-none d-sm-none d-md-none d-lg-block d-xl-block d-xxl-block">
                           <h6 class="bi bi-chat-left-dots-fill"></h6>
                         </div>
 
@@ -304,7 +304,7 @@
                         </span>
                         </div>
 
-                        <div class="col-2 texto-parc-finalizada">
+                        <div class="col-2 texto-parc-finalizada d-none d-sm-none d-md-none d-lg-block d-xl-block d-xxl-block">
                           <h6 class="bi bi-check-circle-fill"></h6>
                         </div>
 
@@ -316,7 +316,7 @@
                         </span>
                         </div>
 
-                        <div class="col-1 texto-finalizada">
+                        <div class="col-1 texto-finalizada d-none d-sm-none d-md-none d-lg-block d-xl-block d-xxl-block">
                           <h6 class="bi bi-check-circle-fill"></h6>
                         </div>
 
@@ -324,109 +324,120 @@
                     </td>
 
                     <td>
-                        @if(Session::get('id_logado') == $part->id)
-                           <button class="btn btn-editar btn-sm bi bi-pencil texto_p" type="submit" data-bs-toggle="modal" data-bs-target="#Editarnecessidade-{{$necp->id_nec_part}}"> Editar</button>
-                        @endif
+                        <div class="row">
 
-                        <form action="{{route('altera_necessidade_part')}}" method="post" enctype="multipart/form-data">
-                          @csrf
-                            <!-- Modal Alterar necessidade-->
-                            <div class="modal fade" id="Editarnecessidade-{{$necp->id_nec_part}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                              <div class="modal-dialog modal-lg">
-                                <div class="modal-content">
-                                  <div class="modal-header">
-                                    <h5 class="modal-title" id="staticBackdropLabel">Alterar Necessidade de : {{$part->nome_part}}</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                  </div>
-                                        <div class="modal-body">
+                          <div class="col">
 
-                                          <div class="row">
-                                            <div class="col-2">
-                                                  <figure class="figure">
+                            @if(Session::get('id_logado') == $part->id)
+                              <button class="btn btn-editar btn-sm bi bi-pencil texto_p" type="submit" data-bs-toggle="modal" data-bs-target="#Editarnecessidade-{{$necp->id_nec_part}}"> Editar</button>
+                            @endif
 
-                                                    @if(!@empty($necp->imagem))
-                                                        <img id="imagem_nec_alt-{{$necp->id_nec_part}}"  src="/uploads/nec_img/{{$necp->imagem}}" class="imagem-of-nec">
-                                                    @else
-                                                        <img id="imagem_nec_alt-{{$necp->id_nec_part}}" src="/img/logo.jpg" class="figure-img img-fluid imagem-of-nec img-thumbnail ">
-                                                    @endif
-
-                                                 </figure>
-
-                                            </div>
-
-                                            <div class="col-10" style="align-self: flex-end;">
-                                               <label for="sel_img_alt" class="form-label texto_m">Selecionar imagem</label>
-                                                <input  name="sel_img_alt" id="sel_img_alt" type="file" accept=".jpg,.png,.jpeg" onchange ="mostra_imagem(this,'editar',{{$necp->id_nec_part}})" class="form-control form-control-sm @error('sel_img_alt') is-invalid @enderror" >
-                                                <label class="form-label red-message">{{Session::get('fail image')}}</label>
-                                            </div>
-
-                                          </div>
-
-                                          <div class="mb-3">
-                                            <input value="{{$part->id}}" name="id_part" type="hidden">
-                                            <input value="{{$necp->id_nec_part}}" name="id_nec_part" type="hidden">
-
-                                            <label for="FormControl_id_nec" class="form-label">Selecione um tipo de Necessidade</label>
-                                            <select type="text" name="id_nec" id="FormControl_id_nec" class="form-select" aria-label="Default select example" required>
-                                              <option value="{{$necp->id_nec}}" selected>{{$necp->desc_nec}}</option>
-                                              @foreach ($necs as $nec)
-                                                <option value="{{$nec->id}}">
-                                                      {{$nec->descricao}}
-                                                </option>
-                                              @endforeach
-                                            </select>
-                                            <br>
-
-                                            <label for="data_nec" class="form-label">Data</label>
-                                            <input type="date" value="{{$necp->data}}"  class="form-control" id="data_nec" name="data_nec" required>
-                                            <br>
-
-                                            <label for="quant_nec" class="form-label">Quantidade</label>
-                                            <input type="number" step="0.010" value="{{$necp->quant}}" class="form-control" id="quant_nec" name="quant_nec" required>
-
-                                            <br>
-
-                                            <label for="obs_nec" class="form-label">Observações</label>
-                                            <textarea type="text" class="form-control" id="obs_nec" name="obs_nec" value="">{{$necp->obs}}</textarea>
-                                          </div>
-
-                                      </div>
-                                      <div class="modal-footer">
-                                        <button type="button" class="btn btn-sair" data-bs-dismiss="modal">Sair</button>
-                                        <button type="submit" class="btn btn-primary">Alterar</button>
-                                      </div>
-                                </div>
-                              </div>
-                            </div>
-                          </form>
-                    </td>
-
-                    <td>
-                        @if(Session::get('id_logado') == $part->id)
-                            <button class="btn btn-danger btn-sm bi bi-trash texto_p" type="button" data-bs-toggle="modal" data-bs-target="#ModalExcluinecessidade-{{$necp->id_nec_part}}" >Excluir</button>
-                        @endif
-
-                        <form class="" action="/deleta_necessidade_part/{{$necp->id_nec_part}}" method="POST">
+                            <form action="{{route('altera_necessidade_part')}}" method="post" enctype="multipart/form-data">
                               @csrf
-                              @method('DELETE')
+                                <!-- Modal Alterar necessidade-->
+                                <div class="modal fade" id="Editarnecessidade-{{$necp->id_nec_part}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                  <div class="modal-dialog modal-lg">
+                                    <div class="modal-content">
+                                      <div class="modal-header">
+                                        <h5 class="modal-title" id="staticBackdropLabel">Alterar Necessidade de : {{$part->nome_part}}</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                      </div>
+                                            <div class="modal-body">
 
-                              <!-- Modal -->
-                              <div class="modal fade" id="ModalExcluinecessidade-{{$necp->id_nec_part}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                  <div class="modal-content">
-                                    <div class="modal-header">
-                                      <h5 class="modal-title" id="exampleModalLabel">Confirma Exclusão da necessidade "{{$necp->desc_nec}}" para {{$part->nome_part}} ?</h5>
-                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
+                                              <div class="row">
+                                                <div class="col-2">
+                                                      <figure class="figure">
 
-                                    <div class="modal-footer">
-                                      <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Sair</button>
-                                      <button type="submit" class="btn btn-danger">Excluir</button>
+                                                        @if(!@empty($necp->imagem))
+                                                            <img id="imagem_nec_alt-{{$necp->id_nec_part}}"  src="/uploads/nec_img/{{$necp->imagem}}" class="imagem-of-nec">
+                                                        @else
+                                                            <img id="imagem_nec_alt-{{$necp->id_nec_part}}" src="/img/logo.jpg" class="figure-img img-fluid imagem-of-nec img-thumbnail ">
+                                                        @endif
+
+                                                    </figure>
+
+                                                </div>
+
+                                                <div class="col-10" style="align-self: flex-end;">
+                                                  <label for="sel_img_alt" class="form-label texto_m">Selecionar imagem</label>
+                                                    <input  name="sel_img_alt" id="sel_img_alt" type="file" accept=".jpg,.png,.jpeg" onchange ="mostra_imagem(this,'editar',{{$necp->id_nec_part}})" class="form-control form-control-sm @error('sel_img_alt') is-invalid @enderror" >
+                                                    <label class="form-label red-message">{{Session::get('fail image')}}</label>
+                                                </div>
+
+                                              </div>
+
+                                              <div class="mb-3">
+                                                <input value="{{$part->id}}" name="id_part" type="hidden">
+                                                <input value="{{$necp->id_nec_part}}" name="id_nec_part" type="hidden">
+
+                                                <label for="FormControl_id_nec" class="form-label">Selecione um tipo de Necessidade</label>
+                                                <select type="text" name="id_nec" id="FormControl_id_nec" class="form-select" aria-label="Default select example" required>
+                                                  <option value="{{$necp->id_nec}}" selected>{{$necp->desc_nec}}</option>
+                                                  @foreach ($necs as $nec)
+                                                    <option value="{{$nec->id}}">
+                                                          {{$nec->descricao}}
+                                                    </option>
+                                                  @endforeach
+                                                </select>
+                                                <br>
+
+                                                <label for="data_nec" class="form-label">Data</label>
+                                                <input type="date" value="{{$necp->data}}"  class="form-control" id="data_nec" name="data_nec" required>
+                                                <br>
+
+                                                <label for="quant_nec" class="form-label">Quantidade</label>
+                                                <input type="number" step="0.010" value="{{$necp->quant}}" class="form-control" id="quant_nec" name="quant_nec" required>
+
+                                                <br>
+
+                                                <label for="obs_nec" class="form-label">Observações</label>
+                                                <textarea type="text" class="form-control" id="obs_nec" name="obs_nec" value="">{{$necp->obs}}</textarea>
+                                              </div>
+
+                                          </div>
+                                          <div class="modal-footer">
+                                            <button type="button" class="btn btn-sair" data-bs-dismiss="modal">Sair</button>
+                                            <button type="submit" class="btn btn-primary">Alterar</button>
+                                          </div>
                                     </div>
                                   </div>
                                 </div>
-                              </div>
-                        </form>
+                              </form>
+
+                        </div>
+                        
+                        <div class="col">
+
+                            @if(Session::get('id_logado') == $part->id)
+                                <button class="btn btn-danger btn-sm bi bi-trash texto_p" type="button" data-bs-toggle="modal" data-bs-target="#ModalExcluinecessidade-{{$necp->id_nec_part}}" >Excluir</button>
+                            @endif
+
+                            <form class="" action="/deleta_necessidade_part/{{$necp->id_nec_part}}" method="POST">
+                                  @csrf
+                                  @method('DELETE')
+
+                                  <!-- Modal -->
+                                  <div class="modal fade" id="ModalExcluinecessidade-{{$necp->id_nec_part}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                      <div class="modal-content">
+                                        <div class="modal-header">
+                                          <h5 class="modal-title" id="exampleModalLabel">Confirma Exclusão da necessidade "{{$necp->desc_nec}}" para {{$part->nome_part}} ?</h5>
+                                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+
+                                        <div class="modal-footer">
+                                          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Sair</button>
+                                          <button type="submit" class="btn btn-danger">Excluir</button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                            </form>
+
+                        </div>
+                        
+                      </div>  
+
                     </td>
 
                   </tr>
