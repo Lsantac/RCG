@@ -64,15 +64,25 @@
                                         <div class="card-body" style="background-color:rgb(245, 217, 199)">
 
                                           <div class="row">
-                                                <div class="col-2">
+                                               <div style="width:auto;">
                                                     <figure class="figure">
+
+                                                      <div class="d-block d-lg-none d-md-none d-xl-none d-xxl-none">
+                                                            @if(!@empty($nec_st->imagem_nec))
+                                                                <img id="imagem_nec_cons"  src="/uploads/nec_img/{{$nec_st->imagem_nec}}" class="imagem-of-nec-cons-p">
+                                                            @else
+                                                                <img id="imagem_nec_cons" src="/img/logo.jpg" class="imagem-of-nec-cons-p">
+                                                            @endif 
+                                                      </div>
+                            
+                                                      <div class="d-none d-sm-none d-md-block d-lg-block d-xl-block d-xxl-block">
+                                                            @if(!@empty($nec_st->imagem_nec))
+                                                                <img id="imagem_nec_cons"  src="/uploads/nec_img/{{$nec_st->imagem_nec}}" class="imagem-of-nec-cons">
+                                                            @else
+                                                                <img id="imagem_nec_cons" src="/img/logo.jpg" class="imagem-of-nec-cons">
+                                                            @endif 
+                                                      </div>
                                                       
-                                                        @if(!@empty($nec_st->imagem_nec))
-                                                            <img id="imagem_nec_cons"  src="/uploads/nec_img/{{$nec_st->imagem_nec}}" class="imagem-of-nec-cons">
-                                                        @else
-                                                            <img id="imagem_nec_cons" src="/img/logo.jpg" class="imagem-of-nec-cons">
-                                                        @endif 
-                                                  
                                                       </figure>
                                                 </div>
 
@@ -128,15 +138,25 @@
                                               <div class="card-body" style="background-color:rgb(199, 245, 207) " >
 
                                                     <div class="row">
-                                                          <div class="col-2">
+                                                         <div style="width:auto;">
                                                               <figure class="figure">
+
+                                                                    <div class="d-block d-lg-none d-md-none d-xl-none d-xxl-none">
+                                                                          @if(!@empty($nec_st->imagem_of))
+                                                                              <img id="imagem_of_cons"  src="/uploads/of_img/{{$nec_st->imagem_of}}" class="imagem-of-nec-cons-p">
+                                                                          @else
+                                                                              <img id="imagem_of_cons" src="/img/logo.jpg" class="imagem-of-nec-cons-p">
+                                                                          @endif 
+                                                                    </div>
+                                      
+                                                                    <div class="d-none d-sm-none d-md-block d-lg-block d-xl-block d-xxl-block">
+                                                                        @if(!@empty($nec_st->imagem_of))
+                                                                            <img id="imagem_of_cons"  src="/uploads/of_img/{{$nec_st->imagem_of}}" class="imagem-of-nec-cons">
+                                                                        @else
+                                                                            <img id="imagem_of_cons" src="/img/logo.jpg" class="imagem-of-nec-cons">
+                                                                        @endif 
+                                                                    </div>
                                                                 
-                                                                  @if(!@empty($nec_st->imagem_of))
-                                                                      <img id="imagem_of_cons"  src="/uploads/of_img/{{$nec_st->imagem_of}}" class="imagem-of-nec-cons">
-                                                                  @else
-                                                                      <img id="imagem_of_cons" src="/img/logo.jpg" class="imagem-of-nec-cons">
-                                                                  @endif 
-                                                            
                                                                 </figure>
                                                           </div>
 
@@ -189,7 +209,7 @@
                         
                         <td>
                           <div class="col">
-                                  <div class="card" style="width: 20rem;" >
+                                  <div class="card" style="width: 10rem;" >
 
                                     <div class="card-body header-trans">
           

@@ -16,7 +16,9 @@
     <div class="col">
 
         <div class="card">
-               <h6 class="card-header header-oferta" style="padding-bottom: 0px;padding-left:10px;padding-top:10px;">
+
+              <div class="d-none d-lg-block">
+                <h6 class="card-header header-oferta" style="padding-bottom: 0px;padding-left:10px;padding-top:10px;">
                   <span>
                     <figure class="figure">
                       @if(!@empty($ofps->imagem))
@@ -27,7 +29,23 @@
                     </figure>
                     &nbsp
                   </span>Oferta : {{$ofps->desc_of}}</h6>
-         
+              </div>
+
+              <div class="d-block d-lg-none">
+                <h6 class="card-header header-oferta" style="font-size:smaller; padding-bottom: 0px;padding-left:10px;padding-top:10px;">
+                  <span>
+                    <figure class="figure">
+                      @if(!@empty($ofps->imagem))
+                          <img id="imagem_of_cons"  src="/uploads/of_img/{{$ofps->imagem}}" class="imagem-pequena">
+                      @else
+                          <img id="imagem_of_cons" src="/img/logo.jpg" class="imagem-pequena">
+                      @endif 
+                    </figure>
+                    &nbsp
+                  </span>Oferta : {{$ofps->desc_of}}</h6>                
+
+              </div>
+
           <div class="card-body">
             <h6 class="card-title">{{$ofps->nome_part}}</h6>
             <div class="card-text texto_m">Categoria : {{$ofps->desc_cat}}</div>
@@ -72,17 +90,36 @@
       <div class="card">
         @if(isset($necps))
 
-        <h6 class="card-header header-necessidade" style="padding-bottom: 0px;padding-left:10px;padding-top:10px;">
-          <span>
-            <figure class="figure">
-              @if(!@empty($necps->imagem))
-                  <img id="imagem_nec_cons"  src="/uploads/nec_img/{{$necps->imagem}}" class="imagem-pequena">
-              @else
-                  <img id="imagem_nec_cons" src="/img/logo.jpg" class="imagem-pequena">
-              @endif 
-            </figure>
-            &nbsp
-          </span>Necessidade : {{$necps->desc_nec}}</h6>
+        <div class="d-none d-lg-block">
+
+            <h6 class="card-header header-necessidade" style="padding-bottom: 0px;padding-left:10px;padding-top:10px;">
+              <span>
+                <figure class="figure">
+                  @if(!@empty($necps->imagem))
+                      <img id="imagem_nec_cons"  src="/uploads/nec_img/{{$necps->imagem}}" class="imagem-pequena">
+                  @else
+                      <img id="imagem_nec_cons" src="/img/logo.jpg" class="imagem-pequena">
+                  @endif 
+                </figure>
+                &nbsp
+              </span>Necessidade : {{$necps->desc_nec}}
+            </h6>
+        </div>
+
+        <div class="d-block d-lg-none">
+          <h6 class="card-header header-necessidade" style="font-size:smaller; padding-bottom: 0px;padding-left:10px;padding-top:10px;">
+            <span>
+              <figure class="figure">
+                @if(!@empty($necps->imagem))
+                    <img id="imagem_nec_cons"  src="/uploads/nec_img/{{$necps->imagem}}" class="imagem-pequena">
+                @else
+                    <img id="imagem_nec_cons" src="/img/logo.jpg" class="imagem-pequena">
+                @endif 
+              </figure>
+              &nbsp
+            </span>Necessidade : {{$necps->desc_nec}}
+          </h6>
+        </div>  
 
             <div class="card-body">
               <h6 class="card-title">{{$necps->nome_part}}</h6>

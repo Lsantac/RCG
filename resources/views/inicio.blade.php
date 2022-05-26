@@ -136,7 +136,6 @@
 
         <div class="d-none d-lg-block">
 
-
             <div class="row ">
                 <!-- <div class="col d-none d-lg-block"> -->
 
@@ -237,7 +236,6 @@
         <br>
 
         <div class="d-lg-none">
-
 
             <div class="row ">
                 <!-- <div class="col d-none d-lg-block"> -->

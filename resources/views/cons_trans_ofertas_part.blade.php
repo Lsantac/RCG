@@ -59,72 +59,77 @@
                        <tr>
                         
                         <td>
-                          <div class="row">
+                           
+                            <div class="card" >
+                              
+                                  <div class="card-body" style="background-color:rgb(199, 245, 207) ">
+                                        <div class="row">
+                                            <div style="width:auto;">
+                                                  <figure class="figure">
 
-                            <div class="col">
-                                        <div class="card" >
-                                          
-                                              <div class="card-body" style="background-color:rgb(199, 245, 207) ">
-                                                   <div class="row">
-                                                        <div class="col-2">
-                                                             <figure class="figure">
-                                                              
-                                                                @if(!@empty($of_st->imagem_of))
-                                                                    <img id="imagem_of_cons"  src="/uploads/of_img/{{$of_st->imagem_of}}" class="imagem-of-nec-cons">
-                                                                @else
-                                                                    <img id="imagem_of_cons" src="/img/logo.jpg" class="imagem-of-nec-cons">
-                                                                @endif 
-                                                          
-                                                              </figure>
-                                                        </div>
+                                                    <div class="d-block d-lg-none d-md-none d-xl-none d-xxl-none">
+                                                      @if(!@empty($of_st->imagem_of))
+                                                         <img id="imagem_of_cons"  src="/uploads/of_img/{{$of_st->imagem_of}}" class="imagem-of-nec-cons-p">
+                                                      @else
+                                                         <img id="imagem_of_cons" src="/img/logo.jpg" class="imagem-of-nec-cons-p">
+                                                      @endif 
+                                                    </div>
+                          
+                                                    <div class="d-none d-sm-none d-md-block d-lg-block d-xl-block d-xxl-block">
+                                                         @if(!@empty($of_st->imagem_of))
+                                                            <img id="imagem_of_cons"  src="/uploads/of_img/{{$of_st->imagem_of}}" class="imagem-of-nec-cons">
+                                                         @else
+                                                            <img id="imagem_of_cons" src="/img/logo.jpg" class="imagem-of-nec-cons">
+                                                         @endif 
+                                                    </div>
+                                                  
+                                                  </figure>
+                                            </div>
 
-                                                        <div class="col">
-                                                             <div class="row align-items-start">
-                                                            
-                                                                <div class="col">
-                                                                  <div class="row">
-                                                                        <div class="col">
-                                                                            <h6 class="texto-oferta">Oferta : {{$of_st->desc_of}}</h6>       
-                                                                        </div>
-                                                                        <div class="col texto_p">
-                                                                          @php
-                                                                              if($of_st->data_final_of_part <> null){
-                                                                                $date = new DateTime($of_st->data_final_of_part);
-                                                                                echo "Confirmada em : ".$date->format('d-m-Y'). " (UTC: ".$date->format('H:i').")" ;
-                                                                              }
-                                                                          @endphp
-
-                                                                        </div>
-                                                                      </div>
-                                                                  </div>
-
-                                                                  <div class="card-text texto_p">Categoria : {{$of_st->desc_cat_of}} </div>
-                                                                  <div class="texto_p">
-                                                                  @php
-                                                                      if($of_st->data_inic <> null){
-                                                                        $date = new DateTime($of_st->data_inic);
-                                                                        echo "Início : ".$date->format('d-m-Y'). " (UTC: ".$date->format('H:i').")" ;
-                                                                      }
-                                                                  @endphp
-                                                                  </div>
-
-                                                                  <div class="card-text texto_p">Participante : {{$of_st->nome_part_of}} </div>
-                                                                  <div class="card-text texto_p">Obs : {{$of_st->obs_of}}</div>
-                                                                </div>
+                                            <div class="col">
+                                                  <div class="row align-items-start">
+                                                
+                                                    <div class="col">
+                                                      <div class="row">
+                                                            <div class="col">
+                                                                <h6 class="texto-oferta">Oferta : {{$of_st->desc_of}}</h6>       
                                                             </div>
+                                                            <div class="col texto_p">
+                                                              @php
+                                                                  if($of_st->data_final_of_part <> null){
+                                                                    $date = new DateTime($of_st->data_final_of_part);
+                                                                    echo "Confirmada em : ".$date->format('d-m-Y'). " (UTC: ".$date->format('H:i').")" ;
+                                                                  }
+                                                              @endphp
 
-                                                        </div>
-                                                   </div>
-                                                   
-                                              </div>
+                                                            </div>
+                                                          </div>
+                                                      </div>
+
+                                                      <div class="card-text texto_p">Categoria : {{$of_st->desc_cat_of}} </div>
+                                                      <div class="texto_p">
+                                                      @php
+                                                          if($of_st->data_inic <> null){
+                                                            $date = new DateTime($of_st->data_inic);
+                                                            echo "Início : ".$date->format('d-m-Y'). " (UTC: ".$date->format('H:i').")" ;
+                                                          }
+                                                      @endphp
+                                                      </div>
+
+                                                      <div class="card-text texto_p">Participante : {{$of_st->nome_part_of}} </div>
+                                                      <div class="card-text texto_p">Obs : {{$of_st->obs_of}}</div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
                                         </div>
-                              </div>
-
-                          </div>
-
+                                        
+                                  </div>
+                            </div>
+                            
                         </td>
                         <td>
-                          <div class="col">
+                          
                                   <div class="card" >
                                     @if($of_st->fluxo == 'Troca')
                                         <div class="card-body" style="background-color:rgb(172, 240, 223) ">
@@ -135,22 +140,46 @@
                                     <div class="row">
                                          <div style="width:auto;">
                                               <figure class="figure">
-                                                @if($of_st->fluxo == 'Troca')                  
-                                                    @if(!@empty($of_st->imagem_of_tr))
-                                                        @if($of_st->imagem_of_tr <> $of_st->imagem_of)
-                                                            <img id="imagem_of_tr_cons"  src="/uploads/of_img/{{$of_st->imagem_of_tr}}" class="imagem-of-nec-cons">
-                                                        @else
 
-                                                        @endif
-                                                    @else
-                                                        <img id="imagem_of_tr_cons" src="/img/logo.jpg" class="imagem-of-nec-cons">
-                                                    @endif 
+                                                @if($of_st->fluxo == 'Troca')   
+
+                                                      <div class="d-block d-lg-none d-md-none d-xl-none d-xxl-none">
+                                                           @if(!@empty($of_st->imagem_of_tr))
+                                                              @if($of_st->imagem_of_tr <> $of_st->imagem_of)
+                                                                 <img id="imagem_of_tr_cons"  src="/uploads/of_img/{{$of_st->imagem_of_tr}}" class="imagem-of-nec-cons-p">
+                                                              @endif
+                                                           @else
+                                                              <img id="imagem_of_tr_cons" src="/img/logo.jpg" class="imagem-of-nec-cons-p">
+                                                           @endif 
+                                                      </div>
+                            
+                                                      <div class="d-none d-sm-none d-md-block d-lg-block d-xl-block d-xxl-block">
+                                                            @if(!@empty($of_st->imagem_of_tr))
+                                                                  @if($of_st->imagem_of_tr <> $of_st->imagem_of)
+                                                                    <img id="imagem_of_tr_cons"  src="/uploads/of_img/{{$of_st->imagem_of_tr}}" class="imagem-of-nec-cons">
+                                                                  @endif
+                                                            @else
+                                                                  <img id="imagem_of_tr_cons" src="/img/logo.jpg" class="imagem-of-nec-cons">
+                                                            @endif 
+                                                      </div>
+
                                                 @else
-                                                   @if(!@empty($of_st->imagem_nec))
-                                                        <img id="imagem_nec_cons"  src="/uploads/nec_img/{{$of_st->imagem_nec}}" class="imagem-of-nec-cons">
-                                                   @else
-                                                        <img id="imagem_nec_cons" src="/img/logo.jpg" class="imagem-of-nec-cons">
-                                                   @endif 
+
+                                                      <div class="d-block d-lg-none d-md-none d-xl-none d-xxl-none">
+                                                          @if(!@empty($of_st->imagem_nec))
+                                                              <img id="imagem_nec_cons"  src="/uploads/nec_img/{{$of_st->imagem_nec}}" class="imagem-of-nec-cons-p">
+                                                          @else
+                                                              <img id="imagem_nec_cons" src="/img/logo.jpg" class="imagem-of-nec-cons-p">
+                                                          @endif 
+                                                      </div>
+                            
+                                                      <div class="d-none d-sm-none d-md-block d-lg-block d-xl-block d-xxl-block">
+                                                          @if(!@empty($of_st->imagem_nec))
+                                                              <img id="imagem_nec_cons"  src="/uploads/nec_img/{{$of_st->imagem_nec}}" class="imagem-of-nec-cons">
+                                                          @else
+                                                              <img id="imagem_nec_cons" src="/img/logo.jpg" class="imagem-of-nec-cons">
+                                                          @endif 
+                                                      </div>
 
                                                 @endif
                                           
