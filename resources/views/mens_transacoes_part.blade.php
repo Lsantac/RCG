@@ -210,7 +210,7 @@
         <h6 class="card-header header-trans">Definições</h6>
         <div class="card-body">
 
-            <div class="row texto_m">
+            <div class="row">
               <div class="col-4">
                 <label for="inputMoeda" class="">Fluxo :</label>
               </div>
