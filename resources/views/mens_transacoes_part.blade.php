@@ -69,17 +69,32 @@
                   <a href="/consultar_participante/{{$ofps->id_part}}" class="btn btn-primary btn-sm">Ver Perfil</a>    
                 </div>
                 <div class="col-9">
-                  <div style="color:rgb(13, 122, 13); text-decoration:double;" class="card-text texto_m"> 
-                    <strong> Confirmada em :
-                      @php
-                      if(isset($trans[0])){
-                        if($trans[0]->data_final_of_part > 0){
-                          $date = new DateTime($trans[0]->data_final_of_part);
-                          echo $date->format('d-m-Y'). " (UTC: ".$date->format('H:i').")" ;
+                  <div style="color:rgb(13, 122, 13); text-decoration:double;" class="card-text"> 
+                    <div class=" texto_p d-block d-lg-none">
+                        <strong> Confirmada em :
+                          @php
+                          if(isset($trans[0])){
+                            if($trans[0]->data_final_of_part > 0){
+                              $date = new DateTime($trans[0]->data_final_of_part);
+                              echo $date->format('d-m-Y'). " (UTC: ".$date->format('H:i').")" ;
+                            }
+                          }
+                          @endphp
+                        </strong>
+                    </div>
+                    <div class=" texto_m d-none d-lg-block">
+                      <strong> Confirmada em :
+                        @php
+                        if(isset($trans[0])){
+                          if($trans[0]->data_final_of_part > 0){
+                            $date = new DateTime($trans[0]->data_final_of_part);
+                            echo $date->format('d-m-Y'). " (UTC: ".$date->format('H:i').")" ;
+                          }
                         }
-                      }
-                      @endphp
-                    </strong>
+                        @endphp
+                      </strong>
+                  </div>
+
                   </div>
                   
                 </div>
@@ -142,20 +157,32 @@
                   <a href="/consultar_participante/{{$necps->id_part}}" class="btn btn-primary btn-sm">Ver Perfil</a>    
                 </div>
                 <div class="col-9">
-                  <div style="color:rgb(122, 66, 13); text-decoration:double;" class="card-text texto_m"> 
-                    <strong> Confirmada em :
-                    @php
-                          
-                        if(isset($trans[0])){
-                          if($trans[0]->data_final_nec_part > 0){
-                            $date = new DateTime($trans[0]->data_final_nec_part);
-                            echo $date->format('d-m-Y'). " (UTC: ".$date->format('H:i').")" ;
-                          }
-                        }
-                        
-                    @endphp
+                  <div style="color:rgb(122, 66, 13); text-decoration:double;" class="card-text"> 
+                    <div class=" texto_p d-block d-lg-none">
+                        <strong> Confirmada em :
+                            @php
+                                if(isset($trans[0])){
+                                  if($trans[0]->data_final_nec_part > 0){
+                                    $date = new DateTime($trans[0]->data_final_nec_part);
+                                    echo $date->format('d-m-Y'). " (UTC: ".$date->format('H:i').")" ;
+                                  }
+                                }
+                            @endphp
+                        </strong>
+                    </div>
+                    <div class=" texto_m d-none d-lg-block">
+                      <strong> Confirmada em :
+                          @php
+                              if(isset($trans[0])){
+                                if($trans[0]->data_final_nec_part > 0){
+                                  $date = new DateTime($trans[0]->data_final_nec_part);
+                                  echo $date->format('d-m-Y'). " (UTC: ".$date->format('H:i').")" ;
+                                }
+                              }
+                          @endphp
+                      </strong>
+                  </div>
 
-                    </strong>
                   </div>
                 </div>
             </div>
@@ -189,17 +216,32 @@
                   <a href="/consultar_participante/{{$oftrps->id_part}}" class="btn btn-primary btn-sm">Ver Perfil</a>    
                 </div>
                 <div class="col-9">
-                  <div style="color:rgb(13, 122, 107); text-decoration:double;" class="card-text texto_m"> 
-                    <strong> Confirmada em :
-                        @php
-                            if(isset($trans[0])){
-                              if($trans[0]->data_final_of_tr_part > 0){
-                                $date = new DateTime($trans[0]->data_final_of_tr_part);
-                                echo $date->format('d-m-Y'). " (UTC: ".$date->format('H:i').")" ;
+                  <div style="color:rgb(13, 122, 107); text-decoration:double;" class="card-text"> 
+                    <div class=" texto_p d-block d-lg-none">
+                        <strong> Confirmada em :
+                            @php
+                                if(isset($trans[0])){
+                                  if($trans[0]->data_final_of_tr_part > 0){
+                                    $date = new DateTime($trans[0]->data_final_of_tr_part);
+                                    echo $date->format('d-m-Y'). " (UTC: ".$date->format('H:i').")" ;
+                                  }
+                                }
+                            @endphp
+                        </strong>
+                    </div>
+                    <div class=" texto_m d-none d-lg-block">
+                      <strong> Confirmada em :
+                          @php
+                              if(isset($trans[0])){
+                                if($trans[0]->data_final_of_tr_part > 0){
+                                  $date = new DateTime($trans[0]->data_final_of_tr_part);
+                                  echo $date->format('d-m-Y'). " (UTC: ".$date->format('H:i').")" ;
+                                }
                               }
-                            }
-                        @endphp
-                    </strong>
+                          @endphp
+                      </strong>
+                  </div>
+
                   </div>
                 </div>
             </div>
