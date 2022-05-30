@@ -5,14 +5,19 @@
 <div class="container">
 
   <div class="row">
-    <div class="col-6">
+    <div>
+      <div class="col-6 d-block d-lg-none">
+        <h5 class="texto-oferta" style="color:rgb(91, 19, 207);">Detalhes da Transação</h5>      
+      </div>
+    </div>
+    <div class="col-6 d-none d-lg-block">
          <h4 class="texto-oferta" style="color:rgb(91, 19, 207);">Detalhes da Transação</h4>      
     </div>
   </div>
 
   <br>
 
-  <div class="row row-cols-1 row-cols-sm-1 row-cols-md-3">
+  <div class="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-3">
     <div class="col">
 
         <div class="card">
@@ -211,11 +216,11 @@
         <div class="card-body">
 
             <div class="row">
-              <div class="col-4">
+              <div class="col-auto">
                 <label for="inputMoeda" class="">Fluxo :</label>
               </div>
 
-              <div class="col-6 ">
+              <div class="col-auto ">
                 @if(isset($oftrps))
                     <input  class="form-control" value="Troca" name="Fluxo_tr" id="Fluxo_tr" readonly>
                     <input form="finalizar_transacao" value="1" name="Fluxo" id="Fluxo" type="hidden">
@@ -257,9 +262,9 @@
                   <label for="inputQtOf" class="">Qt Oferta :</label>
                 </div>
   
-                <div class="col-8 ">
+                <div class="col-auto">
                   <div class="row">
-                    <div class="col-6 ">
+                    <div class="col-7">
                          @if (count($trans)>0)
                              <input onkeypress="return event.keyCode!=13" id="QtOf" name="QtOf" onchange="verifica_quant({{$disp_qt_of_trans}},'of')"  form="finalizar_transacao"  value="{{$trans[0]->quant_of}}" type=""  class="form-control texto_m"  required>  
                          @else
@@ -278,9 +283,9 @@
                       <label for="inputQtNec" class="">Qt Necessidade :</label>
                     </div>
       
-                    <div class="col-8 ">
+                    <div class="col-auto ">
                       <div class="row">
-                          <div class="col-6 ">
+                          <div class="col-7 ">
                             @if (count($trans)>0)
                                 <input  onkeypress="return event.keyCode!=13" id="QtNec" name="QtNec" onchange="verifica_quant({{$disp_qt_nec_trans}},'nec')" form="finalizar_transacao"  value="{{$trans[0]->quant_nec}}" type=""  class="form-control texto_m"  required>  
                             @else
@@ -316,7 +321,7 @@
                 <br>
 
                 <div class="row">
-                  <div class="col-3">
+                  <div class="col-auto">
                       <!-- Modal -->
                       <form id='finalizar_transacao'  action="{{route('finalizar_transacao')}}" method="get">
                         
@@ -443,8 +448,13 @@
 
     <br>
     <div class="row">
-        <div class="col-2">
-            <h5 class="texto-mensagens">Mensagens : </h5> 
+        <div class="col-auto">
+            <div class="d-block d-lg-none">
+                 <h6 class="texto-mensagens">Mensagens : </h6> 
+            </div> 
+            <div class="d-none d-lg-block">
+              <h5 class="texto-mensagens">Mensagens : </h5> 
+            </div>         
         </div>
         <div class="col">
               <!-- Button trigger modal -->
@@ -520,10 +530,42 @@
     <table class="table table-sm">
         <thead class="cab-msg">
           <tr>
-            <th scope="col" class="texto_m">Data</th>
-            <th scope="col" class="texto_m">Enviado por</th>
-            <th scope="col" class="texto_m">Mensagem</th>
-            <th class="texto_m" colspan="3">Ações</th>
+              <th scope="col">
+                <div class="texto_m d-none d-lg-block">
+                     Data
+                </div>
+                <div class="texto_p d-block d-lg-none">
+                  Data
+                </div>
+
+              </th>
+              <th scope="col">
+                <div class="texto_m d-none d-lg-block">
+                     Enviado por
+                </div>
+                <div class="texto_p d-block d-lg-none">
+                  Enviado por
+                </div>       
+              </th>
+
+              <th scope="col" class="texto_m">
+                <div class="texto_m d-none d-lg-block">
+                Mensagem
+                </div>
+                <div class="texto_p d-block d-lg-none">
+                  Mensagem
+                </div>  
+              </th>
+
+              <th scope="col" colspan="3" >
+                <div class="texto_m d-none d-lg-block">
+                     Ação
+                </div>
+                <div class="texto_p d-block d-lg-none">
+                  Ação
+                </div>
+              </th>  
+              
           </tr>
         </thead>
 
@@ -538,15 +580,40 @@
                     <tr style="background-color:rgb(243, 237, 156)">
                  @endif 
                  
-                    <td class="texto_m">
+                    <td>
                       @php
-                          $date = new DateTime($msg->data);
-                          echo $date->format('d-m-Y'). " (UTC: ".$date->format('H:i').")" ;
+                        $date = new DateTime($msg->data);
                       @endphp
+                      <div class="d-none d-lg-block texto_m">
+                           @php
+                             echo $date->format('d-m-Y'). " (UTC: ".$date->format('H:i').")" ;
+                           @endphp
+                      </div>
+                      <div class="d-block d-lg-none texto_p">
+                        @php
+                          echo $date->format('d-m-Y'). " (UTC: ".$date->format('H:i').")" ;
+                        @endphp
+                   </div>
+
                     </td>
 
-                    <td class="texto_m ">{{$msg->nome_part_mens}}</td>
-                    <td class="texto_m ">{{$msg->mensagem}}</td>
+                    <td>
+                      <div class="d-none d-lg-block texto_m">
+                          {{$msg->nome_part_mens}}
+                      </div>
+                      <div class="d-block d-lg-none texto_p">
+                        {{$msg->nome_part_mens}}
+                      </div>
+                    </td>
+
+                    <td>
+                      <div class="d-none d-lg-block texto_m">
+                          {{$msg->mensagem}}
+                      </div>
+                      <div class="d-block d-lg-none texto_p">
+                        {{$msg->mensagem}}
+                      </div>
+                    </td>
 
                     <td>
                         @if(Session::get('id_logado') == $msg->id_part and ($msg->canc_conf == false))  
