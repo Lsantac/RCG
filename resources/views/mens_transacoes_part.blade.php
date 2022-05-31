@@ -6,8 +6,16 @@
 
   <div class="row">
     <div>
-      <div class="col-6 d-block d-lg-none">
-        <h5 class="texto-oferta" style="color:rgb(91, 19, 207);">Detalhes da Transação</h5>      
+      <div class="col-auto d-block d-lg-none">
+        <div class="row">
+             <div class="col-auto">
+                <h5 class="texto-oferta" style="color:rgb(91, 19, 207);">Detalhes da Transação</h5>      
+             </div>
+             <div class="col">
+                <a class="btn btn-primary btn-sm" href="#mensagens" role="button">Mensagens</a>
+             </div>
+        </div>
+        
       </div>
     </div>
     <div class="col-6 d-none d-lg-block">
@@ -492,10 +500,10 @@
     <div class="row">
         <div class="col-auto">
             <div class="d-block d-lg-none">
-                 <h6 class="texto-mensagens">Mensagens : </h6> 
+                 <h6 id="mensagens" class="texto-mensagens">Mensagens : </h6> 
             </div> 
             <div class="d-none d-lg-block">
-              <h5 class="texto-mensagens">Mensagens : </h5> 
+              <h5 id="mensagens" class="texto-mensagens">Mensagens : </h5> 
             </div>         
         </div>
         <div class="col">
@@ -577,7 +585,7 @@
                      Data
                 </div>
                 <div class="texto_p d-block d-lg-none">
-                  Data
+                     Data
                 </div>
 
               </th>
@@ -586,16 +594,16 @@
                      Enviado por
                 </div>
                 <div class="texto_p d-block d-lg-none">
-                  Enviado por
+                     Enviado por
                 </div>       
               </th>
 
               <th scope="col" class="texto_m">
                 <div class="texto_m d-none d-lg-block">
-                Mensagem
+                     Mensagem
                 </div>
                 <div class="texto_p d-block d-lg-none">
-                  Mensagem
+                     Mensagem
                 </div>  
               </th>
 
@@ -604,7 +612,7 @@
                      Ação
                 </div>
                 <div class="texto_p d-block d-lg-none">
-                  Ação
+                     Ação
                 </div>
               </th>  
               
