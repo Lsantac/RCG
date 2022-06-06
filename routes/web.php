@@ -13,6 +13,7 @@ use App\Http\Controllers\CategoriasController;
 use App\Http\Controllers\MoedasController;
 use App\Http\Controllers\UnidadesController;
 use App\Http\Controllers\IdentController;
+use App\Http\Controllers\MailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -150,4 +151,6 @@ Route::get('/geocode', function ()
 });
 
 
+/*Emails */
+route::get ('/SendEmail', [MailController::class,'SendEmail']);
 

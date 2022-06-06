@@ -6,7 +6,7 @@
 <div class="container">
     <br><br><br><br>
     <div class="row justify-content-center">
-         <div class="col-4">
+         <div class="col-auto">
    
             <form action="{{route('auth.login')}}" method="post">
   

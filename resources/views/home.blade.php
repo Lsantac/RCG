@@ -15,7 +15,7 @@
 
                                 <img src="/img/imagem2.jpg" class="d-block" 
                                 
-                                style="width: 60vmax;height: 45vmax;
+                                style="width: 55vmax;height: 45vmax;
                                 margin-left: auto;
                                 margin-right: auto;" alt="...">
                 </div>
@@ -25,7 +25,7 @@
                 <h1 style="text-align: center; color:blue;">{{$ident->nome_ident}}</h1>
                 <img src="/img/imagem6.webp" class="d-block" 
 
-                style="width: 60vmax;height: 45vmax;
+                style="width: 55vmax;height: 45vmax;
                 margin-left: auto;
                 margin-right: auto;"
                  alt="...">
@@ -36,7 +36,7 @@
                 <h1 style="text-align: center; color:blue;">{{$ident->nome_ident}}</h1>
                 <img src="/img/imagem9.jpg" class="d-block" 
 
-                style="width: 70vmax;height: 45vmax;
+                style="width: 55vmax;height: 45vmax;
                 margin-left: auto;
                 margin-right: auto;" alt="...">
 
@@ -46,7 +46,7 @@
                 <h1 style="text-align: center; color:blue;">{{$ident->nome_ident}}</h1>
                 <img src="/img/imagem8.jpg" class="d-block" 
                 
-                style="width: 60vmax;height: 45vmax;
+                style="width: 55vmax;height: 45vmax;
                 margin-left: auto;
                 margin-right: auto;" alt="...">
               </div>
@@ -57,7 +57,7 @@
                 <h1 style="text-align: center; color:blue;">{{$ident->nome_ident}}</h1>
                 <img src="/img/imagem3.jpg" class="d-block" 
                 
-                style="width: 60vmax;height: 45vmax;
+                style="width: 55vmax;height: 45vmax;
                 margin-left: auto;
                 margin-right: auto;" alt="...">
               </div>
