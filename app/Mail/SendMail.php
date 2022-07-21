@@ -33,4 +33,7 @@ class SendMail extends Mailable
     {
         return $this->subject('Mensagem da Rede Colaborativa Global')->view('emails.EnviarMail');
     }
+
+   
+    
 }
