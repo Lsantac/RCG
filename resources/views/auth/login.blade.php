@@ -55,7 +55,13 @@
                     </div>      
                 @enderror
                 </div>
-                <br>               
+                <br> 
+                
+                <a href="{{route('SendEmail',['email'=>'lsantac@gmail.com'])}}">Esqueci minha senha !</a>
+
+                <br>
+                <br>
+
                 <button type="submit" class="btn btn-primary">Entrar</button>
                 <!-- <a class="btn btn-success" href="novo_participante" role="button">Novo Participante</a> -->
                 

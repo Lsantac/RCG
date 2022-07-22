@@ -152,5 +152,5 @@ Route::get('/geocode', function ()
 
 
 /*Emails */
-route::get ('/SendEmail', [MailController::class,'SendEmail']);
+route::get ('/SendEmail/{email}', [MailController::class,'SendEmail'])->name('SendEmail');
 
