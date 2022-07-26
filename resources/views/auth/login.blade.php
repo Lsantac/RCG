@@ -3,6 +3,27 @@
 
 @section('content')
 
+<div class='results'>
+    @if(Session::get('success'))
+        <div class="alert alert-success">
+            {{Session::get('success')}}
+        </div>
+    @endif
+
+    @if(Session::get('fail'))
+        <div class="alert alert-danger">
+            {{Session::get('fail')}}
+        </div>
+    @endif
+
+    @if(Session::get('podealterar'))
+        <div class="alert alert-danger">
+            {{Session::get('podealterar')}}
+        </div>
+    @endif
+                    
+</div>
+
 <div class="container">
     <br><br><br><br>
     <div class="row justify-content-center">
@@ -10,27 +31,6 @@
    
             <form action="{{route('auth.login')}}" method="post">
   
-                <div class='results'>
-                    @if(Session::get('success'))
-                        <div class="alert alert-success">
-                            {{Session::get('success')}}
-                        </div>
-                    @endif
-    
-                    @if(Session::get('fail'))
-                        <div class="alert alert-danger">
-                            {{Session::get('fail')}}
-                        </div>
-                    @endif
-
-                    @if(Session::get('podealterar'))
-                        <div class="alert alert-danger">
-                            {{Session::get('podealterar')}}
-                        </div>
-                    @endif
-                    
-                </div>
-                
                 <h4>Entre com suas credenciais :</h4>
                 <hr>
 
@@ -56,8 +56,8 @@
                 @enderror
                 </div>
                 <br> 
-                
-                <a href="{{route('SendEmail',['email'=>'lsantac@gmail.com'])}}">Esqueci minha senha !</a>
+
+                <a href="{{route('SendEmail',['email'=>".pega_email()."])}}">Esqueci minha senha !</a>
 
                 <br>
                 <br>
@@ -73,5 +73,11 @@
     </div>
 </div>
 
+<script>
+    function pega_email(){
+      return document.getElementById("email").value ;
+    }
+
+</script>
 
 @endsection

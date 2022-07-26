@@ -3,36 +3,56 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
-
-use Illuminate\Support\Facades\Mail;
 use App\Mail\SendMail;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Http\Request;
 
 
 class MailController extends Controller
 {
     public function SendEmail($email){
 
+        dd($email);
+
         $ident = DB::table('identidade')->first();
         $nome_ident = $ident->nome_ident;
+        $part = DB::table('participantes')->where('email', $email)->first();
+
+        $nome_part = $part->nome_part;
 
         $details = [
-            'title' => 'Olá '.$email.' da '. $nome_ident .' !',
+            'title' => "Olá '".$nome_part."' da ". $nome_ident .' !',
             'body' => 'Essa mensagem é para voce poder resetar sua senha, clique no link abaixo. Seja Bem Vindo a '. $nome_ident.' !',
+            /*'image'=> asset('/img/logo.jpg'),*/
+            'image' => 'http://redecolaborativa.ddns.net:8221/img/logo.jpg',
            
-            
         ];
 
-        /*dd($email);*/
+        
         /*dd($details);*/
+        /*dd(public_path());*/
+        /*dd(asset('/img/logo.jpg'));*/
 
         Mail::to($email)->send(new \App\Mail\SendMail($details),['html' => 'email.EnviarMail']);
 
-        /*return "Email enviado para ".$email;*/
-
-        return view('emails.EnviarMail',['details' => $details]);
+        return back()->with('success', 'Email enviado para '.$email. ' com sucesso! Verifique sua caixa de entrada e use o link para redefinir sua senha !');
         
 
     }  
+
+    public function SendEmail_teste($email)
+    {
+         
+        Mail::send('email.EnviarMail', function ($m) use($email) {
+            $m->from('lsantac.redecolaborativa@gmail.com', 'Your Application');
+ 
+            $m->to($email)->subject('Your Reminder!');
+        });
+    }
+
+
+
+
 
     public function send_email_mailer() {
         $to      = 'lsantac@gmail.com';

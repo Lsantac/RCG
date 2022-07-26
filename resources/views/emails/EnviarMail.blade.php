@@ -11,6 +11,8 @@
 <body>
     <h1>{{$details['title']}}</h1>
     <br>
+    <img src="{{$details['image']}}" alt="">
+    <br>
     <p>
        <a href="http://localhost:8000/alterpass">clique aqui para resetar sua senha</a>   
     </p>

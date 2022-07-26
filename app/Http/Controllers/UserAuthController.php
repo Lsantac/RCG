@@ -63,7 +63,7 @@ class UserAuthController extends Controller
                                 return redirect('/')->with('fail','Aconteceu algum erro! Participante não foi registrado.');
                             }*/
                     }else{
-                         return redirect('/home')->with('fail','Senha inválida!');
+                         return redirect('/login')->with('fail','Senha inválida!');
                     }
 
                 }
