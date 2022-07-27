@@ -28,7 +28,7 @@ class UserAuthController extends Controller
                 $part = DB::table('participantes')->where('email','=',request('email'))->first();
 
                 if(!$part){
-                return redirect('/home')->with('success','Voce é um Novo Participante! Faça seu cadastro primeiro.');
+                return redirect('/login')->with('fail','Voce é um Novo Participante! Faça seu cadastro primeiro.');
                 }
                 else{
 

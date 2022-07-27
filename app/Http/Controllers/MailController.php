@@ -10,25 +10,28 @@ use Illuminate\Http\Request;
 
 class MailController extends Controller
 {
-    public function SendEmail($email){
+    public function SendEmail(Request $request){
 
-        dd($email);
+        $email = $request->input('email_enviado');
+        /*dd($email);*/
 
         $ident = DB::table('identidade')->first();
         $nome_ident = $ident->nome_ident;
         $part = DB::table('participantes')->where('email', $email)->first();
+
+        if(!$part){
+            return redirect('/login')->with('fail','Email não cadastrado!');
+        }  
 
         $nome_part = $part->nome_part;
 
         $details = [
             'title' => "Olá '".$nome_part."' da ". $nome_ident .' !',
             'body' => 'Essa mensagem é para voce poder resetar sua senha, clique no link abaixo. Seja Bem Vindo a '. $nome_ident.' !',
-            /*'image'=> asset('/img/logo.jpg'),*/
             'image' => 'http://redecolaborativa.ddns.net:8221/img/logo.jpg',
            
         ];
 
-        
         /*dd($details);*/
         /*dd(public_path());*/
         /*dd(asset('/img/logo.jpg'));*/

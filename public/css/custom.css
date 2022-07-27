@@ -337,6 +337,13 @@
     height: 80%;
 }
 
+.btn_link{
+    background-color: white;
+    border-color: white;
+    border-style:solid;
+    text-decoration: underline;
+    color: blue;
+}
 
 /* Optional: Makes the sample page fill the window. */
 

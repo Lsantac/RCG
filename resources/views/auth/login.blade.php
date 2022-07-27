@@ -55,17 +55,20 @@
                     </div>      
                 @enderror
                 </div>
-                <br> 
-
-                <a href="{{route('SendEmail',['email'=>".pega_email()."])}}">Esqueci minha senha !</a>
-
-                <br>
+                
                 <br>
 
                 <button type="submit" class="btn btn-primary">Entrar</button>
-                <!-- <a class="btn btn-success" href="novo_participante" role="button">Novo Participante</a> -->
                 
-            
+            </form>
+
+            <br>
+
+            <form action="{{route('SendEmail')}}" method="get">
+                
+                <input type="hidden" name="email_enviado" id="email_enviado">
+                <button  onclick="pega_email()" type="submit" class="btn_link" >Esqueci minha senha !</button> 
+                
             </form>
             
             <hr>
@@ -75,7 +78,7 @@
 
 <script>
     function pega_email(){
-      return document.getElementById("email").value ;
+      document.getElementById("email_enviado").value = document.getElementById("email").value;
     }
 
 </script>
