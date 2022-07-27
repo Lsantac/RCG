@@ -43,8 +43,13 @@ Route::post('login',[UserAuthController::class,'login'])->name('auth.login');
 Route::post('create',[UserAuthController::class,'create'])->name('auth.create');
 Route::delete('/logout',[UserAuthController::class,'logout'])->name('auth.logout');
 Route::any('mudasenha',[UserAuthController::class,'alterpass'])->name('auth.alterpass');
+
+Route::any('alterpass_email/{id}', [UserAuthController::class,'alterpass_email'])->name('auth.alterpass_email');
+
 Route::any('resetasenha',[UserAuthController::class,'resetpass'])->name('auth.resetpass');
 Route::post('senhaok',[UserAuthController::class,'alterpassok'])->name('auth.alterpassok');
+Route::post('senhaok_email',[UserAuthController::class,'alterpassok_email'])->name('auth.alterpassok_email');
+
 Route::post('resetsenhaok',[UserAuthController::class,'resetpassok'])->name('auth.resetpassok');
 
 Route::get('/novo_participante', function () {
@@ -54,6 +59,7 @@ Route::get('/novo_participante', function () {
 Route::any('alterpass', function () {
     return view('auth.alterpass');
 });
+
 Route::any('resetpass', function () {
     return view('auth.resetpass');
 });

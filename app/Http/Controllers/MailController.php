@@ -29,6 +29,7 @@ class MailController extends Controller
             'title' => "Olá '".$nome_part."' da ". $nome_ident .' !',
             'body' => 'Essa mensagem é para voce poder resetar sua senha, clique no link abaixo. Seja Bem Vindo a '. $nome_ident.' !',
             'image' => 'http://redecolaborativa.ddns.net:8221/img/logo.jpg',
+            'id' => $part->id,
            
         ];
 

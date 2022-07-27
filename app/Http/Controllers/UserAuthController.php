@@ -153,6 +153,28 @@ class UserAuthController extends Controller
 
     }
 
+    public function alterpass_email($id){
+
+        $part = participantes::FindOrfail($id);
+
+        /*dd($part->email);*/
+
+        if(!$part){
+            return back()->with('fail','Participante não encontrado!');
+        }else{
+
+            if( $part->email <> null){
+            return view('auth.alterpass_email')->with('email',$part->email);
+
+            }else{
+            return redirect('/')->with('podealterar','Para alterar a senha é preciso estar logado primeiro');
+
+            }
+
+        }
+
+    }
+
     public function resetpass(){
 
         if(session('email')<> null){
@@ -176,6 +198,35 @@ class UserAuthController extends Controller
            {
             $ok = DB::table('participantes')
             ->where('email','=',Session('email'))
+            ->update(['senha' => Hash::make(request('novasenha'))]);
+
+             if($ok){
+               return redirect('/')->with('success','Senha alterada com sucesso!');
+             }else{
+               return back()->with('fail','Erro ao salvar nova senha');
+             }
+           }
+           else
+           {
+             return back()->with('fail','Senha inválida');
+            }
+        }else{
+            return back()->with('fail','Erro ao consultar email');
+        }
+    }
+
+    public function alterpassok_email(AlterPassRequest $request){
+
+        $email = request('email');
+
+        $p = DB::table('participantes')->where('email','=',$email)->first();
+
+        if($p)
+        {
+           if(Hash::check($request->senha,$p->senha))
+           {
+            $ok = DB::table('participantes')
+            ->where('email','=',$email)
             ->update(['senha' => Hash::make(request('novasenha'))]);
 
              if($ok){

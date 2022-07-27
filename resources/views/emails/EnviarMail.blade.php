@@ -14,7 +14,8 @@
     <img src="{{$details['image']}}" alt="">
     <br>
     <p>
-       <a href="http://localhost:8000/alterpass">clique aqui para resetar sua senha</a>   
+                
+       <a href="{{asset('/alterpass_email')}}/{{$details['id']}}">clique aqui para resetar sua senha</a>   
     </p>
     
 </body>
