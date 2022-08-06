@@ -54,7 +54,46 @@ class RedesController extends Controller
             return view('redes_part',['part' => $participante,'rps'=>$rps,'redes'=>$redes]);
             
         }
-       }   
+       } 
+       
+       public function consultar_todas_redes(Request $request){
+
+            $request->session()->put('criterio', request('consulta'));
+
+            if(isset($_GET['consulta'])){
+
+                $string = $_GET['consulta'];
+
+                // split on 1+ whitespace & ignore empty (eg. trailing space)
+                $searchValues = preg_split('/\s+/', $string, -1, PREG_SPLIT_NO_EMPTY);
+
+
+                $redes = DB::table('redes')->where(function($query) use ($searchValues){
+                                             foreach($searchValues as $value){
+                                                     $query->where('nome','like','%'.$value.'%') 
+                                                     ->orwhere('descricao','like','%'.$value.'%') 
+                                                     ->orwhere('nome_part','like','%'.$value.'%') 
+                                                     ->orwhere('data_inic','like','%'.$value.'%'); 
+                                              }      
+                                              })
+
+                                              ->join('participantes','redes.id_part_inic','=','participantes.id')
+                                              ->select('participantes.*','redes.*')
+                                              ->paginate(10);
+            }
+            else
+            {
+                $redes = DB::table('redes')->join('participantes','redes.id_part_inic','=','participantes.id')
+                                                ->select('participantes.*','redes.*')
+                                                ->paginate(10);
+            }
+
+            /*dd ($redes);*/
+            
+            $redes->appends($request->all());
+            return view('consultar_todas_redes',['redes'=>$redes]);
+
+       }      
 
     public function incluir_redes_part(Request $request) {
 
@@ -103,5 +142,22 @@ class RedesController extends Controller
             return back()->with('fail','Erro na exclusão da rede do participante!');
         }
     }
+
+    public function deleta_rede($id){
+
+        $rp = DB::table('redesparts')->where('id_rede','=',$id);
       
+        if(!$rp){
+
+            $r = DB::table('redes')->where('id','=',$id)->delete();  
+                
+            if($r){
+                return back()->with('success','Rede excluida com sucesso!');
+            }else{
+                return back()->with('fail','Erro na exclusão da rede!');
+            }
+        }else{
+             return back()->with('fail','Erro na exclusão da rede! Rede está sendo usada por algum participante!');
+    }
+    }         
 }

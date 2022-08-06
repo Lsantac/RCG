@@ -33,6 +33,7 @@ class MailController extends Controller
            
         ];
 
+
         /*dd($details);*/
         /*dd(public_path());*/
         /*dd(asset('/img/logo.jpg'));*/

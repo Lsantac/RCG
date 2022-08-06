@@ -124,9 +124,12 @@ Route::get('/cancelar_transacao',  [TransacoesController::class,'cancelar_transa
 /*Redes*/
 Route::get('/consulta_redes',  [RedesController::class,'query_redes'])->name('consulta_redes')->middleware('islogged');
 Route::delete('/deleta_rede_part/{id}',  [RedesController::class,'deleta_rede_part'])->name('deleta_rede_part');
+Route::delete('/deleta_rede/{id}',  [RedesController::class,'deleta_rede'])->name('deleta_rede');
 Route::get('/redes_part/{id}',  [RedesController::class,'show_redes'])->name('procura_redes_part');
 Route::post('incluir_redes_part',  [RedesController::class,'incluir_redes_part'])->name('incluir_redes_part');
 Route::post('nova_rede',  [RedesController::class,'nova_rede'])->name('nova_rede');
+
+Route::get('/redes',  [RedesController::class,'consultar_todas_redes'])->name('consultar_todas_redes')->middleware('islogged');
 
 /*Categorias*/
 Route::get('/consulta_categorias',  [CategoriasController::class,'query_categorias'])->name('consulta_categorias')->middleware('islogged');

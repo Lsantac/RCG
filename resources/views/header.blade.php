@@ -22,7 +22,7 @@
                 </li>
               
                 <li class="nav-item">
-                  <a class="nav-link" href="">Redes</a>
+                  <a style="color:rgb(126, 13, 120); "class="nav-link" href="/redes">Redes</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="">Projetos</a>

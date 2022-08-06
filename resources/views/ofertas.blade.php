@@ -15,18 +15,25 @@
         </div>
         <div class="col">
             <form action="mostra_varios_parts" method="post">
-                @csrf @if (isset($ofps_map))
-                <button class="btn btn-mapa btn-sm bi-globe texto_m" type="submit"> Mapa Geral</button>
+                @csrf
 
-                <input value="0" name="nome_part" type="hidden">
-                <input value="Oferta" name="of_nec" type="hidden">
-                <input value="{{Session::get('latitude')}}" name="latitude" type="hidden">
-                <input value="{{Session::get('longitude')}}" name="longitude" type="hidden"> @if (count($ofps_map)>0) @foreach($ofps_map as $ofp)
-                <input value="{{$ofp->id_part}}" name="parts[{{ $loop->index }}][id]" type="hidden">
-                <input value="{{$ofp->latitude}}" name="parts[{{ $loop->index }}][latitude]" type="hidden">
-                <input value="{{$ofp->longitude}}" name="parts[{{ $loop->index }}][longitude]" type="hidden">
-                <input value="{{$ofp->nome_part}}" name="parts[{{ $loop->index }}][nome_part]" type="hidden">
-                <input value="{{$ofp->endereco}}" name="parts[{{ $loop->index }}][endereco]" type="hidden"> @endforeach @endif @endif
+                @if (isset($ofps_map))
+                    <button class="btn btn-mapa btn-sm bi-globe texto_m" type="submit"> Mapa Geral</button>
+
+                    <input value="0" name="nome_part" type="hidden">
+                    <input value="Oferta" name="of_nec" type="hidden">
+                    <input value="{{Session::get('latitude')}}" name="latitude" type="hidden">
+                    <input value="{{Session::get('longitude')}}" name="longitude" type="hidden"> 
+                    @if (count($ofps_map)>0) 
+                        @foreach($ofps_map as $ofp)
+                            <input value="{{$ofp->id_part}}" name="parts[{{ $loop->index }}][id]" type="hidden">
+                            <input value="{{$ofp->latitude}}" name="parts[{{ $loop->index }}][latitude]" type="hidden">
+                            <input value="{{$ofp->longitude}}" name="parts[{{ $loop->index }}][longitude]" type="hidden">
+                            <input value="{{$ofp->nome_part}}" name="parts[{{ $loop->index }}][nome_part]" type="hidden">
+                            <input value="{{$ofp->endereco}}" name="parts[{{ $loop->index }}][endereco]" type="hidden"> 
+                        @endforeach 
+                    @endif 
+                @endif
 
 
             </form>
@@ -34,7 +41,8 @@
         </div>
 
     </div>
-    <br> @if (isset($ofps))
+    <br>
+    @if (isset($ofps))
 
     <table class="table table-sm">
         <thead class="texto_m">
@@ -52,7 +60,8 @@
             </tr>
         </thead>
         <tbody>
-            @if (count($ofps)>0) @foreach($ofps as $ofp)
+            @if (count($ofps)>0)
+            @foreach($ofps as $ofp)
             <div>
                 <td>
                     <div class="col-1">
@@ -232,7 +241,8 @@
                 </tr>
             </div>
 
-            @endforeach @else
+            @endforeach
+            @else
             <tr>
                 <td>Nenhum registro encontrado</td>
                 <td></td>
