@@ -111,6 +111,9 @@
               </div>
 
           </div>
+          
+          <input type="hidden" name="id_part_inic" value="{{session('id_logado')}}">
+
           <div class="modal-footer">
             <button type="button" class="btn btn-sair" data-bs-dismiss="modal">Sair</button>
             <button type="submit" class="btn btn-primary">Salvar</button>

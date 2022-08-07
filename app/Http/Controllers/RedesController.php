@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\participantes;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
 
 use function PHPUnit\Framework\isNull;
@@ -88,7 +89,7 @@ class RedesController extends Controller
                                                 ->paginate(10);
             }
 
-            /*dd ($redes);*/
+           /* dd ($redes);*/
             
             $redes->appends($request->all());
             return view('consultar_todas_redes',['redes'=>$redes]);
@@ -124,7 +125,9 @@ class RedesController extends Controller
         if(!$rede){
             $r = DB::table('redes')->insert([
                 'nome' => request('nome'),
-                'descricao' => request('descricao')
+                'descricao' => request('descricao'),
+                'id_part_inic' => request('id_part_inic'),
+                'data_inic' => Date('Y-m-d')
             ]);
             return back()->with('success','Rede incluida com sucesso!');
         }else{
@@ -145,8 +148,10 @@ class RedesController extends Controller
 
     public function deleta_rede($id){
 
-        $rp = DB::table('redesparts')->where('id_rede','=',$id);
-      
+        $rp = DB::table('redesparts')->where('id_rede',$id)->first();
+
+       /* dd($id,$rp);*/
+
         if(!$rp){
 
             $r = DB::table('redes')->where('id','=',$id)->delete();  
@@ -158,6 +163,6 @@ class RedesController extends Controller
             }
         }else{
              return back()->with('fail','Erro na exclusão da rede! Rede está sendo usada por algum participante!');
-    }
+        }
     }         
 }

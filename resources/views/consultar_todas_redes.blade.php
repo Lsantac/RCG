@@ -33,12 +33,15 @@
           </div>
       
         <div class="col-sm">
-          <button style="margin-right: 20px" class="btn btn-sm btn-primary " type="submit">Procurar</button>
+             <button style="margin-right: 20px" class="btn btn-sm btn-primary " type="submit">Procurar</button>
           
         </div>
-        
+        <div class="col-sm">
+          <a type="button" href="/redes_part/{{Session('id_logado')}}" class="btn btn-sm btn-redes bi-snow texto_m"> Redes que eu participo</a>   
+       
+        </div>
     </form>
-
+    
     <br>
 
     @if (isset($redes)) 
@@ -70,7 +73,10 @@
                     </td>
                     
                     <td>
-                      <button class="btn btn-danger btn-sm bi bi-trash" type="button" data-bs-toggle="modal" data-bs-target="#ModalExcluiRede-{{$r->id}}" >Excluir</button>
+
+                      @if ($r->id_part_inic == Session('id_logado'))
+                        <button class="btn btn-danger btn-sm bi bi-trash" type="button" data-bs-toggle="modal" data-bs-target="#ModalExcluiRede-{{$r->id}}" >Excluir</button>   
+                      @endif
 
                       <form class="" action="/deleta_rede/{{$r->id}}" method="POST">
                           @csrf
