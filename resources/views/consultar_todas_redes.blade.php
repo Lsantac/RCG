@@ -27,15 +27,23 @@
 
           @csrf
      
-          <div class="col-sm-8">
+          <div class="col-sm-5">
                <input class="form-control texto_p" id="consulta"  name="consulta" value="{{Session::get('criterio')}}" placeholder="Digite palavras para consulta..." type="search">
                
           </div>
       
-        <div class="col-sm">
-             <button style="margin-right: 20px" class="btn btn-sm btn-primary " type="submit">Procurar</button>
+        <div class="col-sm-2">
+             <button id="submit_procurar" style="margin-right: 20px" class="btn btn-sm btn-primary " type="submit">Procurar</button>
           
         </div>
+
+        <div class="col-sm">
+          <input onclick="mostrar_redes_eu_criei()" class="form-check-input" type="checkbox" value="" id="Check_id_part_inic" name="Check_id_part_inic">
+          <label style="color: purple;" class="form-check-label texto_m" for="Check_id_part_inic">
+            Redes que eu criei
+          </label>
+        </div>
+
         <div class="col-sm">
           <a type="button" href="/redes_part/{{Session('id_logado')}}" class="btn btn-sm btn-redes bi-snow texto_m"> Redes que eu participo</a>   
        
@@ -129,6 +137,21 @@
 
     @endif 
   </div>
+
+  <script>
+    function mostrar_redes_eu_criei() {
+      var Checked = document.getElementById("Check_id_part_inic").checked;
+          
+      if (Checked) {
+        document.getElementById("Check_id_part_inic").value = "true";
+        document.getElementById("submit_procurar").click();
+        
+      } else {
+        document.getElementById("Check_id_part_inic").value = "false";
+        window.location.href = "/redes";
+      }
+    }
+  </script>
 
 @endsection
 

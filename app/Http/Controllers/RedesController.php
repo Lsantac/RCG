@@ -60,23 +60,33 @@ class RedesController extends Controller
        public function consultar_todas_redes(Request $request){
 
             $request->session()->put('criterio', request('consulta'));
+            $request->session()->put('check', request('Check_id_part_inic'));
+            
+          /* dd($request->session()->get('check'));*/
 
-            if(isset($_GET['consulta'])){
+            if(request('consulta') <> null){
 
-                $string = $_GET['consulta'];
+                $string = request('consulta');
 
                 // split on 1+ whitespace & ignore empty (eg. trailing space)
                 $searchValues = preg_split('/\s+/', $string, -1, PREG_SPLIT_NO_EMPTY);
 
 
                 $redes = DB::table('redes')->where(function($query) use ($searchValues){
+
                                              foreach($searchValues as $value){
                                                      $query->where('nome','like','%'.$value.'%') 
                                                      ->orwhere('descricao','like','%'.$value.'%') 
                                                      ->orwhere('nome_part','like','%'.$value.'%') 
                                                      ->orwhere('data_inic','like','%'.$value.'%'); 
-                                              }      
+                                              } 
+
+                                              if(request('Check_id_part_inic')){
+                                                  $query->where('id_part_inic','=',session('id_logado'));
+                                              } 
+
                                               })
+                                              ->orderBy('redes.nome')       
                                               ->join('participantes','redes.id_part_inic','=','participantes.id')
                                               ->select(
                                                 'redes.id',
@@ -91,7 +101,16 @@ class RedesController extends Controller
             }
             else
             {
-                $redes = DB::table('redes')->join('participantes','redes.id_part_inic','=','participantes.id')
+                
+              /*dd(request('Check_id_part_inic'));*/
+
+                $redes = DB::table('redes')->where(function($query){
+                                                   if(request('Check_id_part_inic')){
+                                                    $query->where('id_part_inic','=',session('id_logado'));
+                                                   } 
+                                            })
+                                           ->orderBy('redes.nome')    
+                                           ->join('participantes','redes.id_part_inic','=','participantes.id')
                                            ->select(
                                                'redes.id',
                                                'redes.nome',
@@ -100,11 +119,13 @@ class RedesController extends Controller
                                                'redes.id_part_inic',
                                                'participantes.imagem as imagem_part',
                                                'participantes.nome_part'
-                                               )
+                                           )
+                                            
                                            ->paginate(10);
             }
 
-           /* dd ($redes);*/
+           
+            /*dd ($redes);*/
             
             $redes->appends($request->all());
             return view('consultar_todas_redes',['redes'=>$redes]);
