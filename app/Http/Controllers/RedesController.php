@@ -77,16 +77,31 @@ class RedesController extends Controller
                                                      ->orwhere('data_inic','like','%'.$value.'%'); 
                                               }      
                                               })
-
                                               ->join('participantes','redes.id_part_inic','=','participantes.id')
-                                              ->select('participantes.*','redes.*')
+                                              ->select(
+                                                'redes.id',
+                                                'redes.nome',
+                                                'redes.descricao',
+                                                'redes.data_inic',
+                                                'redes.id_part_inic',
+                                                'participantes.imagem as imagem_part',
+                                                'participantes.nome_part'
+                                                )
                                               ->paginate(10);
             }
             else
             {
                 $redes = DB::table('redes')->join('participantes','redes.id_part_inic','=','participantes.id')
-                                                ->select('participantes.*','redes.*')
-                                                ->paginate(10);
+                                           ->select(
+                                               'redes.id',
+                                               'redes.nome',
+                                               'redes.descricao',
+                                               'redes.data_inic',
+                                               'redes.id_part_inic',
+                                               'participantes.imagem as imagem_part',
+                                               'participantes.nome_part'
+                                               )
+                                           ->paginate(10);
             }
 
            /* dd ($redes);*/

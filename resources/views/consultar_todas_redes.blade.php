@@ -51,6 +51,7 @@
           <tr>
             <th scope="col">Rede</th>
             <th scope="col">Descrição</th>
+            <th scope="col"></th>
             <th scope="col">Criada pelo Participante</th>
             <th scope="col">Data Criação</th>
             <th>Ações</th>
@@ -64,6 +65,14 @@
                   <tr>
                     <td>{{$r->nome}}</td>
                     <td>{{$r->descricao}}</td>
+                    <td>
+                      @if($r->imagem_part)
+                         <img src="/uploads/participantes/{{$r->imagem_part}}" class="imagem-header rounded-circle">
+                      @else
+                         <img src="/img/logo.jpg" class="imagem-header rounded-circle">
+                      @endif 
+                    </td>
+                 
                     <td>{{$r->nome_part}}</td>
                     <td>
                       @php
