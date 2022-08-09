@@ -60,7 +60,7 @@ class RedesController extends Controller
        public function consultar_todas_redes(Request $request){
 
             $request->session()->put('criterio', request('consulta'));
-            $request->session()->put('check', request('Check_id_part_inic'));
+            $request->session()->put('checked', request('Check_id_part_inic'));
             
           /* dd($request->session()->get('check'));*/
 

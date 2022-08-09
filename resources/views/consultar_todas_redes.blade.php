@@ -38,7 +38,12 @@
         </div>
 
         <div class="col-sm">
-          <input onclick="mostrar_redes_eu_criei()" class="form-check-input" type="checkbox" value="" id="Check_id_part_inic" name="Check_id_part_inic">
+          @if(Session::get('checked'))
+             <input checked onclick="mostrar_redes_eu_criei()" class="form-check-input" type="checkbox" value="{{Session::get('checked')}}" id="Check_id_part_inic" name="Check_id_part_inic">  
+          @else  
+             <input onclick="mostrar_redes_eu_criei()" class="form-check-input" type="checkbox" value="" id="Check_id_part_inic" name="Check_id_part_inic">
+          @endif
+          
           <label style="color: purple;" class="form-check-label texto_m" for="Check_id_part_inic">
             Redes que eu criei
           </label>
@@ -140,15 +145,19 @@
 
   <script>
     function mostrar_redes_eu_criei() {
+
       var Checked = document.getElementById("Check_id_part_inic").checked;
-          
+
+      document.getElementById("Check_id_part_inic").value = "-1"
       if (Checked) {
-        document.getElementById("Check_id_part_inic").value = "true";
+       
+        
         document.getElementById("submit_procurar").click();
         
       } else {
-        document.getElementById("Check_id_part_inic").value = "false";
-        window.location.href = "/redes";
+        document.getElementById("Check_id_part_inic").value = "0";
+        document.getElementById("submit_procurar").click();
+        /*window.location.href = "/redes";*/
       }
     }
   </script>
