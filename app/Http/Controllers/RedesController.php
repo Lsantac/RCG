@@ -198,7 +198,7 @@ class RedesController extends Controller
                 return back()->with('fail','Erro na exclusão da rede!');
             }
         }else{
-             return back()->with('fail','Erro na exclusão da rede! Rede está sendo usada por algum participante!');
+             return back()->with('fail','Não é possivel excluir! Rede está sendo usada por algum participante!');
         }
     }         
 }

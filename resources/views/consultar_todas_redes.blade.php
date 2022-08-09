@@ -148,17 +148,14 @@
 
       var Checked = document.getElementById("Check_id_part_inic").checked;
 
-      document.getElementById("Check_id_part_inic").value = "-1"
       if (Checked) {
-       
-        
-        document.getElementById("submit_procurar").click();
-        
+         document.getElementById("Check_id_part_inic").value = "-1"
       } else {
-        document.getElementById("Check_id_part_inic").value = "0";
-        document.getElementById("submit_procurar").click();
-        /*window.location.href = "/redes";*/
+         document.getElementById("Check_id_part_inic").value = "0";
       }
+
+      document.getElementById("submit_procurar").click();
+
     }
   </script>
 

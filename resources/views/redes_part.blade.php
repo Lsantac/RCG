@@ -38,7 +38,7 @@
           
           <!-- Button trigger modal -->
           <button type="button" class="btn btn-redes btn-sm bi-snow" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-            Incluir Rede
+            Entrar em uma Rede
           </button>
           <button type="button" class="btn btn-criar-redes btn-sm bi-snow" data-bs-toggle="modal" data-bs-target="#staticBackdropNovaRede">
             Criar Nova Rede
