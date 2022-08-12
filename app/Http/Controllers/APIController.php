@@ -12,12 +12,8 @@ class APIController extends Controller
     function consulta_part(Request $request)
     {
 
-        $part = db::table('participantes')->all();
-
-        $id = $part->id;
-        $nome = $part->nome_part;
-        $email = $part->email;
+        $parts = DB::table('participantes')->get();
         
-        return response()->json(['nome' => $nome, 'email' => $email, 'id' => $id]);
+        return response()->json(['parts' => $parts]);
     }
 }
