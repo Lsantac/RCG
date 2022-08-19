@@ -20,4 +20,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
-Route::get('consulta_part',  [APIController::class, 'consulta_part']);
+Route::get('/consulta_part/{consulta}',  [APIController::class, 'consulta_part']);

@@ -125,9 +125,10 @@ class RedesController extends Controller
             }
 
            
-            /*dd ($redes);*/
-            
             $redes->appends($request->all());
+
+           /* dd ($redes);*/
+
             return view('consultar_todas_redes',['redes'=>$redes]);
 
        }      
