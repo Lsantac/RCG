@@ -12,6 +12,7 @@ class APIController extends Controller
     function consulta_part(Request $request)
     {
 
+
           $string = $_GET['consulta'];
 
           // split on 1+ whitespace & ignore empty (eg. trailing space)
@@ -35,7 +36,11 @@ class APIController extends Controller
                 $parts->appends($request->all());
 
                return response()->json(['parts' => $parts]);
-                 
-         
+        
+
+      /*  $parts = DB::table('participantes')->get();
+        
+        return response()->json(['parts' => $parts]);*/
+
     }
 }
