@@ -16,6 +16,7 @@
         "postcss": "^8.1.14"
     },
     "dependencies": {
+        "chart.js": "^3.9.1",
         "rfs": "^9.0.6"
     }
 }

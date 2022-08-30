@@ -35,7 +35,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
    
+    
      <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
+     
+
 </head>
 
 <header>
@@ -53,10 +56,6 @@
 <!--<footer class=''>
     @include('footer')
 </footer> -->
-
-<style>
-
-</style>
 
 
 </html>

@@ -14,6 +14,7 @@ use App\Http\Controllers\MoedasController;
 use App\Http\Controllers\UnidadesController;
 use App\Http\Controllers\IdentController;
 use App\Http\Controllers\MailController;
+use App\Http\Controllers\ChartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -163,3 +164,5 @@ Route::get('/geocode', function ()
 /*Emails */
 route::get ('/SendEmail', [MailController::class,'SendEmail'])->name('SendEmail');
 
+/*Charts (gráficos) */
+route::get ('/chart', [ChartController::class,'ChartTest']);
