@@ -31,10 +31,16 @@ class ChartController extends Controller
         /*dd($stat_of);*/
 
         $num_itens =count($stat_of);
+        $total = 0;
+        foreach ($stat_of as $val) {
+            $total += $val->qt_status;
+        } 
+
         $i = 0;
 
         $data="[";
         foreach ($stat_of as $val) {
+            /*$data .= ($val->qt_status/$total)*100;*/
             $data .= $val->qt_status;
             if(++$i < $num_itens){
               $data .= ","  ;
@@ -44,9 +50,9 @@ class ChartController extends Controller
 
         $data.="],";
 
-       /* dd($data);*/
+        /*dd($data);*/
 
-        return view('charts.chart_status',compact('data'));
+        return view('charts.chart_status',['data'=>$data]);
 
         
 
