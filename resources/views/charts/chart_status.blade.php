@@ -3,8 +3,6 @@
 
 @section('content')
 
-        
-
         <script src="https://cdn.jsdelivr.net/npm/chart.js@2.7.3/dist/Chart.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.7.0"></script>
 
@@ -32,11 +30,6 @@
             </html>
             <script>
                 var data = [{
-                    labels: [
-                    'Em andamento',
-                    'Confirmada Parcialmente',
-                    'Finalizada'
-                    ],
                     data: <?php echo $data; ?>
                     backgroundColor: [
                     'rgb(197, 15, 233)',
@@ -52,7 +45,9 @@
                         enabled: false
                     },
                     plugins: {
+                        
                         datalabels: {
+                            
                             formatter: (value, categories) => {
         
                                 let sum = 0;
@@ -60,12 +55,15 @@
                                 dataArr.map(data => {
                                     sum += data;
                                 });
-                                let percentage = (value*100 / sum).toFixed(2)+"%";
-                                return percentage;
-        
+                                let percentage = (value*100 / sum).toFixed(0)+"%";
+
+                                const display = ['Transações: '+value,percentage]
+                                return display;
         
                             },
+                            
                             color: '#fff',
+
                         }
                     }
                 };
@@ -75,6 +73,11 @@
                 var myChart = new Chart(categories, {
                     type: 'pie',
                     data: {
+                        labels: [
+                    'Em andamento',
+                    'Confirmada Parcialmente',
+                    'Finalizada'
+                    ],
                         datasets: data
                     },
                     options: options
