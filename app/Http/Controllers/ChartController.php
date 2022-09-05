@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use CachingIterator;
 use Illuminate\Http\Request;
 use Illuminate\Queue\Events\Looping;
 use Illuminate\Support\Facades\DB;
@@ -45,6 +46,7 @@ class ChartController extends Controller
                                              ->selectRaw('id_st_trans,COUNT(id_st_trans) as qt_status')
                                              ->groupBy('id_st_trans')
                                              ->union($stat_of)
+                                             ->orderby('id_st_trans')
                                              ->get()
                                              ;
 
@@ -52,40 +54,46 @@ class ChartController extends Controller
         /*dd($stat_of_tr);*/
 
         $num_itens_of_tr =count($stat_of_tr);
-
+        
         $i = 0;
-        $id_ant = 0;
         $total_qt_st = 0;
 
         $data="[";
         foreach ($stat_of_tr as $val) {
-            
-            if($id_ant == $val->id_st_trans){
-                $total_qt_st += $val->qt_status;
-            }else{
 
-                if($total_qt_st > 0){
-                    $data .= $total_qt_st;
+            if($i <= $num_itens_of_tr-1){
+                $pos_current = $stat_of_tr[$i]->id_st_trans;
+                if(($i+1) <= $num_itens_of_tr-1){
+                    $pos_next = $stat_of_tr[$i+1]->id_st_trans;
                 }else{
-                    $data .= $val->qt_status;
+                    $pos_next = 0;
                 }
-                
-                $total_qt_st = $val->qt_status;
+            }
+        
+            if($pos_current == $pos_next){
+                $total_qt_st += $val->qt_status;
+               
+            }else{
+                if($total_qt_st == 0){
+                    $data .= $val->qt_status;
+                }else{
+                    $total_qt_st += $val->qt_status;
+                    $data .= $total_qt_st;
+                    $total_qt_st = 0;
+                }
                 
             }
 
             if(++$i < $num_itens_of_tr){
-                if($id_ant <> $val->id_st_trans){
+                if($pos_current <> $pos_next){
                   $data .= ","  ;
                 }  
-
-            $id_ant = $val->id_st_trans;
             }
         }
         
         $data.="],";
 
-        dd($data);
+       /* dd($data);*/
 
         return view('charts.chart_status',['data'=>$data]);
 
