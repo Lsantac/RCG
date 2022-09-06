@@ -30,6 +30,13 @@
                 <li class="nav-item">
                   <a class="nav-link" href="">Eventos</a>
                 </li>
+                <li class="nav-item">
+                  @if(Session::get('id_logado') > 0 )
+                     <a style="color:indianred" class="nav-link" href="/chart_part/{{Session('id_logado')}}">Estatístico</a>
+                  @else
+                     <a style="color:indianred" class="nav-link" href="/inicio">Estatístico</a>
+                  @endif
+                </li>
               </ul>
 
           </div>

@@ -165,4 +165,5 @@ Route::get('/geocode', function ()
 route::get ('/SendEmail', [MailController::class,'SendEmail'])->name('SendEmail');
 
 /*Charts (gráficos) */
-route::get ('/chart/{id_part}/{id_rede}', [ChartController::class,'ChartStatus'])->middleware('islogged');
+route::get ('/chart_part/{id_part}', [ChartController::class,'ChartStatus_part'])->name('chart_part')->middleware('islogged');
+route::get ('/chart_rede/{id_rede}/{id_part}', [ChartController::class,'ChartStatus_rede'])->middleware('islogged');
