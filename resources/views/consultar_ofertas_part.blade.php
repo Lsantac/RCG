@@ -102,24 +102,38 @@
                         <div class="mb-3">
 
                           <input value="{{$part->id}}" name="id_part" type="hidden">
-
-                          <label for="exampleFormControlInput1" class="form-label">Selecione um tipo de Oferta</label>
-                          <select type="text" name="id_of" id="exampleFormControlInput1" class="form-select" aria-label="Default select example" required>
-                            <option value = ""></option>
-                            @foreach ($ofs as $of)
-                              <option value="{{$of->id}}">
-                                    {{$of->descricao}}
-                              </option>
-                            @endforeach
-                          </select>
+                          
+                          <div class="row">
+                            <div class="col">
+                              <label for="exampleFormControlInput1" class="form-label">Selecione um tipo de Oferta</label>
+                                <select type="text" name="id_of" id="exampleFormControlInput1" class="form-select" aria-label="Default select example" required>
+                                  <option value = ""></option>
+                                  @foreach ($ofs as $of)
+                                    <option value="{{$of->id}}">
+                                          {{$of->descricao}}
+                                    </option>
+                                  @endforeach
+                                </select>
+                            </div>
+                            <div class="col">
+                              <label for="data_of" class="form-label">Data</label>
+                                <input type="date" class="form-control" id="data_of" name="data_of" required>
+                            </div>
+                          </div>
+                                
                           <br>
 
-                          <label for="data_of" class="form-label">Data</label>
-                          <input type="date" class="form-control" id="data_of" name="data_of" required>
-                          <br>
-
-                          <label for="quant_of" class="form-label">Quantidade</label>
-                          <input type="number" step="0.010" class="form-control" id="quant_of" name="quant_of" required>
+                          <div class="row">
+                            <div class="col">
+                              <label for="quant_of" class="form-label">Quantidade</label>
+                              <input type="number" step="0.010" class="form-control" id="quant_of" name="quant_of" required>
+                            </div>
+                            <div class="col">
+                              <label for="quant_of" class="form-label">Vincular a Rede</label>
+                              <input type="text" class="form-control" id="id_rede" name="id_rede" >
+                            </div>
+                            
+                          </div>
 
                           <br>
 
