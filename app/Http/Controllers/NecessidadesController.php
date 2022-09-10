@@ -71,6 +71,8 @@ class NecessidadesController extends Controller
 
             $num_linhas_por_pag = 5;
 
+            
+
             if(isset($_GET['consulta_nec'])){
 
               $request->session()->put('criterio_nec', request('consulta_nec')); 
@@ -195,6 +197,11 @@ class NecessidadesController extends Controller
          
         $id = $_GET['id_part'];
 
+        $redes = DB::table('redesparts')->where('id_part',$id)
+                                      ->join('redes','redesparts.id_rede','=','redes.id') 
+                                      ->orderby('nome')  
+                                      ->get();
+
         $request->session()->put('criterio_nec_part', request('consulta_nec_part')); 
 
         $participante = participantes::FindOrfail($id);
@@ -226,13 +233,16 @@ class NecessidadesController extends Controller
                                           ->join('necessidades','necessidades_part.id_nec','=','necessidades.id')
                                           ->join('categorias','necessidades.id_cat','=','categorias.id')
                                           ->join('unidades','necessidades.id_unid','=','unidades.id')
+                                          ->leftjoin('redes','necessidades_part.id_rede',"=",'redes.id')
 
                                           ->select('participantes.id as id_part','participantes.latitude','participantes.longitude','participantes.nome_part',
                                                 'necessidades_part.id as id_nec_part',
                                                 'participantes.endereco','participantes.cidade','participantes.estado','participantes.pais',
                                                 'necessidades_part.id_nec','necessidades_part.quant','necessidades_part.data','necessidades_part.obs','necessidades.descricao as desc_nec',
                                                 'necessidades_part.status','necessidades_part.imagem',
-                                                'categorias.descricao as desc_cat','unidades.descricao as desc_unid')
+                                                'categorias.descricao as desc_cat','unidades.descricao as desc_unid',
+                                                'necessidades_part.id_rede',
+                                                'redes.nome as nome_rede')
 
                                           ->orderBy('data','desc')
                                           ->orderBy('id_nec_part','desc')
@@ -242,13 +252,23 @@ class NecessidadesController extends Controller
       
       $necps->appends($request->all());    
       
-      return view('consultar_necessidades_part',['part' => $participante,'necps'=>$necps,'necs'=>$necs,'cats'=>$cats,'unids'=>$unids]);
+      return view('consultar_necessidades_part',['part' => $participante,
+                                                'necps'=>$necps,
+                                                'necs'=>$necs,
+                                                'cats'=>$cats,
+                                                'unids'=>$unids,
+                                                'redes'=>$redes]);
     }  
   }
 
     public function show_necessidades_part($id){
 
       $participante = participantes::FindOrfail($id);
+
+      $redes = DB::table('redesparts')->where('id_part',$id)
+                                      ->join('redes','redesparts.id_rede','=','redes.id') 
+                                      ->orderby('nome')  
+                                      ->get();
 
       $necs = DB::table('necessidades')->orderBy('descricao')->get();
       $cats = DB::table('categorias')->orderBy('descricao')->get();
@@ -259,20 +279,28 @@ class NecessidadesController extends Controller
                                     ->join('necessidades','necessidades_part.id_nec','=','necessidades.id')
                                     ->join('categorias','necessidades.id_cat','=','categorias.id')
                                     ->join('unidades','necessidades.id_unid','=','unidades.id')
-                                    
+                                    ->leftjoin('redes','necessidades_part.id_rede',"=",'redes.id')
+
                                     ->select('participantes.id as id_part','participantes.latitude','participantes.longitude','participantes.nome_part',
                                                 'necessidades_part.id as id_nec_part',
                                                 'participantes.endereco','participantes.cidade','participantes.estado','participantes.pais',
                                                 'necessidades_part.id_nec','necessidades_part.quant','necessidades_part.data','necessidades_part.obs','necessidades.descricao as desc_nec',
                                                 'necessidades_part.status','necessidades_part.imagem',
-                                                'categorias.descricao as desc_cat','unidades.descricao as desc_unid')
+                                                'categorias.descricao as desc_cat','unidades.descricao as desc_unid',
+                                                'necessidades_part.id_rede',
+                                                'redes.nome as nome_rede')
 
                                     ->orderBy('data','desc')
                                     ->orderBy('id_nec_part','desc')
                                     ->paginate(5);
 
       
-      return view('consultar_necessidades_part',['part' => $participante,'necps'=>$necps,'necs'=>$necs,'cats'=>$cats,'unids'=>$unids]);
+      return view('consultar_necessidades_part',['part' => $participante,
+                                                'necps'=>$necps,
+                                                'necs'=>$necs,
+                                                'cats'=>$cats,
+                                                'unids'=>$unids,
+                                                'redes'=>$redes]);
     }
 
   public function incluir_necessidades_part(Request $request) {
@@ -313,6 +341,7 @@ class NecessidadesController extends Controller
             'data' => request('data_nec'),
             'quant' => request('quant_nec'),
             'obs' => request('obs_nec'),
+            'id_rede'=>request('id_rede'),
             'imagem' => $filename
 
         ]);
@@ -369,6 +398,7 @@ class NecessidadesController extends Controller
                                             'data' => request('data_nec'), 
                                             'quant' => request('quant_nec'), 
                                             'obs' => request('obs_nec'), 
+                                            'id_rede'=>request('id_rede_alt'),
                                             'imagem'=>$filename
                                             ], 
                                   );  
@@ -384,7 +414,8 @@ class NecessidadesController extends Controller
                                             'id_part' => request('id_part'),
                                             'data' => request('data_nec'), 
                                             'quant' => request('quant_nec'), 
-                                            'obs' => request('obs_nec') 
+                                            'obs' => request('obs_nec'), 
+                                            'id_rede'=>request('id_rede_alt')
                                             ], 
                                   );  
     }

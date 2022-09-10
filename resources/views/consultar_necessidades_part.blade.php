@@ -72,7 +72,6 @@
                           </div> -->
 
                           <div class="col-12" style="align-self: flex-end;">
-                             <label for="sel_img" class="form-label texto_m">Selecionar imagem</label>
                              <input id="sel_img" accept="image/*" data-msg-placeholder="Selecione uma imagem"
                                 name="sel_img" type="file" class="file" data-browse-on-zone-click="true"
                                 >
@@ -101,8 +100,22 @@
                           <input type="date" class="form-control" id="data_nec" name="data_nec" required>
                           <br>
 
-                          <label for="quant_nec" class="form-label">Quantidade</label>
-                          <input type="number" step="0.010" class="form-control" id="quant_nec" name="quant_nec" required>
+                          <div class="row">
+                               <div class="col">
+                                    <label for="quant_nec" class="form-label">Quantidade</label>
+                                    <input type="number" step="0.010" class="form-control" id="quant_nec" name="quant_nec" required>
+                               </div>
+                               <div class="col">
+                                    <label for="id_rede" class="form-label">Vincular a Rede</label>
+                                    <select id="id_rede" name="id_rede" class="form-select" aria-label="Default select example">
+                                      <option selected></option>
+                                      @foreach ($redes as $rede)
+                                        <option value="{{$rede->id_rede}}">{{$rede->nome}}</option>
+                                      @endforeach 
+                                    </select>
+                              </div>
+
+                          </div>
 
                           <br>
 
@@ -381,8 +394,29 @@
                                                 </select>
                                                 <br>
 
-                                                <label for="data_nec" class="form-label">Data</label>
-                                                <input type="date" value="{{$necp->data}}"  class="form-control" id="data_nec" name="data_nec" required>
+                                                <div class="row">
+                                                     <div class="col">
+                                                          <label for="data_nec" class="form-label">Data</label>
+                                                          <input type="date" value="{{$necp->data}}"  class="form-control" id="data_nec" name="data_nec" required>
+                                                     </div>  
+                                                     <div class="col">
+                                                          <label for="id_rede_alt" class="form-label">Vinculada a Rede</label>
+                                                          <select id="id_rede_alt" name="id_rede_alt" class="form-select" aria-label="Default select example">
+                                                            <option selected value="{{$necp->id_rede}}"><?php echo $necp->nome_rede; ?></option>
+                                                            @if($necp->id_rede > 0)
+                                                              <option value="0"></option>       
+                                                            @endif
+
+                                                            @foreach ($redes as $rede)
+                                                              @if($necp->id_rede <> $rede->id_rede)
+                                                                <option value="{{$rede->id_rede}}">{{$rede->nome}}</option>  
+                                                              @endif
+                                                            @endforeach 
+                                                          </select>
+                                                    </div>  
+                                                </div>
+
+                                                
                                                 <br>
 
                                                 <label for="quant_nec" class="form-label">Quantidade</label>

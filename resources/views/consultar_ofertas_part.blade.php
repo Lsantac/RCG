@@ -435,13 +435,13 @@
                                                            <input type="date" value="{{$ofp->data}}"  class="form-control" id="data_of" name="data_of" required>
                                                         </div> 
                                                         <div class="col">
-                                                            <label for="id_rede_alt" class="form-label">Vincular a Rede</label>
+                                                            <label for="id_rede_alt" class="form-label">Vinculada a Rede</label>
                                                             <select id="id_rede_alt" name="id_rede_alt" class="form-select" aria-label="Default select example">
                                                               <option selected value="{{$ofp->id_rede}}"><?php echo $ofp->nome_rede; ?></option>
                                                               @if($ofp->id_rede > 0)
                                                                  <option value="0"></option>       
                                                               @endif
-                                                              
+
                                                               @foreach ($redes as $rede)
                                                                 @if($ofp->id_rede <> $rede->id_rede)
                                                                    <option value="{{$rede->id_rede}}">{{$rede->nome}}</option>  
