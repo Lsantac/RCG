@@ -82,18 +82,11 @@
                       <div class="modal-body">
 
                         <div class="row">
-                          <!-- <div class="col-2">
-                                <figure class="figure">
-                                      <img id="imagem_of" src="/img/logo.jpg" class="figure-img img-fluid imagem-of-nec img-thumbnail ">
-                                </figure>
-                          </div> -->
-
                           <div class="col-12" style="align-self: flex-end;">
-                             <label for="sel_img" class="form-label texto_m">Selecionar imagem</label>
+                             
                              <input id="sel_img" accept=".jpg,.png,.jpeg" data-msg-placeholder="Selecione uma imagem"
-                                name="sel_img" type="file" class="file" data-browse-on-zone-click="true"
-                                >
-                              <!-- <input  name="sel_img" id="sel_img" type="file" accept=".jpg,.png,.jpeg" onchange ="mostra_imagem(this, 'inclusao',0)" class="form-control form-control-sm @error('sel_img') is-invalid @enderror" > -->
+                                name="sel_img" type="file" class="file" data-browse-on-zone-click="true">
+                         
                               <label class="form-label red-message">{{Session::get('fail image')}}</label>
                           </div>
 
@@ -128,13 +121,18 @@
                               <label for="quant_of" class="form-label">Quantidade</label>
                               <input type="number" step="0.010" class="form-control" id="quant_of" name="quant_of" required>
                             </div>
-                            <div class="col">
-                              <label for="quant_of" class="form-label">Vincular a Rede</label>
-                              <input type="text" class="form-control" id="id_rede" name="id_rede" >
-                            </div>
-                            
-                          </div>
 
+                            <div class="col">
+                              <label for="id_rede" class="form-label">Vincular a Rede</label>
+                              <select id="id_rede" name="id_rede" class="form-select" aria-label="Default select example">
+                                <option selected></option>
+                                @foreach ($redes as $rede)
+                                   <option value="{{$rede->id_rede}}">{{$rede->nome}}</option>
+                                @endforeach 
+                              </select>
+                            </div>
+                              
+                          </div>
                           <br>
 
                           <label for="obs_of" class="form-label">Observações</label>
@@ -431,8 +429,28 @@
                                                   </select>
                                                   <br>
 
-                                                  <label for="data_of" class="form-label">Data</label>
-                                                  <input type="date" value="{{$ofp->data}}"  class="form-control" id="data_of" name="data_of" required>
+                                                  <div class="row">
+                                                       <div class="col">
+                                                           <label for="data_of" class="form-label">Data</label>
+                                                           <input type="date" value="{{$ofp->data}}"  class="form-control" id="data_of" name="data_of" required>
+                                                        </div> 
+                                                        <div class="col">
+                                                            <label for="id_rede_alt" class="form-label">Vincular a Rede</label>
+                                                            <select id="id_rede_alt" name="id_rede_alt" class="form-select" aria-label="Default select example">
+                                                              <option selected value="{{$ofp->id_rede}}"><?php echo $ofp->nome_rede; ?></option>
+                                                              @if($ofp->id_rede > 0)
+                                                                 <option value="0"></option>       
+                                                              @endif
+                                                              
+                                                              @foreach ($redes as $rede)
+                                                                @if($ofp->id_rede <> $rede->id_rede)
+                                                                   <option value="{{$rede->id_rede}}">{{$rede->nome}}</option>  
+                                                                @endif
+                                                              @endforeach 
+                                                            </select>
+                                                        </div> 
+                                                  </div>
+
                                                   <br>
 
                                                   <label for="quant_of" class="form-label">Quantidade</label>

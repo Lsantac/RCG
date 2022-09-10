@@ -195,8 +195,13 @@ class ofertasController extends Controller
     public function consultar_ofertas_part(Request $request){
 
       if(isset($_GET['id_part'])){
-         
+
         $id = $_GET['id_part'];
+
+        $redes = DB::table('redesparts')->where('id_part',$id)
+                                        ->join('redes','redesparts.id_rede','=','redes.id') 
+                                        ->orderby('nome') 
+                                        ->get();
 
         $request->session()->put('criterio_of_part', request('consulta_of_part')); 
 
@@ -229,12 +234,15 @@ class ofertasController extends Controller
                                           ->join('ofertas','ofertas_part.id_of','=','ofertas.id')
                                           ->join('categorias','ofertas.id_cat','=','categorias.id')
                                           ->join('unidades','ofertas.id_unid','=','unidades.id')
+                                          ->join('redes','ofertas_part.id_rede',"=",'redes.id')
 
                                           ->select('participantes.id as id_part','participantes.latitude','participantes.longitude',
                                                 'participantes.nome_part','ofertas_part.id as id_of_part',
                                                 'ofertas_part.id_of','ofertas_part.quant','ofertas_part.data','ofertas_part.obs','ofertas.descricao as desc_of',
                                                 'ofertas_part.status','ofertas_part.imagem',
-                                                'categorias.descricao as desc_cat','unidades.descricao as desc_unid')
+                                                'categorias.descricao as desc_cat','unidades.descricao as desc_unid',
+                                                'ofertas_part.id_rede',
+                                                'redes.nome as nome_rede')
 
                                           ->orderBy('data','DESC')
                                           ->orderBy('id_of_part','DESC')
@@ -244,13 +252,23 @@ class ofertasController extends Controller
       
       $ofps->appends($request->all());    
       
-      return view('consultar_ofertas_part',['part' => $participante,'ofps'=>$ofps,'ofs'=>$ofs,'cats'=>$cats,'unids'=>$unids]);
+      return view('consultar_ofertas_part',['part'=> $participante,
+                                            'ofps'=>$ofps,
+                                            'ofs' =>$ofs,
+                                            'cats'=>$cats,
+                                            'unids'=>$unids,
+                                            'redes'=>$redes]);
     }  
   }
 
     public function show_ofertas_part($id){
 
       $participante = participantes::FindOrfail($id);
+
+      $redes = DB::table('redesparts')->where('id_part',$id)
+                                      ->join('redes','redesparts.id_rede','=','redes.id') 
+                                      ->orderby('nome')  
+                                      ->get();
 
       $ofs = DB::table('ofertas')->orderBy('descricao')->get();
       $cats = DB::table('categorias')->orderBy('descricao')->get();
@@ -261,12 +279,15 @@ class ofertasController extends Controller
                                     ->join('ofertas','ofertas_part.id_of','=','ofertas.id')
                                     ->join('categorias','ofertas.id_cat','=','categorias.id')
                                     ->join('unidades','ofertas.id_unid','=','unidades.id')
+                                    ->leftjoin('redes','ofertas_part.id_rede',"=",'redes.id')
                                     
                                     ->select('participantes.id as id_part','participantes.latitude','participantes.longitude',
                                     'participantes.nome_part','ofertas_part.id as id_of_part','ofertas_part.imagem',
                                     'ofertas_part.id_of','ofertas_part.quant','ofertas_part.data','ofertas_part.obs',
                                     'ofertas.descricao as desc_of','ofertas_part.status',
-                                    'categorias.descricao as desc_cat','unidades.descricao as desc_unid')
+                                    'categorias.descricao as desc_cat','unidades.descricao as desc_unid',
+                                    'ofertas_part.id_rede',
+                                    'redes.nome as nome_rede')
 
                                     ->orderBy('data','desc')
                                     ->orderBy('id_of_part','DESC')
@@ -274,7 +295,12 @@ class ofertasController extends Controller
 
       /*dd($ofps);      */
 
-      return view('consultar_ofertas_part',['part' => $participante,'ofps'=>$ofps,'ofs'=>$ofs,'cats'=>$cats,'unids'=>$unids]);
+      return view('consultar_ofertas_part',['part' => $participante,
+                                            'ofps'=>$ofps,
+                                            'ofs'=>$ofs,
+                                            'cats'=>$cats,
+                                            'unids'=>$unids,
+                                            'redes'=>$redes]);
     }
 
   public function incluir_ofertas_part(Request $request) {
@@ -316,6 +342,7 @@ class ofertasController extends Controller
                             'data' => request('data_of'),
                             'quant' => request('quant_of'),
                             'obs' => request('obs_of'),
+                            'id_rede'=>request('id_rede'),
                             'imagem'=>$filename
                         ]);
                         
@@ -340,8 +367,6 @@ class ofertasController extends Controller
   }  
 
   public function altera_oferta_part(Request $request){
-
-
 
     if($request->hasFile('sel_img_alt')){
       $file = $request->file('sel_img_alt');
@@ -377,6 +402,7 @@ class ofertasController extends Controller
                'data' => request('data_of'), 
                'quant' => request('quant_of'), 
                'obs' => request('obs_of'), 
+               'id_rede'=>request('id_rede_alt'),
                'imagem'=>$filename
                ], 
       );   
@@ -388,7 +414,8 @@ class ofertasController extends Controller
                                             'id_part' => request('id_part'),
                                             'data' => request('data_of'), 
                                             'quant' => request('quant_of'), 
-                                            'obs' => request('obs_of') 
+                                            'obs' => request('obs_of') ,
+                                            'id_rede'=>request('id_rede_alt'),
                                             ], 
                                   );  
 
