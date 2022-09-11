@@ -2,7 +2,7 @@
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container-fluid ">
-        <a class="navbar-brand" href="/"><img src="/img/{{App\Http\Controllers\IdentController::consulta_logo()}}" class="imagem-header rounded-circle"></a>
+        <a class="navbar-brand" href="/"><img src="/img/{{App\Http\Controllers\IdentController::consulta_logo()}}" class="imagem-header"></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -43,17 +43,17 @@
 
           <div>
            @if(Session::get('nomelogado'))
-              <form class="d-flex" action="{{route('auth.logout')}}" method="POST">
+              <form class="d-flex align-items-center" action="{{route('auth.logout')}}" method="POST">
                 @csrf
                 @method('DELETE')
               
-                  <div class="" href="">Seja Bem-Vindo,&nbsp &nbsp</div><div class="texto-nome-logado">{{Session('nomelogado')}}&nbsp &nbsp &nbsp</div>
+                  <div href="">Seja Bem-Vindo,&nbsp &nbsp</div><div class="texto-nome-logado">{{Session('nomelogado')}}&nbsp &nbsp &nbsp</div>
                   <a href="/alterar_participantes/{{Session('id_logado')}}" id="dropdownMenuButton1">
 
                     @if(Session::get('imagem_logado'))
-                      <img src="/uploads/participantes/{{Session('imagem_logado')}}" class="imagem-header rounded-circle">
+                      <img src="/uploads/participantes/{{Session('imagem_logado')}}" class="imagem-header">
                     @else
-                      <img src="/img/logo.jpg" class="imagem-header rounded-circle">
+                      <img src="/img/logo.jpg" class="imagem-header">
                     @endif 
           
                   </a>
