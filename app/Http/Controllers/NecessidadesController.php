@@ -248,6 +248,27 @@ class NecessidadesController extends Controller
                                           ->orderBy('id_nec_part','desc')
                                           ->paginate(5);
 
+      }else{
+            $necps = DB::table('necessidades_part')->where('id_part',$id)
+            ->join('participantes','necessidades_part.id_part','=','participantes.id')
+            ->join('necessidades','necessidades_part.id_nec','=','necessidades.id')
+            ->join('categorias','necessidades.id_cat','=','categorias.id')
+            ->join('unidades','necessidades.id_unid','=','unidades.id')
+            ->leftjoin('redes','necessidades_part.id_rede',"=",'redes.id')
+
+            ->select('participantes.id as id_part','participantes.latitude','participantes.longitude','participantes.nome_part',
+                        'necessidades_part.id as id_nec_part',
+                        'participantes.endereco','participantes.cidade','participantes.estado','participantes.pais',
+                        'necessidades_part.id_nec','necessidades_part.quant','necessidades_part.data','necessidades_part.obs','necessidades.descricao as desc_nec',
+                        'necessidades_part.status','necessidades_part.imagem',
+                        'categorias.descricao as desc_cat','unidades.descricao as desc_unid',
+                        'necessidades_part.id_rede',
+                        'redes.nome as nome_rede')
+
+            ->orderBy('data','desc')
+            ->orderBy('id_nec_part','desc')
+            ->paginate(5);
+
       }
       
       $necps->appends($request->all());    

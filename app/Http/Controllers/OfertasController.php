@@ -198,12 +198,15 @@ class ofertasController extends Controller
 
         $id = $_GET['id_part'];
 
+        $request->session()->put('criterio_of_part', request('consulta_of_part')); 
+        $request->session()->put('criterio_cons_rede', request('consulta_redes')); 
+
+        $nome_rede = request('consulta_redes');
+
         $redes = DB::table('redesparts')->where('id_part',$id)
                                         ->join('redes','redesparts.id_rede','=','redes.id') 
                                         ->orderby('nome') 
                                         ->get();
-
-        $request->session()->put('criterio_of_part', request('consulta_of_part')); 
 
         $participante = participantes::FindOrfail($id);
 
@@ -214,7 +217,7 @@ class ofertasController extends Controller
         if(isset($_GET['consulta_of_part'])){
 
           $string = $_GET['consulta_of_part'];
-
+         
           // split on 1+ whitespace & ignore empty (eg. trailing space)
           $searchValues = preg_split('/\s+/', $string, -1, PREG_SPLIT_NO_EMPTY);     
 
@@ -229,12 +232,21 @@ class ofertasController extends Controller
                                                         ->orwhere('data','like','%'.($value).'%');
                                                   }      
                                             })
-
+                                            
                                           ->join('participantes','ofertas_part.id_part','=','participantes.id')
                                           ->join('ofertas','ofertas_part.id_of','=','ofertas.id')
                                           ->join('categorias','ofertas.id_cat','=','categorias.id')
                                           ->join('unidades','ofertas.id_unid','=','unidades.id')
-                                          ->join('redes','ofertas_part.id_rede',"=",'redes.id')
+
+                                          ->when(!$nome_rede,function($join){
+                                                 $join->leftjoin('redes','ofertas_part.id_rede',"=",'redes.id');
+                                                 },
+                                                 function($join) use($nome_rede){
+                                                 $join->join('redes','ofertas_part.id_rede',"=",'redes.id')
+                                                      ->where('redes.nome','like','%'.$nome_rede.'%') ;                                                
+                                                 })
+                                                 
+                                          /*->leftjoin('redes','ofertas_part.id_rede',"=",'redes.id')*/
 
                                           ->select('participantes.id as id_part','participantes.latitude','participantes.longitude',
                                                 'participantes.nome_part','ofertas_part.id as id_of_part',
@@ -248,10 +260,31 @@ class ofertasController extends Controller
                                           ->orderBy('id_of_part','DESC')
                                           ->paginate(5);
 
+
+      }else{
+          $ofps = DB::table('ofertas_part')->where('id_part',$id)
+          ->join('participantes','ofertas_part.id_part','=','participantes.id')
+          ->join('ofertas','ofertas_part.id_of','=','ofertas.id')
+          ->join('categorias','ofertas.id_cat','=','categorias.id')
+          ->join('unidades','ofertas.id_unid','=','unidades.id')
+          ->leftjoin('redes','ofertas_part.id_rede',"=",'redes.id')
+          
+          ->select('participantes.id as id_part','participantes.latitude','participantes.longitude',
+          'participantes.nome_part','ofertas_part.id as id_of_part','ofertas_part.imagem',
+          'ofertas_part.id_of','ofertas_part.quant','ofertas_part.data','ofertas_part.obs',
+          'ofertas.descricao as desc_of','ofertas_part.status',
+          'categorias.descricao as desc_cat','unidades.descricao as desc_unid',
+          'ofertas_part.id_rede',
+          'redes.nome as nome_rede')
+
+          ->orderBy('data','desc')
+          ->orderBy('id_of_part','DESC')
+          ->paginate(5);
+
       }
-      
-      $ofps->appends($request->all());    
-      
+
+      $ofps->appends($request->all());
+
       return view('consultar_ofertas_part',['part'=> $participante,
                                             'ofps'=>$ofps,
                                             'ofs' =>$ofs,
