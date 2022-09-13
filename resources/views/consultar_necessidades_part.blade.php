@@ -6,8 +6,7 @@
 
     <h2 class="texto-necessidade">Necessidades do Participante</h2>
     <h5 class="texto-participante">{{$part->nome_part}}</h5>
-    <br>
-
+    
     <div class='results'>
       @if(Session::get('success'))
           <div class="alert alert-success">
@@ -22,7 +21,7 @@
       @endif
 
     </div>
-
+    <br>
     <form class="row g-3" method="GET" action="{{route('consultar_necessidades_part')}}">
 
           @csrf
@@ -79,12 +78,6 @@
                       <div class="modal-body">
 
                         <div class="row">
-                          <!-- <div class="col-2">
-                                <figure class="figure">
-                                      <img id="imagem_nec" src="/img/logo.jpg" class="figure-img img-fluid imagem-of-nec img-thumbnail ">
-                                </figure>
-                          </div> -->
-
                           <div class="col-12" style="align-self: flex-end;">
                              <input id="sel_img" accept="image/*" data-msg-placeholder="Selecione uma imagem"
                                 name="sel_img" type="file" class="file" data-browse-on-zone-click="true"
@@ -96,22 +89,28 @@
                         </div>
 
                         <div class="mb-3">
+                          
+                          <div class="row">
+                               <div class="col">
+                                    <label for="exampleFormControlInput1" class="form-label">Selecione um tipo de necessidade</label>
+                                    <select type="text" name="id_nec" id="exampleFormControlInput1" class="form-select" aria-label="Default select example" required>
+                                      <option value = ""></option>
+                                      @foreach ($necs as $nec)
+                                        <option value="{{$nec->id}}">
+                                              {{$nec->descricao}}
+                                        </option>
+                                      @endforeach
+                                    </select>
+                               </div>
+                               <div class="col">
+                                    <label for="data_nec" class="form-label">Data</label>
+                                    <input type="date" class="form-control" id="data_nec" name="data_nec" required>
+                              </div>
+                          </div> 
+                          <br>
 
                           <input value="{{$part->id}}" name="id_part" type="hidden">
 
-                          <label for="exampleFormControlInput1" class="form-label">Selecione um tipo de necessidade</label>
-                          <select type="text" name="id_nec" id="exampleFormControlInput1" class="form-select" aria-label="Default select example" required>
-                            <option value = ""></option>
-                            @foreach ($necs as $nec)
-                              <option value="{{$nec->id}}">
-                                    {{$nec->descricao}}
-                              </option>
-                            @endforeach
-                          </select>
-                          
-                          <label for="data_nec" class="form-label">Data</label>
-                          <input type="date" class="form-control" id="data_nec" name="data_nec" required>
-                         
                           <div class="row">
                                <div class="col">
                                     <label for="quant_nec" class="form-label">Quantidade</label>
@@ -128,7 +127,7 @@
                               </div>
 
                           </div>
-
+                          <br>
                           <label for="obs_nec" class="form-label">Observações</label>
                           <textarea type="text" class="form-control" id="obs_nec" name="obs_nec"></textarea>
                         </div>

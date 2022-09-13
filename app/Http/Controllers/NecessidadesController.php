@@ -338,12 +338,7 @@ class NecessidadesController extends Controller
 
   public function incluir_necessidades_part(Request $request) {
 
-       
-    /*$necps = DB::table('necessidades_part')->where('id_nec',request('id_nec'))
-                                     ->where('id_part',request('id_part'))
-                                     ->first();*/
-
-
+   
       if($request->hasFile('sel_img')){
       $file = $request->file('sel_img');
 
@@ -366,18 +361,35 @@ class NecessidadesController extends Controller
       
     }
 
+    if(request('id_rede')){
+      $id_rede = request('id_rede'); 
+   }else{
+      $id_rede = 0;
+   }
                     
-    /*if(!$necps){*/
+    if(isset($filename)){
         $necps_i = DB::table('necessidades_part')->insert([
             'id_nec' => request('id_nec'),
             'id_part' => request('id_part'),
             'data' => request('data_nec'),
             'quant' => request('quant_nec'),
             'obs' => request('obs_nec'),
-            'id_rede'=>request('id_rede'),
+            'id_rede'=>$id_rede,
             'imagem' => $filename
 
         ]);
+      }else{
+          $necps_i = DB::table('necessidades_part')->insert([
+            'id_nec' => request('id_nec'),
+            'id_part' => request('id_part'),
+            'data' => request('data_nec'),
+            'quant' => request('quant_nec'),
+            'obs' => request('obs_nec'),
+            'id_rede'=>$id_rede
+          ]);
+
+      }    
+
         return back()->with('success','necessidade incluida com sucesso para o participante!');
 
     /*}else{

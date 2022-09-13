@@ -369,16 +369,34 @@ class ofertasController extends Controller
               
            }
 
-           $ofps_i = DB::table('ofertas_part')->insert([
-                            'id_of' => request('id_of'),
-                            'id_part' => request('id_part'),
-                            'data' => request('data_of'),
-                            'quant' => request('quant_of'),
-                            'obs' => request('obs_of'),
-                            'id_rede'=>request('id_rede'),
-                            'imagem'=>$filename
-                        ]);
-                        
+          /* dd(isset($filename));*/
+          if(request('id_rede')){
+             $id_rede = request('id_rede'); 
+          }else{
+             $id_rede = 0;
+          }
+
+           if(isset($filename)){
+              $ofps_i = DB::table('ofertas_part')->insert([
+                'id_of' => request('id_of'),
+                'id_part' => request('id_part'),
+                'data' => request('data_of'),
+                'quant' => request('quant_of'),
+                'obs' => request('obs_of'),
+                'id_rede'=>$id_rede,
+                'imagem'=>$filename  
+            ]);
+           }else{
+                $ofps_i = DB::table('ofertas_part')->insert([
+                  'id_of' => request('id_of'),
+                  'id_part' => request('id_part'),
+                  'data' => request('data_of'),
+                  'quant' => request('quant_of'),
+                  'obs' => request('obs_of'),
+                  'id_rede'=>$id_rede
+              ]);
+           }
+           
             return back()->with('success','Oferta incluida com sucesso para o participante!');
 
     /*}else{

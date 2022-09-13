@@ -8,8 +8,7 @@
 
     <h2 class="texto-oferta">Ofertas do Participante</h2>
     <h5 class="texto-nome-logado">{{$part->nome_part}}</h5>
-    <br>
-
+    
     <div class='results'>
       @if(Session::get('success'))
           <div class="alert alert-success">
@@ -36,6 +35,7 @@
       @endif
 
     </div>
+    <br>
 
     <form class="row g-3" method="get" action="{{route('consultar_ofertas_part')}}">
 
