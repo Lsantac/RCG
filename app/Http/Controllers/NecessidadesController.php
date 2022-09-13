@@ -197,12 +197,15 @@ class NecessidadesController extends Controller
          
         $id = $_GET['id_part'];
 
+        $request->session()->put('criterio_nec_part', request('consulta_nec_part')); 
+        $request->session()->put('criterio_cons_rede', request('consulta_redes'));
+
+        $nome_rede = request('consulta_redes');
+
         $redes = DB::table('redesparts')->where('id_part',$id)
                                       ->join('redes','redesparts.id_rede','=','redes.id') 
                                       ->orderby('nome')  
                                       ->get();
-
-        $request->session()->put('criterio_nec_part', request('consulta_nec_part')); 
 
         $participante = participantes::FindOrfail($id);
 
@@ -233,7 +236,16 @@ class NecessidadesController extends Controller
                                           ->join('necessidades','necessidades_part.id_nec','=','necessidades.id')
                                           ->join('categorias','necessidades.id_cat','=','categorias.id')
                                           ->join('unidades','necessidades.id_unid','=','unidades.id')
-                                          ->leftjoin('redes','necessidades_part.id_rede',"=",'redes.id')
+
+                                          ->when(!$nome_rede,function($join){
+                                            $join->leftjoin('redes','necessidades_part.id_rede',"=",'redes.id');
+                                            },
+                                            function($join) use($nome_rede){
+                                            $join->join('redes','necessidades_part.id_rede',"=",'redes.id')
+                                                 ->where('redes.nome','like','%'.$nome_rede.'%') ;                                                
+                                            })
+
+                                         /* ->leftjoin('redes','necessidades_part.id_rede',"=",'redes.id')*/
 
                                           ->select('participantes.id as id_part','participantes.latitude','participantes.longitude','participantes.nome_part',
                                                 'necessidades_part.id as id_nec_part',

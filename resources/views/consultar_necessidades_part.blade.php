@@ -27,26 +27,40 @@
 
           @csrf
 
-          <div class="col-sm-7">
-               <input class="form-control texto_p" name="consulta_nec_part" value="{{Session::get('criterio_nec_part')}}" placeholder="Digite palavras para consulta..." type="search">
-               <input name="id_part" type="hidden" value="{{$part->id}}">
-          </div>
+        <div class="row">
+            <div class="col-sm-5">
+              <input class="form-control texto_m" name="consulta_nec_part" value="{{Session::get('criterio_nec_part')}}" placeholder="Digite palavras para consulta..." type="search">
+              <input name="id_part" type="hidden" value="{{$part->id}}">
+            </div>
 
-        <div class="col-sm">
-          <button style="margin-right: 20px" class="btn btn-sm btn-primary " type="submit">Procurar</button>
-          <!--<a class="btn btn btn-redes bi-snow" type="button"> Incluir Rede</a> -->
+            <div class="col-sm-3">
+              <input class="form-control me-2 texto_m" list="rede-list" id="consulta_redes" name="consulta_redes" value="{{Session::get('criterio_cons_rede')}}"  type="search" placeholder="Consulta por Rede...">
+              <datalist id="rede-list">
+                        @foreach ($redes as $rede)
+                                <option value="{{ $rede->nome }}"> 
+                                        {{ $rede->nome }} 
+                                </option>
+                        @endforeach
+              </datalist> 
+            </div>
 
-          <!-- Button trigger modal -->
-          @if(Session::get('id_logado') == $part->id)
-            <button type="button" class="btn btn-incluir-necessidades btn-sm bi-arrow-up-circle-fill" data-bs-toggle="modal" data-bs-target="#Incluirnecessidade">
-              Incluir Necessidade
-            </button>
-            <button type="button" class="btn btn-criar-necessidades btn-sm bi-arrow-up-circle-fill" data-bs-toggle="modal" data-bs-target="#Novanecessidade">
-              Criar novo tipo de Necessidade
-            </button>
-          @endif
-        </div>
+            <div class="col-sm">
+                <button style="margin-right: 20px" class="btn btn-sm btn-primary " type="submit">Procurar</button>
+                <!--<a class="btn btn btn-redes bi-snow" type="button"> Incluir Rede</a> -->
 
+                <!-- Button trigger modal -->
+                @if(Session::get('id_logado') == $part->id)
+                  <button type="button" class="btn btn-incluir-necessidades btn-sm bi-arrow-up-circle-fill" data-bs-toggle="modal" data-bs-target="#Incluirnecessidade">
+                    Incluir Necessidade
+                  </button>
+                  <button type="button" class="btn btn-criar-necessidades btn-sm bi-arrow-up-circle-fill" data-bs-toggle="modal" data-bs-target="#Novanecessidade">
+                    Criar novo tipo de Necessidade
+                  </button>
+                @endif
+            </div>
+
+        </div>  
+          
     </form>
 
     <form action="{{route('incluir_necessidades_part')}}" method="post" enctype="multipart/form-data">
@@ -94,12 +108,10 @@
                               </option>
                             @endforeach
                           </select>
-                          <br>
-
+                          
                           <label for="data_nec" class="form-label">Data</label>
                           <input type="date" class="form-control" id="data_nec" name="data_nec" required>
-                          <br>
-
+                         
                           <div class="row">
                                <div class="col">
                                     <label for="quant_nec" class="form-label">Quantidade</label>
@@ -116,8 +128,6 @@
                               </div>
 
                           </div>
-
-                          <br>
 
                           <label for="obs_nec" class="form-label">Observações</label>
                           <textarea type="text" class="form-control" id="obs_nec" name="obs_nec"></textarea>
@@ -196,6 +206,7 @@
             <th scope="col" class="texto_p">Data</th>
             <th scope="col" class="texto_p">Quant</th>
             <th scope="col" class="texto_p">Unidade</th>
+            <th scope="col" class="texto_p">Rede</th>
             <th scope="col" class="texto_p" style="text-align:left;">Transações</th>
             <th scope="col" class="texto_p" >Status</th>
 
@@ -252,6 +263,7 @@
                     </td>
                     <td class="texto_p">{{$necp->quant}}</td>
                     <td class="texto_p">{{$necp->desc_unid}}</td>
+                    <td class="texto_p">{{$necp->nome_rede}}</td>
 
                    <!-- @if($necp->status == 2)
                         <td class="texto_p texto-em-andamento"><h4 class="bi bi-chat-left-dots-fill"></h4></td>

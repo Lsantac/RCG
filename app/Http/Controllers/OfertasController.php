@@ -308,23 +308,23 @@ class ofertasController extends Controller
       $unids = DB::table('unidades')->orderBy('descricao')->get();
                                                 
       $ofps = DB::table('ofertas_part')->where('id_part',$id)
-                                    ->join('participantes','ofertas_part.id_part','=','participantes.id')
-                                    ->join('ofertas','ofertas_part.id_of','=','ofertas.id')
-                                    ->join('categorias','ofertas.id_cat','=','categorias.id')
-                                    ->join('unidades','ofertas.id_unid','=','unidades.id')
-                                    ->leftjoin('redes','ofertas_part.id_rede',"=",'redes.id')
-                                    
-                                    ->select('participantes.id as id_part','participantes.latitude','participantes.longitude',
-                                    'participantes.nome_part','ofertas_part.id as id_of_part','ofertas_part.imagem',
-                                    'ofertas_part.id_of','ofertas_part.quant','ofertas_part.data','ofertas_part.obs',
-                                    'ofertas.descricao as desc_of','ofertas_part.status',
-                                    'categorias.descricao as desc_cat','unidades.descricao as desc_unid',
-                                    'ofertas_part.id_rede',
-                                    'redes.nome as nome_rede')
+                                       ->join('participantes','ofertas_part.id_part','=','participantes.id')
+                                       ->join('ofertas','ofertas_part.id_of','=','ofertas.id')
+                                       ->join('categorias','ofertas.id_cat','=','categorias.id')
+                                       ->join('unidades','ofertas.id_unid','=','unidades.id')
+                                       ->leftjoin('redes','ofertas_part.id_rede',"=",'redes.id')
+                                        
+                                       ->select('participantes.id as id_part','participantes.latitude','participantes.longitude',
+                                        'participantes.nome_part','ofertas_part.id as id_of_part','ofertas_part.imagem',
+                                        'ofertas_part.id_of','ofertas_part.quant','ofertas_part.data','ofertas_part.obs',
+                                        'ofertas.descricao as desc_of','ofertas_part.status',
+                                        'categorias.descricao as desc_cat','unidades.descricao as desc_unid',
+                                        'ofertas_part.id_rede',
+                                        'redes.nome as nome_rede')
 
-                                    ->orderBy('data','desc')
-                                    ->orderBy('id_of_part','DESC')
-                                    ->paginate(5);
+                                       ->orderBy('data','desc')
+                                       ->orderBy('id_of_part','DESC')
+                                       ->paginate(5);
 
       /*dd($ofps);      */
 
