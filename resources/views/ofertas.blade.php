@@ -6,13 +6,30 @@
     <br>
 
     <div class="row">
-        <div class="col-10">
-            <form class="d-flex" method="GET" action="{{route('consultar_ofertas')}}">
-                @csrf
-                <input class="form-control me-3 texto_m" name="consulta_of" value="{{Session::get('criterio_of')}}" type="search" placeholder="Digite palavras para consulta..." aria-label="Consultar">
-                <button class="btn btn btn-primary me-3 texto_m" type="submit">Procurar</button>
-            </form>
-        </div>
+        
+        <form class="row-g-3" method="GET" action="{{route('consultar_ofertas')}}">
+            @csrf
+            <div class="row">
+                <div class="col-sm-5">
+                    <input class="form-control me-3 texto_m" name="consulta_of" value="{{Session::get('criterio_of')}}" type="search" placeholder="Digite palavras para consulta..." aria-label="Consultar">
+                </div>
+                <div class="col-sm-3">
+                    <input class="form-control me-2 texto_m" list="rede-list" id="consulta_redes" name="consulta_redes" value="{{Session::get('criterio_cons_rede')}}"  type="search" placeholder="Consulta por Rede...">
+                    <datalist id="rede-list">
+                                @foreach ($redes as $rede)
+                                        <option value="{{ $rede->nome }}"> 
+                                                {{ $rede->nome }} 
+                                        </option>
+                                @endforeach
+                    </datalist>                         
+                </div>
+                <div class="col-sm">
+                        <button class="btn btn btn-primary me-3 texto_m" type="submit">Procurar</button>                        
+                </div>
+            </div>
+            
+        </form>
+        
         <div class="col">
             <form action="mostra_varios_parts" method="post">
                 @csrf
