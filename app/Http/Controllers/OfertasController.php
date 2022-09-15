@@ -162,6 +162,15 @@ class ofertasController extends Controller
                     ->join('categorias','ofertas.id_cat','=','categorias.id')
                     ->join('unidades','ofertas.id_unid','=','unidades.id')
 
+                    ->when(!$nome_rede,function($join){
+                      $join->leftjoin('redes','ofertas_part.id_rede',"=",'redes.id');
+                      },
+                      function($join) use($nome_rede){
+                      $join->join('redes','ofertas_part.id_rede',"=",'redes.id')
+                           ->where('redes.nome','like','%'.$nome_rede.'%') ;                                                
+                      })
+
+
                     ->select('participantes.id as id_part','participantes.latitude','participantes.longitude','participantes.nome_part',
                     'participantes.endereco','participantes.cidade','participantes.estado','participantes.pais',
                     'ofertas_part.id as id_of_part','ofertas_part.id_of','ofertas_part.quant','ofertas_part.data','ofertas_part.obs',
@@ -179,11 +188,21 @@ class ofertasController extends Controller
                                               ->join('categorias','ofertas.id_cat','=','categorias.id')
                                               ->join('unidades','ofertas.id_unid','=','unidades.id')
 
+                                              ->when(!$nome_rede,function($join){
+                                                $join->leftjoin('redes','ofertas_part.id_rede',"=",'redes.id');
+                                                },
+                                                function($join) use($nome_rede){
+                                                $join->join('redes','ofertas_part.id_rede',"=",'redes.id')
+                                                     ->where('redes.nome','like','%'.$nome_rede.'%') ;                                                
+                                                })
+
                                               ->select('participantes.id as id_part','participantes.latitude','participantes.longitude','participantes.nome_part',
                                                       'participantes.endereco','participantes.cidade','participantes.estado','participantes.pais',
                                                       'ofertas_part.id as id_of_part','ofertas_part.id_of','ofertas_part.quant','ofertas_part.data','ofertas_part.obs',
                                                       'ofertas_part.status','ofertas_part.imagem',
-                                                      'ofertas.descricao as desc_of','categorias.descricao as desc_cat','unidades.descricao as desc_unid')
+                                                      'ofertas.descricao as desc_of','categorias.descricao as desc_cat','unidades.descricao as desc_unid',
+                                                      'ofertas_part.id_rede',
+                                                      'redes.nome as nome_rede')
 
                                               ->orderBy('data','desc')
                                               ->orderBy('id_of_part','desc')
@@ -198,11 +217,21 @@ class ofertasController extends Controller
                                               ->join('categorias','ofertas.id_cat','=','categorias.id')
                                               ->join('unidades','ofertas.id_unid','=','unidades.id')
 
+                                              ->when(!$nome_rede,function($join){
+                                                $join->leftjoin('redes','ofertas_part.id_rede',"=",'redes.id');
+                                                },
+                                                function($join) use($nome_rede){
+                                                $join->join('redes','ofertas_part.id_rede',"=",'redes.id')
+                                                     ->where('redes.nome','like','%'.$nome_rede.'%') ;                                                
+                                                })
+
                                               ->select('participantes.id as id_part','participantes.latitude','participantes.longitude','participantes.nome_part',
                                                       'participantes.endereco','participantes.cidade','participantes.estado','participantes.pais',
                                                       'ofertas_part.id as id_of_part','ofertas_part.id_of','ofertas_part.quant','ofertas_part.data','ofertas_part.obs',
                                                       'ofertas_part.status','ofertas_part.imagem',
-                                                      'ofertas.descricao as desc_of','categorias.descricao as desc_cat','unidades.descricao as desc_unid')
+                                                      'ofertas.descricao as desc_of','categorias.descricao as desc_cat','unidades.descricao as desc_unid',
+                                                      'ofertas_part.id_rede',
+                                                      'redes.nome as nome_rede')
 
                                               ->orderBy('data','desc')
                                               ->orderBy('id_of_part','desc')

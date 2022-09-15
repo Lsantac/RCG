@@ -6,29 +6,31 @@
     <br>
 
     <div class="row">
-        
-        <form class="row-g-3" method="GET" action="{{route('consultar_ofertas')}}">
-            @csrf
-            <div class="row">
-                <div class="col-sm-5">
-                    <input class="form-control me-3 texto_m" name="consulta_of" value="{{Session::get('criterio_of')}}" type="search" placeholder="Digite palavras para consulta..." aria-label="Consultar">
+        <div class="col-10">
+
+            <form class="row-g-3" method="GET" action="{{route('consultar_ofertas')}}">
+                @csrf
+                <div class="row">
+                    <div class="col-sm-5">
+                        <input class="form-control me-3 texto_m" name="consulta_of" value="{{Session::get('criterio_of')}}" type="search" placeholder="Digite palavras para consulta..." aria-label="Consultar">
+                    </div>
+                    <div class="col-sm-3">
+                        <input class="form-control me-2 texto_m" list="rede-list" id="consulta_redes" name="consulta_redes" value="{{Session::get('criterio_cons_rede')}}"  type="search" placeholder="Consulta por Rede...">
+                        <datalist id="rede-list">
+                                    @foreach ($redes as $rede)
+                                            <option value="{{ $rede->nome }}"> 
+                                                    {{ $rede->nome }} 
+                                            </option>
+                                    @endforeach
+                        </datalist>                         
+                    </div>
+                    <div class="col-sm-2">
+                            <button class="btn btn btn-primary me-3 texto_m" type="submit">Procurar</button>                        
+                    </div>
                 </div>
-                <div class="col-sm-3">
-                    <input class="form-control me-2 texto_m" list="rede-list" id="consulta_redes" name="consulta_redes" value="{{Session::get('criterio_cons_rede')}}"  type="search" placeholder="Consulta por Rede...">
-                    <datalist id="rede-list">
-                                @foreach ($redes as $rede)
-                                        <option value="{{ $rede->nome }}"> 
-                                                {{ $rede->nome }} 
-                                        </option>
-                                @endforeach
-                    </datalist>                         
-                </div>
-                <div class="col-sm">
-                        <button class="btn btn btn-primary me-3 texto_m" type="submit">Procurar</button>                        
-                </div>
-            </div>
-            
-        </form>
+                
+            </form>
+        </div>
         
         <div class="col">
             <form action="mostra_varios_parts" method="post">
@@ -69,8 +71,8 @@
                 <th scope="col">Data</th>
                 <th scope="col">Quant</th>
                 <th scope="col">Unidade</th>
+                <th scope="col">Rede</th>
                 <th scope="col" colspan="2">Transações</th>
-                <!-- <th scope="col" >Status Of</th>-->
                 <th scope="col">Status</th>
                 <th scope="col">Local</th>
 
@@ -140,7 +142,7 @@
                     </td>
                     <td class="texto_m">{{$ofp->quant}}</td>
                     <td class="texto_m">{{$ofp->desc_unid}}</td>
-                
+                    <td class="texto_m">{{$ofp->nome_rede}}</td>
 
                 <td>
                     <div class="row">
